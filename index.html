@@ -39,7 +39,6 @@
       font-size: 16px;
     }
 
-    /* NAV */
     nav {
       display: flex;
       align-items: center;
@@ -51,155 +50,62 @@
       background: var(--bg);
       z-index: 10;
     }
-    .nav-name {
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--text);
-      text-decoration: none;
-    }
+    .nav-name { font-size: 15px; font-weight: 500; color: var(--text); text-decoration: none; }
     .nav-links { display: flex; gap: 24px; list-style: none; }
-    .nav-links a {
-      font-size: 14px;
-      color: var(--muted);
-      text-decoration: none;
-      transition: color 0.15s;
-    }
+    .nav-links a { font-size: 14px; color: var(--muted); text-decoration: none; transition: color 0.15s; }
     .nav-links a:hover { color: var(--text); }
 
-    /* LAYOUT */
     main { max-width: 760px; margin: 0 auto; padding: 0 40px 80px; }
 
-    /* HERO */
     .hero { padding: 64px 0 48px; border-bottom: 0.5px solid var(--border); }
-    .hero-label {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--hint);
-      margin-bottom: 12px;
-    }
-    .hero h1 {
-      font-size: 32px;
-      font-weight: 500;
-      line-height: 1.25;
-      color: var(--text);
-      margin-bottom: 16px;
-    }
-    .hero p {
-      font-size: 16px;
-      color: var(--muted);
-      max-width: 520px;
-      margin-bottom: 24px;
-    }
+    .hero-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--hint); margin-bottom: 12px; }
+    .hero h1 { font-size: 32px; font-weight: 500; line-height: 1.25; color: var(--text); margin-bottom: 16px; }
+    .hero p { font-size: 16px; color: var(--muted); max-width: 520px; margin-bottom: 24px; }
     .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
-    .tag {
-      font-size: 12px;
-      padding: 4px 12px;
-      border-radius: 20px;
-      border: 0.5px solid var(--border);
-      color: var(--muted);
-    }
+    .tag { font-size: 12px; padding: 4px 12px; border-radius: 20px; border: 0.5px solid var(--border); color: var(--muted); }
 
-    /* SECTIONS */
     section { padding: 48px 0; border-bottom: 0.5px solid var(--border); }
-    .section-label {
-      font-size: 11px;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--hint);
-      margin-bottom: 24px;
-    }
+    .section-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--hint); margin-bottom: 24px; }
 
-    /* PROJECT CARDS */
     .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .project-card {
-      border: 0.5px solid var(--border);
-      border-radius: 12px;
-      padding: 20px;
-      background: var(--bg);
-      text-decoration: none;
-      display: block;
-      transition: border-color 0.15s;
-    }
+    .project-card { border: 0.5px solid var(--border); border-radius: 12px; padding: 20px; background: var(--bg); text-decoration: none; display: block; transition: border-color 0.15s; }
     .project-card:hover { border-color: var(--accent); }
-    .project-badge {
-      display: inline-block;
-      font-size: 10px;
-      padding: 3px 9px;
-      border-radius: 20px;
-      margin-bottom: 10px;
-    }
+    .project-badge { display: inline-block; font-size: 10px; padding: 3px 9px; border-radius: 20px; margin-bottom: 10px; }
     .badge-teal { background: #E1F5EE; color: #0F6E56; }
     .badge-purple { background: #EEEDFE; color: #3C3489; }
     .project-card h3 { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
     .project-card p { font-size: 13px; color: var(--muted); line-height: 1.55; margin-bottom: 12px; }
     .chip-row { display: flex; flex-wrap: wrap; gap: 4px; }
-    .chip {
-      font-size: 11px;
-      padding: 2px 8px;
-      border-radius: 20px;
-      background: var(--bg2);
-      color: var(--muted);
-    }
+    .chip { font-size: 11px; padding: 2px 8px; border-radius: 20px; background: var(--bg2); color: var(--muted); }
 
-    /* ART GRID */
+    /* ART SECTION */
+    .art-filter { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+    .filter-btn { font-size: 12px; padding: 4px 14px; border-radius: 20px; border: 0.5px solid var(--border); background: var(--bg); color: var(--muted); cursor: pointer; transition: all 0.15s; }
+    .filter-btn:hover { border-color: var(--accent); color: var(--text); }
+    .filter-btn.active { background: var(--accent-bg); color: var(--accent); border-color: var(--accent); }
+
     .art-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-    .art-card { border-radius: 10px; overflow: hidden; border: 0.5px solid var(--border); }
-    .art-thumb {
-      width: 100%;
-      aspect-ratio: 1;
-      background: var(--bg2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--hint);
-      font-size: 12px;
-    }
-    /* Replace these bg colors with your actual images later */
-    .art-thumb.warm { background: #F5C4B3; }
-    .art-thumb.cool { background: #9FE1CB; }
-    .art-thumb.soft { background: #CECBF6; }
-    .art-thumb.gold { background: #FAC775; }
-    .art-thumb.blue { background: #B5D4F4; }
-    .art-thumb.pink { background: #F4C0D1; }
-
+    .art-card { border-radius: 10px; overflow: hidden; border: 0.5px solid var(--border); cursor: pointer; transition: transform 0.15s; }
+    .art-card:hover { transform: scale(1.02); }
+    .art-card img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
     .art-meta { padding: 10px 12px; background: var(--bg); }
     .art-title { font-size: 12px; font-weight: 500; color: var(--text); }
     .art-medium { font-size: 11px; color: var(--hint); margin-top: 2px; }
 
-    .art-note {
-      font-size: 12px;
-      color: var(--hint);
-      margin-top: 14px;
-    }
+    /* LIGHTBOX */
+    .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100; align-items: center; justify-content: center; padding: 20px; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 90vw; max-height: 85vh; object-fit: contain; border-radius: 8px; }
+    .lightbox-close { position: fixed; top: 20px; right: 24px; font-size: 28px; color: white; cursor: pointer; line-height: 1; opacity: 0.8; }
+    .lightbox-close:hover { opacity: 1; }
+    .lightbox-caption { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); color: white; font-size: 13px; opacity: 0.7; text-align: center; }
 
-    /* ABOUT */
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .about-card {
-      background: var(--bg2);
-      border-radius: 10px;
-      padding: 16px 18px;
-    }
-    .about-card-label {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      color: var(--hint);
-      margin-bottom: 8px;
-    }
+    .about-card { background: var(--bg2); border-radius: 10px; padding: 16px 18px; }
+    .about-card-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--hint); margin-bottom: 8px; }
     .about-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
 
-    /* FOOTER */
-    footer {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 32px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-top: 0.5px solid var(--border);
-    }
+    footer { max-width: 760px; margin: 0 auto; padding: 32px 40px; display: flex; justify-content: space-between; align-items: center; border-top: 0.5px solid var(--border); }
     footer span { font-size: 13px; color: var(--hint); }
     .footer-links { display: flex; gap: 20px; }
     .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; }
@@ -230,7 +136,6 @@
 
 <main>
 
-  <!-- HERO -->
   <div class="hero">
     <p class="hero-label">Data science · Cognitive science · Visual arts</p>
     <h1>I build things at the<br>intersection of data and people.</h1>
@@ -244,11 +149,9 @@
     </div>
   </div>
 
-  <!-- WORK -->
   <section id="work">
     <p class="section-label">Selected work</p>
     <div class="project-grid">
-
       <a class="project-card" href="https://github.com/laura06919-max" target="_blank">
         <span class="project-badge badge-teal">DataHacks 2026 · 3rd place</span>
         <h3>Ocean Pulse</h3>
@@ -260,7 +163,6 @@
           <span class="chip">Groq LLM</span>
         </div>
       </a>
-
       <a class="project-card" href="https://github.com/laura06919-max" target="_blank">
         <span class="project-badge badge-purple">Research · E4E Lab</span>
         <h3>Bioacoustic species classifier</h3>
@@ -272,71 +174,103 @@
           <span class="chip">Python</span>
         </div>
       </a>
-
     </div>
   </section>
 
-  <!-- ART -->
   <section id="art">
     <p class="section-label">Art</p>
-    <div class="art-grid">
 
-      <!-- Replace each .art-thumb div with an <img> tag when you have photos ready -->
-      <!-- Example: <img src="images/painting1.jpg" alt="Still life, morning" style="width:100%;aspect-ratio:1;object-fit:cover"> -->
+    <div class="art-filter">
+      <button class="filter-btn active" onclick="filterArt('all', this)">All</button>
+      <button class="filter-btn" onclick="filterArt('oil', this)">Oil & acrylic</button>
+      <button class="filter-btn" onclick="filterArt('digital', this)">Digital</button>
+    </div>
 
-      <div class="art-card">
-        <div class="art-thumb warm">photo coming soon</div>
+    <div class="art-grid" id="art-grid">
+
+      <div class="art-card" data-medium="oil" onclick="openLightbox('images/the-sunset.jpg', 'The sunset · Oil on canvas')">
+        <img src="images/the-sunset.jpg" alt="Oil painting of a dramatic sunset with palm tree silhouettes" loading="lazy" />
         <div class="art-meta">
-          <p class="art-title">Still life, morning</p>
+          <p class="art-title">The sunset</p>
           <p class="art-medium">Oil on canvas</p>
         </div>
       </div>
 
-      <div class="art-card">
-        <div class="art-thumb cool">photo coming soon</div>
+      <div class="art-card" data-medium="oil" onclick="openLightbox('images/fantasy-figure.jpg', 'Fantasy figure · Acrylic on canvas')">
+        <img src="images/fantasy-figure.jpg" alt="Large acrylic painting of a fantasy figure with dragon" loading="lazy" />
         <div class="art-meta">
-          <p class="art-title">Landscape study</p>
-          <p class="art-medium">Acrylic</p>
+          <p class="art-title">Fantasy figure</p>
+          <p class="art-medium">Acrylic on canvas</p>
         </div>
       </div>
 
-      <div class="art-card">
-        <div class="art-thumb soft">photo coming soon</div>
+      <div class="art-card" data-medium="oil" onclick="openLightbox('images/floral-bouquet.jpg', 'Floral bouquet · Oil on canvas')">
+        <img src="images/floral-bouquet.jpg" alt="Oil painting of a lush floral bouquet on a blue-grey background" loading="lazy" />
         <div class="art-meta">
-          <p class="art-title">Untitled figure</p>
+          <p class="art-title">Floral bouquet</p>
+          <p class="art-medium">Oil on canvas</p>
+        </div>
+      </div>
+
+      <div class="art-card" data-medium="oil" onclick="openLightbox('images/slot-canyon.jpg', 'Slot canyon · Oil on canvas')">
+        <img src="images/slot-canyon.jpg" alt="Abstract oil painting of a slot canyon in vivid colour" loading="lazy" />
+        <div class="art-meta">
+          <p class="art-title">Slot canyon</p>
+          <p class="art-medium">Oil on canvas</p>
+        </div>
+      </div>
+
+      <div class="art-card" data-medium="oil" onclick="openLightbox('images/cat-window.jpg', 'Cat by the window · Acrylic on canvas')">
+        <img src="images/cat-window.jpg" alt="Acrylic painting of a tabby cat sitting by blue shuttered window" loading="lazy" />
+        <div class="art-meta">
+          <p class="art-title">Cat by the window</p>
+          <p class="art-medium">Acrylic on canvas</p>
+        </div>
+      </div>
+
+      <div class="art-card" data-medium="oil" onclick="openLightbox('images/plant-dino.jpg', 'Studio still life · Acrylic on canvas')">
+        <img src="images/plant-dino.jpg" alt="Acrylic still life of a plant and toy dinosaur by a window" loading="lazy" />
+        <div class="art-meta">
+          <p class="art-title">Studio still life</p>
+          <p class="art-medium">Acrylic on canvas</p>
+        </div>
+      </div>
+
+      <div class="art-card" data-medium="oil" onclick="openLightbox('images/snake-flowers.jpg', 'Snake and flowers · Gouache')">
+        <img src="images/snake-flowers.jpg" alt="Decorative gouache painting with snake, flowers, and patterned forms" loading="lazy" />
+        <div class="art-meta">
+          <p class="art-title">Snake and flowers</p>
+          <p class="art-medium">Gouache</p>
+        </div>
+      </div>
+
+      <div class="art-card" data-medium="oil" onclick="openLightbox('images/china-triptych.jpg', 'Home, 2021 · Acrylic triptych')">
+        <img src="images/china-triptych.jpg" alt="Acrylic triptych of scenes from China during lockdown" loading="lazy" />
+        <div class="art-meta">
+          <p class="art-title">Home, 2021</p>
+          <p class="art-medium">Acrylic triptych</p>
+        </div>
+      </div>
+
+      <div class="art-card" data-medium="digital" onclick="openLightbox('images/digital-portrait.jpg', 'Portrait study · Procreate')">
+        <img src="images/digital-portrait.jpg" alt="Digital portrait of a figure with white hair painted in Procreate" loading="lazy" />
+        <div class="art-meta">
+          <p class="art-title">Portrait study</p>
           <p class="art-medium">Procreate</p>
         </div>
       </div>
 
-      <div class="art-card">
-        <div class="art-thumb gold">photo coming soon</div>
+      <div class="art-card" data-medium="digital" onclick="openLightbox('images/digital-cafe.jpg', 'No signal · Procreate')">
+        <img src="images/digital-cafe.jpg" alt="Digital illustration of a person working on a laptop in a café with no wifi" loading="lazy" />
         <div class="art-meta">
-          <p class="art-title">Work in progress</p>
-          <p class="art-medium">Oil on canvas</p>
-        </div>
-      </div>
-
-      <div class="art-card">
-        <div class="art-thumb blue">photo coming soon</div>
-        <div class="art-meta">
-          <p class="art-title">Color study</p>
-          <p class="art-medium">Acrylic</p>
-        </div>
-      </div>
-
-      <div class="art-card">
-        <div class="art-thumb pink">photo coming soon</div>
-        <div class="art-meta">
-          <p class="art-title">Digital sketch</p>
+          <p class="art-title">No signal</p>
           <p class="art-medium">Procreate</p>
         </div>
       </div>
 
     </div>
-    <p class="art-note">Oil · acrylic · digital (Procreate). Replace placeholders with your actual work — see the code comments above each card.</p>
   </section>
 
-  <!-- ABOUT -->
   <section id="about">
     <p class="section-label">About</p>
     <div class="about-grid">
@@ -369,6 +303,43 @@
     <a href="mailto:l3yuan@ucsd.edu">Email</a>
   </div>
 </footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close" onclick="closeLightbox()">×</span>
+  <img id="lightbox-img" src="" alt="" />
+  <p class="lightbox-caption" id="lightbox-caption"></p>
+</div>
+
+<script>
+  function openLightbox(src, caption) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox-caption').textContent = caption;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  function filterArt(type, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.art-card').forEach(card => {
+      if (type === 'all' || card.dataset.medium === type) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+</script>
 
 </body>
 </html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laura Yuan</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --bg2: #f7f7f5;
+      --border: rgba(0,0,0,0.1);
+      --text: #111111;
+      --muted: #666666;
+      --hint: #999999;
+      --accent: #534AB7;
+      --accent-bg: #EEEDFE;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1a1a;
+        --bg2: #222222;
+        --border: rgba(255,255,255,0.1);
+        --text: #f0f0f0;
+        --muted: #aaaaaa;
+        --hint: #777777;
+        --accent: #AFA9EC;
+        --accent-bg: #26215C;
+      }
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 40px;
+      border-bottom: 0.5px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      z-index: 10;
+    }
+    .nav-name {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 24px; list-style: none; }
+    .nav-links a {
+      font-size: 14px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* LAYOUT */
+    main { max-width: 760px; margin: 0 auto; padding: 0 40px 80px; }
+
+    /* HERO */
+    .hero { padding: 64px 0 48px; border-bottom: 0.5px solid var(--border); }
+    .hero-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--hint);
+      margin-bottom: 12px;
+    }
+    .hero h1 {
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 1.25;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    .hero p {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 24px;
+    }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      font-size: 12px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 0.5px solid var(--border);
+      color: var(--muted);
+    }
+
+    /* SECTIONS */
+    section { padding: 48px 0; border-bottom: 0.5px solid var(--border); }
+    .section-label {
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--hint);
+      margin-bottom: 24px;
+    }
+
+    /* PROJECT CARDS */
+    .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .project-card {
+      border: 0.5px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      background: var(--bg);
+      text-decoration: none;
+      display: block;
+      transition: border-color 0.15s;
+    }
+    .project-card:hover { border-color: var(--accent); }
+    .project-badge {
+      display: inline-block;
+      font-size: 10px;
+      padding: 3px 9px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+    .badge-teal { background: #E1F5EE; color: #0F6E56; }
+    .badge-purple { background: #EEEDFE; color: #3C3489; }
+    .project-card h3 { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+    .project-card p { font-size: 13px; color: var(--muted); line-height: 1.55; margin-bottom: 12px; }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 4px; }
+    .chip {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 20px;
+      background: var(--bg2);
+      color: var(--muted);
+    }
+
+    /* ART GRID */
+    .art-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .art-card { border-radius: 10px; overflow: hidden; border: 0.5px solid var(--border); }
+    .art-thumb {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--bg2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--hint);
+      font-size: 12px;
+    }
+    /* Replace these bg colors with your actual images later */
+    .art-thumb.warm { background: #F5C4B3; }
+    .art-thumb.cool { background: #9FE1CB; }
+    .art-thumb.soft { background: #CECBF6; }
+    .art-thumb.gold { background: #FAC775; }
+    .art-thumb.blue { background: #B5D4F4; }
+    .art-thumb.pink { background: #F4C0D1; }
+
+    .art-meta { padding: 10px 12px; background: var(--bg); }
+    .art-title { font-size: 12px; font-weight: 500; color: var(--text); }
+    .art-medium { font-size: 11px; color: var(--hint); margin-top: 2px; }
+
+    .art-note {
+      font-size: 12px;
+      color: var(--hint);
+      margin-top: 14px;
+    }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .about-card {
+      background: var(--bg2);
+      border-radius: 10px;
+      padding: 16px 18px;
+    }
+    .about-card-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--hint);
+      margin-bottom: 8px;
+    }
+    .about-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* FOOTER */
+    footer {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 32px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 0.5px solid var(--border);
+    }
+    footer span { font-size: 13px; color: var(--hint); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; }
+    .footer-links a:hover { color: var(--text); }
+
+    @media (max-width: 600px) {
+      nav { padding: 14px 20px; }
+      main { padding: 0 20px 60px; }
+      .hero h1 { font-size: 24px; }
+      .project-grid { grid-template-columns: 1fr; }
+      .art-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-grid { grid-template-columns: 1fr; }
+      footer { padding: 24px 20px; flex-direction: column; gap: 12px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-name" href="#">Laura Yuan</a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#art">Art</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="mailto:l3yuan@ucsd.edu">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <div class="hero">
+    <p class="hero-label">Data science · Cognitive science · Visual arts</p>
+    <h1>I build things at the<br>intersection of data and people.</h1>
+    <p>First-year at UC San Diego studying data science and cognitive science. I research bioacoustic ML pipelines, design interactive dashboards, and make oil paintings. Sometimes all three feel like the same problem.</p>
+    <div class="tag-row">
+      <span class="tag">Human-computer interaction</span>
+      <span class="tag">Data visualization</span>
+      <span class="tag">Active learning</span>
+      <span class="tag">Visual art</span>
+      <span class="tag">Open to research</span>
+    </div>
+  </div>
+
+  <!-- WORK -->
+  <section id="work">
+    <p class="section-label">Selected work</p>
+    <div class="project-grid">
+
+      <a class="project-card" href="https://github.com/laura06919-max" target="_blank">
+        <span class="project-badge badge-teal">DataHacks 2026 · 3rd place</span>
+        <h3>Ocean Pulse</h3>
+        <p>Interactive dashboard for California Current ecosystem health — designed for non-technical users to explore 70 years of ocean data and AI-generated policy recommendations.</p>
+        <div class="chip-row">
+          <span class="chip">Streamlit</span>
+          <span class="chip">Random Forest</span>
+          <span class="chip">Data viz</span>
+          <span class="chip">Groq LLM</span>
+        </div>
+      </a>
+
+      <a class="project-card" href="https://github.com/laura06919-max" target="_blank">
+        <span class="project-badge badge-purple">Research · E4E Lab</span>
+        <h3>Bioacoustic species classifier</h3>
+        <p>Active learning pipeline for bird species classification from audio, in collaboration with the San Diego Zoo. Minimizes annotation cost on imbalanced multi-species datasets.</p>
+        <div class="chip-row">
+          <span class="chip">PyTorch</span>
+          <span class="chip">BirdNET</span>
+          <span class="chip">Active learning</span>
+          <span class="chip">Python</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ART -->
+  <section id="art">
+    <p class="section-label">Art</p>
+    <div class="art-grid">
+
+      <!-- Replace each .art-thumb div with an <img> tag when you have photos ready -->
+      <!-- Example: <img src="images/painting1.jpg" alt="Still life, morning" style="width:100%;aspect-ratio:1;object-fit:cover"> -->
+
+      <div class="art-card">
+        <div class="art-thumb warm">photo coming soon</div>
+        <div class="art-meta">
+          <p class="art-title">Still life, morning</p>
+          <p class="art-medium">Oil on canvas</p>
+        </div>
+      </div>
+
+      <div class="art-card">
+        <div class="art-thumb cool">photo coming soon</div>
+        <div class="art-meta">
+          <p class="art-title">Landscape study</p>
+          <p class="art-medium">Acrylic</p>
+        </div>
+      </div>
+
+      <div class="art-card">
+        <div class="art-thumb soft">photo coming soon</div>
+        <div class="art-meta">
+          <p class="art-title">Untitled figure</p>
+          <p class="art-medium">Procreate</p>
+        </div>
+      </div>
+
+      <div class="art-card">
+        <div class="art-thumb gold">photo coming soon</div>
+        <div class="art-meta">
+          <p class="art-title">Work in progress</p>
+          <p class="art-medium">Oil on canvas</p>
+        </div>
+      </div>
+
+      <div class="art-card">
+        <div class="art-thumb blue">photo coming soon</div>
+        <div class="art-meta">
+          <p class="art-title">Color study</p>
+          <p class="art-medium">Acrylic</p>
+        </div>
+      </div>
+
+      <div class="art-card">
+        <div class="art-thumb pink">photo coming soon</div>
+        <div class="art-meta">
+          <p class="art-title">Digital sketch</p>
+          <p class="art-medium">Procreate</p>
+        </div>
+      </div>
+
+    </div>
+    <p class="art-note">Oil · acrylic · digital (Procreate). Replace placeholders with your actual work — see the code comments above each card.</p>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="section-label">About</p>
+    <div class="about-grid">
+      <div class="about-card">
+        <p class="about-card-label">Currently</p>
+        <p>Student researcher at Engineers for Exploration (UCSD), building ML pipelines for bioacoustic species classification in collaboration with the San Diego Zoo.</p>
+      </div>
+      <div class="about-card">
+        <p class="about-card-label">Background</p>
+        <p>I came to HCI through data science — building dashboards and realizing that good data and good design are inseparable problems. Also a practicing visual artist.</p>
+      </div>
+      <div class="about-card">
+        <p class="about-card-label">Education</p>
+        <p>B.S. Data Science, minor in Cognitive Science — UC San Diego, class of 2029.</p>
+      </div>
+      <div class="about-card">
+        <p class="about-card-label">Looking for</p>
+        <p>HCI research opportunities and design collaborations where data and human experience intersect.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span>Laura Yuan · UCSD 2029</span>
+  <div class="footer-links">
+    <a href="https://github.com/laura06919-max" target="_blank">GitHub</a>
+    <a href="https://linkedin.com/in/laurayuan" target="_blank">LinkedIn</a>
+    <a href="mailto:l3yuan@ucsd.edu">Email</a>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -134,12 +134,25 @@
       font-size: 16px;
       color: var(--muted);
       max-width: 480px;
-      margin-bottom: 28px;
+      margin-bottom: 16px;
       opacity: 0;
       transform: translateY(16px);
       transition: all 0.8s ease 0.3s;
       position: relative;
     }
+    .hero-philosophy {
+      font-family: 'Abril Fatface', serif;
+      font-size: 19px;
+      color: var(--text);
+      max-width: 440px;
+      margin-bottom: 28px !important;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: all 0.8s ease 0.38s;
+      position: relative;
+      line-height: 1.4;
+    }
+    .hero.loaded .hero-philosophy { opacity: 1; transform: translateY(0); }
     .tag-row {
       display: flex;
       flex-wrap: wrap;
@@ -198,6 +211,7 @@
     .project-card p { font-size: 13px; color: var(--muted); line-height: 1.55; margin-bottom: 12px; font-family: 'Sora', sans-serif; }
     .chip-row { display: flex; flex-wrap: wrap; gap: 4px; }
     .chip { font-size: 11px; padding: 2px 9px; border-radius: 20px; background: var(--bg2); color: var(--muted); font-family: 'Sora', sans-serif; }
+    .case-study-link { display: inline-block; margin-top: 14px; font-size: 12px; color: var(--blue); font-family: 'Sora', sans-serif; font-weight: 500; }
 
     .art-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
     .art-filter { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -232,7 +246,7 @@
       padding: 28px;
       backface-visibility: hidden;
       transform-style: preserve-3d;
-      transform-origin: left center;
+      transform-origin: right center;
       transition: transform 0.7s cubic-bezier(0.45, 0.05, 0.55, 0.95);
       z-index: 1;
       clip-path: polygon(
@@ -241,7 +255,7 @@
         88% 99%, 76% 100%, 64% 99%, 52% 100%, 40% 99%, 28% 100%, 16% 99%, 4% 100%, 0% 99%
       );
     }
-    .book-page.flipped { transform: rotateY(-180deg); z-index: 2; }
+    .book-page.flipped { transform: rotateY(180deg); z-index: 2; }
     .book-page.current { z-index: 3; }
     .book-page-img { flex: 1; width: 100%; object-fit: contain; border-radius: 8px; min-height: 0; }
     .book-page-caption { padding-top: 16px; text-align: center; }
@@ -259,6 +273,33 @@
     .book-close:hover { opacity: 1; }
     .book-close svg { width: 26px; height: 26px; }
     .book-counter { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); color: #F7F1DF; font-family: 'Sora', sans-serif; font-size: 13px; opacity: 0.7; }
+
+    .case-overlay { display: none; position: fixed; inset: 0; background: rgba(46,68,86,0.7); z-index: 200; overflow-y: auto; padding: 40px 20px; }
+    .case-overlay.open { display: block; }
+    .case-modal { max-width: 640px; margin: 0 auto; background: var(--bg3); border-radius: 24px; padding: 44px 44px 52px; position: relative; }
+    .case-close { position: absolute; top: 24px; right: 28px; cursor: pointer; color: var(--hint); transition: color 0.2s; }
+    .case-close:hover { color: var(--text); }
+    .case-close svg { width: 24px; height: 24px; }
+    .case-eyebrow { font-family: 'Fredoka', sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--blue); margin-bottom: 10px; }
+    .case-title { font-size: 32px; color: var(--text); margin-bottom: 8px; }
+    .case-subtitle { font-size: 15px; color: var(--muted); margin-bottom: 32px; }
+    .case-meta-row { display: flex; gap: 24px; margin-bottom: 36px; padding-bottom: 28px; border-bottom: 0.5px solid var(--border); flex-wrap: wrap; }
+    .case-meta-item { flex: 1; min-width: 120px; }
+    .case-meta-label { font-family: 'Fredoka', sans-serif; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--hint); margin-bottom: 4px; }
+    .case-meta-value { font-size: 13px; color: var(--text); }
+    .case-block { margin-bottom: 32px; }
+    .case-block-title { font-family: 'Fredoka', sans-serif; font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+    .case-block p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+    .case-decision { background: var(--bg2); border-radius: 14px; padding: 16px 18px; margin-bottom: 10px; }
+    .case-decision-q { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+    .case-decision-a { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .case-reflection { background: var(--blue-bg); border-radius: 14px; padding: 18px 20px; }
+    .case-reflection p { color: var(--text); font-style: italic; }
+    @media (max-width: 600px) {
+      .case-modal { padding: 32px 24px 40px; }
+      .case-title { font-size: 26px; }
+      .case-meta-row { gap: 16px; }
+    }
     @media (max-width: 640px) {
       .book-arrow.left { left: 8px; }
       .book-arrow.right { right: 8px; }
@@ -346,6 +387,7 @@
   <p class="hero-label">Data science · Cognitive science · Visual arts</p>
   <h1>I build things at the<br>intersection of data and people.</h1>
   <p>First-year at UC San Diego studying data science and cognitive science. I research bioacoustic ML pipelines, design interactive dashboards, and make oil paintings. Sometimes all three feel like the same problem.</p>
+  <p class="hero-philosophy">Good interfaces don't show off the model. They show off the person using it.</p>
   <div class="tag-row">
     <span class="tag">Human-computer interaction</span>
     <span class="tag">Data visualization</span>
@@ -369,7 +411,7 @@
   <section id="work">
     <p class="section-label reveal">Selected work</p>
     <div class="project-grid">
-      <a class="project-card reveal" href="https://github.com/laura06919-max" target="_blank">
+      <div class="project-card reveal" onclick="openCaseStudy()" style="cursor:pointer">
         <span class="project-badge badge-coral">DataHacks 2026 · 3rd place</span>
         <h3>Ocean Pulse</h3>
         <p>Interactive dashboard for California Current ocean ecosystem health — designed for non-technical users to explore 70 years of ocean data and AI-generated policy recommendations.</p>
@@ -379,7 +421,8 @@
           <span class="chip">Data viz</span>
           <span class="chip">Groq LLM</span>
         </div>
-      </a>
+        <span class="case-study-link">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;display:inline;vertical-align:-1px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </div>
       <a class="project-card reveal" href="https://github.com/laura06919-max" target="_blank">
         <span class="project-badge badge-blue">Research · E4E Lab</span>
         <h3>Bioacoustic classifier</h3>
@@ -414,7 +457,7 @@
       <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(0)">
         <img src="the-sunset.jpg" alt="Oil painting of a dramatic sunset with palm tree silhouettes outside of home's window" loading="lazy" />
         <div class="art-meta">
-          <p class="art-title">The Sunset</p>
+          <p class="art-title">The sunset</p>
           <p class="art-medium">Oil on canvas</p>
         </div>
       </div>
@@ -430,7 +473,7 @@
       <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(2)">
         <img src="floral-bouquet.JPG" alt="Oil painting of a lush floral bouquet on a blue-grey background" loading="lazy" />
         <div class="art-meta">
-          <p class="art-title">Floral Bouquet</p>
+          <p class="art-title">Floral bouquet</p>
           <p class="art-medium">Oil on canvas</p>
         </div>
       </div>
@@ -438,7 +481,7 @@
       <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(3)">
         <img src="slot-canyon.JPG" alt="Abstract oil painting of a slot canyon in vivid colour" loading="lazy" />
         <div class="art-meta">
-          <p class="art-title">Slot Canyon</p>
+          <p class="art-title">Slot canyon</p>
           <p class="art-medium">Oil on canvas</p>
         </div>
       </div>
@@ -446,7 +489,7 @@
       <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(4)">
         <img src="cat-window.jpg" alt="Acrylic painting of a tabby cat sitting by blue shuttered window" loading="lazy" />
         <div class="art-meta">
-          <p class="art-title">Cat by the Window</p>
+          <p class="art-title">Cat by the window</p>
           <p class="art-medium">Acrylic on canvas</p>
         </div>
       </div>
@@ -454,7 +497,7 @@
       <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(5)">
         <img src="plant-dino.jpg" alt="Acrylic still life of a plant and toy dinosaur by a window" loading="lazy" />
         <div class="art-meta">
-          <p class="art-title">Studio Still Life</p>
+          <p class="art-title">Studio still life</p>
           <p class="art-medium">Acrylic on canvas</p>
         </div>
       </div>
@@ -462,7 +505,7 @@
       <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(6)">
         <img src="snake-flowers.jpg" alt="Decorative gouache painting with snake, flowers, and patterned forms" loading="lazy" />
         <div class="art-meta">
-          <p class="art-title">Snake and Flowers</p>
+          <p class="art-title">Snake and flowers</p>
           <p class="art-medium">Gouache</p>
         </div>
       </div>
@@ -570,6 +613,70 @@
   <span>Laura Yuan · UCSD 2029</span>
 </footer>
 
+<div class="case-overlay" id="caseOverlay" onclick="if(event.target===this)closeCaseStudy()">
+  <div class="case-modal">
+    <span class="case-close" onclick="closeCaseStudy()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </span>
+
+    <p class="case-eyebrow">Case study · DataHacks 2026</p>
+    <h2 class="case-title">Ocean Pulse</h2>
+    <p class="case-subtitle">A dashboard for exploring 70 years of California Current ecosystem health — and the design decisions that made it usable by people who aren't data scientists.</p>
+
+    <div class="case-meta-row">
+      <div class="case-meta-item">
+        <p class="case-meta-label">Role</p>
+        <p class="case-meta-value">ML + design, team of 4</p>
+      </div>
+      <div class="case-meta-item">
+        <p class="case-meta-label">Timeline</p>
+        <p class="case-meta-value">48-hour hackathon</p>
+      </div>
+      <div class="case-meta-item">
+        <p class="case-meta-label">Outcome</p>
+        <p class="case-meta-value">3rd place, ML/AI track</p>
+      </div>
+    </div>
+
+    <div class="case-block">
+      <p class="case-block-title">The problem</p>
+      <p>Our team had 70 years of CalCOFI ocean health data and a Random Forest model predicting ecosystem health at 98% accuracy. That part was easy. The hard part: the people who'd actually use this — policymakers, science communicators — don't read model outputs, they read interfaces. A technically correct model that nobody can navigate isn't useful to anyone.</p>
+    </div>
+
+    <div class="case-block">
+      <p class="case-block-title">Who it's for</p>
+      <p>Not data scientists. Someone with zero ML background who needs to understand "is this region's ecosystem healthy or not" in under a minute, and trust the answer enough to act on it.</p>
+    </div>
+
+    <div class="case-block">
+      <p class="case-block-title">Design decisions</p>
+
+      <div class="case-decision">
+        <p class="case-decision-q">Why does tab order matter here?</p>
+        <p class="case-decision-a">We initially ordered tabs by how we built the pipeline — data, then model, then predictions. We reordered around what a policymaker actually cares about first: "what's the health status right now," with the methodology pushed later for people who want to dig in.</p>
+      </div>
+
+      <div class="case-decision">
+        <p class="case-decision-q">Why add an AI explainer instead of just showing the number?</p>
+        <p class="case-decision-a">A health score alone doesn't tell a non-expert what to do with it. We added a Groq-powered agent that translates the prediction into plain-language regional policy context — the goal wasn't to make the AI look impressive, it was to remove the gap between "here's a number" and "here's what it means for your region."</p>
+      </div>
+
+      <div class="case-decision">
+        <p class="case-decision-q">Why constrain the map to government-regulated zones?</p>
+        <p class="case-decision-a">Letting people click anywhere on the map felt powerful but was actually misleading — policy decisions are made at the level of regulated zones, not arbitrary coordinates. Scoping the predictor to match real boundaries made the tool match how decisions actually get made.</p>
+      </div>
+    </div>
+
+    <div class="case-block">
+      <p class="case-block-title">What I'd do differently</p>
+      <div class="case-reflection">
+        <p>I didn't have the vocabulary for any of this while we were building it — I just knew the dashboard "felt wrong" until we made these changes. Looking back, I'd user-test the tab order with an actual non-technical person before building, instead of guessing and fixing it after the fact.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <div class="book-viewer" id="bookViewer">
   <span class="book-close" onclick="closeBook()">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
@@ -643,6 +750,22 @@
     document.getElementById('bookViewer').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
+
+  function openCaseStudy() {
+    document.getElementById('caseOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCaseStudy() {
+    document.getElementById('caseOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && document.getElementById('caseOverlay').classList.contains('open')) {
+      closeCaseStudy();
+    }
+  });
 
   function closeBook() {
     document.getElementById('bookViewer').classList.remove('open');

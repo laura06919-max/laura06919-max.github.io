@@ -59,7 +59,8 @@
     @media (hover: none) { .glow, .glow-trail { display: none; } }
 
     h1, h2, h3, .display { font-family: 'Abril Fatface', serif; font-weight: 400; }
-    .display-fredoka { font-family: 'Fredoka', sans-serif; font-weight: 500; }
+
+    svg.icon { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; display: block; }
 
     nav {
       display: flex;
@@ -180,7 +181,6 @@
     .project-card {
       background: var(--bg3);
       text-decoration: none; display: block; position: relative;
-      transform-style: preserve-3d; will-change: transform;
       padding: 30px 26px 38px;
       clip-path: polygon(
         0% 2%, 5% 0%, 14% 1.5%, 24% 0%, 34% 1%, 44% 0%, 54% 1.5%, 64% 0%, 74% 1%, 84% 0%, 94% 1.5%, 100% 0%,
@@ -188,7 +188,6 @@
         90% 98.5%, 80% 100%, 70% 99%, 60% 100%, 50% 98.5%, 40% 100%, 30% 99%, 20% 100%, 10% 98.5%, 0% 100%,
         1% 88%, 0% 76%, 1.5% 64%, 0% 52%, 1% 40%, 0% 28%, 1.5% 16%, 0% 4%
       );
-      box-shadow: 0 2px 0 rgba(0,0,0,0.02);
       transition: filter 0.2s;
     }
     .project-card:hover { filter: brightness(0.99); }
@@ -211,34 +210,39 @@
       display: inline-flex; align-items: center; gap: 6px; transition: transform 0.2s;
     }
     .view-all-btn:hover { transform: translateY(-1px); }
+    .view-all-btn svg { width: 14px; height: 14px; }
 
-    .art-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .art-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; perspective: 1000px; }
     .art-card {
       border-radius: 16px; overflow: hidden; border: 0.5px solid var(--border);
-      cursor: pointer; transition: transform 0.2s; background: var(--bg3);
+      cursor: pointer; background: var(--bg3);
+      transform-style: preserve-3d; will-change: transform;
+      transition: box-shadow 0.2s;
     }
-    .art-card img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; transition: transform 0.4s ease; }
-    .art-card:hover img { transform: scale(1.06); }
+    .art-card img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
     .art-meta { padding: 10px 12px; }
     .art-title { font-size: 12px; font-weight: 500; color: var(--text); font-family: 'Sora', sans-serif; }
     .art-medium { font-size: 11px; color: var(--hint); margin-top: 2px; font-family: 'Sora', sans-serif; }
 
     .book-viewer { display: none; position: fixed; inset: 0; background: rgba(46,68,86,0.94); z-index: 200; align-items: center; justify-content: center; padding: 20px; }
     .book-viewer.open { display: flex; }
-    .book-stage { position: relative; width: min(560px, 90vw); height: min(640px, 80vh); display: flex; align-items: center; justify-content: center; }
+    .book-stage { position: relative; width: min(560px, 90vw); height: min(640px, 80vh); perspective: 1800px; }
     .book-page {
       position: absolute; inset: 0; background: var(--bg3); display: flex; flex-direction: column;
-      padding: 28px; opacity: 0; transform: rotateY(-90deg) scale(0.92); transform-origin: left center;
-      transition: opacity 0.45s ease, transform 0.45s ease;
-      pointer-events: none;
+      padding: 28px;
+      backface-visibility: hidden;
+      transform-style: preserve-3d;
+      transform-origin: left center;
+      transition: transform 0.7s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+      z-index: 1;
       clip-path: polygon(
         0% 1.5%, 6% 0%, 16% 1%, 26% 0%, 36% 1.2%, 46% 0%, 56% 1%, 66% 0%, 76% 1.2%, 86% 0%, 96% 1%, 100% 0%,
         99% 14%, 100% 28%, 98.5% 42%, 100% 56%, 99% 70%, 100% 84%, 99% 96%, 100% 100%,
         88% 99%, 76% 100%, 64% 99%, 52% 100%, 40% 99%, 28% 100%, 16% 99%, 4% 100%, 0% 99%
       );
     }
-    .book-page.active { opacity: 1; transform: rotateY(0deg) scale(1); pointer-events: auto; z-index: 2; }
-    .book-page.prev { transform: rotateY(-12deg) scale(0.97); opacity: 0.4; z-index: 1; }
+    .book-page.flipped { transform: rotateY(-180deg); z-index: 2; }
+    .book-page.current { z-index: 3; }
     .book-page-img { flex: 1; width: 100%; object-fit: contain; border-radius: 8px; min-height: 0; }
     .book-page-caption { padding-top: 16px; text-align: center; }
     .book-page-title { font-family: 'Abril Fatface', serif; font-size: 20px; color: var(--text); margin-bottom: 4px; }
@@ -246,13 +250,14 @@
     .book-arrow {
       position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%;
       background: var(--bg3); border: 0.5px solid var(--border); display: flex; align-items: center; justify-content: center;
-      cursor: pointer; z-index: 5; color: var(--text); transition: transform 0.2s;
+      cursor: pointer; z-index: 10; color: var(--text); transition: transform 0.2s;
     }
     .book-arrow:hover { transform: translateY(-50%) scale(1.08); }
     .book-arrow.left { left: -60px; }
     .book-arrow.right { right: -60px; }
-    .book-close { position: fixed; top: 24px; right: 28px; font-size: 28px; color: #F7F1DF; cursor: pointer; z-index: 201; opacity: 0.8; }
+    .book-close { position: fixed; top: 24px; right: 28px; cursor: pointer; z-index: 201; opacity: 0.8; color: #F7F1DF; }
     .book-close:hover { opacity: 1; }
+    .book-close svg { width: 26px; height: 26px; }
     .book-counter { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); color: #F7F1DF; font-family: 'Sora', sans-serif; font-size: 13px; opacity: 0.7; }
     @media (max-width: 640px) {
       .book-arrow.left { left: 8px; }
@@ -270,6 +275,7 @@
     .about-photo {
       width: 84px; height: 84px; border-radius: 50%; object-fit: cover; flex-shrink: 0;
       border: 3px solid var(--bg3); box-shadow: 0 0 0 1px var(--border);
+      background: var(--blue-bg);
     }
     .about-intro-text p { font-size: 14px; color: var(--muted); line-height: 1.6; font-family: 'Sora', sans-serif; }
     .about-intro-text strong { color: var(--text); font-family: 'Fredoka', sans-serif; font-weight: 600; }
@@ -290,6 +296,7 @@
       border-radius: 30px; text-decoration: none; transition: transform 0.2s;
     }
     .contact-email-btn:hover { transform: translateY(-2px); }
+    .contact-email-btn svg { width: 18px; height: 18px; }
     .contact-icons { display: flex; justify-content: center; gap: 14px; margin-top: 28px; }
     .contact-icon-btn {
       width: 44px; height: 44px; border-radius: 50%; background: var(--bg3); border: 0.5px solid var(--border);
@@ -297,6 +304,7 @@
       transition: transform 0.2s, border-color 0.2s;
     }
     .contact-icon-btn:hover { transform: translateY(-2px); border-color: var(--blue); color: var(--blue); }
+    .contact-icon-btn svg { width: 20px; height: 20px; }
 
     footer { max-width: 760px; margin: 0 auto; padding: 28px 40px; display: flex; justify-content: center; align-items: center; }
     footer span { font-size: 13px; color: var(--hint); font-family: 'Sora', sans-serif; }
@@ -344,7 +352,7 @@
     <span class="tag">Open to research</span>
   </div>
   <div class="scroll-hint">
-    <i class="ti ti-chevron-down" style="font-size:20px"></i>
+    <svg class="icon" viewBox="0 0 24 24" style="margin:0 auto"><path d="M6 9l6 6 6-6"/></svg>
   </div>
 </div>
 
@@ -394,13 +402,14 @@
         <button class="filter-btn" onclick="filterArt('digital', this)">Digital</button>
       </div>
       <button class="view-all-btn" onclick="openBook(0)">
-        View all <i class="ti ti-arrow-right" style="font-size:14px"></i>
+        View all
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </button>
     </div>
 
     <div class="art-grid" id="art-grid">
 
-      <div class="art-card reveal" data-medium="oil" onclick="openBook(0)">
+      <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(0)">
         <img src="the-sunset.jpg" alt="Oil painting of a dramatic sunset with palm tree silhouettes outside of home's window" loading="lazy" />
         <div class="art-meta">
           <p class="art-title">The sunset</p>
@@ -408,7 +417,7 @@
         </div>
       </div>
 
-      <div class="art-card reveal" data-medium="oil" onclick="openBook(1)">
+      <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(1)">
         <img src="fantasy-figure.jpg" alt="Large acrylic painting of a fantasy figure with dragon" loading="lazy" />
         <div class="art-meta">
           <p class="art-title">Ukyo Tachibana Recreation</p>
@@ -416,7 +425,7 @@
         </div>
       </div>
 
-      <div class="art-card reveal" data-medium="oil" onclick="openBook(2)">
+      <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(2)">
         <img src="floral-bouquet.JPG" alt="Oil painting of a lush floral bouquet on a blue-grey background" loading="lazy" />
         <div class="art-meta">
           <p class="art-title">Floral bouquet</p>
@@ -424,7 +433,7 @@
         </div>
       </div>
 
-      <div class="art-card reveal" data-medium="oil" onclick="openBook(3)">
+      <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(3)">
         <img src="slot-canyon.JPG" alt="Abstract oil painting of a slot canyon in vivid colour" loading="lazy" />
         <div class="art-meta">
           <p class="art-title">Slot canyon</p>
@@ -432,7 +441,7 @@
         </div>
       </div>
 
-      <div class="art-card reveal" data-medium="oil" onclick="openBook(4)">
+      <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(4)">
         <img src="cat-window.jpg" alt="Acrylic painting of a tabby cat sitting by blue shuttered window" loading="lazy" />
         <div class="art-meta">
           <p class="art-title">Cat by the window</p>
@@ -440,7 +449,7 @@
         </div>
       </div>
 
-      <div class="art-card reveal" data-medium="oil" onclick="openBook(5)">
+      <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(5)">
         <img src="plant-dino.jpg" alt="Acrylic still life of a plant and toy dinosaur by a window" loading="lazy" />
         <div class="art-meta">
           <p class="art-title">Studio still life</p>
@@ -448,7 +457,7 @@
         </div>
       </div>
 
-      <div class="art-card reveal" data-medium="oil" onclick="openBook(6)">
+      <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(6)">
         <img src="snake-flowers.jpg" alt="Decorative gouache painting with snake, flowers, and patterned forms" loading="lazy" />
         <div class="art-meta">
           <p class="art-title">Snake and flowers</p>
@@ -456,7 +465,7 @@
         </div>
       </div>
 
-      <div class="art-card reveal" data-medium="oil" onclick="openBook(7)">
+      <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(7)">
         <img src="china-triptych.JPG" alt="Acrylic triptych of scenes from Guangdong, China during flood" loading="lazy" />
         <div class="art-meta">
           <p class="art-title">Home's Flood, 2021</p>
@@ -464,7 +473,7 @@
         </div>
       </div>
 
-      <div class="art-card reveal" data-medium="digital" onclick="openBook(8)">
+      <div class="art-card reveal tilt" data-medium="digital" onclick="openBook(8)">
         <img src="digital-portrait.jpg" alt="Digital portrait recreation of Chang'e painted in Procreate" loading="lazy" />
         <div class="art-meta">
           <p class="art-title">Chang'e Recreation</p>
@@ -472,7 +481,7 @@
         </div>
       </div>
 
-      <div class="art-card reveal" data-medium="digital" onclick="openBook(9)">
+      <div class="art-card reveal tilt" data-medium="digital" onclick="openBook(9)">
         <img src="digital-cafe.jpg" alt="Digital illustration of a person working on a laptop in a café with no wifi, made for school newspaper illustration" loading="lazy" />
         <div class="art-meta">
           <p class="art-title">Poor Wifi Cafe</p>
@@ -539,18 +548,18 @@
   <h2>Let's make something</h2>
   <p>Whether it's about research, design, or just comparing notes on oil paint brands — I'd love to hear from you.</p>
   <a class="contact-email-btn" href="mailto:l3yuan@ucsd.edu">
-    <i class="ti ti-mail" style="font-size:18px"></i>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
     l3yuan@ucsd.edu
   </a>
   <div class="contact-icons">
     <a class="contact-icon-btn" href="https://github.com/laura06919-max" target="_blank" aria-label="GitHub">
-      <i class="ti ti-brand-github" style="font-size:20px"></i>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
     </a>
     <a class="contact-icon-btn" href="https://linkedin.com/in/laurayuan" target="_blank" aria-label="LinkedIn">
-      <i class="ti ti-brand-linkedin" style="font-size:20px"></i>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4V8h4v2a4 4 0 0 1 4-2z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
     </a>
     <a class="contact-icon-btn" href="mailto:l3yuan@ucsd.edu" aria-label="Email">
-      <i class="ti ti-mail" style="font-size:20px"></i>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
     </a>
   </div>
 </section>
@@ -560,13 +569,15 @@
 </footer>
 
 <div class="book-viewer" id="bookViewer">
-  <span class="book-close" onclick="closeBook()">×</span>
+  <span class="book-close" onclick="closeBook()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+  </span>
   <div class="book-stage" id="bookStage">
     <div class="book-arrow left" onclick="bookPrev()" aria-label="Previous">
-      <i class="ti ti-chevron-left" style="font-size:20px"></i>
+      <svg class="icon" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
     </div>
     <div class="book-arrow right" onclick="bookNext()" aria-label="Next">
-      <i class="ti ti-chevron-right" style="font-size:20px"></i>
+      <svg class="icon" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
     </div>
   </div>
   <p class="book-counter" id="bookCounter"></p>
@@ -595,6 +606,7 @@
     artworks.forEach((art, i) => {
       const page = document.createElement('div');
       page.className = 'book-page';
+      page.style.zIndex = artworks.length - i;
       page.innerHTML = `
         <img class="book-page-img" src="${art.src}" alt="${art.title}" />
         <div class="book-page-caption">
@@ -609,9 +621,15 @@
 
   function renderBook() {
     pageEls.forEach((el, i) => {
-      el.classList.remove('active', 'prev');
-      if (i === currentPage) el.classList.add('active');
-      else if (i === currentPage - 1) el.classList.add('prev');
+      el.classList.remove('current');
+      if (i < currentPage) {
+        el.classList.add('flipped');
+        el.style.zIndex = i + 1;
+      } else {
+        el.classList.remove('flipped');
+        el.style.zIndex = artworks.length - i;
+      }
+      if (i === currentPage) el.classList.add('current');
     });
     document.getElementById('bookCounter').textContent = (currentPage + 1) + ' / ' + artworks.length;
   }
@@ -630,13 +648,17 @@
   }
 
   function bookNext() {
-    currentPage = (currentPage + 1) % artworks.length;
-    renderBook();
+    if (currentPage < artworks.length - 1) {
+      currentPage++;
+      renderBook();
+    }
   }
 
   function bookPrev() {
-    currentPage = (currentPage - 1 + artworks.length) % artworks.length;
-    renderBook();
+    if (currentPage > 0) {
+      currentPage--;
+      renderBook();
+    }
   }
 
   document.addEventListener('keydown', function(e) {
@@ -666,9 +688,25 @@
     }
     animateGlow();
 
-    document.querySelectorAll('a, button').forEach(el => {
+    document.querySelectorAll('a, button, .tilt').forEach(el => {
       el.addEventListener('mouseenter', () => glow.classList.add('hovering'));
       el.addEventListener('mouseleave', () => glow.classList.remove('hovering'));
+    });
+
+    document.querySelectorAll('.tilt').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -8;
+        const rotateY = ((x - centerX) / centerX) * 8;
+        card.style.transform = `perspective(500px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(0)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(500px) rotateX(0) rotateY(0)';
+      });
     });
 
     window.addEventListener('scroll', () => {

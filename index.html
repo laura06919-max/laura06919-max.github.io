@@ -4,40 +4,62 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Laura Yuan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Fredoka:wght@500;600&family=Sora:wght@400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #ffffff;
-      --bg2: #f7f7f5;
-      --border: rgba(0,0,0,0.1);
-      --text: #111111;
-      --muted: #666666;
-      --hint: #999999;
-      --accent: #534AB7;
-      --accent-bg: #EEEDFE;
+      --bg: #F7F1DF;
+      --bg2: #F0E8CC;
+      --bg3: #FFFCF2;
+      --border: #E3D9B8;
+      --text: #2E4456;
+      --muted: #5C6F7E;
+      --hint: #9CA6AC;
+      --blue: #6F95B0;
+      --blue-light: #A8C5D9;
+      --blue-bg: #E3EEF4;
+      --accent2: #C98A7D;
+      --accent2-bg: #F5E3DD;
     }
 
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg: #1a1a1a;
-        --bg2: #222222;
-        --border: rgba(255,255,255,0.1);
-        --text: #f0f0f0;
-        --muted: #aaaaaa;
-        --hint: #777777;
-        --accent: #AFA9EC;
-        --accent-bg: #26215C;
+        --bg: #1E2530;
+        --bg2: #252D3A;
+        --bg3: #2A3340;
+        --border: #38424F;
+        --text: #E8EDF1;
+        --muted: #AEB9C2;
+        --hint: #707C87;
+        --blue: #8FB3CC;
+        --blue-light: #5C7E96;
+        --blue-bg: #2C3A47;
+        --accent2: #DDA396;
+        --accent2-bg: #3D2D29;
       }
     }
 
+    @media (hover: hover) { body { cursor: none; } }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-family: 'Sora', -apple-system, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.65;
       font-size: 16px;
+      overflow-x: hidden;
     }
+
+    .glow { position: fixed; top: 0; left: 0; width: 28px; height: 28px; border-radius: 50%; background: radial-gradient(circle, rgba(111,149,176,0.45) 0%, transparent 70%); pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: width 0.25s, height 0.25s, background 0.25s; }
+    .glow.hovering { width: 48px; height: 48px; background: radial-gradient(circle, rgba(111,149,176,0.6) 0%, transparent 70%); }
+    .glow-trail { position: fixed; top: 0; left: 0; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); }
+    @media (hover: none) { .glow, .glow-trail { display: none; } }
+
+    h1, h2, h3, .display { font-family: 'Abril Fatface', serif; font-weight: 400; }
+    .display-fredoka { font-family: 'Fredoka', sans-serif; font-weight: 500; }
 
     nav {
       display: flex;
@@ -50,112 +72,297 @@
       background: var(--bg);
       z-index: 10;
     }
-    .nav-name { font-size: 15px; font-weight: 500; color: var(--text); text-decoration: none; }
+    .nav-name { font-family: 'Abril Fatface', serif; font-size: 19px; color: var(--text); text-decoration: none; }
     .nav-links { display: flex; gap: 24px; list-style: none; }
-    .nav-links a { font-size: 14px; color: var(--muted); text-decoration: none; transition: color 0.15s; }
+    .nav-links a { font-size: 14px; color: var(--muted); text-decoration: none; transition: color 0.2s; position: relative; padding-bottom: 4px; font-family: 'Sora', sans-serif; }
     .nav-links a:hover { color: var(--text); }
+    .nav-links a.active { color: var(--text); }
+    .nav-links a.active::after {
+      content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 2px;
+      background: var(--blue); border-radius: 2px;
+    }
 
-    main { max-width: 760px; margin: 0 auto; padding: 0 40px 80px; }
+    main { max-width: 760px; margin: 0 auto; padding: 0 40px 0; }
 
-    .hero { padding: 64px 0 48px; border-bottom: 0.5px solid var(--border); }
-    .hero-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--hint); margin-bottom: 12px; }
-    .hero h1 { font-size: 32px; font-weight: 500; line-height: 1.25; color: var(--text); margin-bottom: 16px; }
-    .hero p { font-size: 16px; color: var(--muted); max-width: 520px; margin-bottom: 24px; }
-    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
-    .tag { font-size: 12px; padding: 4px 12px; border-radius: 20px; border: 0.5px solid var(--border); color: var(--muted); }
+    .hero {
+      min-height: 68vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin: 0 -40px;
+      padding: 0 40px;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--blue-bg) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg-shape {
+      position: absolute;
+      width: 480px; height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--blue-bg) 0%, transparent 70%);
+      opacity: 0.7;
+      top: -120px; right: -120px;
+      will-change: transform;
+    }
+    .hero-label {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--blue);
+      margin-bottom: 16px;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: all 0.8s ease;
+      position: relative;
+      font-weight: 500;
+    }
+    .hero h1 {
+      font-size: 46px;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 20px;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: all 0.8s ease 0.15s;
+      position: relative;
+    }
+    .hero p {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 480px;
+      margin-bottom: 28px;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: all 0.8s ease 0.3s;
+      position: relative;
+    }
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: all 0.8s ease 0.45s;
+      position: relative;
+    }
+    .tag { font-size: 12px; padding: 4px 14px; border-radius: 20px; border: 0.5px solid var(--border); color: var(--muted); background: var(--bg3); transition: transform 0.2s, border-color 0.2s; font-family: 'Sora', sans-serif; }
+    .tag:hover { transform: translateY(-2px); border-color: var(--blue); color: var(--blue); }
+    .scroll-hint {
+      margin-top: 40px;
+      color: var(--hint);
+      opacity: 0;
+      transition: opacity 0.8s ease 0.6s;
+      animation: bounce 2s infinite;
+      position: relative;
+    }
+    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+    .hero.loaded .hero-label,
+    .hero.loaded h1,
+    .hero.loaded p,
+    .hero.loaded .tag-row { opacity: 1; transform: translateY(0); }
+    .hero.loaded .scroll-hint { opacity: 1; }
 
-    section { padding: 48px 0; border-bottom: 0.5px solid var(--border); }
-    .section-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--hint); margin-bottom: 24px; }
+    .wave-wrap { margin: 0 -40px; line-height: 0; }
+    .wave-wrap svg { display: block; width: 100%; height: 60px; }
 
-    .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .project-card { border: 0.5px solid var(--border); border-radius: 12px; padding: 20px; background: var(--bg); text-decoration: none; display: block; transition: border-color 0.15s; }
-    .project-card:hover { border-color: var(--accent); }
-    .project-badge { display: inline-block; font-size: 10px; padding: 3px 9px; border-radius: 20px; margin-bottom: 10px; }
-    .badge-teal { background: #E1F5EE; color: #0F6E56; }
-    .badge-purple { background: #EEEDFE; color: #3C3489; }
-    .project-card h3 { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
-    .project-card p { font-size: 13px; color: var(--muted); line-height: 1.55; margin-bottom: 12px; }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    section { padding: 56px 40px; border-bottom: 0.5px solid var(--border); }
+    main > section { padding: 56px 0; }
+    .section-label { font-family: 'Fredoka', sans-serif; font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: var(--hint); margin-bottom: 24px; }
+
+    .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .project-card {
+      background: var(--bg3);
+      text-decoration: none; display: block; position: relative;
+      transform-style: preserve-3d; will-change: transform;
+      padding: 30px 26px 38px;
+      clip-path: polygon(
+        0% 2%, 5% 0%, 14% 1.5%, 24% 0%, 34% 1%, 44% 0%, 54% 1.5%, 64% 0%, 74% 1%, 84% 0%, 94% 1.5%, 100% 0%,
+        99% 12%, 100% 24%, 98.5% 36%, 100% 48%, 99% 60%, 100% 72%, 98.5% 84%, 100% 96%, 99% 100%,
+        90% 98.5%, 80% 100%, 70% 99%, 60% 100%, 50% 98.5%, 40% 100%, 30% 99%, 20% 100%, 10% 98.5%, 0% 100%,
+        1% 88%, 0% 76%, 1.5% 64%, 0% 52%, 1% 40%, 0% 28%, 1.5% 16%, 0% 4%
+      );
+      box-shadow: 0 2px 0 rgba(0,0,0,0.02);
+      transition: filter 0.2s;
+    }
+    .project-card:hover { filter: brightness(0.99); }
+    .project-badge { display: inline-block; font-size: 10px; padding: 3px 10px; border-radius: 20px; margin-bottom: 10px; font-family: 'Sora', sans-serif; }
+    .badge-blue { background: var(--blue-bg); color: var(--blue); }
+    .badge-coral { background: var(--accent2-bg); color: var(--accent2); }
+    .project-card h3 { font-size: 22px; color: var(--text); margin-bottom: 8px; }
+    .project-card p { font-size: 13px; color: var(--muted); line-height: 1.55; margin-bottom: 12px; font-family: 'Sora', sans-serif; }
     .chip-row { display: flex; flex-wrap: wrap; gap: 4px; }
-    .chip { font-size: 11px; padding: 2px 8px; border-radius: 20px; background: var(--bg2); color: var(--muted); }
+    .chip { font-size: 11px; padding: 2px 9px; border-radius: 20px; background: var(--bg2); color: var(--muted); font-family: 'Sora', sans-serif; }
 
-    /* ART SECTION */
-    .art-filter { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
-    .filter-btn { font-size: 12px; padding: 4px 14px; border-radius: 20px; border: 0.5px solid var(--border); background: var(--bg); color: var(--muted); cursor: pointer; transition: all 0.15s; }
-    .filter-btn:hover { border-color: var(--accent); color: var(--text); }
-    .filter-btn.active { background: var(--accent-bg); color: var(--accent); border-color: var(--accent); }
+    .art-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+    .art-filter { display: flex; gap: 8px; flex-wrap: wrap; }
+    .filter-btn { font-size: 12px; padding: 4px 14px; border-radius: 20px; border: 0.5px solid var(--border); background: var(--bg3); color: var(--muted); cursor: pointer; transition: all 0.15s; font-family: 'Sora', sans-serif; }
+    .filter-btn:hover { border-color: var(--blue); color: var(--text); }
+    .filter-btn.active { background: var(--blue-bg); color: var(--blue); border-color: var(--blue); }
+    .view-all-btn {
+      font-size: 12px; padding: 4px 16px; border-radius: 20px; border: 0.5px solid var(--blue);
+      background: var(--blue-bg); color: var(--blue); cursor: pointer; font-family: 'Sora', sans-serif;
+      display: inline-flex; align-items: center; gap: 6px; transition: transform 0.2s;
+    }
+    .view-all-btn:hover { transform: translateY(-1px); }
 
     .art-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-    .art-card { border-radius: 10px; overflow: hidden; border: 0.5px solid var(--border); cursor: pointer; transition: transform 0.15s; }
-    .art-card:hover { transform: scale(1.02); }
-    .art-card img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
-    .art-meta { padding: 10px 12px; background: var(--bg); }
-    .art-title { font-size: 12px; font-weight: 500; color: var(--text); }
-    .art-medium { font-size: 11px; color: var(--hint); margin-top: 2px; }
+    .art-card {
+      border-radius: 16px; overflow: hidden; border: 0.5px solid var(--border);
+      cursor: pointer; transition: transform 0.2s; background: var(--bg3);
+    }
+    .art-card img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; transition: transform 0.4s ease; }
+    .art-card:hover img { transform: scale(1.06); }
+    .art-meta { padding: 10px 12px; }
+    .art-title { font-size: 12px; font-weight: 500; color: var(--text); font-family: 'Sora', sans-serif; }
+    .art-medium { font-size: 11px; color: var(--hint); margin-top: 2px; font-family: 'Sora', sans-serif; }
 
-    /* LIGHTBOX */
-    .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100; align-items: center; justify-content: center; padding: 20px; }
-    .lightbox.open { display: flex; }
-    .lightbox img { max-width: 90vw; max-height: 85vh; object-fit: contain; border-radius: 8px; }
-    .lightbox-close { position: fixed; top: 20px; right: 24px; font-size: 28px; color: white; cursor: pointer; line-height: 1; opacity: 0.8; }
-    .lightbox-close:hover { opacity: 1; }
-    .lightbox-caption { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); color: white; font-size: 13px; opacity: 0.7; text-align: center; }
+    .book-viewer { display: none; position: fixed; inset: 0; background: rgba(46,68,86,0.94); z-index: 200; align-items: center; justify-content: center; padding: 20px; }
+    .book-viewer.open { display: flex; }
+    .book-stage { position: relative; width: min(560px, 90vw); height: min(640px, 80vh); display: flex; align-items: center; justify-content: center; }
+    .book-page {
+      position: absolute; inset: 0; background: var(--bg3); display: flex; flex-direction: column;
+      padding: 28px; opacity: 0; transform: rotateY(-90deg) scale(0.92); transform-origin: left center;
+      transition: opacity 0.45s ease, transform 0.45s ease;
+      pointer-events: none;
+      clip-path: polygon(
+        0% 1.5%, 6% 0%, 16% 1%, 26% 0%, 36% 1.2%, 46% 0%, 56% 1%, 66% 0%, 76% 1.2%, 86% 0%, 96% 1%, 100% 0%,
+        99% 14%, 100% 28%, 98.5% 42%, 100% 56%, 99% 70%, 100% 84%, 99% 96%, 100% 100%,
+        88% 99%, 76% 100%, 64% 99%, 52% 100%, 40% 99%, 28% 100%, 16% 99%, 4% 100%, 0% 99%
+      );
+    }
+    .book-page.active { opacity: 1; transform: rotateY(0deg) scale(1); pointer-events: auto; z-index: 2; }
+    .book-page.prev { transform: rotateY(-12deg) scale(0.97); opacity: 0.4; z-index: 1; }
+    .book-page-img { flex: 1; width: 100%; object-fit: contain; border-radius: 8px; min-height: 0; }
+    .book-page-caption { padding-top: 16px; text-align: center; }
+    .book-page-title { font-family: 'Abril Fatface', serif; font-size: 20px; color: var(--text); margin-bottom: 4px; }
+    .book-page-medium { font-family: 'Sora', sans-serif; font-size: 12px; color: var(--hint); }
+    .book-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%;
+      background: var(--bg3); border: 0.5px solid var(--border); display: flex; align-items: center; justify-content: center;
+      cursor: pointer; z-index: 5; color: var(--text); transition: transform 0.2s;
+    }
+    .book-arrow:hover { transform: translateY(-50%) scale(1.08); }
+    .book-arrow.left { left: -60px; }
+    .book-arrow.right { right: -60px; }
+    .book-close { position: fixed; top: 24px; right: 28px; font-size: 28px; color: #F7F1DF; cursor: pointer; z-index: 201; opacity: 0.8; }
+    .book-close:hover { opacity: 1; }
+    .book-counter { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); color: #F7F1DF; font-family: 'Sora', sans-serif; font-size: 13px; opacity: 0.7; }
+    @media (max-width: 640px) {
+      .book-arrow.left { left: 8px; }
+      .book-arrow.right { right: 8px; }
+      .book-stage { width: 92vw; height: 70vh; }
+    }
 
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .about-card { background: var(--bg2); border-radius: 10px; padding: 16px 18px; }
-    .about-card-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--hint); margin-bottom: 8px; }
-    .about-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .about-card { background: var(--bg2); border-radius: 16px; padding: 18px 20px; transition: transform 0.2s; }
+    .about-card:hover { transform: translateY(-2px); }
+    .about-card-label { font-family: 'Fredoka', sans-serif; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: var(--blue); margin-bottom: 8px; }
+    .about-card p { font-size: 13px; color: var(--muted); line-height: 1.6; font-family: 'Sora', sans-serif; }
 
-    footer { max-width: 760px; margin: 0 auto; padding: 32px 40px; display: flex; justify-content: space-between; align-items: center; border-top: 0.5px solid var(--border); }
-    footer span { font-size: 13px; color: var(--hint); }
-    .footer-links { display: flex; gap: 20px; }
-    .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; }
-    .footer-links a:hover { color: var(--text); }
+    .about-intro { display: flex; gap: 20px; align-items: center; margin-bottom: 24px; }
+    .about-photo {
+      width: 84px; height: 84px; border-radius: 50%; object-fit: cover; flex-shrink: 0;
+      border: 3px solid var(--bg3); box-shadow: 0 0 0 1px var(--border);
+    }
+    .about-intro-text p { font-size: 14px; color: var(--muted); line-height: 1.6; font-family: 'Sora', sans-serif; }
+    .about-intro-text strong { color: var(--text); font-family: 'Fredoka', sans-serif; font-weight: 600; }
+
+    .skills-wrap { margin-top: 28px; }
+    .skill-row { margin-bottom: 16px; }
+    .skill-label { display: flex; justify-content: space-between; font-size: 13px; color: var(--text); margin-bottom: 6px; font-family: 'Sora', sans-serif; }
+    .skill-label span:last-child { color: var(--hint); }
+    .skill-track { height: 6px; background: var(--bg2); border-radius: 10px; overflow: hidden; }
+    .skill-fill { height: 100%; width: 0%; border-radius: 10px; background: var(--blue); transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+
+    .contact-section { background: var(--blue-bg); margin: 0 -40px; padding: 64px 40px; text-align: center; border-bottom: none; }
+    .contact-section h2 { font-size: 38px; color: var(--text); margin-bottom: 12px; }
+    .contact-section p { font-size: 15px; color: var(--muted); max-width: 420px; margin: 0 auto 28px; font-family: 'Sora', sans-serif; }
+    .contact-email-btn {
+      display: inline-flex; align-items: center; gap: 8px; background: var(--text); color: var(--bg3);
+      font-family: 'Fredoka', sans-serif; font-weight: 500; font-size: 15px; padding: 12px 24px;
+      border-radius: 30px; text-decoration: none; transition: transform 0.2s;
+    }
+    .contact-email-btn:hover { transform: translateY(-2px); }
+    .contact-icons { display: flex; justify-content: center; gap: 14px; margin-top: 28px; }
+    .contact-icon-btn {
+      width: 44px; height: 44px; border-radius: 50%; background: var(--bg3); border: 0.5px solid var(--border);
+      display: flex; align-items: center; justify-content: center; color: var(--text); text-decoration: none;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .contact-icon-btn:hover { transform: translateY(-2px); border-color: var(--blue); color: var(--blue); }
+
+    footer { max-width: 760px; margin: 0 auto; padding: 28px 40px; display: flex; justify-content: center; align-items: center; }
+    footer span { font-size: 13px; color: var(--hint); font-family: 'Sora', sans-serif; }
 
     @media (max-width: 600px) {
       nav { padding: 14px 20px; }
-      main { padding: 0 20px 60px; }
-      .hero h1 { font-size: 24px; }
+      main { padding: 0 20px 0; }
+      .hero { margin: 0 -20px; padding: 0 20px; }
+      .hero h1 { font-size: 32px; }
+      .wave-wrap { margin: 0 -20px; }
       .project-grid { grid-template-columns: 1fr; }
       .art-grid { grid-template-columns: repeat(2, 1fr); }
       .about-grid { grid-template-columns: 1fr; }
-      footer { padding: 24px 20px; flex-direction: column; gap: 12px; text-align: center; }
+      .about-intro { flex-direction: column; text-align: center; }
+      .contact-section { margin: 0 -20px; padding: 48px 20px; }
+      section { padding: 48px 20px; }
     }
   </style>
 </head>
 <body>
 
+<div class="glow" id="glow"></div>
+<div class="glow-trail" id="glowTrail"></div>
+
 <nav>
   <a class="nav-name" href="#">Laura Yuan</a>
   <ul class="nav-links">
-    <li><a href="#work">Work</a></li>
-    <li><a href="#art">Art</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="mailto:l3yuan@ucsd.edu">Contact</a></li>
+    <li><a href="#work" class="nav-link" data-section="work">Work</a></li>
+    <li><a href="#art" class="nav-link" data-section="art">Art</a></li>
+    <li><a href="#about" class="nav-link" data-section="about">About</a></li>
+    <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
   </ul>
 </nav>
 
+<div class="hero" id="hero">
+  <div class="hero-bg-shape" id="heroShape"></div>
+  <p class="hero-label">Data science · Cognitive science · Visual arts</p>
+  <h1>I build things at the<br>intersection of data and people.</h1>
+  <p>First-year at UC San Diego studying data science and cognitive science. I research bioacoustic ML pipelines, design interactive dashboards, and make oil paintings. Sometimes all three feel like the same problem.</p>
+  <div class="tag-row">
+    <span class="tag">Human-computer interaction</span>
+    <span class="tag">Data visualization</span>
+    <span class="tag">Active learning</span>
+    <span class="tag">Visual art</span>
+    <span class="tag">Open to research</span>
+  </div>
+  <div class="scroll-hint">
+    <i class="ti ti-chevron-down" style="font-size:20px"></i>
+  </div>
+</div>
+
+<div class="wave-wrap">
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
+    <path d="M0,30 Q360,60 720,30 T1440,30 L1440,0 L0,0 Z" fill="var(--bg)"></path>
+  </svg>
+</div>
+
 <main>
 
-  <div class="hero">
-    <p class="hero-label">Data science · Cognitive science · Visual arts</p>
-    <h1>I build things at the<br>intersection of data and people.</h1>
-    <p>First-year at UC San Diego studying data science and cognitive science. I research bioacoustic ML pipelines, design interactive dashboards, and make oil paintings. Sometimes all three feel like the same problem.</p>
-    <div class="tag-row">
-      <span class="tag">Human-computer interaction</span>
-      <span class="tag">Data visualization</span>
-      <span class="tag">Active learning</span>
-      <span class="tag">Visual art</span>
-      <span class="tag">Open to research</span>
-    </div>
-  </div>
-
   <section id="work">
-    <p class="section-label">Selected work</p>
+    <p class="section-label reveal">Selected work</p>
     <div class="project-grid">
-      <a class="project-card" href="https://github.com/laura06919-max" target="_blank">
-        <span class="project-badge badge-teal">DataHacks 2026 · 3rd place</span>
+      <a class="project-card reveal" href="https://github.com/laura06919-max" target="_blank">
+        <span class="project-badge badge-coral">DataHacks 2026 · 3rd place</span>
         <h3>Ocean Pulse</h3>
-        <p>Interactive dashboard for California Current ecosystem health — designed for non-technical users to explore 70 years of ocean data and AI-generated policy recommendations.</p>
+        <p>Interactive dashboard for California Current ocean ecosystem health — designed for non-technical users to explore 70 years of ocean data and AI-generated policy recommendations.</p>
         <div class="chip-row">
           <span class="chip">Streamlit</span>
           <span class="chip">Random Forest</span>
@@ -163,9 +370,9 @@
           <span class="chip">Groq LLM</span>
         </div>
       </a>
-      <a class="project-card" href="https://github.com/laura06919-max" target="_blank">
-        <span class="project-badge badge-purple">Research · E4E Lab</span>
-        <h3>Bioacoustic species classifier</h3>
+      <a class="project-card reveal" href="https://github.com/laura06919-max" target="_blank">
+        <span class="project-badge badge-blue">Research · E4E Lab</span>
+        <h3>Bioacoustic classifier</h3>
         <p>Active learning pipeline for bird species classification from audio, in collaboration with the San Diego Zoo. Minimizes annotation cost on imbalanced multi-species datasets.</p>
         <div class="chip-row">
           <span class="chip">PyTorch</span>
@@ -178,17 +385,22 @@
   </section>
 
   <section id="art">
-    <p class="section-label">Art</p>
+    <p class="section-label reveal">Art</p>
 
-    <div class="art-filter">
-      <button class="filter-btn active" onclick="filterArt('all', this)">All</button>
-      <button class="filter-btn" onclick="filterArt('oil', this)">Oil & acrylic</button>
-      <button class="filter-btn" onclick="filterArt('digital', this)">Digital</button>
+    <div class="art-header-row reveal">
+      <div class="art-filter">
+        <button class="filter-btn active" onclick="filterArt('all', this)">All</button>
+        <button class="filter-btn" onclick="filterArt('oil', this)">Oil & acrylic</button>
+        <button class="filter-btn" onclick="filterArt('digital', this)">Digital</button>
+      </div>
+      <button class="view-all-btn" onclick="openBook(0)">
+        View all <i class="ti ti-arrow-right" style="font-size:14px"></i>
+      </button>
     </div>
 
     <div class="art-grid" id="art-grid">
 
-      <div class="art-card" data-medium="oil" onclick="openLightbox('the-sunset.jpg', 'The sunset · Oil on canvas')">
+      <div class="art-card reveal" data-medium="oil" onclick="openBook(0)">
         <img src="the-sunset.jpg" alt="Oil painting of a dramatic sunset with palm tree silhouettes outside of home's window" loading="lazy" />
         <div class="art-meta">
           <p class="art-title">The sunset</p>
@@ -196,7 +408,7 @@
         </div>
       </div>
 
-      <div class="art-card" data-medium="oil" onclick="openLightbox('fantasy-figure.jpg', 'Ukyo Tachibana Recreation · Acrylic on canvas')">
+      <div class="art-card reveal" data-medium="oil" onclick="openBook(1)">
         <img src="fantasy-figure.jpg" alt="Large acrylic painting of a fantasy figure with dragon" loading="lazy" />
         <div class="art-meta">
           <p class="art-title">Ukyo Tachibana Recreation</p>
@@ -204,7 +416,7 @@
         </div>
       </div>
 
-      <div class="art-card" data-medium="oil" onclick="openLightbox('floral-bouquet.JPG', 'Floral bouquet · Oil on canvas')">
+      <div class="art-card reveal" data-medium="oil" onclick="openBook(2)">
         <img src="floral-bouquet.JPG" alt="Oil painting of a lush floral bouquet on a blue-grey background" loading="lazy" />
         <div class="art-meta">
           <p class="art-title">Floral bouquet</p>
@@ -212,7 +424,7 @@
         </div>
       </div>
 
-      <div class="art-card" data-medium="oil" onclick="openLightbox('slot-canyon.JPG', 'Slot canyon · Oil on canvas')">
+      <div class="art-card reveal" data-medium="oil" onclick="openBook(3)">
         <img src="slot-canyon.JPG" alt="Abstract oil painting of a slot canyon in vivid colour" loading="lazy" />
         <div class="art-meta">
           <p class="art-title">Slot canyon</p>
@@ -220,7 +432,7 @@
         </div>
       </div>
 
-      <div class="art-card" data-medium="oil" onclick="openLightbox('cat-window.jpg', 'Cat by the window · Acrylic on canvas')">
+      <div class="art-card reveal" data-medium="oil" onclick="openBook(4)">
         <img src="cat-window.jpg" alt="Acrylic painting of a tabby cat sitting by blue shuttered window" loading="lazy" />
         <div class="art-meta">
           <p class="art-title">Cat by the window</p>
@@ -228,7 +440,7 @@
         </div>
       </div>
 
-      <div class="art-card" data-medium="oil" onclick="openLightbox('plant-dino.jpg', 'Studio still life · Acrylic on canvas')">
+      <div class="art-card reveal" data-medium="oil" onclick="openBook(5)">
         <img src="plant-dino.jpg" alt="Acrylic still life of a plant and toy dinosaur by a window" loading="lazy" />
         <div class="art-meta">
           <p class="art-title">Studio still life</p>
@@ -236,7 +448,7 @@
         </div>
       </div>
 
-      <div class="art-card" data-medium="oil" onclick="openLightbox('snake-flowers.jpg', 'Snake and flowers · Gouache')">
+      <div class="art-card reveal" data-medium="oil" onclick="openBook(6)">
         <img src="snake-flowers.jpg" alt="Decorative gouache painting with snake, flowers, and patterned forms" loading="lazy" />
         <div class="art-meta">
           <p class="art-title">Snake and flowers</p>
@@ -244,7 +456,7 @@
         </div>
       </div>
 
-      <div class="art-card" data-medium="oil" onclick="openLightbox('china-triptych.JPG', 'Home's Flood, 2021 · Acrylic triptych')">
+      <div class="art-card reveal" data-medium="oil" onclick="openBook(7)">
         <img src="china-triptych.JPG" alt="Acrylic triptych of scenes from Guangdong, China during flood" loading="lazy" />
         <div class="art-meta">
           <p class="art-title">Home's Flood, 2021</p>
@@ -252,7 +464,7 @@
         </div>
       </div>
 
-      <div class="art-card" data-medium="digital" onclick="openLightbox('digital-portrait.jpg', 'Chang'e Recreation· Procreate')">
+      <div class="art-card reveal" data-medium="digital" onclick="openBook(8)">
         <img src="digital-portrait.jpg" alt="Digital portrait recreation of Chang'e painted in Procreate" loading="lazy" />
         <div class="art-meta">
           <p class="art-title">Chang'e Recreation</p>
@@ -260,7 +472,7 @@
         </div>
       </div>
 
-      <div class="art-card" data-medium="digital" onclick="openLightbox('digital-cafe.jpg', 'Poor Wifi Cafe· Procreate')">
+      <div class="art-card reveal" data-medium="digital" onclick="openBook(9)">
         <img src="digital-cafe.jpg" alt="Digital illustration of a person working on a laptop in a café with no wifi, made for school newspaper illustration" loading="lazy" />
         <div class="art-meta">
           <p class="art-title">Poor Wifi Cafe</p>
@@ -272,61 +484,238 @@
   </section>
 
   <section id="about">
-    <p class="section-label">About</p>
+    <p class="section-label reveal">About</p>
+
+    <div class="about-intro reveal">
+      <img class="about-photo" src="me.jpg" alt="Laura Yuan, candid photo" />
+      <div class="about-intro-text">
+        <p><strong>Hi, I'm Laura</strong> — first-year at UCSD, equally happy in front of a Jupyter notebook or a canvas. This site is where both sides live.</p>
+      </div>
+    </div>
+
     <div class="about-grid">
-      <div class="about-card">
+      <div class="about-card reveal">
         <p class="about-card-label">Currently</p>
         <p>Student researcher at Engineers for Exploration (UCSD), building ML pipelines for bioacoustic species classification in collaboration with the San Diego Zoo.</p>
       </div>
-      <div class="about-card">
+      <div class="about-card reveal">
         <p class="about-card-label">Background</p>
         <p>I came to HCI through data science — building dashboards and realizing that good data and good design are inseparable problems. Also a practicing visual artist.</p>
       </div>
-      <div class="about-card">
+      <div class="about-card reveal">
         <p class="about-card-label">Education</p>
         <p>B.S. Data Science, minor in Cognitive Science — UC San Diego, class of 2029.</p>
       </div>
-      <div class="about-card">
+      <div class="about-card reveal">
         <p class="about-card-label">Looking for</p>
         <p>HCI research opportunities and design collaborations where data and human experience intersect.</p>
+      </div>
+    </div>
+
+    <div class="skills-wrap reveal" id="skillsWrap">
+      <p class="section-label" style="margin-bottom:16px">Comfort level</p>
+      <div class="skill-row">
+        <div class="skill-label"><span>Python / data science</span><span>90%</span></div>
+        <div class="skill-track"><div class="skill-fill" data-width="90"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-label"><span>Visual art (oil, acrylic, digital)</span><span>85%</span></div>
+        <div class="skill-track"><div class="skill-fill" data-width="85"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-label"><span>HTML / CSS / front-end</span><span>55%</span></div>
+        <div class="skill-track"><div class="skill-fill" data-width="55"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-label"><span>UX / design research</span><span>40%</span></div>
+        <div class="skill-track"><div class="skill-fill" data-width="40"></div></div>
       </div>
     </div>
   </section>
 
 </main>
 
+<section id="contact" class="contact-section reveal">
+  <h2>Let's make something</h2>
+  <p>Whether it's about research, design, or just comparing notes on oil paint brands — I'd love to hear from you.</p>
+  <a class="contact-email-btn" href="mailto:l3yuan@ucsd.edu">
+    <i class="ti ti-mail" style="font-size:18px"></i>
+    l3yuan@ucsd.edu
+  </a>
+  <div class="contact-icons">
+    <a class="contact-icon-btn" href="https://github.com/laura06919-max" target="_blank" aria-label="GitHub">
+      <i class="ti ti-brand-github" style="font-size:20px"></i>
+    </a>
+    <a class="contact-icon-btn" href="https://linkedin.com/in/laurayuan" target="_blank" aria-label="LinkedIn">
+      <i class="ti ti-brand-linkedin" style="font-size:20px"></i>
+    </a>
+    <a class="contact-icon-btn" href="mailto:l3yuan@ucsd.edu" aria-label="Email">
+      <i class="ti ti-mail" style="font-size:20px"></i>
+    </a>
+  </div>
+</section>
+
 <footer>
   <span>Laura Yuan · UCSD 2029</span>
-  <div class="footer-links">
-    <a href="https://github.com/laura06919-max" target="_blank">GitHub</a>
-    <a href="https://linkedin.com/in/laurayuan" target="_blank">LinkedIn</a>
-    <a href="mailto:l3yuan@ucsd.edu">Email</a>
-  </div>
 </footer>
 
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox()">
-  <span class="lightbox-close" onclick="closeLightbox()">×</span>
-  <img id="lightbox-img" src="" alt="" />
-  <p class="lightbox-caption" id="lightbox-caption"></p>
+<div class="book-viewer" id="bookViewer">
+  <span class="book-close" onclick="closeBook()">×</span>
+  <div class="book-stage" id="bookStage">
+    <div class="book-arrow left" onclick="bookPrev()" aria-label="Previous">
+      <i class="ti ti-chevron-left" style="font-size:20px"></i>
+    </div>
+    <div class="book-arrow right" onclick="bookNext()" aria-label="Next">
+      <i class="ti ti-chevron-right" style="font-size:20px"></i>
+    </div>
+  </div>
+  <p class="book-counter" id="bookCounter"></p>
 </div>
 
 <script>
-  function openLightbox(src, caption) {
-    document.getElementById('lightbox-img').src = src;
-    document.getElementById('lightbox-caption').textContent = caption;
-    document.getElementById('lightbox').classList.add('open');
+  const artworks = [
+    { src: 'the-sunset.jpg', title: 'The sunset', medium: 'Oil on canvas' },
+    { src: 'fantasy-figure.jpg', title: 'Ukyo Tachibana Recreation', medium: 'Acrylic on canvas' },
+    { src: 'floral-bouquet.JPG', title: 'Floral bouquet', medium: 'Oil on canvas' },
+    { src: 'slot-canyon.JPG', title: 'Slot canyon', medium: 'Oil on canvas' },
+    { src: 'cat-window.jpg', title: 'Cat by the window', medium: 'Acrylic on canvas' },
+    { src: 'plant-dino.jpg', title: 'Studio still life', medium: 'Acrylic on canvas' },
+    { src: 'snake-flowers.jpg', title: 'Snake and flowers', medium: 'Gouache' },
+    { src: 'china-triptych.JPG', title: "Home's Flood, 2021", medium: 'Acrylic triptych' },
+    { src: 'digital-portrait.jpg', title: "Chang'e Recreation", medium: 'Procreate' },
+    { src: 'digital-cafe.jpg', title: 'Poor Wifi Cafe', medium: 'Procreate' }
+  ];
+  let currentPage = 0;
+  let pageEls = [];
+
+  function buildBookPages() {
+    const stage = document.getElementById('bookStage');
+    pageEls.forEach(el => el.remove());
+    pageEls = [];
+    artworks.forEach((art, i) => {
+      const page = document.createElement('div');
+      page.className = 'book-page';
+      page.innerHTML = `
+        <img class="book-page-img" src="${art.src}" alt="${art.title}" />
+        <div class="book-page-caption">
+          <p class="book-page-title">${art.title}</p>
+          <p class="book-page-medium">${art.medium}</p>
+        </div>
+      `;
+      stage.insertBefore(page, stage.querySelector('.book-arrow.left'));
+      pageEls.push(page);
+    });
+  }
+
+  function renderBook() {
+    pageEls.forEach((el, i) => {
+      el.classList.remove('active', 'prev');
+      if (i === currentPage) el.classList.add('active');
+      else if (i === currentPage - 1) el.classList.add('prev');
+    });
+    document.getElementById('bookCounter').textContent = (currentPage + 1) + ' / ' + artworks.length;
+  }
+
+  function openBook(index) {
+    if (pageEls.length === 0) buildBookPages();
+    currentPage = index;
+    renderBook();
+    document.getElementById('bookViewer').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
 
-  function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('open');
+  function closeBook() {
+    document.getElementById('bookViewer').classList.remove('open');
     document.body.style.overflow = '';
   }
 
+  function bookNext() {
+    currentPage = (currentPage + 1) % artworks.length;
+    renderBook();
+  }
+
+  function bookPrev() {
+    currentPage = (currentPage - 1 + artworks.length) % artworks.length;
+    renderBook();
+  }
+
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeLightbox();
+    if (!document.getElementById('bookViewer').classList.contains('open')) return;
+    if (e.key === 'Escape') closeBook();
+    if (e.key === 'ArrowRight') bookNext();
+    if (e.key === 'ArrowLeft') bookPrev();
   });
+
+  const glow = document.getElementById('glow');
+  const trail = document.getElementById('glowTrail');
+  let mouseX = 0, mouseY = 0, glowX = 0, glowY = 0;
+
+  if (window.matchMedia('(hover: hover)').matches) {
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX; mouseY = e.clientY;
+      trail.style.left = mouseX + 'px';
+      trail.style.top = mouseY + 'px';
+    });
+
+    function animateGlow() {
+      glowX += (mouseX - glowX) * 0.12;
+      glowY += (mouseY - glowY) * 0.12;
+      glow.style.left = glowX + 'px';
+      glow.style.top = glowY + 'px';
+      requestAnimationFrame(animateGlow);
+    }
+    animateGlow();
+
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => glow.classList.add('hovering'));
+      el.addEventListener('mouseleave', () => glow.classList.remove('hovering'));
+    });
+
+    window.addEventListener('scroll', () => {
+      const shape = document.getElementById('heroShape');
+      if (shape) shape.style.transform = `translateY(${window.scrollY * 0.3}px)`;
+    });
+  }
+
+  setTimeout(() => {
+    document.getElementById('hero').classList.add('loaded');
+  }, 100);
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  const skillObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        document.querySelectorAll('.skill-fill').forEach(fill => {
+          fill.style.width = fill.dataset.width + '%';
+        });
+        skillObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.3 });
+  const skillsEl = document.getElementById('skillsWrap');
+  if (skillsEl) skillObserver.observe(skillsEl);
+
+  const sections = document.querySelectorAll('main section[id], #contact');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.dataset.section === entry.target.id);
+        });
+      }
+    });
+  }, { threshold: 0.3, rootMargin: '-80px 0px -50% 0px' });
+  sections.forEach(s => navObserver.observe(s));
 
   function filterArt(type, btn) {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));

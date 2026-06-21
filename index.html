@@ -291,7 +291,9 @@
     .case-close svg { width: 24px; height: 24px; }
     .case-eyebrow { font-family: 'Fredoka', sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--blue); margin-bottom: 10px; }
     .case-title { font-size: 32px; color: var(--text); margin-bottom: 8px; }
-    .case-subtitle { font-size: 15px; color: var(--muted); margin-bottom: 32px; }
+    .case-subtitle { font-size: 15px; color: var(--muted); margin-bottom: 24px; }
+    .case-team-photo { width: 100%; border-radius: 14px; display: block; margin-bottom: 8px; }
+    .case-photo-caption { font-size: 12px; color: var(--hint); margin-bottom: 32px; font-style: italic; }
     .case-meta-row { display: flex; gap: 24px; margin-bottom: 36px; padding-bottom: 28px; border-bottom: 0.5px solid var(--border); flex-wrap: wrap; }
     .case-meta-item { flex: 1; min-width: 120px; }
     .case-meta-label { font-family: 'Fredoka', sans-serif; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--hint); margin-bottom: 4px; }
@@ -636,7 +638,10 @@
 
     <p class="case-eyebrow">Case study · DataHacks 2026</p>
     <h2 class="case-title">Ocean Pulse</h2>
-    <p class="case-subtitle">A dashboard for exploring 70 years of California Current ecosystem health — and the design decisions that made it usable by people who aren't data scientists.</p>
+    <p class="case-subtitle">A dashboard for exploring 70 years of California Current ocean data — built in 48 hours, mostly figured out by trial and error.</p>
+
+    <img class="case-team-photo" src="ocean-pulse-team.jpg" alt="Our team at DataHacks 2026" loading="lazy" />
+    <p class="case-photo-caption">Us right after the demo, still running on no sleep and free Red Bull.</p>
 
     <div class="case-meta-row">
       <div class="case-meta-item">
@@ -655,37 +660,37 @@
 
     <div class="case-block">
       <p class="case-block-title">The problem</p>
-      <p>Our team had 70 years of CalCOFI ocean health data and a Random Forest model predicting ecosystem health at 98% accuracy. That part was easy. The hard part: the people who'd actually use this — policymakers, science communicators — don't read model outputs, they read interfaces. A technically correct model that nobody can navigate isn't useful to anyone.</p>
+      <p>We had 70 years of CalCOFI ocean data and a Random Forest model that hit 98% accuracy predicting ecosystem health. Honestly, that part wasn't even the hard part — anyone on the team could've built that model alone. What we kept running into was that nobody who'd actually use this thing cares about model accuracy. A policymaker isn't going to read our confusion matrix. If they can't figure out what the dashboard is telling them in the first ten seconds, it doesn't matter how good the model is underneath.</p>
     </div>
 
     <div class="case-block">
       <p class="case-block-title">Who it's for</p>
-      <p>Not data scientists. Someone with zero ML background who needs to understand "is this region's ecosystem healthy or not" in under a minute, and trust the answer enough to act on it.</p>
+      <p>Not us. Not other data science students. We had to keep reminding ourselves of that. The actual user is someone with zero ML background — a policymaker, a science communicator, maybe a curious local — who needs to look at the screen and know whether a region's ecosystem is doing okay, fast, and trust that answer enough to do something with it.</p>
     </div>
 
     <div class="case-block">
-      <p class="case-block-title">Design decisions</p>
+      <p class="case-block-title">Things we changed (and why)</p>
 
       <div class="case-decision">
-        <p class="case-decision-q">Why does tab order matter here?</p>
-        <p class="case-decision-a">We initially ordered tabs by how we built the pipeline — data, then model, then predictions. We reordered around what a policymaker actually cares about first: "what's the health status right now," with the methodology pushed later for people who want to dig in.</p>
+        <p class="case-decision-q">Tab order</p>
+        <p class="case-decision-a">We built the tabs in the order we built the pipeline — raw data first, then the model, then predictions last. Made sense to us, made zero sense to anyone testing it. We flipped it so "is this region healthy right now" comes first, and buried the methodology stuff further back for people who actually want to dig in.</p>
       </div>
 
       <div class="case-decision">
-        <p class="case-decision-q">Why add an AI explainer instead of just showing the number?</p>
-        <p class="case-decision-a">A health score alone doesn't tell a non-expert what to do with it. We added a Groq-powered agent that translates the prediction into plain-language regional policy context — the goal wasn't to make the AI look impressive, it was to remove the gap between "here's a number" and "here's what it means for your region."</p>
+        <p class="case-decision-q">The AI explainer</p>
+        <p class="case-decision-a">A health score by itself is just a number floating there. We hooked up a Groq model to translate the prediction into plain language about what it might mean for regional policy. This wasn't us trying to cram AI into the project for the sake of it — we genuinely needed something to close the gap between "here's a score" and "here's why you should care."</p>
       </div>
 
       <div class="case-decision">
-        <p class="case-decision-q">Why constrain the map to government-regulated zones?</p>
-        <p class="case-decision-a">Letting people click anywhere on the map felt powerful but was actually misleading — policy decisions are made at the level of regulated zones, not arbitrary coordinates. Scoping the predictor to match real boundaries made the tool match how decisions actually get made.</p>
+        <p class="case-decision-q">Limiting the map</p>
+        <p class="case-decision-a">Originally you could click literally anywhere on the map. Felt cool in the demo, but it was kind of dishonest — real ocean policy gets made at the level of government-regulated zones, not random coordinates someone clicked on. So we scoped the predictor down to match those actual boundaries. Less flashy, more true to how this would really get used.</p>
       </div>
     </div>
 
     <div class="case-block">
       <p class="case-block-title">What I'd do differently</p>
       <div class="case-reflection">
-        <p>I didn't have the vocabulary for any of this while we were building it — I just knew the dashboard "felt wrong" until we made these changes. Looking back, I'd user-test the tab order with an actual non-technical person before building, instead of guessing and fixing it after the fact.</p>
+        <p>None of us had the vocabulary for "user-centered design" while we were building this — we just kept saying the dashboard "felt off" until something clicked. Looking back, I wish we'd shown the tab layout to one non-technical person before writing any code, instead of building first and rearranging things at 1am once we noticed the problem ourselves.</p>
       </div>
     </div>
 
@@ -828,6 +833,37 @@
     }
     animateGlow();
 
+    const zoneSections = [
+      { id: 'work', el: document.getElementById('work') },
+      { id: 'art', el: document.getElementById('art') },
+      { id: 'about', el: document.getElementById('about') },
+      { id: 'contact', el: document.getElementById('contact') }
+    ].filter(s => s.el);
+    let currentZone = null;
+
+    function updateCursorZone() {
+      let foundZone = null;
+      for (const s of zoneSections) {
+        const rect = s.el.getBoundingClientRect();
+        if (mouseY >= rect.top && mouseY <= rect.bottom) {
+          foundZone = s.id;
+          break;
+        }
+      }
+      if (foundZone !== currentZone) {
+        if (currentZone) {
+          glow.classList.remove('zone-' + currentZone);
+          trail.classList.remove('zone-' + currentZone);
+        }
+        if (foundZone) {
+          glow.classList.add('zone-' + foundZone);
+          trail.classList.add('zone-' + foundZone);
+        }
+        currentZone = foundZone;
+      }
+    }
+    setInterval(updateCursorZone, 150);
+
     document.querySelectorAll('a, button, .tilt').forEach(el => {
       el.addEventListener('mouseenter', () => glow.classList.add('hovering'));
       el.addEventListener('mouseleave', () => glow.classList.remove('hovering'));
@@ -884,16 +920,12 @@
 
   const sections = document.querySelectorAll('main section[id], #contact');
   const navLinks = document.querySelectorAll('.nav-link');
-  const zoneClasses = ['zone-work', 'zone-art', 'zone-about', 'zone-contact'];
   const navObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         navLinks.forEach(link => {
           link.classList.toggle('active', link.dataset.section === entry.target.id);
         });
-        zoneClasses.forEach(z => { glow.classList.remove(z); trail.classList.remove(z); });
-        glow.classList.add('zone-' + entry.target.id);
-        trail.classList.add('zone-' + entry.target.id);
       }
     });
   }, { threshold: 0.3, rootMargin: '-80px 0px -50% 0px' });

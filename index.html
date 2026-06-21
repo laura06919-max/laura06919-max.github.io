@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Laura Yuan</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%23F7F1DF%22/><circle cx=%2250%22 cy=%2250%22 r=%2230%22 fill=%22none%22 stroke=%22%236F95B0%22 stroke-width=%226%22/><circle cx=%2250%22 cy=%2250%22 r=%2210%22 fill=%22%23C98A7D%22/></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Fredoka:wght@500;600&family=Sora:wght@400;500&display=swap" rel="stylesheet">
@@ -53,9 +54,14 @@
       overflow-x: hidden;
     }
 
-    .glow { position: fixed; top: 0; left: 0; width: 28px; height: 28px; border-radius: 50%; background: radial-gradient(circle, rgba(111,149,176,0.45) 0%, transparent 70%); pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: width 0.25s, height 0.25s, background 0.25s; }
-    .glow.hovering { width: 48px; height: 48px; background: radial-gradient(circle, rgba(111,149,176,0.6) 0%, transparent 70%); }
-    .glow-trail { position: fixed; top: 0; left: 0; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); }
+    .glow { position: fixed; top: 0; left: 0; width: 28px; height: 28px; border-radius: 50%; background: radial-gradient(circle, rgba(111,149,176,0.45) 0%, transparent 70%); pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: width 0.25s, height 0.25s, background 0.4s ease; }
+    .glow.hovering { width: 48px; height: 48px; }
+    .glow.zone-work { background: radial-gradient(circle, rgba(111,149,176,0.6) 0%, transparent 70%); }
+    .glow.zone-art { background: radial-gradient(circle, rgba(201,138,125,0.55) 0%, transparent 70%); }
+    .glow.zone-about { background: radial-gradient(circle, rgba(111,149,176,0.5) 0%, transparent 70%); }
+    .glow.zone-contact { background: radial-gradient(circle, rgba(111,149,176,0.6) 0%, transparent 70%); }
+    .glow-trail { position: fixed; top: 0; left: 0; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: background 0.4s ease; }
+    .glow-trail.zone-art { background: var(--accent2); }
     @media (hover: none) { .glow, .glow-trail { display: none; } }
 
     h1, h2, h3, .display { font-family: 'Abril Fatface', serif; font-weight: 400; }
@@ -73,7 +79,10 @@
       background: var(--bg);
       z-index: 10;
     }
-    .nav-name { font-family: 'Abril Fatface', serif; font-size: 19px; color: var(--text); text-decoration: none; }
+    .nav-name { font-family: 'Abril Fatface', serif; font-size: 19px; color: var(--text); text-decoration: none; cursor: pointer; }
+    #waveEmoji { transition: transform 0.3s ease; opacity: 0.85; }
+    #waveEmoji.waving { animation: wave 0.6s ease; }
+    @keyframes wave { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(20deg); } 50% { transform: rotate(-15deg); } 75% { transform: rotate(15deg); } }
     .nav-links { display: flex; gap: 24px; list-style: none; }
     .nav-links a { font-size: 14px; color: var(--muted); text-decoration: none; transition: color 0.2s; position: relative; padding-bottom: 4px; font-family: 'Sora', sans-serif; }
     .nav-links a:hover { color: var(--text); }
@@ -349,7 +358,10 @@
     .contact-icon-btn svg { width: 20px; height: 20px; }
 
     footer { max-width: 760px; margin: 0 auto; padding: 28px 40px; display: flex; justify-content: center; align-items: center; }
+    .footer-inner { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
     footer span { font-size: 13px; color: var(--hint); font-family: 'Sora', sans-serif; }
+    .footer-craft { font-size: 11px; color: var(--hint); opacity: 0.7; max-width: 480px; line-height: 1.6; }
+    .footer-time { font-family: 'Sora', sans-serif; }
 
     @media (max-width: 600px) {
       nav { padding: 14px 20px; }
@@ -373,7 +385,7 @@
 <div class="glow-trail" id="glowTrail"></div>
 
 <nav>
-  <a class="nav-name" href="#">Laura Yuan</a>
+  <a class="nav-name" href="#" id="navName" onclick="return false">Laura Yuan <span id="waveEmoji" style="display:inline-block">👋</span></a>
   <ul class="nav-links">
     <li><a href="#work" class="nav-link" data-section="work">Work</a></li>
     <li><a href="#art" class="nav-link" data-section="art">Art</a></li>
@@ -457,7 +469,7 @@
       <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(0)">
         <img src="the-sunset.jpg" alt="Oil painting of a dramatic sunset with palm tree silhouettes outside of home's window" loading="lazy" />
         <div class="art-meta">
-          <p class="art-title">The Sunset</p>
+          <p class="art-title">The sunset</p>
           <p class="art-medium">Oil on canvas</p>
         </div>
       </div>
@@ -473,7 +485,7 @@
       <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(2)">
         <img src="floral-bouquet.JPG" alt="Oil painting of a lush floral bouquet on a blue-grey background" loading="lazy" />
         <div class="art-meta">
-          <p class="art-title">Floral Bouquet</p>
+          <p class="art-title">Floral bouquet</p>
           <p class="art-medium">Oil on canvas</p>
         </div>
       </div>
@@ -481,7 +493,7 @@
       <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(3)">
         <img src="slot-canyon.JPG" alt="Abstract oil painting of a slot canyon in vivid colour" loading="lazy" />
         <div class="art-meta">
-          <p class="art-title">Slot Canyon</p>
+          <p class="art-title">Slot canyon</p>
           <p class="art-medium">Oil on canvas</p>
         </div>
       </div>
@@ -489,7 +501,7 @@
       <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(4)">
         <img src="cat-window.jpg" alt="Acrylic painting of a tabby cat sitting by blue shuttered window" loading="lazy" />
         <div class="art-meta">
-          <p class="art-title">Cat by the Window</p>
+          <p class="art-title">Cat by the window</p>
           <p class="art-medium">Acrylic on canvas</p>
         </div>
       </div>
@@ -497,7 +509,7 @@
       <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(5)">
         <img src="plant-dino.jpg" alt="Acrylic still life of a plant and toy dinosaur by a window" loading="lazy" />
         <div class="art-meta">
-          <p class="art-title">Studio Still Life</p>
+          <p class="art-title">Studio still life</p>
           <p class="art-medium">Acrylic on canvas</p>
         </div>
       </div>
@@ -505,7 +517,7 @@
       <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(6)">
         <img src="snake-flowers.jpg" alt="Decorative gouache painting with snake, flowers, and patterned forms" loading="lazy" />
         <div class="art-meta">
-          <p class="art-title">Snake and Flowers</p>
+          <p class="art-title">Snake and flowers</p>
           <p class="art-medium">Gouache</p>
         </div>
       </div>
@@ -610,7 +622,10 @@
 </section>
 
 <footer>
-  <span>Laura Yuan · UCSD 2029</span>
+  <div class="footer-inner">
+    <span>Laura Yuan · UCSD 2029</span>
+    <span class="footer-craft">Hand-coded in HTML/CSS/JS, no template · built quarter by quarter while learning front-end · <span class="footer-time" id="footerTime"></span></span>
+  </div>
 </footer>
 
 <div class="case-overlay" id="caseOverlay" onclick="if(event.target===this)closeCaseStudy()">
@@ -869,12 +884,16 @@
 
   const sections = document.querySelectorAll('main section[id], #contact');
   const navLinks = document.querySelectorAll('.nav-link');
+  const zoneClasses = ['zone-work', 'zone-art', 'zone-about', 'zone-contact'];
   const navObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         navLinks.forEach(link => {
           link.classList.toggle('active', link.dataset.section === entry.target.id);
         });
+        zoneClasses.forEach(z => { glow.classList.remove(z); trail.classList.remove(z); });
+        glow.classList.add('zone-' + entry.target.id);
+        trail.classList.add('zone-' + entry.target.id);
       }
     });
   }, { threshold: 0.3, rootMargin: '-80px 0px -50% 0px' });
@@ -890,6 +909,27 @@
         card.style.display = 'none';
       }
     });
+  }
+
+  const navName = document.getElementById('navName');
+  const waveEmoji = document.getElementById('waveEmoji');
+  if (navName) {
+    navName.addEventListener('click', () => {
+      waveEmoji.classList.remove('waving');
+      void waveEmoji.offsetWidth;
+      waveEmoji.classList.add('waving');
+    });
+  }
+
+  const footerTime = document.getElementById('footerTime');
+  if (footerTime) {
+    function updateTime() {
+      const now = new Date();
+      const options = { hour: 'numeric', minute: '2-digit', timeZone: 'America/Los_Angeles' };
+      footerTime.textContent = 'it\'s ' + now.toLocaleTimeString('en-US', options) + ' in La Jolla right now';
+    }
+    updateTime();
+    setInterval(updateTime, 30000);
   }
 </script>
 

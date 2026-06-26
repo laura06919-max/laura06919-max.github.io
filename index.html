@@ -116,19 +116,58 @@
       top: -120px; right: -120px;
       will-change: transform;
     }
-    .hero-label {
+
+    /* --- TORN PAPER COLLAGE HERO STYLES --- */
+    .hero-collage {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 24px;
+      overflow: hidden;
+      padding: 10px 0;
+      width: 100%;
+      position: relative;
+    }
+    .paper-piece {
       font-family: 'Fredoka', sans-serif;
       font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--blue);
-      margin-bottom: 16px;
-      opacity: 0;
-      transform: translateY(16px);
-      transition: all 0.8s ease;
-      position: relative;
       font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 8px 20px;
+      background: var(--bg3);
+      color: var(--text);
+      border: 0.5px solid var(--border);
+      box-shadow: 0 4px 14px rgba(46,68,86, 0.06);
+      transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+      opacity: 0;
+      will-change: transform;
     }
+    .piece-ds {
+      color: var(--blue);
+      clip-path: polygon(0% 0%, 92% 3%, 100% 45%, 90% 88%, 96% 100%, 0% 100%);
+      transform: translate(-60vw, 20px) rotate(-12deg);
+      margin-right: -12px;
+      z-index: 1;
+    }
+    .piece-cogs {
+      color: var(--text);
+      background: var(--bg2);
+      clip-path: polygon(4% 0%, 100% 0%, 96% 100%, 0% 96%);
+      transform: translate(0, -70vh) scale(1.15) rotate(8deg);
+      z-index: 3;
+    }
+    .piece-art {
+      color: var(--accent2);
+      clip-path: polygon(8% 0%, 100% 0%, 100% 100%, 4% 100%, 0% 55%, 10% 20%);
+      transform: translate(60vw, 15px) rotate(14deg);
+      margin-left: -12px;
+      z-index: 2;
+    }
+    .hero.loaded .piece-ds   { opacity: 1; transform: translate(0, 0) rotate(-1.5deg); }
+    .hero.loaded .piece-cogs { opacity: 1; transform: translate(0, 0) scale(1) rotate(0.8deg); }
+    .hero.loaded .piece-art  { opacity: 1; transform: translate(0, 0) rotate(1.2deg); }
+
     .hero h1 {
       font-size: 46px;
       line-height: 1.3;
@@ -183,7 +222,6 @@
       position: relative;
     }
     @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
-    .hero.loaded .hero-label,
     .hero.loaded h1,
     .hero.loaded p,
     .hero.loaded .tag-row { opacity: 1; transform: translateY(0); }
@@ -310,6 +348,9 @@
       .case-modal { padding: 32px 24px 40px; }
       .case-title { font-size: 26px; }
       .case-meta-row { gap: 16px; }
+      .paper-piece { font-size: 10px; padding: 6px 12px; letter-spacing: 0.04em; }
+      .piece-ds { margin-right: -6px; }
+      .piece-art { margin-left: -6px; }
     }
     @media (max-width: 640px) {
       .book-arrow.left { left: 8px; }
@@ -398,7 +439,13 @@
 
 <div class="hero" id="hero">
   <div class="hero-bg-shape" id="heroShape"></div>
-  <p class="hero-label">Data science · Cognitive science · Visual arts</p>
+  
+  <div class="hero-collage" id="heroCollage">
+    <div class="paper-piece piece-ds">Data science</div>
+    <div class="paper-piece piece-cogs">Cognitive science</div>
+    <div class="paper-piece piece-art">Visual arts</div>
+  </div>
+
   <h1>I build things at the<br>intersection of data and people.</h1>
   <p>First-year at UC San Diego studying data science and cognitive science. I research bioacoustic ML pipelines, design interactive dashboards, and make oil paintings. Sometimes all three feel like the same problem.</p>
   <p class="hero-philosophy">Good interfaces don't show off the model. They show off the person using it.</p>

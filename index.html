@@ -10,50 +10,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Fredoka:wght@500;600&family=Sora:wght@400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg: #F7F1DF;
-      --bg2: #F0E8CC;
-      --bg3: #FFFCF2;
-      --border: #E3D9B8;
-      --text: #2E4456;
-      --muted: #5C6F7E;
-      --hint: #9CA6AC;
-      --blue: #6F95B0;
-      --blue-light: #A8C5D9;
-      --blue-bg: #E3EEF4;
-      --accent2: #C98A7D;
-      --accent2-bg: #F5E3DD;
+      --bg: #F7F1DF; --bg2: #F0E8CC; --bg3: #FFFCF2; --border: #E3D9B8;
+      --text: #2E4456; --muted: #5C6F7E; --hint: #9CA6AC;
+      --blue: #6F95B0; --blue-light: #A8C5D9; --blue-bg: #E3EEF4;
+      --accent2: #C98A7D; --accent2-bg: #F5E3DD;
     }
-
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg: #1E2530;
-        --bg2: #252D3A;
-        --bg3: #2A3340;
-        --border: #38424F;
-        --text: #E8EDF1;
-        --muted: #AEB9C2;
-        --hint: #707C87;
-        --blue: #8FB3CC;
-        --blue-light: #5C7E96;
-        --blue-bg: #2C3A47;
-        --accent2: #DDA396;
-        --accent2-bg: #3D2D29;
+        --bg: #1E2530; --bg2: #252D3A; --bg3: #2A3340; --border: #38424F;
+        --text: #E8EDF1; --muted: #AEB9C2; --hint: #707C87;
+        --blue: #8FB3CC; --blue-light: #5C7E96; --blue-bg: #2C3A47;
+        --accent2: #DDA396; --accent2-bg: #3D2D29;
       }
     }
-
     @media (hover: hover) { body { cursor: none; } }
-
-    body {
-      font-family: 'Sora', -apple-system, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.65;
-      font-size: 16px;
-      overflow-x: hidden;
-    }
-
+    body { font-family: 'Sora', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; font-size: 16px; overflow-x: hidden; }
     .glow { position: fixed; top: 0; left: 0; width: 28px; height: 28px; border-radius: 50%; background: radial-gradient(circle, rgba(111,149,176,0.45) 0%, transparent 70%); pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: width 0.25s, height 0.25s, background 0.4s ease; }
     .glow.hovering { width: 48px; height: 48px; }
     .glow.zone-work { background: radial-gradient(circle, rgba(111,149,176,0.6) 0%, transparent 70%); }
@@ -63,22 +35,9 @@
     .glow-trail { position: fixed; top: 0; left: 0; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: background 0.4s ease; }
     .glow-trail.zone-art { background: var(--accent2); }
     @media (hover: none) { .glow, .glow-trail { display: none; } }
-
     h1, h2, h3, .display { font-family: 'Abril Fatface', serif; font-weight: 400; }
-
     svg.icon { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; display: block; }
-
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 40px;
-      border-bottom: 0.5px solid var(--border);
-      position: sticky;
-      top: 0;
-      background: var(--bg);
-      z-index: 10;
-    }
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 40px; border-bottom: 0.5px solid var(--border); position: sticky; top: 0; background: var(--bg); z-index: 10; }
     .nav-name { font-family: 'Abril Fatface', serif; font-size: 19px; color: var(--text); text-decoration: none; cursor: pointer; }
     #waveEmoji { transition: transform 0.3s ease; opacity: 0.85; }
     #waveEmoji.waving { animation: wave 0.6s ease; }
@@ -87,169 +46,38 @@
     .nav-links a { font-size: 14px; color: var(--muted); text-decoration: none; transition: color 0.2s; position: relative; padding-bottom: 4px; font-family: 'Sora', sans-serif; }
     .nav-links a:hover { color: var(--text); }
     .nav-links a.active { color: var(--text); }
-    .nav-links a.active::after {
-      content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 2px;
-      background: var(--blue); border-radius: 2px;
-    }
-
+    .nav-links a.active::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 2px; background: var(--blue); border-radius: 2px; }
     main { max-width: 760px; margin: 0 auto; padding: 0 40px 0; }
-
-    .hero {
-      min-height: 68vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      margin: 0 -40px;
-      padding: 0 40px;
-      background: linear-gradient(180deg, var(--bg) 0%, var(--blue-bg) 100%);
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-bg-shape {
-      position: absolute;
-      width: 480px; height: 480px;
-      border-radius: 50%;
-      background: radial-gradient(circle, var(--blue-bg) 0%, transparent 70%);
-      opacity: 0.7;
-      top: -120px; right: -120px;
-      will-change: transform;
-    }
-
-    /* --- TORN PAPER COLLAGE HERO STYLES --- */
-    .hero-collage {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 24px;
-      overflow: hidden;
-      padding: 10px 0;
-      width: 100%;
-      position: relative;
-    }
-    .paper-piece {
-      font-family: 'Fredoka', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 8px 20px;
-      background: var(--bg3);
-      color: var(--text);
-      border: 0.5px solid var(--border);
-      box-shadow: 0 4px 14px rgba(46,68,86, 0.06);
-      transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
-      opacity: 0;
-      will-change: transform;
-    }
-    .piece-ds {
-      color: var(--blue);
-      clip-path: polygon(0% 0%, 92% 3%, 100% 45%, 90% 88%, 96% 100%, 0% 100%);
-      transform: translate(-60vw, 20px) rotate(-12deg);
-      margin-right: -12px;
-      z-index: 1;
-    }
-    .piece-cogs {
-      color: var(--text);
-      background: var(--bg2);
-      clip-path: polygon(4% 0%, 100% 0%, 96% 100%, 0% 96%);
-      transform: translate(0, -70vh) scale(1.15) rotate(8deg);
-      z-index: 3;
-    }
-    .piece-art {
-      color: var(--accent2);
-      clip-path: polygon(8% 0%, 100% 0%, 100% 100%, 4% 100%, 0% 55%, 10% 20%);
-      transform: translate(60vw, 15px) rotate(14deg);
-      margin-left: -12px;
-      z-index: 2;
-    }
+    .hero { min-height: 68vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin: 0 -40px; padding: 0 40px; background: linear-gradient(180deg, var(--bg) 0%, var(--blue-bg) 100%); position: relative; overflow: hidden; }
+    .hero-bg-shape { position: absolute; width: 480px; height: 480px; border-radius: 50%; background: radial-gradient(circle, var(--blue-bg) 0%, transparent 70%); opacity: 0.7; top: -120px; right: -120px; will-change: transform; }
+    .hero-collage { display: flex; justify-content: center; align-items: center; margin-bottom: 24px; overflow: hidden; padding: 10px 0; width: 100%; position: relative; }
+    .paper-piece { font-family: 'Fredoka', sans-serif; font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; padding: 8px 20px; background: var(--bg3); color: var(--text); border: 0.5px solid var(--border); box-shadow: 0 4px 14px rgba(46,68,86, 0.06); transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease; opacity: 0; will-change: transform; }
+    .piece-ds { color: var(--blue); clip-path: polygon(0% 0%, 92% 3%, 100% 45%, 90% 88%, 96% 100%, 0% 100%); transform: translate(-60vw, 20px) rotate(-12deg); margin-right: -12px; z-index: 1; }
+    .piece-cogs { color: var(--text); background: var(--bg2); clip-path: polygon(4% 0%, 100% 0%, 96% 100%, 0% 96%); transform: translate(0, -70vh) scale(1.15) rotate(8deg); z-index: 3; }
+    .piece-art { color: var(--accent2); clip-path: polygon(8% 0%, 100% 0%, 100% 100%, 4% 100%, 0% 55%, 10% 20%); transform: translate(60vw, 15px) rotate(14deg); margin-left: -12px; z-index: 2; }
     .hero.loaded .piece-ds   { opacity: 1; transform: translate(0, 0) rotate(-1.5deg); }
     .hero.loaded .piece-cogs { opacity: 1; transform: translate(0, 0) scale(1) rotate(0.8deg); }
     .hero.loaded .piece-art  { opacity: 1; transform: translate(0, 0) rotate(1.2deg); }
-
-    .hero h1 {
-      font-size: 46px;
-      line-height: 1.3;
-      color: var(--text);
-      margin-bottom: 20px;
-      opacity: 0;
-      transform: translateY(16px);
-      transition: all 0.8s ease 0.15s;
-      position: relative;
-    }
-    .hero p {
-      font-size: 16px;
-      color: var(--muted);
-      max-width: 480px;
-      margin-bottom: 16px;
-      opacity: 0;
-      transform: translateY(16px);
-      transition: all 0.8s ease 0.3s;
-      position: relative;
-    }
-    .hero-philosophy {
-      font-family: 'Abril Fatface', serif;
-      font-size: 19px;
-      color: var(--text);
-      max-width: 440px;
-      margin-bottom: 28px !important;
-      opacity: 0;
-      transform: translateY(16px);
-      transition: all 0.8s ease 0.38s;
-      position: relative;
-      line-height: 1.4;
-    }
+    .hero h1 { font-size: 46px; line-height: 1.3; color: var(--text); margin-bottom: 20px; opacity: 0; transform: translateY(16px); transition: all 0.8s ease 0.15s; position: relative; }
+    .hero p { font-size: 16px; color: var(--muted); max-width: 480px; margin-bottom: 16px; opacity: 0; transform: translateY(16px); transition: all 0.8s ease 0.3s; position: relative; }
+    .hero-philosophy { font-family: 'Abril Fatface', serif; font-size: 19px; color: var(--text); max-width: 440px; margin-bottom: 28px !important; opacity: 0; transform: translateY(16px); transition: all 0.8s ease 0.38s; position: relative; line-height: 1.4; }
     .hero.loaded .hero-philosophy { opacity: 1; transform: translateY(0); }
-    .tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      justify-content: center;
-      opacity: 0;
-      transform: translateY(16px);
-      transition: all 0.8s ease 0.45s;
-      position: relative;
-    }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; opacity: 0; transform: translateY(16px); transition: all 0.8s ease 0.45s; position: relative; }
     .tag { font-size: 12px; padding: 4px 14px; border-radius: 20px; border: 0.5px solid var(--border); color: var(--muted); background: var(--bg3); transition: transform 0.2s, border-color 0.2s; font-family: 'Sora', sans-serif; }
     .tag:hover { transform: translateY(-2px); border-color: var(--blue); color: var(--blue); }
-    .scroll-hint {
-      margin-top: 40px;
-      color: var(--hint);
-      opacity: 0;
-      transition: opacity 0.8s ease 0.6s;
-      animation: bounce 2s infinite;
-      position: relative;
-    }
+    .scroll-hint { margin-top: 40px; color: var(--hint); opacity: 0; transition: opacity 0.8s ease 0.6s; animation: bounce 2s infinite; position: relative; }
     @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
-    .hero.loaded h1,
-    .hero.loaded p,
-    .hero.loaded .tag-row { opacity: 1; transform: translateY(0); }
+    .hero.loaded h1, .hero.loaded p, .hero.loaded .tag-row { opacity: 1; transform: translateY(0); }
     .hero.loaded .scroll-hint { opacity: 1; }
-
     .wave-wrap { margin: 0 -40px; line-height: 0; }
     .wave-wrap svg { display: block; width: 100%; height: 60px; }
-
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
-
     section { padding: 56px 40px; border-bottom: 0.5px solid var(--border); }
     main > section { padding: 56px 0; }
     .section-label { font-family: 'Fredoka', sans-serif; font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: var(--hint); margin-bottom: 24px; }
-
     .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .project-card {
-      background: var(--bg3);
-      text-decoration: none; display: block; position: relative;
-      padding: 30px 26px 38px;
-      clip-path: polygon(
-        0% 2%, 5% 0%, 14% 1.5%, 24% 0%, 34% 1%, 44% 0%, 54% 1.5%, 64% 0%, 74% 1%, 84% 0%, 94% 1.5%, 100% 0%,
-        99% 12%, 100% 24%, 98.5% 36%, 100% 48%, 99% 60%, 100% 72%, 98.5% 84%, 100% 96%, 99% 100%,
-        90% 98.5%, 80% 100%, 70% 99%, 60% 100%, 50% 98.5%, 40% 100%, 30% 99%, 20% 100%, 10% 98.5%, 0% 100%,
-        1% 88%, 0% 76%, 1.5% 64%, 0% 52%, 1% 40%, 0% 28%, 1.5% 16%, 0% 4%
-      );
-      transition: filter 0.2s;
-    }
+    .project-card { background: var(--bg3); text-decoration: none; display: block; position: relative; padding: 30px 26px 38px; clip-path: polygon(0% 2%, 5% 0%, 14% 1.5%, 24% 0%, 34% 1%, 44% 0%, 54% 1.5%, 64% 0%, 74% 1%, 84% 0%, 94% 1.5%, 100% 0%, 99% 12%, 100% 24%, 98.5% 36%, 100% 48%, 99% 60%, 100% 72%, 98.5% 84%, 100% 96%, 99% 100%, 90% 98.5%, 80% 100%, 70% 99%, 60% 100%, 50% 98.5%, 40% 100%, 30% 99%, 20% 100%, 10% 98.5%, 0% 100%, 1% 88%, 0% 76%, 1.5% 64%, 0% 52%, 1% 40%, 0% 28%, 1.5% 16%, 0% 4%); transition: filter 0.2s; }
     .project-card:hover { filter: brightness(0.99); }
     .project-badge { display: inline-block; font-size: 10px; padding: 3px 10px; border-radius: 20px; margin-bottom: 10px; font-family: 'Sora', sans-serif; }
     .badge-blue { background: var(--blue-bg); color: var(--blue); }
@@ -258,61 +86,38 @@
     .project-card p { font-size: 13px; color: var(--muted); line-height: 1.55; margin-bottom: 12px; font-family: 'Sora', sans-serif; }
     .chip-row { display: flex; flex-wrap: wrap; gap: 4px; }
     .chip { font-size: 11px; padding: 2px 9px; border-radius: 20px; background: var(--bg2); color: var(--muted); font-family: 'Sora', sans-serif; }
-    .case-study-link { display: inline-block; margin-top: 14px; font-size: 12px; color: var(--blue); font-family: 'Sora', sans-serif; font-weight: 500; }
-
+    .case-study-link { display: inline-block; margin-top: 14px; font-size: 12px; color: var(--blue); font-family: 'Sora', sans-serif; font-weight: 500; cursor: pointer; }
+    .case-showcase { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 36px; align-items: center; background: var(--bg2); border: 0.5px solid var(--border); border-radius: 20px; padding: 36px; margin-top: 24px; }
+    .case-showcase-text { min-width: 0; }
+    .case-showcase-visual { display: flex; align-items: center; justify-content: center; }
+    .phone-frame-css { max-width: 250px; margin: 0 auto; border-radius: 36px; padding: 8px; background: #1A202C; box-shadow: 0 20px 40px rgba(46,68,86, 0.18), inset 0 0 0 1px rgba(255,255,255,0.1); transform: rotate(-2deg); transition: transform 0.3s ease; }
+    .phone-frame-css:hover { transform: rotate(0deg) scale(1.02); }
+    .phone-frame-css img { width: 100%; border-radius: 28px; display: block; }
     .art-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
     .art-filter { display: flex; gap: 8px; flex-wrap: wrap; }
     .filter-btn { font-size: 12px; padding: 4px 14px; border-radius: 20px; border: 0.5px solid var(--border); background: var(--bg3); color: var(--muted); cursor: pointer; transition: all 0.15s; font-family: 'Sora', sans-serif; }
     .filter-btn:hover { border-color: var(--blue); color: var(--text); }
     .filter-btn.active { background: var(--blue-bg); color: var(--blue); border-color: var(--blue); }
-    .view-all-btn {
-      font-size: 12px; padding: 4px 16px; border-radius: 20px; border: 0.5px solid var(--blue);
-      background: var(--blue-bg); color: var(--blue); cursor: pointer; font-family: 'Sora', sans-serif;
-      display: inline-flex; align-items: center; gap: 6px; transition: transform 0.2s;
-    }
+    .view-all-btn { font-size: 12px; padding: 4px 16px; border-radius: 20px; border: 0.5px solid var(--blue); background: var(--blue-bg); color: var(--blue); cursor: pointer; font-family: 'Sora', sans-serif; display: inline-flex; align-items: center; gap: 6px; transition: transform 0.2s; }
     .view-all-btn:hover { transform: translateY(-1px); }
     .view-all-btn svg { width: 14px; height: 14px; }
-
     .art-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; perspective: 1000px; }
-    .art-card {
-      border-radius: 16px; overflow: hidden; border: 0.5px solid var(--border);
-      cursor: pointer; background: var(--bg3);
-      transform-style: preserve-3d; will-change: transform;
-      transition: box-shadow 0.2s;
-    }
+    .art-card { border-radius: 16px; overflow: hidden; border: 0.5px solid var(--border); cursor: pointer; background: var(--bg3); transform-style: preserve-3d; will-change: transform; transition: box-shadow 0.2s; }
     .art-card img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
     .art-meta { padding: 10px 12px; }
     .art-title { font-size: 12px; font-weight: 500; color: var(--text); font-family: 'Sora', sans-serif; }
     .art-medium { font-size: 11px; color: var(--hint); margin-top: 2px; font-family: 'Sora', sans-serif; }
-
     .book-viewer { display: none; position: fixed; inset: 0; background: rgba(46,68,86,0.94); z-index: 200; align-items: center; justify-content: center; padding: 20px; }
     .book-viewer.open { display: flex; }
     .book-stage { position: relative; width: min(560px, 90vw); height: min(640px, 80vh); perspective: 1800px; }
-    .book-page {
-      position: absolute; inset: 0; background: var(--bg3); display: flex; flex-direction: column;
-      padding: 28px;
-      backface-visibility: hidden;
-      transform-style: preserve-3d;
-      transform-origin: right center;
-      transition: transform 0.7s cubic-bezier(0.45, 0.05, 0.55, 0.95);
-      z-index: 1;
-      clip-path: polygon(
-        0% 1.5%, 6% 0%, 16% 1%, 26% 0%, 36% 1.2%, 46% 0%, 56% 1%, 66% 0%, 76% 1.2%, 86% 0%, 96% 1%, 100% 0%,
-        99% 14%, 100% 28%, 98.5% 42%, 100% 56%, 99% 70%, 100% 84%, 99% 96%, 100% 100%,
-        88% 99%, 76% 100%, 64% 99%, 52% 100%, 40% 99%, 28% 100%, 16% 99%, 4% 100%, 0% 99%
-      );
-    }
+    .book-page { position: absolute; inset: 0; background: var(--bg3); display: flex; flex-direction: column; padding: 28px; backface-visibility: hidden; transform-style: preserve-3d; transform-origin: right center; transition: transform 0.7s cubic-bezier(0.45, 0.05, 0.55, 0.95); z-index: 1; clip-path: polygon(0% 1.5%, 6% 0%, 16% 1%, 26% 0%, 36% 1.2%, 46% 0%, 56% 1%, 66% 0%, 76% 1.2%, 86% 0%, 96% 1%, 100% 0%, 99% 14%, 100% 28%, 98.5% 42%, 100% 56%, 99% 70%, 100% 84%, 99% 96%, 100% 100%, 88% 99%, 76% 100%, 64% 99%, 52% 100%, 40% 99%, 28% 100%, 16% 99%, 4% 100%, 0% 99%); }
     .book-page.flipped { transform: rotateY(180deg); z-index: 2; }
     .book-page.current { z-index: 3; }
     .book-page-img { flex: 1; width: 100%; object-fit: contain; border-radius: 8px; min-height: 0; }
     .book-page-caption { padding-top: 16px; text-align: center; }
     .book-page-title { font-family: 'Abril Fatface', serif; font-size: 20px; color: var(--text); margin-bottom: 4px; }
     .book-page-medium { font-family: 'Sora', sans-serif; font-size: 12px; color: var(--hint); }
-    .book-arrow {
-      position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%;
-      background: var(--bg3); border: 0.5px solid var(--border); display: flex; align-items: center; justify-content: center;
-      cursor: pointer; z-index: 10; color: var(--text); transition: transform 0.2s;
-    }
+    .book-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: var(--bg3); border: 0.5px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; color: var(--text); transition: transform 0.2s; }
     .book-arrow:hover { transform: translateY(-50%) scale(1.08); }
     .book-arrow.left { left: -60px; }
     .book-arrow.right { right: -60px; }
@@ -320,7 +125,6 @@
     .book-close:hover { opacity: 1; }
     .book-close svg { width: 26px; height: 26px; }
     .book-counter { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); color: #F7F1DF; font-family: 'Sora', sans-serif; font-size: 13px; opacity: 0.7; }
-
     .case-overlay { display: none; position: fixed; inset: 0; background: rgba(46,68,86,0.7); z-index: 200; overflow-y: auto; padding: 40px 20px; }
     .case-overlay.open { display: block; }
     .case-modal { max-width: 640px; margin: 0 auto; background: var(--bg3); border-radius: 24px; padding: 44px 44px 52px; position: relative; }
@@ -344,68 +148,44 @@
     .case-decision-a { font-size: 13px; color: var(--muted); line-height: 1.6; }
     .case-reflection { background: var(--blue-bg); border-radius: 14px; padding: 18px 20px; }
     .case-reflection p { color: var(--text); font-style: italic; }
-    @media (max-width: 600px) {
-      .case-modal { padding: 32px 24px 40px; }
-      .case-title { font-size: 26px; }
-      .case-meta-row { gap: 16px; }
-      .paper-piece { font-size: 10px; padding: 6px 12px; letter-spacing: 0.04em; }
-      .piece-ds { margin-right: -6px; }
-      .piece-art { margin-left: -6px; }
-    }
-    @media (max-width: 640px) {
-      .book-arrow.left { left: 8px; }
-      .book-arrow.right { right: 8px; }
-      .book-stage { width: 92vw; height: 70vh; }
-    }
-
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     .about-card { background: var(--bg2); border-radius: 16px; padding: 18px 20px; transition: transform 0.2s; }
     .about-card:hover { transform: translateY(-2px); }
     .about-card-label { font-family: 'Fredoka', sans-serif; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: var(--blue); margin-bottom: 8px; }
     .about-card p { font-size: 13px; color: var(--muted); line-height: 1.6; font-family: 'Sora', sans-serif; }
-
     .about-intro { display: flex; gap: 28px; align-items: flex-start; margin-bottom: 32px; }
-    .about-photo {
-      width: 180px; border-radius: 18px; object-fit: cover; flex-shrink: 0;
-      border: 4px solid var(--bg3); box-shadow: 0 0 0 1px var(--border);
-      background: var(--blue-bg);
-    }
+    .about-photo { width: 180px; border-radius: 18px; object-fit: cover; flex-shrink: 0; border: 4px solid var(--bg3); box-shadow: 0 0 0 1px var(--border); background: var(--blue-bg); }
     .about-intro-text { padding-top: 12px; }
     .about-intro-text p { font-size: 15px; color: var(--muted); line-height: 1.7; font-family: 'Sora', sans-serif; }
     .about-intro-text strong { color: var(--text); font-family: 'Fredoka', sans-serif; font-weight: 600; }
-
     .skills-wrap { margin-top: 28px; }
     .skill-row { margin-bottom: 16px; }
     .skill-label { display: flex; justify-content: space-between; font-size: 13px; color: var(--text); margin-bottom: 6px; font-family: 'Sora', sans-serif; }
     .skill-label span:last-child { color: var(--hint); }
     .skill-track { height: 6px; background: var(--bg2); border-radius: 10px; overflow: hidden; }
     .skill-fill { height: 100%; width: 0%; border-radius: 10px; background: var(--blue); transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
-
     .contact-section { background: var(--blue-bg); margin: 0 -40px; padding: 64px 40px; text-align: center; border-bottom: none; }
     .contact-section h2 { font-size: 38px; color: var(--text); margin-bottom: 12px; }
     .contact-section p { font-size: 15px; color: var(--muted); max-width: 420px; margin: 0 auto 28px; font-family: 'Sora', sans-serif; }
-    .contact-email-btn {
-      display: inline-flex; align-items: center; gap: 8px; background: var(--text); color: var(--bg3);
-      font-family: 'Fredoka', sans-serif; font-weight: 500; font-size: 15px; padding: 12px 24px;
-      border-radius: 30px; text-decoration: none; transition: transform 0.2s;
-    }
+    .contact-email-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--text); color: var(--bg3); font-family: 'Fredoka', sans-serif; font-weight: 500; font-size: 15px; padding: 12px 24px; border-radius: 30px; text-decoration: none; transition: transform 0.2s; }
     .contact-email-btn:hover { transform: translateY(-2px); }
     .contact-email-btn svg { width: 18px; height: 18px; }
     .contact-icons { display: flex; justify-content: center; gap: 14px; margin-top: 28px; }
-    .contact-icon-btn {
-      width: 44px; height: 44px; border-radius: 50%; background: var(--bg3); border: 0.5px solid var(--border);
-      display: flex; align-items: center; justify-content: center; color: var(--text); text-decoration: none;
-      transition: transform 0.2s, border-color 0.2s;
-    }
+    .contact-icon-btn { width: 44px; height: 44px; border-radius: 50%; background: var(--bg3); border: 0.5px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text); text-decoration: none; transition: transform 0.2s, border-color 0.2s; }
     .contact-icon-btn:hover { transform: translateY(-2px); border-color: var(--blue); color: var(--blue); }
     .contact-icon-btn svg { width: 20px; height: 20px; }
-
     footer { max-width: 760px; margin: 0 auto; padding: 28px 40px; display: flex; justify-content: center; align-items: center; }
     .footer-inner { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
     footer span { font-size: 13px; color: var(--hint); font-family: 'Sora', sans-serif; }
     .footer-craft { font-size: 11px; color: var(--hint); opacity: 0.7; max-width: 480px; line-height: 1.6; }
     .footer-time { font-family: 'Sora', sans-serif; }
-
+    @media (max-width: 680px) {
+      .case-showcase { grid-template-columns: 1fr; padding: 24px; text-align: center; }
+      .phone-frame-css { max-width: 220px; margin-top: 16px; }
+      .paper-piece { font-size: 10px; padding: 6px 12px; }
+      .piece-ds { margin-right: -6px; }
+      .piece-art { margin-left: -6px; }
+    }
     @media (max-width: 600px) {
       nav { padding: 14px 20px; }
       main { padding: 0 20px 0; }
@@ -439,13 +219,11 @@
 
 <div class="hero" id="hero">
   <div class="hero-bg-shape" id="heroShape"></div>
-  
   <div class="hero-collage" id="heroCollage">
     <div class="paper-piece piece-ds">Data science</div>
     <div class="paper-piece piece-cogs">Cognitive science</div>
     <div class="paper-piece piece-art">Visual arts</div>
   </div>
-
   <h1>I build things at the<br>intersection of data and people.</h1>
   <p>First-year at UC San Diego studying data science and cognitive science. I research bioacoustic ML pipelines, design interactive dashboards, and make oil paintings. Sometimes all three feel like the same problem.</p>
   <p class="hero-philosophy">Good interfaces don't show off the model. They show off the person using it.</p>
@@ -472,7 +250,7 @@
   <section id="work">
     <p class="section-label reveal">Selected work</p>
     <div class="project-grid">
-      <div class="project-card reveal" onclick="openCaseStudy()" style="cursor:pointer">
+      <div class="project-card reveal" onclick="openCaseStudy('ocean')" style="cursor:pointer">
         <span class="project-badge badge-coral">DataHacks 2026 · 3rd place</span>
         <h3>Ocean Pulse</h3>
         <p>Interactive dashboard for California Current ocean ecosystem health — designed for non-technical users to explore 70 years of ocean data and AI-generated policy recommendations.</p>
@@ -496,11 +274,31 @@
         </div>
       </a>
     </div>
+
+    <div class="case-showcase reveal">
+      <div class="case-showcase-text">
+        <span class="project-badge badge-blue">HCI Redesign · Mobile UX</span>
+        <h3 style="font-size:28px; color:var(--text); margin-bottom:6px;">The 30-Minute Lie</h3>
+        <p style="font-family:'Fredoka',sans-serif; font-size:15px; color:var(--text); font-weight:500; margin:8px 0 12px;">Campus dining apps optimize for checkout conversion. I redesigned the ordering flow around a different problem: not making students late to lecture.</p>
+        <p style="font-size:13.5px; color:var(--muted); line-height:1.65; margin-bottom:16px;">I noticed this myself before I noticed it as a design problem — the wait time estimate at the Bistro is basically a guess. It treats a cold side dish and a hot wok entree as the same prep time, even though only one of them is bottlenecked by an actual burner. So I started dropping my class schedule in as an .ics file and built a version of the app that warns you before you pay, not after you're already standing outside in the cold wondering where your food is.</p>
+        <div class="chip-row" style="margin-bottom:20px;">
+          <span class="chip">Figma</span>
+          <span class="chip">Positive friction</span>
+          <span class="chip">Predictive UX</span>
+          <span class="chip">CogSci</span>
+        </div>
+        <span class="case-study-link" onclick="openCaseStudy('bistro')">Read the full breakdown <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;display:inline;vertical-align:-1px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </div>
+      <div class="case-showcase-visual">
+        <div class="phone-frame-css">
+          <img src="bistro-modal.jpg" alt="Triton2Go Intercept Modal Redesign" loading="lazy" />
+        </div>
+      </div>
+    </div>
   </section>
 
   <section id="art">
     <p class="section-label reveal">Art</p>
-
     <div class="art-header-row reveal">
       <div class="art-filter">
         <button class="filter-btn active" onclick="filterArt('all', this)">All</button>
@@ -512,102 +310,58 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </button>
     </div>
-
     <div class="art-grid" id="art-grid">
-
       <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(0)">
-        <img src="the-sunset.jpg" alt="Oil painting of a dramatic sunset with palm tree silhouettes outside of home's window" loading="lazy" />
-        <div class="art-meta">
-          <p class="art-title">The sunset</p>
-          <p class="art-medium">Oil on canvas</p>
-        </div>
+        <img src="the-sunset.jpg" alt="Oil painting of sunset" loading="lazy" />
+        <div class="art-meta"><p class="art-title">The sunset</p><p class="art-medium">Oil on canvas</p></div>
       </div>
-
       <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(1)">
-        <img src="fantasy-figure.jpg" alt="Large acrylic painting of a fantasy figure with dragon" loading="lazy" />
-        <div class="art-meta">
-          <p class="art-title">Ukyo Tachibana Recreation</p>
-          <p class="art-medium">Acrylic on canvas</p>
-        </div>
+        <img src="fantasy-figure.jpg" alt="Acrylic painting" loading="lazy" />
+        <div class="art-meta"><p class="art-title">Ukyo Tachibana Recreation</p><p class="art-medium">Acrylic on canvas</p></div>
       </div>
-
       <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(2)">
-        <img src="floral-bouquet.JPG" alt="Oil painting of a lush floral bouquet on a blue-grey background" loading="lazy" />
-        <div class="art-meta">
-          <p class="art-title">Floral bouquet</p>
-          <p class="art-medium">Oil on canvas</p>
-        </div>
+        <img src="floral-bouquet.JPG" alt="Oil painting of flowers" loading="lazy" />
+        <div class="art-meta"><p class="art-title">Floral bouquet</p><p class="art-medium">Oil on canvas</p></div>
       </div>
-
       <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(3)">
-        <img src="slot-canyon.JPG" alt="Abstract oil painting of a slot canyon in vivid colour" loading="lazy" />
-        <div class="art-meta">
-          <p class="art-title">Slot canyon</p>
-          <p class="art-medium">Oil on canvas</p>
-        </div>
+        <img src="slot-canyon.JPG" alt="Oil painting of canyon" loading="lazy" />
+        <div class="art-meta"><p class="art-title">Slot canyon</p><p class="art-medium">Oil on canvas</p></div>
       </div>
-
       <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(4)">
-        <img src="cat-window.jpg" alt="Acrylic painting of a tabby cat sitting by blue shuttered window" loading="lazy" />
-        <div class="art-meta">
-          <p class="art-title">Cat by the window</p>
-          <p class="art-medium">Acrylic on canvas</p>
-        </div>
+        <img src="cat-window.jpg" alt="Acrylic painting of cat" loading="lazy" />
+        <div class="art-meta"><p class="art-title">Cat by the window</p><p class="art-medium">Acrylic on canvas</p></div>
       </div>
-
       <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(5)">
-        <img src="plant-dino.jpg" alt="Acrylic still life of a plant and toy dinosaur by a window" loading="lazy" />
-        <div class="art-meta">
-          <p class="art-title">Studio still life</p>
-          <p class="art-medium">Acrylic on canvas</p>
-        </div>
+        <img src="plant-dino.jpg" alt="Still life" loading="lazy" />
+        <div class="art-meta"><p class="art-title">Studio still life</p><p class="art-medium">Acrylic on canvas</p></div>
       </div>
-
       <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(6)">
-        <img src="snake-flowers.jpg" alt="Decorative gouache painting with snake, flowers, and patterned forms" loading="lazy" />
-        <div class="art-meta">
-          <p class="art-title">Snake and flowers</p>
-          <p class="art-medium">Gouache</p>
-        </div>
+        <img src="snake-flowers.jpg" alt="Gouache painting" loading="lazy" />
+        <div class="art-meta"><p class="art-title">Snake and flowers</p><p class="art-medium">Gouache</p></div>
       </div>
-
       <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(7)">
-        <img src="china-triptych.JPG" alt="Acrylic triptych of scenes from Guangdong, China during flood" loading="lazy" />
-        <div class="art-meta">
-          <p class="art-title">Home's Flood, 2021</p>
-          <p class="art-medium">Acrylic triptych</p>
-        </div>
+        <img src="china-triptych.JPG" alt="Acrylic triptych" loading="lazy" />
+        <div class="art-meta"><p class="art-title">Home's Flood, 2021</p><p class="art-medium">Acrylic triptych</p></div>
       </div>
-
       <div class="art-card reveal tilt" data-medium="digital" onclick="openBook(8)">
-        <img src="digital-portrait.jpg" alt="Digital portrait recreation of Chang'e painted in Procreate" loading="lazy" />
-        <div class="art-meta">
-          <p class="art-title">Chang'e Recreation</p>
-          <p class="art-medium">Procreate</p>
-        </div>
+        <img src="digital-portrait.jpg" alt="Digital art" loading="lazy" />
+        <div class="art-meta"><p class="art-title">Chang'e Recreation</p><p class="art-medium">Procreate</p></div>
       </div>
-
       <div class="art-card reveal tilt" data-medium="digital" onclick="openBook(9)">
-        <img src="digital-cafe.jpg" alt="Digital illustration of a person working on a laptop in a café with no wifi, made for school newspaper illustration" loading="lazy" />
-        <div class="art-meta">
-          <p class="art-title">Poor Wifi Cafe</p>
-          <p class="art-medium">Procreate</p>
-        </div>
+        <img src="digital-cafe.jpg" alt="Digital illustration" loading="lazy" />
+        <div class="art-meta"><p class="art-title">Poor Wifi Cafe</p><p class="art-medium">Procreate</p></div>
       </div>
-
     </div>
   </section>
 
   <section id="about">
     <p class="section-label reveal">About</p>
-
     <div class="about-intro reveal">
       <img class="about-photo" src="me.jpg" alt="Laura Yuan, candid photo" />
       <div class="about-intro-text">
         <p><strong>Hi, I'm Laura</strong> — first-year at UCSD, equally happy in front of a Jupyter notebook or a canvas. This site is where both sides live.</p>
       </div>
     </div>
-
     <div class="about-grid">
       <div class="about-card reveal">
         <p class="about-card-label">Currently</p>
@@ -626,7 +380,6 @@
         <p>HCI research opportunities and design collaborations where data and human experience intersect.</p>
       </div>
     </div>
-
     <div class="skills-wrap reveal" id="skillsWrap">
       <p class="section-label" style="margin-bottom:16px">Comfort level</p>
       <div class="skill-row">
@@ -678,70 +431,7 @@
 </footer>
 
 <div class="case-overlay" id="caseOverlay" onclick="if(event.target===this)closeCaseStudy()">
-  <div class="case-modal">
-    <span class="case-close" onclick="closeCaseStudy()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
-    </span>
-
-    <p class="case-eyebrow">Case study · DataHacks 2026</p>
-    <h2 class="case-title">Ocean Pulse</h2>
-    <p class="case-subtitle">A dashboard for exploring 70 years of California Current ocean data — built in 48 hours, mostly figured out by trial and error.</p>
-
-    <img class="case-team-photo" src="ocean-pulse-team.jpg" alt="Our team at DataHacks 2026" loading="lazy" />
-    <p class="case-photo-caption">Us right after the demo, still running on no sleep and free Red Bull.</p>
-
-    <div class="case-meta-row">
-      <div class="case-meta-item">
-        <p class="case-meta-label">Role</p>
-        <p class="case-meta-value">ML + design, team of 4</p>
-      </div>
-      <div class="case-meta-item">
-        <p class="case-meta-label">Timeline</p>
-        <p class="case-meta-value">48-hour hackathon</p>
-      </div>
-      <div class="case-meta-item">
-        <p class="case-meta-label">Outcome</p>
-        <p class="case-meta-value">3rd place, ML/AI track</p>
-      </div>
-    </div>
-
-    <div class="case-block">
-      <p class="case-block-title">The problem</p>
-      <p>We had 70 years of CalCOFI ocean data and a Random Forest model that hit 98% accuracy predicting ecosystem health. Honestly, that part wasn't even the hard part — anyone on the team could've built that model alone. What we kept running into was that nobody who'd actually use this thing cares about model accuracy. A policymaker isn't going to read our confusion matrix. If they can't figure out what the dashboard is telling them in the first ten seconds, it doesn't matter how good the model is underneath.</p>
-    </div>
-
-    <div class="case-block">
-      <p class="case-block-title">Who it's for</p>
-      <p>Not us. Not other data science students. We had to keep reminding ourselves of that. The actual user is someone with zero ML background — a policymaker, a science communicator, maybe a curious local — who needs to look at the screen and know whether a region's ecosystem is doing okay, fast, and trust that answer enough to do something with it.</p>
-    </div>
-
-    <div class="case-block">
-      <p class="case-block-title">Things we changed (and why)</p>
-
-      <div class="case-decision">
-        <p class="case-decision-q">Tab order</p>
-        <p class="case-decision-a">We built the tabs in the order we built the pipeline — raw data first, then the model, then predictions last. Made sense to us, made zero sense to anyone testing it. We flipped it so "is this region healthy right now" comes first, and buried the methodology stuff further back for people who actually want to dig in.</p>
-      </div>
-
-      <div class="case-decision">
-        <p class="case-decision-q">The AI explainer</p>
-        <p class="case-decision-a">A health score by itself is just a number floating there. We hooked up a Groq model to translate the prediction into plain language about what it might mean for regional policy. This wasn't us trying to cram AI into the project for the sake of it — we genuinely needed something to close the gap between "here's a score" and "here's why you should care."</p>
-      </div>
-
-      <div class="case-decision">
-        <p class="case-decision-q">Limiting the map</p>
-        <p class="case-decision-a">Originally you could click literally anywhere on the map. Felt cool in the demo, but it was kind of dishonest — real ocean policy gets made at the level of government-regulated zones, not random coordinates someone clicked on. So we scoped the predictor down to match those actual boundaries. Less flashy, more true to how this would really get used.</p>
-      </div>
-    </div>
-
-    <div class="case-block">
-      <p class="case-block-title">What I'd do differently</p>
-      <div class="case-reflection">
-        <p>None of us had the vocabulary for "user-centered design" while we were building this — we just kept saying the dashboard "felt off" until something clicked. Looking back, I wish we'd shown the tab layout to one non-technical person before writing any code, instead of building first and rearranging things at 1am once we noticed the problem ourselves.</p>
-      </div>
-    </div>
-
-  </div>
+  <div class="case-modal" id="caseModalContent"></div>
 </div>
 
 <div class="book-viewer" id="bookViewer">
@@ -818,7 +508,57 @@
     document.body.style.overflow = 'hidden';
   }
 
-  function openCaseStudy() {
+  const caseStudies = {
+    ocean: `
+      <span class="case-close" onclick="closeCaseStudy()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
+      <p class="case-eyebrow">Case study · DataHacks 2026</p>
+      <h2 class="case-title">Ocean Pulse</h2>
+      <p class="case-subtitle">A dashboard for exploring 70 years of California Current ocean data — built in 48 hours, mostly figured out by trial and error.</p>
+      <img class="case-team-photo" src="ocean-pulse-team.jpg" alt="Our team at DataHacks 2026" loading="lazy" />
+      <p class="case-photo-caption">Us right after the demo, still running on no sleep and free Red Bull.</p>
+      <div class="case-meta-row">
+        <div class="case-meta-item"><p class="case-meta-label">Role</p><p class="case-meta-value">ML + design, team of 4</p></div>
+        <div class="case-meta-item"><p class="case-meta-label">Timeline</p><p class="case-meta-value">48-hour hackathon</p></div>
+        <div class="case-meta-item"><p class="case-meta-label">Outcome</p><p class="case-meta-value">3rd place, ML/AI track</p></div>
+      </div>
+      <div class="case-block"><p class="case-block-title">The problem</p><p>We had 70 years of CalCOFI ocean data and a Random Forest model that hit 98% accuracy predicting ecosystem health. Honestly, that part wasn't even the hard part — anyone on the team could've built that model alone. What we kept running into was that nobody who'd actually use this thing cares about model accuracy. A policymaker isn't going to read our confusion matrix. If they can't figure out what the dashboard is telling them in the first ten seconds, it doesn't matter how good the model is underneath.</p></div>
+      <div class="case-block"><p class="case-block-title">Who it's for</p><p>Not us. Not other data science students. We had to keep reminding ourselves of that. The actual user is someone with zero ML background — a policymaker, a science communicator, maybe a curious local — who needs to look at the screen and know whether a region's ecosystem is doing okay, fast, and trust that answer enough to do something with it.</p></div>
+      <div class="case-block"><p class="case-block-title">Things we changed (and why)</p>
+        <div class="case-decision"><p class="case-decision-q">Tab order</p><p class="case-decision-a">We built the tabs in the order we built the pipeline — raw data first, then the model, then predictions last. Made sense to us, made zero sense to anyone testing it. We flipped it so "is this region healthy right now" comes first, and buried the methodology stuff further back for people who actually want to dig in.</p></div>
+        <div class="case-decision"><p class="case-decision-q">The AI explainer</p><p class="case-decision-a">A health score by itself is just a number floating there. We hooked up a Groq model to translate the prediction into plain language about what it might mean for regional policy. This wasn't us trying to cram AI into the project for the sake of it — we genuinely needed something to close the gap between "here's a score" and "here's why you should care."</p></div>
+        <div class="case-decision"><p class="case-decision-q">Limiting the map</p><p class="case-decision-a">Originally you could click literally anywhere on the map. Felt cool in the demo, but it was kind of dishonest — real ocean policy gets made at the level of government-regulated zones, not random coordinates someone clicked on. So we scoped the predictor down to match those actual boundaries. Less flashy, more true to how this would really get used.</p></div>
+      </div>
+      <div class="case-block"><p class="case-block-title">What I'd do differently</p>
+        <div class="case-reflection"><p>None of us had the vocabulary for "user-centered design" while we were building this — we just kept saying the dashboard "felt off" until something clicked. Looking back, I wish we'd shown the tab layout to one non-technical person before writing any code, instead of building first and rearranging things at 3am once we noticed the problem ourselves.</p></div>
+      </div>
+    `,
+    bistro: `
+      <span class="case-close" onclick="closeCaseStudy()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
+      <p class="case-eyebrow">Case study · Unsolicited redesign</p>
+      <h2 class="case-title">The 30-Minute Lie</h2>
+      <p class="case-subtitle">A redesign of UCSD's dining app, built around one constraint: actually making it to 1pm lecture.</p>
+      <img class="case-team-photo" src="bistro-modal.jpg" alt="Triton2Go intercept modal redesign" loading="lazy" style="max-width:320px; margin:0 auto; display:block;" />
+      <p class="case-photo-caption" style="text-align:center;">The warning modal, right at the moment you're about to pay.</p>
+      <div class="case-meta-row">
+        <div class="case-meta-item"><p class="case-meta-label">Role</p><p class="case-meta-value">Solo, design + Figma</p></div>
+        <div class="case-meta-item"><p class="case-meta-label">Started from</p><p class="case-meta-value">Being late to lecture, repeatedly</p></div>
+        <div class="case-meta-item"><p class="case-meta-label">Tooling</p><p class="case-meta-value">Figma</p></div>
+      </div>
+      <div class="case-block"><p class="case-block-title">The wait time is basically a guess</p><p>This started as me being annoyed, not as a design exercise. The app estimates pickup time the same way for every dish — active tickets times average prep time. But at the Bistro, a cold side and a hot wok entree are not the same. The wok station only has so many burners. The app has no idea, so it just lies to you with a confident little timer, and you end up standing outside in the wind way past when it said your food would be ready.</p></div>
+      <div class="case-block"><p class="case-block-title">Why I went with .ics files instead of scraping WebReg</p><p>My first instinct was to just pull a student's schedule straight from WebReg. Bad idea — that's UCSD's own login system, and scraping it is a real security problem, not a hypothetical one. Almost every calendar app can export a standard .ics file though, so I designed around that instead. Same result, way less risk, and the student never has to hand over a password to a class project.</p></div>
+      <div class="case-block"><p class="case-block-title">What the redesign actually changes</p>
+        <div class="case-decision"><p class="case-decision-q">Slowing down checkout on purpose</p><p class="case-decision-a">Normally you'd want checkout to be as frictionless as possible. I did the opposite here. If the math says you'll be 3 minutes late to COGS 9, the app stops you right before payment instead of letting you find out the hard way. It felt wrong at first to add a deliberate speed bump, but that's the entire point of the redesign.</p></div>
+        <div class="case-decision"><p class="case-decision-q">Leaving an escape hatch</p><p class="case-decision-a">The walking-time math assumes you're, well, walking. Plenty of people are on a scooter or running. So there's a plain "I'll walk fast, place order anyway" link at the bottom — the app can warn you, but it shouldn't get to make the final call for you.</p></div>
+      </div>
+      <div class="case-block"><p class="case-block-title">What I'd still want to test</p>
+        <div class="case-reflection"><p>I haven't gotten this in front of an actual student who isn't me yet, which is the obvious next step before I'd call this finished. I'm also not totally sure the modal should interrupt checkout every single time — there's a real chance it gets annoying fast if someone orders from the Bistro daily, and I'd want to watch someone actually hit "ignore" a few times before deciding if that's a problem.</p></div>
+      </div>
+    `
+  };
+
+  function openCaseStudy(type) {
+    const modalContent = document.getElementById('caseModalContent');
+    modalContent.innerHTML = caseStudies[type] || caseStudies['ocean'];
     document.getElementById('caseOverlay').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
@@ -828,32 +568,16 @@
     document.body.style.overflow = '';
   }
 
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && document.getElementById('caseOverlay').classList.contains('open')) {
-      closeCaseStudy();
-    }
-  });
-
   function closeBook() {
     document.getElementById('bookViewer').classList.remove('open');
     document.body.style.overflow = '';
   }
 
-  function bookNext() {
-    if (currentPage < artworks.length - 1) {
-      currentPage++;
-      renderBook();
-    }
-  }
-
-  function bookPrev() {
-    if (currentPage > 0) {
-      currentPage--;
-      renderBook();
-    }
-  }
+  function bookNext() { if (currentPage < artworks.length - 1) { currentPage++; renderBook(); } }
+  function bookPrev() { if (currentPage > 0) { currentPage--; renderBook(); } }
 
   document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && document.getElementById('caseOverlay').classList.contains('open')) closeCaseStudy();
     if (!document.getElementById('bookViewer').classList.contains('open')) return;
     if (e.key === 'Escape') closeBook();
     if (e.key === 'ArrowRight') bookNext();
@@ -867,15 +591,12 @@
   if (window.matchMedia('(hover: hover)').matches) {
     document.addEventListener('mousemove', (e) => {
       mouseX = e.clientX; mouseY = e.clientY;
-      trail.style.left = mouseX + 'px';
-      trail.style.top = mouseY + 'px';
+      trail.style.left = mouseX + 'px'; trail.style.top = mouseY + 'px';
     });
 
     function animateGlow() {
-      glowX += (mouseX - glowX) * 0.12;
-      glowY += (mouseY - glowY) * 0.12;
-      glow.style.left = glowX + 'px';
-      glow.style.top = glowY + 'px';
+      glowX += (mouseX - glowX) * 0.12; glowY += (mouseY - glowY) * 0.12;
+      glow.style.left = glowX + 'px'; glow.style.top = glowY + 'px';
       requestAnimationFrame(animateGlow);
     }
     animateGlow();
@@ -892,20 +613,11 @@
       let foundZone = null;
       for (const s of zoneSections) {
         const rect = s.el.getBoundingClientRect();
-        if (mouseY >= rect.top && mouseY <= rect.bottom) {
-          foundZone = s.id;
-          break;
-        }
+        if (mouseY >= rect.top && mouseY <= rect.bottom) { foundZone = s.id; break; }
       }
       if (foundZone !== currentZone) {
-        if (currentZone) {
-          glow.classList.remove('zone-' + currentZone);
-          trail.classList.remove('zone-' + currentZone);
-        }
-        if (foundZone) {
-          glow.classList.add('zone-' + foundZone);
-          trail.classList.add('zone-' + foundZone);
-        }
+        if (currentZone) { glow.classList.remove('zone-' + currentZone); trail.classList.remove('zone-' + currentZone); }
+        if (foundZone) { glow.classList.add('zone-' + foundZone); trail.classList.add('zone-' + foundZone); }
         currentZone = foundZone;
       }
     }
@@ -919,17 +631,12 @@
     document.querySelectorAll('.tilt').forEach(card => {
       card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const rotateX = ((y - centerY) / centerY) * -8;
-        const rotateY = ((x - centerX) / centerX) * 8;
+        const x = e.clientX - rect.left, y = e.clientY - rect.top;
+        const centerX = rect.width / 2, centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -8, rotateY = ((x - centerX) / centerX) * 8;
         card.style.transform = `perspective(500px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(0)`;
       });
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = 'perspective(500px) rotateX(0) rotateY(0)';
-      });
+      card.addEventListener('mouseleave', () => { card.style.transform = 'perspective(500px) rotateX(0) rotateY(0)'; });
     });
 
     window.addEventListener('scroll', () => {
@@ -938,26 +645,17 @@
     });
   }
 
-  setTimeout(() => {
-    document.getElementById('hero').classList.add('loaded');
-  }, 100);
+  setTimeout(() => { document.getElementById('hero').classList.add('loaded'); }, 100);
 
   const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
   document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
   const skillObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        document.querySelectorAll('.skill-fill').forEach(fill => {
-          fill.style.width = fill.dataset.width + '%';
-        });
+        document.querySelectorAll('.skill-fill').forEach(fill => { fill.style.width = fill.dataset.width + '%'; });
         skillObserver.disconnect();
       }
     });
@@ -970,9 +668,7 @@
   const navObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        navLinks.forEach(link => {
-          link.classList.toggle('active', link.dataset.section === entry.target.id);
-        });
+        navLinks.forEach(link => { link.classList.toggle('active', link.dataset.section === entry.target.id); });
       }
     });
   }, { threshold: 0.3, rootMargin: '-80px 0px -50% 0px' });
@@ -982,11 +678,7 @@
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     document.querySelectorAll('.art-card').forEach(card => {
-      if (type === 'all' || card.dataset.medium === type) {
-        card.style.display = 'block';
-      } else {
-        card.style.display = 'none';
-      }
+      card.style.display = (type === 'all' || card.dataset.medium === type) ? 'block' : 'none';
     });
   }
 
@@ -994,9 +686,7 @@
   const waveEmoji = document.getElementById('waveEmoji');
   if (navName) {
     navName.addEventListener('click', () => {
-      waveEmoji.classList.remove('waving');
-      void waveEmoji.offsetWidth;
-      waveEmoji.classList.add('waving');
+      waveEmoji.classList.remove('waving'); void waveEmoji.offsetWidth; waveEmoji.classList.add('waving');
     });
   }
 
@@ -1005,10 +695,9 @@
     function updateTime() {
       const now = new Date();
       const options = { hour: 'numeric', minute: '2-digit', timeZone: 'America/Los_Angeles' };
-      footerTime.textContent = 'it\'s ' + now.toLocaleTimeString('en-US', options) + ' in La Jolla right now';
+      footerTime.textContent = "it's " + now.toLocaleTimeString('en-US', options) + ' in La Jolla right now';
     }
-    updateTime();
-    setInterval(updateTime, 30000);
+    updateTime(); setInterval(updateTime, 30000);
   }
 </script>
 

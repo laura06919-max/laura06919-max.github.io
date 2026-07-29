@@ -200,6 +200,22 @@
       .contact-section { margin: 0 -20px; padding: 48px 20px; }
       section { padding: 48px 20px; }
     }
+    .exp-intro { background: var(--bg3); padding: 30px 30px 38px; margin-bottom: 22px; clip-path: polygon(0% 2%, 5% 0%, 14% 1.5%, 24% 0%, 34% 1%, 44% 0%, 54% 1.5%, 64% 0%, 74% 1%, 84% 0%, 94% 1.5%, 100% 0%, 99% 12%, 100% 24%, 98.5% 36%, 100% 48%, 99% 60%, 100% 72%, 98.5% 84%, 100% 96%, 99% 100%, 90% 98.5%, 80% 100%, 70% 99%, 60% 100%, 50% 98.5%, 40% 100%, 30% 99%, 20% 100%, 10% 98.5%, 0% 100%, 1% 88%, 0% 76%, 1.5% 64%, 0% 52%, 1% 40%, 0% 28%, 1.5% 16%, 0% 4%); }
+    .exp-intro-role { font-family: 'Abril Fatface', serif; font-size: 22px; color: var(--text); margin-bottom: 4px; }
+    .exp-intro-meta { font-family: 'Fredoka', sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--blue); margin-bottom: 14px; }
+    .exp-intro p { font-size: 14px; color: var(--muted); line-height: 1.7; font-family: 'Sora', sans-serif; }
+    .exp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .exp-card { background: var(--bg3); padding: 26px 24px 34px; cursor: pointer; clip-path: polygon(0% 2%, 5% 0%, 14% 1.5%, 24% 0%, 34% 1%, 44% 0%, 54% 1.5%, 64% 0%, 74% 1%, 84% 0%, 94% 1.5%, 100% 0%, 99% 12%, 100% 24%, 98.5% 36%, 100% 48%, 99% 60%, 100% 72%, 98.5% 84%, 100% 96%, 99% 100%, 90% 98.5%, 80% 100%, 70% 99%, 60% 100%, 50% 98.5%, 40% 100%, 30% 99%, 20% 100%, 10% 98.5%, 0% 100%, 1% 88%, 0% 76%, 1.5% 64%, 0% 52%, 1% 40%, 0% 28%, 1.5% 16%, 0% 4%); transition: filter 0.2s; }
+    .exp-card:hover { filter: brightness(0.99); }
+    .exp-card-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
+    .exp-dept { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 15px; color: var(--text); }
+    .exp-dept-cn { font-size: 12px; color: var(--hint); margin-bottom: 12px; font-family: 'Sora', sans-serif; }
+    .exp-pill { font-size: 10px; padding: 2px 9px; border-radius: 20px; font-family: 'Sora', sans-serif; white-space: nowrap; flex-shrink: 0; }
+    .exp-pill.current { background: var(--blue-bg); color: var(--blue); }
+    .exp-pill.upcoming { background: var(--bg2); color: var(--hint); border: 0.5px solid var(--border); }
+    .exp-card p { font-size: 13px; color: var(--muted); line-height: 1.6; font-family: 'Sora', sans-serif; }
+    .exp-card .case-study-link { margin-top: 12px; }
+    @media (max-width: 640px) { .exp-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -211,6 +227,7 @@
   <a class="nav-name" href="#" id="navName" onclick="return false">Laura Yuan <span id="waveEmoji" style="display:inline-block">👋</span></a>
   <ul class="nav-links">
     <li><a href="#work" class="nav-link" data-section="work">Work</a></li>
+    <li><a href="#experience" class="nav-link" data-section="experience">Experience</a></li>
     <li><a href="#art" class="nav-link" data-section="art">Art</a></li>
     <li><a href="#about" class="nav-link" data-section="about">About</a></li>
     <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
@@ -262,17 +279,18 @@
         </div>
         <span class="case-study-link">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;display:inline;vertical-align:-1px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </div>
-      <a class="project-card reveal" href="https://github.com/laura06919-max" target="_blank">
+      <div class="project-card reveal" onclick="openCaseStudy('birdsong')" style="cursor:pointer">
         <span class="project-badge badge-blue">Research · E4E Lab</span>
-        <h3>Bioacoustic classifier</h3>
-        <p>Active learning pipeline for bird species classification from audio, in collaboration with the San Diego Zoo. Minimizes annotation cost on imbalanced multi-species datasets.</p>
+        <h3>Background Noise</h3>
+        <p>Active learning pipeline for bird species classification from audio, with the San Diego Zoo. The interesting part turned out to be catching the model cheating.</p>
         <div class="chip-row">
           <span class="chip">PyTorch</span>
           <span class="chip">BirdNET</span>
           <span class="chip">Active learning</span>
           <span class="chip">Python</span>
         </div>
-      </a>
+        <span class="case-study-link">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;display:inline;vertical-align:-1px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </div>
     </div>
 
     <div class="case-showcase reveal">
@@ -293,6 +311,44 @@
         <div class="phone-frame-css">
           <img src="bistro-modal.jpg" alt="Triton2Go Intercept Modal Redesign" loading="lazy" />
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <p class="section-label reveal">Experience</p>
+    <div class="exp-intro reveal tilt">
+      <p class="exp-intro-role">SmartCloud Network Engineer Intern · China Telecom</p>
+      <p class="exp-intro-meta">Dongguan, Guangdong · Jul–Aug 2026</p>
+      <p>I'm interning across China Telecom's city headquarters cloud division, and I'm using the time to figure out how a big state carrier actually runs, from the customer-facing side all the way to the technical backend. Along the way I built a reusable slide-generation tool on the internal TeleAgent platform, mostly as a way to learn the product by hand. It has a content-traceability check that catches the model making up facts before a deck goes out, and I got into the habit of checking every change against the slides it actually rendered instead of taking the agent's word that it worked. I put together its on-demand "skills" setup by trial and error to keep the context window from overflowing, and a company training later taught that same idea as a core concept, which was a nice moment of building something first and finding out afterward why it worked. Most of the cloud business is government and enterprise clients, the kind who care a lot about the security a state carrier can promise.</p>
+    </div>
+    <div class="exp-grid">
+      <div class="exp-card reveal tilt" onclick="openCaseStudy('dept_cloud')">
+        <div class="exp-card-head">
+          <span class="exp-dept">Cloud · Delivery</span>
+          <span class="exp-pill current">Current</span>
+        </div>
+        <p class="exp-dept-cn">云中台 · 交付</p>
+        <p>The middle layer at HQ that connects customer solutions to the technical backend. I sit with delivery, so onboarding customers and handling maintenance after they buy, and I join pre-sales on customer visits when they head out.</p>
+        <span class="case-study-link">See more details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;display:inline;vertical-align:-1px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </div>
+      <div class="exp-card reveal tilt" onclick="openCaseStudy('dept_sales')">
+        <div class="exp-card-head">
+          <span class="exp-dept">Sales Hall</span>
+          <span class="exp-pill upcoming">Upcoming</span>
+        </div>
+        <p class="exp-dept-cn">销售大厅 · front end</p>
+        <p>The all-product, all-customer sales front, wider than the cloud team's government and enterprise focus. I rotate in soon.</p>
+        <span class="case-study-link">See more details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;display:inline;vertical-align:-1px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </div>
+      <div class="exp-card reveal tilt" onclick="openCaseStudy('dept_monitor')">
+        <div class="exp-card-head">
+          <span class="exp-dept">Monitoring Center</span>
+          <span class="exp-pill upcoming">Upcoming</span>
+        </div>
+        <p class="exp-dept-cn">监控中心 · back end</p>
+        <p>The technical backend that watches for system faults and sends people out to fix them. I rotate in soon.</p>
+        <span class="case-study-link">See more details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;display:inline;vertical-align:-1px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </div>
     </div>
   </section>
@@ -552,6 +608,69 @@
       </div>
       <div class="case-block"><p class="case-block-title">What I'd still want to test</p>
         <div class="case-reflection"><p>I haven't gotten this in front of an actual student who isn't me yet, which is the obvious next step before I'd call this finished. I'm also not totally sure the modal should interrupt checkout every single time, since there's a real chance it gets annoying fast if someone orders from the Bistro daily, and I'd want to watch someone actually hit "ignore" a few times before deciding if that's a problem.</p></div>
+      </div>
+    `,
+    birdsong: `
+      <span class="case-close" onclick="closeCaseStudy()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
+      <p class="case-eyebrow">Case study · Engineers for Exploration</p>
+      <h2 class="case-title">Background Noise</h2>
+      <p class="case-subtitle">Teaching a model to recognize bird species from field audio — and learning that the exciting-looking result was a leak.</p>
+      <div class="case-meta-row">
+        <div class="case-meta-item"><p class="case-meta-label">Role</p><p class="case-meta-value">Student researcher, E4E bioacoustics</p></div>
+        <div class="case-meta-item"><p class="case-meta-label">Partner</p><p class="case-meta-value">San Diego Zoo</p></div>
+        <div class="case-meta-item"><p class="case-meta-label">Data</p><p class="case-meta-value">Public BirdSet</p></div>
+      </div>
+      <div class="case-block"><p class="case-block-title">The bottleneck is labeling, not recording</p><p>Field microphones run continuously and pull in hours of wind, rain, insects, and silence, with the actual bird calls scattered somewhere inside. Recording is easy. The expensive part is labeling, because someone has to tag clips by hand and the model only learns from what's been tagged. So most of my work went into the question underneath all of that: which clips are worth a human's time to label? That's the active learning loop, and I built several strategies for choosing those clips — top-k entropy, dynamic batch sizing off an entropy threshold, and Query-by-Committee using Monte Carlo Dropout — plus a reinforcement-learning component that adjusts the labeling budget as training goes instead of spending it at a flat rate.</p></div>
+      <div class="case-block"><p class="case-block-title">The model was cheating</p><p>Early on the model looked like it was doing well. It wasn't. Clips from the same field recording were landing in both the training and test sets, so the model was quietly learning the background hiss of individual recordings — the specific hum of one microphone on one day — instead of the birds. It looked like recognition. It was memorization. I rewrote the train/test split so it separates by recording, meaning no recording ever appears on both sides. Accuracy dropped, which was the point: the lower number was the honest one, and everything measured after that was finally measuring the thing we actually cared about.</p></div>
+      <div class="case-block"><p class="case-block-title">Where I sit on this</p><p>I'm not the strongest coder in the room, and I don't pretend to be. What I bring is field intuition and follow-through. Before I opened a single spectrogram, I'd spent weeks in Belize snorkeling through mangrove roots and watching a bird migration pass overhead, so I already had a feel for why monitoring wildlife in a noisy real environment is so hard. When I joined I read the lab's papers cold and used AI tools to fill the gaps in my background, so I could contribute early instead of spending a month catching up.</p></div>
+      <div class="case-block"><p class="case-block-title">What it turned into</p>
+        <div class="case-reflection"><p>What stuck with me was less about the accuracy score and more about trust. A biologist has to act on this model's output without being able to see inside it. If it says "probably species X, but not confident," what are they supposed to do with that? Sitting with that question is what turned me toward human-centered design. (Ongoing work on public BirdSet data — currently scaling to more species and larger label budgets, final numbers pending.)</p></div>
+      </div>
+    `,
+    dept_cloud: `
+      <span class="case-close" onclick="closeCaseStudy()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
+      <p class="case-eyebrow">Experience · China Telecom</p>
+      <h2 class="case-title">Cloud · Delivery</h2>
+      <p class="case-subtitle">云中台 · 交付 — the middle layer, where customer solutions meet the technical backend.</p>
+      <div class="case-meta-row">
+        <div class="case-meta-item"><p class="case-meta-label">Team</p><p class="case-meta-value">Cloud, delivery side</p></div>
+        <div class="case-meta-item"><p class="case-meta-label">Status</p><p class="case-meta-value">Current rotation</p></div>
+        <div class="case-meta-item"><p class="case-meta-label">Also joining</p><p class="case-meta-value">Pre-sales, on visits</p></div>
+      </div>
+      <div class="case-block"><p class="case-block-title">What this team does</p><p>The cloud group at city headquarters is split into two sides. Pre-sales pitches the product and proposes the solution. Delivery, where I sit, takes over once a customer buys: showing them how to use it and handling maintenance when something breaks. Sitting on delivery means I see what actually happens after the sale, which is usually the messier and more honest half of the story.</p></div>
+      <div class="case-block"><p class="case-block-title">The tool I built here</p><p>My lead had me build a slide-generation tool on the internal TeleAgent platform, mostly so I'd know the product well enough to demo it live for customers later. It turns raw content into finished, on-brand product-intro decks for pre-sales. The part I'm proudest of is a content check that catches the model inventing facts before a deck ever goes out, since a confident wrong number in front of a client is worse than no deck at all.</p></div>
+      <div class="case-block"><p class="case-block-title">What I learned about the product</p>
+        <div class="case-reflection"><p>Building on TeleAgent taught me the product from the inside instead of from a script. When I go out on a customer visit now, I can actually show the thing working and speak from having broken it and fixed it myself, which lands very differently than reading off a slide.</p></div>
+      </div>
+    `,
+    dept_sales: `
+      <span class="case-close" onclick="closeCaseStudy()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
+      <p class="case-eyebrow">Experience · China Telecom</p>
+      <h2 class="case-title">Sales Hall</h2>
+      <p class="case-subtitle">销售大厅 — the all-product sales front, facing every kind of customer.</p>
+      <div class="case-meta-row">
+        <div class="case-meta-item"><p class="case-meta-label">Team</p><p class="case-meta-value">Sales Hall, front end</p></div>
+        <div class="case-meta-item"><p class="case-meta-label">Status</p><p class="case-meta-value">Upcoming rotation</p></div>
+        <div class="case-meta-item"><p class="case-meta-label">Contrast</p><p class="case-meta-value">Broader than cloud sales</p></div>
+      </div>
+      <div class="case-block"><p class="case-block-title">Placeholder</p><p>I haven't rotated into this team yet. My rough understanding is that it's the broad sales front, handling the full product range for all types of customers, unlike the cloud team which mostly serves government and enterprise clients. I'll fill this in properly once I've spent time here.</p></div>
+      <div class="case-block"><p class="case-block-title">What I want to find out</p>
+        <div class="case-reflection"><p>Coming from the cloud side, I'm curious how selling to a walk-in customer differs from selling a cloud solution to an enterprise, and whether the same product gets pitched completely differently depending on who's across the table.</p></div>
+      </div>
+    `,
+    dept_monitor: `
+      <span class="case-close" onclick="closeCaseStudy()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
+      <p class="case-eyebrow">Experience · China Telecom</p>
+      <h2 class="case-title">Monitoring Center</h2>
+      <p class="case-subtitle">监控中心 — the technical backend that catches faults and sends the fix.</p>
+      <div class="case-meta-row">
+        <div class="case-meta-item"><p class="case-meta-label">Team</p><p class="case-meta-value">Monitoring, back end</p></div>
+        <div class="case-meta-item"><p class="case-meta-label">Status</p><p class="case-meta-value">Upcoming rotation</p></div>
+        <div class="case-meta-item"><p class="case-meta-label">Role</p><p class="case-meta-value">Fault detection + dispatch</p></div>
+      </div>
+      <div class="case-block"><p class="case-block-title">Placeholder</p><p>I haven't rotated in yet. As I understand it, this is where engineers watch the system for errors and dispatch people to fix them when something goes down. It's the technical backend that keeps everything the sales and delivery teams promised actually running. I'll write this properly once I've been here.</p></div>
+      <div class="case-block"><p class="case-block-title">What I want to find out</p>
+        <div class="case-reflection"><p>I want to see the full loop close: a customer buys through sales, delivery sets them up, and this team is who catches it when it breaks. Seeing that hand-off from the inside is the whole point of rotating through all three.</p></div>
       </div>
     `
   };

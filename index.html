@@ -344,10 +344,10 @@
       <div class="exp-card reveal tilt" onclick="openCaseStudy('dept_monitor')">
         <div class="exp-card-head">
           <span class="exp-dept">Monitoring Center</span>
-          <span class="exp-pill upcoming">Upcoming</span>
+          <span class="exp-pill current">Current</span>
         </div>
         <p class="exp-dept-cn">监控中心 · back end</p>
-        <p>The technical backend that watches for system faults and sends people out to fix them. I rotate in soon.</p>
+        <p>The technical backend that watches for system faults, from cybersecurity to power to fiber, and decides what gets fixed automatically versus what needs a person.</p>
         <span class="case-study-link">See more details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;display:inline;vertical-align:-1px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </div>
     </div>
@@ -445,6 +445,10 @@
       <div class="skill-row">
         <div class="skill-label"><span>Visual art (oil, acrylic, digital)</span><span>85%</span></div>
         <div class="skill-track"><div class="skill-fill" data-width="85"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-label"><span>Java</span><span>60%</span></div>
+        <div class="skill-track"><div class="skill-fill" data-width="60"></div></div>
       </div>
       <div class="skill-row">
         <div class="skill-label"><span>HTML / CSS / front-end</span><span>55%</span></div>
@@ -665,12 +669,14 @@
       <p class="case-subtitle">监控中心 — the technical backend that catches faults and sends the fix.</p>
       <div class="case-meta-row">
         <div class="case-meta-item"><p class="case-meta-label">Team</p><p class="case-meta-value">Monitoring, back end</p></div>
-        <div class="case-meta-item"><p class="case-meta-label">Status</p><p class="case-meta-value">Upcoming rotation</p></div>
+        <div class="case-meta-item"><p class="case-meta-label">Status</p><p class="case-meta-value">Current rotation</p></div>
         <div class="case-meta-item"><p class="case-meta-label">Role</p><p class="case-meta-value">Fault detection + dispatch</p></div>
       </div>
-      <div class="case-block"><p class="case-block-title">Placeholder</p><p>I haven't rotated in yet. As I understand it, this is where engineers watch the system for errors and dispatch people to fix them when something goes down. It's the technical backend that keeps everything the sales and delivery teams promised actually running. I'll write this properly once I've been here.</p></div>
-      <div class="case-block"><p class="case-block-title">What I want to find out</p>
-        <div class="case-reflection"><p>I want to see the full loop close: a customer buys through sales, delivery sets them up, and this team is who catches it when it breaks. Seeing that hand-off from the inside is the whole point of rotating through all three.</p></div>
+      <div class="case-block"><p class="case-block-title">How one team watches a whole city</p><p>My team lead walked me through how Monitoring Center is actually structured: separate teams for cybersecurity anomalies, for the physical server rooms (机房), for power (backup systems keep the machines holding the most critical data running even if the city grid goes down), and for cable breaks, copper and fiber. Each team watches for a different kind of failure, and instructions cascade down a real hierarchy: HQ divides Dongguan into five regions, each region routes down to its townships, each township down to the street. Seeing that hierarchy laid out made the scale of the company click in a way no org chart could.</p></div>
+      <div class="case-block"><p class="case-block-title">The triage system, and a pattern I recognized</p><p>Most anomalies get auto-assigned straight to the district and township level for a routine fix. Only two kinds escalate to a person: issues sent down directly from Guangzhou, the provincial capital, and the ones where the system notices something odd, the same kind of request repeating in the same region at the same time, over and over. That second category is the interesting one. It's the same shape as the active learning work I do at E4E: automate the confident cases, route the ambiguous ones to a human. I wasn't expecting to find my own research logic running a telecom's fault system.</p></div>
+      <div class="case-block"><p class="case-block-title">Watching theory become infrastructure</p><p>The lead and a teammate on the Internet Maintenance (互联网维护) sub-team, who has a software engineering degree, walked me through real network topology diagrams: how intranet and internet-facing networks differ, why a public IP and fiber connection are what actually let a device reach the internet, what each machine in the diagram does. It was the first time concepts from the Huawei networking training I'd been studying showed up as something actually running, at the scale of an entire province, instead of a lab exercise. I asked him, half out of curiosity, why my home WiFi keeps lagging, and he walked me through what to check and how, the same troubleshooting instinct at a much smaller scale.</p></div>
+      <div class="case-block"><p class="case-block-title">What's next</p>
+        <div class="case-reflection"><p>He builds internal web tools, backend, frontend, and data storage, that support the team's communications work, which is exactly how his software engineering degree ended up inside a telecom operations role. I'm joining him Monday when he starts maintaining and expanding that tool, to actually learn the scripting behind it rather than just hear about it.</p></div>
       </div>
     `
   };

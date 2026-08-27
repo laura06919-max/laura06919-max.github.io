@@ -205,7 +205,7 @@
     .exp-intro-meta { font-family: 'Fredoka', sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--blue); margin-bottom: 14px; }
     .exp-intro p { font-size: 14px; color: var(--muted); line-height: 1.7; font-family: 'Sora', sans-serif; }
     .exp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .exp-card { background: var(--bg3); padding: 26px 24px 34px; cursor: pointer; clip-path: polygon(0% 2%, 5% 0%, 14% 1.5%, 24% 0%, 34% 1%, 44% 0%, 54% 1.5%, 64% 0%, 74% 1%, 84% 0%, 94% 1.5%, 100% 0%, 99% 12%, 100% 24%, 98.5% 36%, 100% 48%, 99% 60%, 100% 72%, 98.5% 84%, 100% 96%, 99% 100%, 90% 98.5%, 80% 100%, 70% 99%, 60% 100%, 50% 98.5%, 40% 100%, 30% 99%, 20% 100%, 10% 98.5%, 0% 100%, 1% 88%, 0% 76%, 1.5% 64%, 0% 52%, 1% 40%, 0% 28%, 1.5% 16%, 0% 4%); transition: filter 0.2s; }
+    .exp-card { background: linear-gradient(to right, var(--blue) 0 4px, var(--bg3) 4px); padding: 26px 24px 34px 28px; cursor: pointer; clip-path: polygon(0% 2%, 5% 0%, 14% 1.5%, 24% 0%, 34% 1%, 44% 0%, 54% 1.5%, 64% 0%, 74% 1%, 84% 0%, 94% 1.5%, 100% 0%, 99% 12%, 100% 24%, 98.5% 36%, 100% 48%, 99% 60%, 100% 72%, 98.5% 84%, 100% 96%, 99% 100%, 90% 98.5%, 80% 100%, 70% 99%, 60% 100%, 50% 98.5%, 40% 100%, 30% 99%, 20% 100%, 10% 98.5%, 0% 100%, 1% 88%, 0% 76%, 1.5% 64%, 0% 52%, 1% 40%, 0% 28%, 1.5% 16%, 0% 4%); transition: filter 0.2s; }
     .exp-card:hover { filter: brightness(0.99); }
     .exp-card-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
     .exp-dept { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 15px; color: var(--text); }
@@ -330,15 +330,6 @@
         </div>
         <p class="exp-dept-cn">云中台 · 交付</p>
         <p>The middle layer at HQ that connects customer solutions to the technical backend. I sit with delivery, so onboarding customers and handling maintenance after they buy, and I join pre-sales on customer visits when they head out.</p>
-        <span class="case-study-link">See more details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;display:inline;vertical-align:-1px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </div>
-      <div class="exp-card reveal tilt" onclick="openCaseStudy('dept_sales')">
-        <div class="exp-card-head">
-          <span class="exp-dept">Sales Hall</span>
-          <span class="exp-pill upcoming">Upcoming</span>
-        </div>
-        <p class="exp-dept-cn">销售大厅 · front end</p>
-        <p>The all-product, all-customer sales front, wider than the cloud team's government and enterprise focus. I rotate in soon.</p>
         <span class="case-study-link">See more details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;display:inline;vertical-align:-1px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </div>
       <div class="exp-card reveal tilt" onclick="openCaseStudy('dept_monitor')">
@@ -643,23 +634,9 @@
       </div>
       <div class="case-block"><p class="case-block-title">What this team does</p><p>The cloud group at city headquarters is split into two sides. Pre-sales pitches the product and proposes the solution. Delivery, where I sit, takes over once a customer buys: showing them how to use it and handling maintenance when something breaks. Sitting on delivery means I see what actually happens after the sale, which is usually the messier and more honest half of the story.</p></div>
       <div class="case-block"><p class="case-block-title">The tool I built here</p><p>My lead had me build a slide-generation tool on the internal TeleAgent platform, mostly so I'd know the product well enough to demo it live for customers later. It turns raw content into finished, on-brand product-intro decks for pre-sales. The part I'm proudest of is a content check that catches the model inventing facts before a deck ever goes out, since a confident wrong number in front of a client is worse than no deck at all.</p></div>
-      <div class="case-block"><p class="case-block-title">What I learned about the product</p>
-        <div class="case-reflection"><p>Building on TeleAgent taught me the product from the inside instead of from a script. When I go out on a customer visit now, I can actually show the thing working and speak from having broken it and fixed it myself, which lands very differently than reading off a slide.</p></div>
-      </div>
-    `,
-    dept_sales: `
-      <span class="case-close" onclick="closeCaseStudy()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
-      <p class="case-eyebrow">Experience · China Telecom</p>
-      <h2 class="case-title">Sales Hall</h2>
-      <p class="case-subtitle">销售大厅 — the all-product sales front, facing every kind of customer.</p>
-      <div class="case-meta-row">
-        <div class="case-meta-item"><p class="case-meta-label">Team</p><p class="case-meta-value">Sales Hall, front end</p></div>
-        <div class="case-meta-item"><p class="case-meta-label">Status</p><p class="case-meta-value">Upcoming rotation</p></div>
-        <div class="case-meta-item"><p class="case-meta-label">Contrast</p><p class="case-meta-value">Broader than cloud sales</p></div>
-      </div>
-      <div class="case-block"><p class="case-block-title">Placeholder</p><p>I haven't rotated into this team yet. My rough understanding is that it's the broad sales front, handling the full product range for all types of customers, unlike the cloud team which mostly serves government and enterprise clients. I'll fill this in properly once I've spent time here.</p></div>
-      <div class="case-block"><p class="case-block-title">What I want to find out</p>
-        <div class="case-reflection"><p>Coming from the cloud side, I'm curious how selling to a walk-in customer differs from selling a cloud solution to an enterprise, and whether the same product gets pitched completely differently depending on who's across the table.</p></div>
+      <div class="case-block"><p class="case-block-title">What I learned about the product</p><p>Building on TeleAgent taught me the product from the inside instead of from a script. When I go out on a customer visit now, I can actually show the thing working and speak from having broken it and fixed it myself, which lands very differently than reading off a slide.</p></div>
+      <div class="case-block"><p class="case-block-title">A rule I didn't expect</p>
+        <div class="case-reflection"><p>In my last week, I went out with the local township team to install cloud PCs for a government department. Partway through, people kept bringing up problems that had nothing to do with what we were actually there to deliver, a printer that wouldn't connect, an old machine too outdated to support the setup. Some of it we could have fixed on the spot. My first instinct was that if I could solve something right there, I should. My colleague told me otherwise: guide people to handle it themselves when you can, don't just do it for them, because if you fix one person's problem today, everyone else finds you tomorrow, and your own work never gets done. I found that a little jarring. It's only my second time doing fieldwork, and I didn't expect the more effective version of helping to look like holding a boundary instead of just solving whatever was in front of me.</p></div>
       </div>
     `,
     dept_monitor: `
@@ -675,8 +652,8 @@
       <div class="case-block"><p class="case-block-title">How one team watches a whole city</p><p>My team lead walked me through how Monitoring Center is actually structured: separate teams for cybersecurity anomalies, for the physical server rooms (机房), for power (backup systems keep the machines holding the most critical data running even if the city grid goes down), and for cable breaks, copper and fiber. Each team watches for a different kind of failure, and instructions cascade down a real hierarchy: HQ divides Dongguan into five regions, each region routes down to its townships, each township down to the street. Seeing that hierarchy laid out made the scale of the company click in a way no org chart could.</p></div>
       <div class="case-block"><p class="case-block-title">The triage system, and a pattern I recognized</p><p>Most anomalies get auto-assigned straight to the district and township level for a routine fix. Only two kinds escalate to a person: issues sent down directly from Guangzhou, the provincial capital, and the ones where the system notices something odd, the same kind of request repeating in the same region at the same time, over and over. That second category is the interesting one. It's the same shape as the active learning work I do at E4E: automate the confident cases, route the ambiguous ones to a human. I wasn't expecting to find my own research logic running a telecom's fault system.</p></div>
       <div class="case-block"><p class="case-block-title">Watching theory become infrastructure</p><p>The lead and a teammate on the Internet Maintenance (互联网维护) sub-team, who has a software engineering degree, walked me through real network topology diagrams: how intranet and internet-facing networks differ, why a public IP and fiber connection are what actually let a device reach the internet, what each machine in the diagram does. It was the first time concepts from the Huawei networking training I'd been studying showed up as something actually running, at the scale of an entire province, instead of a lab exercise. I asked him, half out of curiosity, why my home WiFi keeps lagging, and he walked me through what to check and how, the same troubleshooting instinct at a much smaller scale.</p></div>
-      <div class="case-block"><p class="case-block-title">What's next</p>
-        <div class="case-reflection"><p>He builds internal web tools, backend, frontend, and data storage, that support the team's communications work, which is exactly how his software engineering degree ended up inside a telecom operations role. I'm joining him Monday when he starts maintaining and expanding that tool, to actually learn the scripting behind it rather than just hear about it.</p></div>
+      <div class="case-block"><p class="case-block-title">Learning to build, not just observe</p>
+        <div class="case-reflection"><p>He builds the internal web tools that support the team's work, which is how his software engineering degree ended up inside a telecom operations role. He walked me through Vue3 from scratch: how it runs locally, how it differs from plain HTML, how existing HTML gets absorbed into a component structure. I went home and rebuilt a piece of my own portfolio in it, converting the hand-written skills bar on this site into a real Vue component, as a way to check I'd actually understood rather than just followed along. He also showed me tools I hadn't known existed, including one that turns a UI sketched on paper into a usable design once you scan it.</p></div>
       </div>
     `
   };

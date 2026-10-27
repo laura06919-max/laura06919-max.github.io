@@ -291,6 +291,19 @@
         </div>
         <span class="case-study-link">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;display:inline;vertical-align:-1px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </div>
+      <div class="project-card reveal" onclick="openCaseStudy('datahacks27')" style="cursor:pointer; grid-column:1/-1">
+        <span class="project-badge badge-blue">DS3 · DataHacks 2027 · In progress</span>
+        <h3>Ride the Dragon</h3>
+        <p>The DataHacks 2027 website and applicant portal, designed as a game world. Hackers customize a character, pick a zone on a world map, and fly there on Dyno. I own the portal's application, status and waiver flows.</p>
+        <div class="chip-row">
+          <span class="chip">Figma</span>
+          <span class="chip">User flows</span>
+          <span class="chip">Design system</span>
+          <span class="chip">Illustration</span>
+          <span class="chip">Motion</span>
+        </div>
+        <span class="case-study-link">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;display:inline;vertical-align:-1px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </div>
     </div>
 
     <div class="case-showcase reveal">
@@ -560,6 +573,29 @@
   }
 
   const caseStudies = {
+    datahacks27: `
+      <span class="case-close" onclick="closeCaseStudy()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
+      <p class="case-eyebrow">Case study · DS3 DataHacks 2027</p>
+      <h2 class="case-title">Ride the Dragon</h2>
+      <p class="case-subtitle">Designing a hackathon website and applicant portal as a game world, where the boring parts (forms, status, waivers) still have to be the clearest parts.</p>
+      <div class="case-meta-row">
+        <div class="case-meta-item"><p class="case-meta-label">Role</p><p class="case-meta-value">Design + Marketing, team of 4 designers</p></div>
+        <div class="case-meta-item"><p class="case-meta-label">My part</p><p class="case-meta-value">Application, status + waiver flows</p></div>
+        <div class="case-meta-item"><p class="case-meta-label">Timeline</p><p class="case-meta-value">Oct 2026 – present</p></div>
+      </div>
+      <div class="case-block"><p class="case-block-title">The world</p><p>DataHacks is DS3's yearly hackathon at UCSD, and this year the site is a blocky, hand-painted game world. You sign up, customize a character, land on a world map and pick one of five themed zones. Getting there means riding Dyno, our club mascot, who I redesigned as a winged dragon with a costume for each zone. I mapped out the full flow from sign-up to flying into a zone, plus how information is split across the five zones so each one holds one kind of content instead of everything everywhere. I also illustrated Dyno and animated the dragon-flight transitions between zones.</p></div>
+      <div class="case-block"><p class="case-block-title">The portal, where the fun has to step aside</p><p>I co-designed the applicant portal in Figma with another designer, and I owned the application, status and waiver flows. This is the part where a cute world can easily get in the way. Someone filling out an application wants to know how much is left, whether their answers saved, and what went wrong if something did.</p>
+        <div class="case-decision"><p class="case-decision-q">Four steps, always visible</p><p class="case-decision-a">The application is split into four steps with a progress bar, a "Section 1 of 4" label, a Save Draft button and a status chip, so nobody wonders whether closing the tab loses their work.</p></div>
+        <div class="case-decision"><p class="case-decision-q">Errors that tell you where to look</p><p class="case-decision-a">Instead of a red banner at the top, validation is inline and counts what's left, like "2 fields need fixing," so you can find the problem without rereading the whole page.</p></div>
+        <div class="case-decision"><p class="case-decision-q">A status tracker with every ending</p><p class="case-decision-a">After submitting, applicants follow Submitted → In review → Decision → Sign waiver. I designed separate accepted, waitlisted and rejected screens, because the rejected one deserves as much care as the happy path.</p></div>
+        <div class="case-decision"><p class="case-decision-q">Locking event info until acceptance</p><p class="case-decision-a">The event handbook only unlocks once you're accepted. I broke a long handbook into 10 short pages you can scan, since nobody reads a wall of rules the night before a hackathon.</p></div>
+      </div>
+      <div class="case-block"><p class="case-block-title">Knowing when the mascot should leave</p><p>My first version had Dyno popping up all over the application. My design lead pushed back, and they were right, because a character talking at you on every step stops being charming fast. Now Dyno shows up exactly once, on the long-answer step, with a small nudge to keep it under 200 words. That's the one moment where a friendly voice actually helps.</p></div>
+      <div class="case-block"><p class="case-block-title">The system underneath</p><p>To keep four designers consistent, I built a style guide and component library. Headings use a pixel display font and body text uses a clean sans-serif, on a fixed palette. Every component has its states drawn out (default, active, locked, focused, error), and the motion pieces like Dyno's blink, wave and flight are built as animated Figma components.</p><p><a href="https://www.figma.com/proto/QVtMklBwxPAWFEJVVa8lWM/portfolio-export?node-id=35-16&starting-point-node-id=35%3A16&scaling=scale-down" target="_blank" rel="noopener">Click through selected screens in the Figma prototype</a></p></div>
+      <div class="case-block"><p class="case-block-title">What I'm still figuring out</p>
+        <div class="case-reflection"><p>The site isn't built yet, so I haven't watched a real applicant go through the portal. The thing I most want to see is whether the game world helps people feel excited or just makes a simple form feel slower. If it's the second one, the theme should get quieter in the portal, not louder.</p></div>
+      </div>
+    `,
     ocean: `
       <span class="case-close" onclick="closeCaseStudy()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
       <p class="case-eyebrow">Case study · DataHacks 2026</p>

@@ -304,6 +304,19 @@
         </div>
         <span class="case-study-link">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;display:inline;vertical-align:-1px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </div>
+      <div class="project-card reveal" onclick="openCaseStudy('clearmed')" style="cursor:pointer; grid-column:1/-1">
+        <span class="project-badge badge-blue">ACM AI · Multi-agent LLMs · In progress</span>
+        <h3>Plain Words, Same Facts</h3>
+        <p>ClearMed, a team of five AI agents that rewrites hospital paperwork so patients can read it, without inventing anything. I own the Readability agent and wire the whole pipeline together.</p>
+        <div class="chip-row">
+          <span class="chip">Python</span>
+          <span class="chip">LangGraph</span>
+          <span class="chip">Ollama</span>
+          <span class="chip">Readability metrics</span>
+          <span class="chip">LLM evaluation</span>
+        </div>
+        <span class="case-study-link">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;display:inline;vertical-align:-1px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </div>
     </div>
 
     <div class="case-showcase reveal">
@@ -333,22 +346,22 @@
     <div class="exp-intro reveal tilt">
       <p class="exp-intro-role">SmartCloud Network Engineer Intern · China Telecom</p>
       <p class="exp-intro-meta">Dongguan, Guangdong · Jul–Aug 2026</p>
-      <p>I'm interning across China Telecom's city headquarters cloud division, and I'm using the time to figure out how a big state carrier actually runs, from the customer-facing side all the way to the technical backend. Along the way I built a reusable slide-generation tool on the internal TeleAgent platform, mostly as a way to learn the product by hand. It has a content-traceability check that catches the model making up facts before a deck goes out, and I got into the habit of checking every change against the slides it actually rendered instead of taking the agent's word that it worked. I put together its on-demand "skills" setup by trial and error to keep the context window from overflowing, and a company training later taught that same idea as a core concept, which was a nice moment of building something first and finding out afterward why it worked. Most of the cloud business is government and enterprise clients, the kind who care a lot about the security a state carrier can promise.</p>
+      <p>I interned across China Telecom's city headquarters cloud division, and used the time to figure out how a big state carrier actually runs, from the customer-facing side all the way to the technical backend. Along the way I built a reusable slide-generation tool on the internal TeleAgent platform, mostly as a way to learn the product by hand. It has a content-traceability check that catches the model making up facts before a deck goes out, and I got into the habit of checking every change against the slides it actually rendered instead of taking the agent's word that it worked. I put together its on-demand "skills" setup by trial and error to keep the context window from overflowing, and a company training later taught that same idea as a core concept, which was a nice moment of building something first and finding out afterward why it worked. Most of the cloud business is government and enterprise clients, the kind who care a lot about the security a state carrier can promise.</p>
     </div>
     <div class="exp-grid">
       <div class="exp-card reveal tilt" onclick="openCaseStudy('dept_cloud')">
         <div class="exp-card-head">
           <span class="exp-dept">Cloud · Delivery</span>
-          <span class="exp-pill current">Current</span>
+          <span class="exp-pill">Jul–Aug 2026</span>
         </div>
         <p class="exp-dept-cn">云中台 · 交付</p>
-        <p>The middle layer at HQ that connects customer solutions to the technical backend. I sit with delivery, so onboarding customers and handling maintenance after they buy, and I join pre-sales on customer visits when they head out.</p>
+        <p>The middle layer at HQ that connects customer solutions to the technical backend. I sat with delivery, onboarding customers and handling maintenance after they buy, and joined pre-sales on customer visits.</p>
         <span class="case-study-link">See more details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;display:inline;vertical-align:-1px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </div>
       <div class="exp-card reveal tilt" onclick="openCaseStudy('dept_monitor')">
         <div class="exp-card-head">
           <span class="exp-dept">Monitoring Center</span>
-          <span class="exp-pill current">Current</span>
+          <span class="exp-pill">Jul–Aug 2026</span>
         </div>
         <p class="exp-dept-cn">监控中心 · back end</p>
         <p>The technical backend that watches for system faults, from cybersecurity to power to fiber, and decides what gets fixed automatically versus what needs a person.</p>
@@ -419,13 +432,13 @@
     <div class="about-intro reveal">
       <img class="about-photo" src="me.jpg" alt="Laura Yuan, candid photo" />
       <div class="about-intro-text">
-        <p><strong>Hi, I'm Laura</strong> — first-year at UCSD, equally happy in front of a Jupyter notebook or a canvas. This site is where both sides live.</p>
+        <p><strong>Hi, I'm Laura</strong> — second-year at UCSD, equally happy in front of a Jupyter notebook or a canvas. This site is where both sides live.</p>
       </div>
     </div>
     <div class="about-grid">
       <div class="about-card reveal">
         <p class="about-card-label">Currently</p>
-        <p>Student researcher at Engineers for Exploration (UCSD), building ML pipelines for bioacoustic species classification in collaboration with the San Diego Zoo.</p>
+        <p>ML research at Engineers for Exploration with the San Diego Zoo, designing the DataHacks 2027 site and applicant portal, and building the Readability agent for ClearMed, an ACM multi-agent LLM project.</p>
       </div>
       <div class="about-card reveal">
         <p class="about-card-label">Background</p>
@@ -437,7 +450,7 @@
       </div>
       <div class="about-card reveal">
         <p class="about-card-label">Looking for</p>
-        <p>HCI research opportunities and design collaborations where data and human experience intersect.</p>
+        <p>Summer 2027 internships in product, UX and data/AI, plus HCI research where data and human experience meet.</p>
       </div>
     </div>
     <div class="skills-wrap reveal" id="skillsWrap">
@@ -456,6 +469,14 @@
       </div>
       <div class="skill-row">
         <div class="skill-label"><span>HTML / CSS / front-end</span><span>55%</span></div>
+        <div class="skill-track"><div class="skill-fill" data-width="55"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-label"><span>Figma / UI design</span><span>65%</span></div>
+        <div class="skill-track"><div class="skill-fill" data-width="65"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-label"><span>LLM pipelines &amp; evaluation</span><span>55%</span></div>
         <div class="skill-track"><div class="skill-fill" data-width="55"></div></div>
       </div>
       <div class="skill-row">
@@ -573,6 +594,21 @@
   }
 
   const caseStudies = {
+    clearmed: `
+      <span class="case-close" onclick="closeCaseStudy()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
+      <p class="case-eyebrow">Case study · ACM AI Team 3 · Fall 2026</p>
+      <h2 class="case-title">Plain Words, Same Facts</h2>
+      <p class="case-subtitle">Hospital discharge notes are written for doctors. ClearMed rewrites them for patients, and checks every sentence so the rewrite never says something the original didn't.</p>
+      <div class="case-meta-row">
+        <div class="case-meta-item"><p class="case-meta-label">Role</p><p class="case-meta-value">Readability agent owner + integration lead</p></div>
+        <div class="case-meta-item"><p class="case-meta-label">Stack</p><p class="case-meta-value">Python, LangGraph, Ollama, textstat</p></div>
+        <div class="case-meta-item"><p class="case-meta-label">Timeline</p><p class="case-meta-value">Oct 2026 – present</p></div>
+      </div>
+      <div class="case-block"><p class="case-block-title">The problem</p><p>Only about 1 in 10 US adults can comfortably read everyday clinical information. People misread a dose or miss a follow-up, and some end up back in the hospital. AI can rewrite the text simply, but it can also make things up, like a dose or an instruction that was never there. In medicine that's worse than no rewrite at all.</p></div>
+      <div class="case-block"><p class="case-block-title">Five agents instead of one</p><p>Instead of asking one model to do everything, our team splits the job. One agent pulls out the facts, one rewrites them in plain language, one checks every sentence against the original and flags anything unsupported, one fixes the flags, and the last one, mine, polishes the reading level. Everything runs on free, local open-source models, so anyone can reproduce it.</p></div>
+      <div class="case-block"><p class="case-block-title">What I found before building</p><p>Our target was an 8th-grade reading level. Before tuning my agent, I scored 20 pairs of expert-written plain-language rewrites on Flesch-Kincaid, SMOG and jargon density. None of the 20 reached grade 8. In some pairs the "plain" version even scored harder, because experts keep the medical term and explain it in parentheses, and the formula punishes longer sentences. So the standard metric can penalize exactly the kind of explaining we want. That changed how I think about the agent's target: hitting a number isn't the goal if it means dropping the explanation a patient needs.</p></div>
+      <div class="case-block"><p class="case-block-title">What I'm building now</p><p>I'm wiring the agents into a LangGraph pipeline with one bounded loop, where the checker and the fixer pass a draft back and forth at most twice, plus per-agent traces so we can see which agent changed what. Next up are ablation tests to measure which agents actually earn their place, and a demo.</p></div>
+    `,
     datahacks27: `
       <span class="case-close" onclick="closeCaseStudy()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
       <p class="case-eyebrow">Case study · DS3 DataHacks 2027</p>
@@ -592,6 +628,7 @@
       </div>
       <div class="case-block"><p class="case-block-title">Knowing when the mascot should leave</p><p>My first version had Dyno popping up all over the application. My design lead pushed back, and they were right, because a character talking at you on every step stops being charming fast. Now Dyno shows up exactly once, on the long-answer step, with a small nudge to keep it under 200 words. That's the one moment where a friendly voice actually helps.</p></div>
       <div class="case-block"><p class="case-block-title">The system underneath</p><p>To keep four designers consistent, I built a style guide and component library. Headings use a pixel display font and body text uses a clean sans-serif, on a fixed palette. Every component has its states drawn out (default, active, locked, focused, error), and the motion pieces like Dyno's blink, wave and flight are built as animated Figma components.</p><p><a href="https://www.figma.com/proto/QVtMklBwxPAWFEJVVa8lWM/portfolio-export?node-id=35-16&starting-point-node-id=35%3A16&scaling=scale-down" target="_blank" rel="noopener">Click through selected screens in the Figma prototype</a></p></div>
+      <div class="case-block"><p class="case-block-title">Brand work: logo and stickers (in progress)</p><p>I'm now designing the DataHacks 2027 logo and a sticker set. The logo has to work small enough for a T-shirt corner, so I'm exploring a more Minecraft-style Dyno, standing on a block or in armor, with letters that each map to one of the site's five zones in one cohesive palette. For stickers, I'm making die-cut Dyno designs in each wing color, plus concepts like Dyno pulling a broken "DATA | HACKS" sign back together. Same process as the rest of the site. AI for early ideas, then hand-drawn in our team's blocky style.</p><p style="font-size:13px;color:var(--muted)">A note on AI. I use it only for idea generation and quick mockups. Every final asset is drawn by hand.</p></div>
       <div class="case-block"><p class="case-block-title">What I'm still figuring out</p>
         <div class="case-reflection"><p>The site isn't built yet, so I haven't watched a real applicant go through the portal. The thing I most want to see is whether the game world helps people feel excited or just makes a simple form feel slower. If it's the second one, the theme should get quieter in the portal, not louder.</p></div>
       </div>

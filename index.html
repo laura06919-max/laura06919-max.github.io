@@ -292,15 +292,15 @@
         <span class="case-study-link">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;display:inline;vertical-align:-1px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </div>
       <div class="project-card reveal" onclick="openCaseStudy('datahacks27')" style="cursor:pointer; grid-column:1/-1">
-        <span class="project-badge badge-blue">DS3 · DataHacks 2027 · In progress</span>
-        <h3>Ride the Dragon</h3>
-        <p>The DataHacks 2027 website and applicant portal, designed as a game world. Hackers customize a character, pick a zone on a world map, and fly there on Dyno. I own the portal's application, status and waiver flows.</p>
+        <span class="project-badge badge-blue">DS3 · DataHacks 2027 · Live portal</span>
+        <h3>Never Wonder Where You Stand</h3>
+        <p>The DataHacks 2027 applicant portal, now open to applicants. I co-designed it in Figma and owned the application, status and waiver flows. The live portal uses my visual system, from the Minecraft Nether theme to the inputs and type. I also hand-painted the mascot Dyno and his sticker series.</p>
         <div class="chip-row">
           <span class="chip">Figma</span>
           <span class="chip">User flows</span>
           <span class="chip">Design system</span>
-          <span class="chip">Illustration</span>
-          <span class="chip">Motion</span>
+          <span class="chip">Prototyping</span>
+          <span class="chip">Procreate</span>
         </div>
         <span class="case-study-link">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;display:inline;vertical-align:-1px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </div>
@@ -355,7 +355,7 @@
           <span class="exp-pill">Jul–Aug 2026</span>
         </div>
         <p class="exp-dept-cn">云中台 · 交付</p>
-        <p>The middle layer at HQ that connects customer solutions to the technical backend. I sat with delivery, onboarding customers and handling maintenance after they buy, and joined pre-sales on customer visits.</p>
+        <p>The middle layer at HQ that connects customer solutions to the technical backend. I sat with delivery, onboarding customers and handling support and maintenance after they buy.</p>
         <span class="case-study-link">See more details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;display:inline;vertical-align:-1px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
       </div>
       <div class="exp-card reveal tilt" onclick="openCaseStudy('dept_monitor')">
@@ -612,25 +612,33 @@
     datahacks27: `
       <span class="case-close" onclick="closeCaseStudy()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
       <p class="case-eyebrow">Case study · DS3 DataHacks 2027</p>
-      <h2 class="case-title">Ride the Dragon</h2>
-      <p class="case-subtitle">Designing a hackathon website and applicant portal as a game world, where the boring parts (forms, status, waivers) still have to be the clearest parts.</p>
+      <h2 class="case-title">Never Wonder Where You Stand</h2>
+      <p class="case-subtitle">Designing the DataHacks 2027 applicant portal, where a playful game theme still has to make the form the clearest part.</p>
       <div class="case-meta-row">
-        <div class="case-meta-item"><p class="case-meta-label">Role</p><p class="case-meta-value">Design + Marketing, team of 4 designers</p></div>
-        <div class="case-meta-item"><p class="case-meta-label">My part</p><p class="case-meta-value">Application, status + waiver flows</p></div>
+        <div class="case-meta-item"><p class="case-meta-label">Role</p><p class="case-meta-value">Co-designer (with one other designer). Owned application, status + waiver flows</p></div>
+        <div class="case-meta-item"><p class="case-meta-label">Team</p><p class="case-meta-value">4 designers + the dev team</p></div>
+        <div class="case-meta-item"><p class="case-meta-label">Tools</p><p class="case-meta-value">Figma, Procreate</p></div>
         <div class="case-meta-item"><p class="case-meta-label">Timeline</p><p class="case-meta-value">Oct 2026 – present</p></div>
       </div>
-      <div class="case-block"><p class="case-block-title">The world</p><p>DataHacks is DS3's yearly hackathon at UCSD, and this year the site is a blocky, hand-painted game world. You sign up, customize a character, land on a world map and pick one of five themed zones. Getting there means riding Dyno, our club mascot, who I redesigned as a winged dragon with a costume for each zone. I mapped out the full flow from sign-up to flying into a zone, plus how information is split across the five zones so each one holds one kind of content instead of everything everywhere. I also illustrated Dyno and animated the dragon-flight transitions between zones.</p></div>
-      <div class="case-block"><p class="case-block-title">The portal, where the fun has to step aside</p><p>I co-designed the applicant portal in Figma with another designer, and I owned the application, status and waiver flows. This is the part where a cute world can easily get in the way. Someone filling out an application wants to know how much is left, whether their answers saved, and what went wrong if something did.</p>
-        <div class="case-decision"><p class="case-decision-q">Four steps, always visible</p><p class="case-decision-a">The application is split into four steps with a progress bar, a "Section 1 of 4" label, a Save Draft button and a status chip, so nobody wonders whether closing the tab loses their work.</p></div>
-        <div class="case-decision"><p class="case-decision-q">Errors that tell you where to look</p><p class="case-decision-a">Instead of a red banner at the top, validation is inline and counts what's left, like "2 fields need fixing," so you can find the problem without rereading the whole page.</p></div>
-        <div class="case-decision"><p class="case-decision-q">A status tracker with every ending</p><p class="case-decision-a">After submitting, applicants follow Submitted → In review → Decision → Sign waiver. I designed separate accepted, waitlisted and rejected screens, because the rejected one deserves as much care as the happy path.</p></div>
-        <div class="case-decision"><p class="case-decision-q">Locking event info until acceptance</p><p class="case-decision-a">The event handbook only unlocks once you're accepted. I broke a long handbook into 10 short pages you can scan, since nobody reads a wall of rules the night before a hackathon.</p></div>
+      <div class="case-block"><p class="case-block-title">Context</p><p>DataHacks is the yearly hackathon run by UCSD's Data Science Student Society. Our design team worked in a hand-painted, blocky style inspired by Minecraft and TreeHacks, with no official game assets. AI was used only for idea generation and quick mockups. Every final asset is drawn by hand. The main event website was designed by our design lead. My work is the applicant portal and the mascot.</p></div>
+      <div class="case-block"><p class="case-block-title">The problem</p><p>Applicants often don't know how much of the form is left, whether their work saved, what went wrong, or when they'll hear back. My goal was simple. Applicants should never wonder where they stand.</p></div>
+      <div class="case-block"><p class="case-block-title">How the direction changed</p>
+        <div class="case-decision"><p class="case-decision-q">Three templates, a signpost, then the Nether</p><p class="case-decision-a">I started with three template directions, moved to a wooden signpost look, and after a team meeting landed on a Minecraft Nether theme that the whole portal now uses.</p></div>
+        <div class="case-decision"><p class="case-decision-q">From a book to a sidebar</p><p class="case-decision-a">I first pictured the event handbook as a book you flip through. I switched to sidebar pages, because flipping adds friction when someone just needs the schedule. The handbook became 10 short, scannable pages that unlock on acceptance.</p></div>
+        <div class="case-decision"><p class="case-decision-q">Feedback I acted on</p><p class="case-decision-a">My first version had Dyno appearing all over the application. Now he shows up once, on the long-answer step, where a friendly nudge actually helps. I also removed the lava on the sides to give the form room to breathe.</p></div>
       </div>
-      <div class="case-block"><p class="case-block-title">Knowing when the mascot should leave</p><p>My first version had Dyno popping up all over the application. My design lead pushed back, and they were right, because a character talking at you on every step stops being charming fast. Now Dyno shows up exactly once, on the long-answer step, with a small nudge to keep it under 200 words. That's the one moment where a friendly voice actually helps.</p></div>
-      <div class="case-block"><p class="case-block-title">The system underneath</p><p>To keep four designers consistent, I built a style guide and component library. Headings use a pixel display font and body text uses a clean sans-serif, on a fixed palette. Every component has its states drawn out (default, active, locked, focused, error), and the motion pieces like Dyno's blink, wave and flight are built as animated Figma components.</p><p><a href="https://www.figma.com/proto/QVtMklBwxPAWFEJVVa8lWM/portfolio-export?node-id=35-16&starting-point-node-id=35%3A16&scaling=scale-down" target="_blank" rel="noopener">Click through selected screens in the Figma prototype</a></p></div>
-      <div class="case-block"><p class="case-block-title">Brand work: logo and stickers (in progress)</p><p>I'm now designing the DataHacks 2027 logo and a sticker set. The logo has to work small enough for a T-shirt corner, so I'm exploring a more Minecraft-style Dyno, standing on a block or in armor, with letters that each map to one of the site's five zones in one cohesive palette. For stickers, I'm making die-cut Dyno designs in each wing color, plus concepts like Dyno pulling a broken "DATA | HACKS" sign back together. Same process as the rest of the site. AI for early ideas, then hand-drawn in our team's blocky style.</p><p style="font-size:13px;color:var(--muted)">A note on AI. I use it only for idea generation and quick mockups. Every final asset is drawn by hand.</p></div>
-      <div class="case-block"><p class="case-block-title">What I'm still figuring out</p>
-        <div class="case-reflection"><p>The site isn't built yet, so I haven't watched a real applicant go through the portal. The thing I most want to see is whether the game world helps people feel excited or just makes a simple form feel slower. If it's the second one, the theme should get quieter in the portal, not louder.</p></div>
+      <div class="case-block"><p class="case-block-title">Key screens</p>
+        <div class="case-decision"><p class="case-decision-q">About you</p><p class="case-decision-a">A progress bar, Save Draft and a status chip, so nobody wonders whether closing the tab loses their work.</p></div>
+        <div class="case-decision"><p class="case-decision-q">Errors</p><p class="case-decision-a">A banner plus a message under each field, so you can find the problem without rereading the whole page.</p></div>
+        <div class="case-decision"><p class="case-decision-q">Status, in review</p><p class="case-decision-a">A tracker with a "You are here" marker, and separate accepted, waitlisted and rejected screens.</p></div>
+        <div class="case-decision"><p class="case-decision-q">Handbook and locked sidebar</p><p class="case-decision-a">Ten scannable pages, including the run of show, locked until you're accepted.</p></div>
+      </div>
+      <div class="case-block"><p class="case-block-title">Design system</p><p>To keep four designers consistent, I built a style guide and component sheet. Tabs (default, active, locked), buttons, inputs (empty, filled, focused, error) and status steps all have their states drawn out. Headings use a pixel font and body text a clean sans-serif.</p></div>
+      <div class="case-block"><p class="case-block-title">Interaction prototype</p><p>I built a clickable Figma prototype with an animated Dyno (blink, wave, talk), a mini Dyno riding the progress bar, and flowing lava. These are in the prototype, not in the launched version.</p><p><a href="https://www.figma.com/proto/QVtMklBwxPAWFEJVVa8lWM/portfolio-export?node-id=35-16&starting-point-node-id=35%3A16&scaling=scale-down" target="_blank" rel="noopener">Click through the Figma prototype</a></p></div>
+      <div class="case-block"><p class="case-block-title">What shipped</p><p>The live portal uses my visual system. That means the Nether theme, the board-and-sidebar layout, the tab signs, inputs and the pixel/sans type pairing. For launch, engineering simplified the experience. The 4-step application became one scrolling form with automatic saving, and the interactive elements were cut to keep the build lean. The status, waiver and handbook pages are planned for after admissions decisions.</p></div>
+      <div class="case-block"><p class="case-block-title">Dyno, mascot and stickers</p><p>I hand-painted Dyno in four poses and three wing colors, and turned him into a die-cut sticker series, including Dyno pulling a broken board back together and Dyno with a treasure chest. My process is AI references for composition, then traced and hand-painted in my own style in Procreate. Next up is the 2027 event logo for merchandise like banners and lanyard cards.</p></div>
+      <div class="case-block"><p class="case-block-title">Reflection</p>
+        <div class="case-reflection"><p>If I had another round, I'd push to bring back a lightweight progress indicator first, because it's the cheapest change with the biggest effect on applicants finishing the form. Next, I'd run a quick usability test with five students to measure completion time and errors.</p></div>
       </div>
     `,
     ocean: `
@@ -704,9 +712,8 @@
       <div class="case-meta-row">
         <div class="case-meta-item"><p class="case-meta-label">Team</p><p class="case-meta-value">Cloud, delivery side</p></div>
         <div class="case-meta-item"><p class="case-meta-label">Status</p><p class="case-meta-value">Current rotation</p></div>
-        <div class="case-meta-item"><p class="case-meta-label">Also joining</p><p class="case-meta-value">Pre-sales, on visits</p></div>
       </div>
-      <div class="case-block"><p class="case-block-title">What this team does</p><p>The cloud group at city headquarters is split into two sides. Pre-sales pitches the product and proposes the solution. Delivery, where I sit, takes over once a customer buys: showing them how to use it and handling maintenance when something breaks. Sitting on delivery means I see what actually happens after the sale, which is usually the messier and more honest half of the story.</p></div>
+      <div class="case-block"><p class="case-block-title">What this team does</p><p>The cloud group at city headquarters is split into two sides. Pre-sales pitches the product and proposes the solution. Delivery, where I worked, takes over once a customer buys: showing them how to use it and handling maintenance when something breaks. Working on delivery meant I saw what actually happens after the sale, which is usually the messier and more honest half of the story.</p></div>
       <div class="case-block"><p class="case-block-title">The tool I built here</p><p>My lead had me build a slide-generation tool on the internal TeleAgent platform, mostly so I'd know the product well enough to demo it live for customers later. It turns raw content into finished, on-brand product-intro decks for pre-sales. The part I'm proudest of is a content check that catches the model inventing facts before a deck ever goes out, since a confident wrong number in front of a client is worse than no deck at all.</p></div>
       <div class="case-block"><p class="case-block-title">What I learned about the product</p><p>Building on TeleAgent taught me the product from the inside instead of from a script. When I go out on a customer visit now, I can actually show the thing working and speak from having broken it and fixed it myself, which lands very differently than reading off a slide.</p></div>
       <div class="case-block"><p class="case-block-title">A rule I didn't expect</p>

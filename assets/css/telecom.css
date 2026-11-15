@@ -84,3 +84,4 @@ html:not(.js) .step-img { display: block; }
   .tc-hero-bg img { width: 100%; opacity: .55; }
   .tc-hero-bg::after { background: linear-gradient(0deg, #0F161E 15%, rgba(15,22,30,.6) 70%, rgba(15,22,30,.4)); }
 }
+.card-fig { margin: 4px 0 16px; } .card-fig img { width: 100%; border-radius: 12px; border: 1px solid var(--border); } .card-fig figcaption { font-size: 12px; color: var(--hint); margin-top: 6px; }

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Whiteboard sketch: an intranet behind a firewall, a public IP and fiber link out to the internet, and a sticky note about rebuilding a skills bar in Vue 3.">
+  <style>
+    text { font-family: "Marker Felt", "Chalkboard SE", "Comic Sans MS", "Avenir Next", sans-serif; }
+    .pkt { offset-path: path("M 180 300 L 330 300 L 470 300 C 540 300, 560 230, 640 220"); animation: go 3s linear infinite; }
+    .pkt.b { animation-delay: 1.5s }
+    @keyframes go { from { offset-distance: 0% } to { offset-distance: 100% } }
+    @media (prefers-reduced-motion: reduce) { .pkt { animation: none; offset-distance: 60% } }
+  </style>
+  <rect width="800" height="600" fill="#2A3138"/>
+  <rect x="18" y="18" width="764" height="564" rx="10" fill="#EEF1EF"/>
+  <rect x="18" y="560" width="764" height="22" fill="#C9CFCC"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- intranet box with three PCs -->
+    <path d="M60 170 L 238 166 L 242 430 L 58 434 Z" stroke="#2E5A88" stroke-width="4"/>
+    <g stroke="#2E5A88" stroke-width="3"><rect x="88" y="200" width="54" height="38" rx="3"/><rect x="160" y="250" width="54" height="38" rx="3"/><rect x="88" y="330" width="54" height="38" rx="3"/></g>
+    <path d="M115 238 L 115 330 M142 219 L 187 250" stroke="#2E5A88" stroke-width="2.5"/>
+    <!-- firewall -->
+    <g stroke="#C0563B" stroke-width="4"><path d="M300 240 L 360 240 L 360 360 L 300 360 Z"/><path d="M300 280 H 360 M300 320 H 360 M330 240 V 280 M315 280 V 320 M345 280 V 320 M330 320 V 360"/></g>
+    <!-- public IP + fiber -->
+    <path d="M180 300 L 300 300 M360 300 L 470 300" stroke="#333" stroke-width="3"/>
+    <path d="M470 300 C 540 300, 560 230, 640 220" stroke="#1F8A70" stroke-width="5" stroke-dasharray="14 8"/>
+    <!-- internet cloud -->
+    <path d="M610 230 C 580 230, 580 180, 615 176 C 615 140, 670 130, 685 160 C 715 140, 760 165, 742 198 C 770 210, 755 250, 720 246 C 705 262, 640 262, 610 230 Z" stroke="#2E5A88" stroke-width="4"/>
+  </g>
+  <circle class="pkt" r="8" fill="#F2A33A"/><circle class="pkt b" r="8" fill="#F2A33A"/>
+  <g font-size="22" fill="#2E5A88">
+    <text x="70" y="160">Intranet 内网</text><text x="640" y="205">Internet</text>
+  </g>
+  <text x="290" y="228" font-size="20" fill="#C0563B">firewall</text>
+  <g font-size="19" fill="#333"><text x="388" y="290">public IP</text></g>
+  <text x="508" y="320" font-size="19" fill="#1F8A70">fiber</text>
+  <text x="70" y="480" font-size="19" fill="#555">"why can this device reach the internet?"</text>
+  <text x="70" y="510" font-size="19" fill="#555">→ public IP + a fiber connection</text>
+  <!-- sticky note -->
+  <g transform="rotate(4 650 440)">
+    <rect x="560" y="370" width="190" height="150" fill="#F7E08A"/>
+    <rect x="560" y="370" width="190" height="16" fill="#EBCD62"/>
+    <text x="578" y="420" font-size="19" fill="#333">rebuilt my</text>
+    <text x="578" y="448" font-size="19" fill="#333">skills bar in</text>
+    <text x="578" y="476" font-size="19" fill="#333">Vue 3  ✓</text>
+    <text x="578" y="504" font-size="15" fill="#7A6A2A">&lt;SkillsBar /&gt;</text>
+  </g>
+</svg>

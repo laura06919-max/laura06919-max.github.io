@@ -43,11 +43,11 @@ body.tc {
     repeating-linear-gradient(0deg, transparent 0 21px, rgba(140,165,185,.2) 21px 22px),
     linear-gradient(90deg, #121B25, #1A2633 55%, #121B25); }
 /* atria: tall lit glass boxes cut into alternating corners, like the real facade */
-.atrium { position: absolute; width: 150px; height: 230px; border: 1px solid rgba(242,200,121,.5); overflow: hidden; background: #F2C879; box-shadow: 0 0 30px rgba(242,200,121,.25); }
+.atrium { position: absolute; width: 220px; height: 165px; border: 1px solid rgba(242,200,121,.5); overflow: hidden; background: #F2C879; box-shadow: 0 0 30px rgba(242,200,121,.25); }
 .atrium.left { left: -1px; } .atrium.right { right: -1px; }
-.atrium[data-i="0"] { top: 120px; } .atrium[data-i="1"] { top: 420px; } .atrium[data-i="2"] { top: 720px; } .atrium[data-i="3"] { top: 1020px; }
+.atrium[data-i="0"] { top: 130px; } .atrium[data-i="1"] { top: 440px; } .atrium[data-i="2"] { top: 750px; } .atrium[data-i="3"] { top: 1060px; }
 .atrium img { width: 100%; height: 100%; object-fit: cover; opacity: var(--reveal, 0); transition: opacity .2s linear; }
-.atrium::after { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, transparent 0 36px, rgba(20,30,40,.55) 36px 38px), repeating-linear-gradient(0deg, transparent 0 56px, rgba(20,30,40,.55) 56px 58px); opacity: calc(1 - var(--reveal, 0) * .8); }
+.atrium::after { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, transparent 0 53px, rgba(20,30,40,.55) 53px 55px), repeating-linear-gradient(0deg, transparent 0 40px, rgba(20,30,40,.55) 40px 42px); opacity: calc(1 - var(--reveal, 0) * .9); }
 
 /* steps scroll over the stage; each card sits opposite the atrium being shown */
 .tz-steps { position: relative; margin-top: -100vh; z-index: 2; padding: 50vh 0 30vh; }

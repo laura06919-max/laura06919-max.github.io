@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The 30-Minute Lie · Laura Yuan</title>
-  <meta name="description" content="Case study: an unsolicited redesign of UCSD dining ordering around not making students late to lecture, with a playable demo.">
+  <meta name="description" content="Case study: I set out to prove UCSD's dining app gives wrong wait times. 77 of my own orders showed the real problem was the estimate that never appears.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="The 30-Minute Lie · Laura Yuan">
-  <meta property="og:description" content="Case study: an unsolicited redesign of UCSD dining ordering around not making students late to lecture, with a playable demo.">
+  <meta property="og:description" content="Case study: I set out to prove UCSD's dining app gives wrong wait times. 77 of my own orders showed the real problem was the estimate that never appears.">
   <meta property="og:url" content="https://laura06919-max.github.io/work/bistro.html">
   <meta property="og:image" content="https://laura06919-max.github.io/assets/img/og-card.jpg">
   <meta name="twitter:card" content="summary_large_image">
@@ -58,83 +58,197 @@
     <li><a href="../index.html#in-the-field">Experience</a></li>
     <li class="opt"><a href="../index.html#art">Art</a></li>
     <li class="opt"><a href="../index.html#about">About</a></li>
-    <li><a href="../index.html#contact">Contact</a></li>
+    <li class="opt"><a href="../index.html#contact">Contact</a></li>
+    <li><a href="../assets/docs/Laura_Yuan_Resume.pdf" target="_blank" rel="noopener">Résumé</a></li>
   </ul>
 </nav>
 <header class="case-hero" id="start" data-chapter="Start">
   <a class="back-link" href="../index.html#then-people">← All work</a>
-  <p class="eyebrow">Case study · Unsolicited redesign · Mobile UX</p>
+  <p class="eyebrow">Case study · Data-informed redesign · Mobile UX</p>
   <h1 class="case-title">The 30-Minute Lie</h1>
-  <p class="case-sub">A redesign of UCSD's dining app, built around one constraint: actually making it to 1pm lecture.</p>
+  <p class="case-sub">I set out to prove that UCSD's dining app gives wrong wait times. Then I pulled 77 of my own orders, and the data told a more interesting story.</p>
   <dl class="tldr">
-    <div><dt>Role</dt><dd>Solo, research + design</dd></div>
-    <div><dt>Started from</dt><dd>Being late to lecture, repeatedly</dd></div>
-    <div><dt>Tools</dt><dd>Figma</dd></div>
-    <div class="full"><dt>Outcome</dt><dd>A pre-payment warning flow using class schedules from .ics files, with an escape hatch. Not yet user-tested (see reflection).</dd></div>
+    <div><dt>Role</dt><dd>Solo: data collection, analysis, design</dd></div>
+    <div><dt>Data</dt><dd>77 of my own Triton2Go food orders, May–Nov 2026, from emailed receipts</dd></div>
+    <div><dt>Tools</dt><dd>Python, Figma</dd></div>
+    <div class="full"><dt>Finding</dt><dd>Where the app gives an estimate, it pads it: 53 of 66 orders were ready early. The Bistro, the slowest spot, never gave an estimate at all: 9 orders, 10 to 41 minutes, median 22.</dd></div>
   </dl>
 </header>
 <main class="case-body">
-  <section id="guess" data-chapter="The guess">
-    <p class="chapter-num">01 · The problem</p>
-    <h2 class="reveal">The wait time is basically a guess</h2>
-    <p class="reveal">This started as me being annoyed, not as a design exercise. The app estimates pickup time the same way for every dish: active tickets times average prep time. But at the Bistro, a cold side and a hot wok entree are not the same. The wok station only has so many burners.</p>
-    <p class="reveal">The app has no idea, so it shows a confident little timer that's wrong, and you end up standing outside in the wind way past when it said your food would be ready.</p>
+  <section id="hunch" data-chapter="The hunch">
+    <p class="chapter-num">01 · The hunch</p>
+    <h2 class="reveal">I thought the timer was lying</h2>
+    <p class="reveal">This started as me being annoyed, not as a design exercise. I'd order at the Bistro before a 1pm lecture and end up standing outside way past when I expected to eat. My theory: the app estimates every dish the same way, active tickets times an average prep time, and ignores that a wok station only has so many burners.</p>
+    <p class="reveal">That theory made a nice story. Before designing around it, I wanted to check it.</p>
   </section>
+
+  <section id="data" data-chapter="The data">
+    <p class="chapter-num">02 · Testing it</p>
+    <h2 class="reveal">77 receipts</h2>
+    <p class="reveal">The app blocks screenshots, but every order sends an email receipt with the order time, the app's target time, and when the order was marked complete. I collected 77 of my food orders from May to November 2026 and turned them into a dataset: location, dish, time ordered, time quoted, time actually completed.</p>
+    <figure class="figure reveal" data-r="pop" style="background:var(--bg3);border:0.5px solid var(--border);border-radius:16px;padding:18px 14px 10px">
+      <svg viewBox="0 0 760 398" role="img" aria-labelledby="ct cd" style="width:100%;height:auto">
+<title id="ct">How long my Triton2Go orders actually took, by location</title>
+<desc id="cd">77 orders, May to November 2026. The Bistro never showed an estimate; its 9 orders took 10 to 41 minutes, median 22. At the other locations the quoted time was usually longer than the real wait.</desc>
+<g font-family="Sora, sans-serif" font-size="12" fill="var(--muted)">
+<line x1="150.0" x2="150.0" y1="26" y2="336" stroke="var(--border)" stroke-width="1"/><text x="150.0" y="354" text-anchor="middle">0</text>
+<line x1="214.4" x2="214.4" y1="26" y2="336" stroke="var(--border)" stroke-width="1"/><text x="214.4" y="354" text-anchor="middle">5</text>
+<line x1="278.9" x2="278.9" y1="26" y2="336" stroke="var(--border)" stroke-width="1"/><text x="278.9" y="354" text-anchor="middle">10</text>
+<line x1="343.3" x2="343.3" y1="26" y2="336" stroke="var(--border)" stroke-width="1"/><text x="343.3" y="354" text-anchor="middle">15</text>
+<line x1="407.8" x2="407.8" y1="26" y2="336" stroke="var(--border)" stroke-width="1"/><text x="407.8" y="354" text-anchor="middle">20</text>
+<line x1="472.2" x2="472.2" y1="26" y2="336" stroke="var(--border)" stroke-width="1"/><text x="472.2" y="354" text-anchor="middle">25</text>
+<line x1="536.7" x2="536.7" y1="26" y2="336" stroke="var(--border)" stroke-width="1"/><text x="536.7" y="354" text-anchor="middle">30</text>
+<line x1="601.1" x2="601.1" y1="26" y2="336" stroke="var(--border)" stroke-width="1"/><text x="601.1" y="354" text-anchor="middle">35</text>
+<line x1="665.6" x2="665.6" y1="26" y2="336" stroke="var(--border)" stroke-width="1"/><text x="665.6" y="354" text-anchor="middle">40</text>
+<line x1="730.0" x2="730.0" y1="26" y2="336" stroke="var(--border)" stroke-width="1"/><text x="730.0" y="354" text-anchor="middle">45</text>
+<text x="440.0" y="390" text-anchor="middle" fill="var(--hint)">minutes from ordering to "completed"</text>
+<text x="138" y="44" text-anchor="end" fill="var(--text)" font-weight="600">The Bistro</text>
+<text x="138" y="59" text-anchor="end" font-size="10.5" fill="var(--hint)">9 orders · no estimate</text>
+<circle cx="420.7" cy="36.3" r="4.6" fill="var(--accent2)" fill-opacity=".75"/>
+<circle cx="420.7" cy="34.4" r="4.6" fill="var(--accent2)" fill-opacity=".75"/>
+<circle cx="433.6" cy="38.5" r="4.6" fill="var(--accent2)" fill-opacity=".75"/>
+<circle cx="356.2" cy="35.2" r="4.6" fill="var(--accent2)" fill-opacity=".75"/>
+<circle cx="626.9" cy="33.9" r="4.6" fill="var(--accent2)" fill-opacity=".75"/>
+<circle cx="678.4" cy="38.6" r="4.6" fill="var(--accent2)" fill-opacity=".75"/>
+<circle cx="588.2" cy="45.9" r="4.6" fill="var(--accent2)" fill-opacity=".75"/>
+<circle cx="278.9" cy="44.2" r="4.6" fill="var(--accent2)" fill-opacity=".75"/>
+<circle cx="562.4" cy="43.7" r="4.6" fill="var(--accent2)" fill-opacity=".75"/>
+<text x="433.6" y="26" text-anchor="middle" font-size="11" fill="var(--coral-ink)">median 22 min</text>
+<text x="138" y="96" text-anchor="end" fill="var(--text)" font-weight="400">Earl's Coffeehouse</text>
+<text x="138" y="111" text-anchor="end" font-size="10.5" fill="var(--hint)">23 orders</text>
+<circle cx="201.6" cy="88.1" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="227.3" cy="92.5" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="240.2" cy="88.9" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="201.6" cy="87.4" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="201.6" cy="86.5" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="188.7" cy="88.0" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="188.7" cy="98.0" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="201.6" cy="96.6" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="175.8" cy="96.3" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="227.3" cy="96.2" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="227.3" cy="87.7" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="175.8" cy="89.3" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="188.7" cy="93.8" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="188.7" cy="95.2" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="240.2" cy="97.0" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="214.4" cy="97.3" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="227.3" cy="86.2" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="188.7" cy="93.5" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="420.7" cy="94.4" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="291.8" cy="92.1" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="175.8" cy="87.5" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="201.6" cy="91.6" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="201.6" cy="86.3" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<line x1="240.2" x2="240.2" y1="79" y2="105" stroke="#C98A2B" stroke-width="3" stroke-linecap="round"/>
+<text x="138" y="148" text-anchor="end" fill="var(--text)" font-weight="400">Club Med</text>
+<text x="138" y="163" text-anchor="end" font-size="10.5" fill="var(--hint)">19 orders</text>
+<circle cx="175.8" cy="150.1" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="291.8" cy="149.1" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="175.8" cy="144.7" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="240.2" cy="141.2" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="240.2" cy="149.7" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="214.4" cy="145.0" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="291.8" cy="149.4" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="240.2" cy="148.9" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="485.1" cy="144.1" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="175.8" cy="142.8" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="330.4" cy="145.4" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="188.7" cy="143.0" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="162.9" cy="139.3" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="240.2" cy="141.3" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="214.4" cy="148.4" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="240.2" cy="137.6" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="162.9" cy="137.6" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="227.3" cy="145.8" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="317.6" cy="140.9" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<line x1="304.7" x2="304.7" y1="131" y2="157" stroke="#C98A2B" stroke-width="3" stroke-linecap="round"/>
+<text x="138" y="200" text-anchor="end" fill="var(--text)" font-weight="400">Fusion</text>
+<text x="138" y="215" text-anchor="end" font-size="10.5" fill="var(--hint)">7 orders</text>
+<circle cx="304.7" cy="196.5" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="240.2" cy="195.6" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="188.7" cy="193.8" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="240.2" cy="203.0" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="175.8" cy="191.7" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="253.1" cy="194.8" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="175.8" cy="191.8" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<line x1="278.9" x2="278.9" y1="183" y2="209" stroke="#C98A2B" stroke-width="3" stroke-linecap="round"/>
+<text x="138" y="252" text-anchor="end" fill="var(--text)" font-weight="400">Goody's</text>
+<text x="138" y="267" text-anchor="end" font-size="10.5" fill="var(--hint)">4 orders</text>
+<circle cx="162.9" cy="249.9" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="626.9" cy="244.9" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="317.6" cy="246.0" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="394.9" cy="251.5" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<line x1="349.8" x2="349.8" y1="235" y2="261" stroke="#C98A2B" stroke-width="3" stroke-linecap="round"/>
+<text x="138" y="304" text-anchor="end" fill="var(--text)" font-weight="400">Fresh</text>
+<text x="138" y="319" text-anchor="end" font-size="10.5" fill="var(--hint)">4 orders</text>
+<circle cx="162.9" cy="297.5" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="253.1" cy="300.8" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="459.3" cy="305.7" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<circle cx="201.6" cy="294.4" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
+<line x1="240.2" x2="240.2" y1="287" y2="313" stroke="#C98A2B" stroke-width="3" stroke-linecap="round"/>
+</g>
+<g font-family="Sora, sans-serif" font-size="11" fill="var(--muted)"><circle cx="150" cy="14" r="4.6" fill="var(--blue)" fill-opacity=".75"/><text x="160" y="18">one order (actual wait)</text><line x1="310" x2="310" y1="6" y2="22" stroke="#C98A2B" stroke-width="3" stroke-linecap="round"/><text x="320" y="18">what the app usually quoted there</text></g>
+</svg>
+      <figcaption>Each dot is one of my orders. The amber tick is the wait the app usually quoted at that location. Locations with fewer than 4 orders are left out of the chart (but included in the counts).</figcaption>
+    </figure>
+    <p class="pull reveal">The lie wasn't the number. It was the missing one.</p>
+    <p class="reveal">At the places that give an estimate, the estimate is <strong>padded, not optimistic</strong>: 53 of 66 orders (80%) were ready early, typically 4 minutes before the quoted time. Earl's quotes 7 minutes and is usually done in 3–6.</p>
+    <p class="reveal">The Bistro is the opposite. It <strong>never showed an estimate</strong> on any of my 9 orders, and it's by far the slowest: 10 to 41 minutes, median 22, with 7 of 9 orders taking 21 minutes or more. The one place a student most needs to plan around is the one place the app says nothing.</p>
+    <div class="reflection reveal"><p><b>What this data can and can't say.</b> It's one person's orders, at the times I happen to eat, and only 9 from the Bistro, so it shows a pattern, not a proof. "Completed" is when staff marked the order ready, which isn't always when I actually had food in hand. The receipt may also leave out an estimate the app showed on screen.</p></div>
+  </section>
+
+  <section id="redesign" data-chapter="Redesign">
+    <p class="chapter-num">03 · What changed in the design</p>
+    <h2 class="reveal">Design for the gap, not the hunch</h2>
+    <div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">My first idea</span><p>Recalculate every estimate around burner capacity, because the timer is too short.</p></div><div><span class="tag">After the data</span><p>Most timers are fine, just padded. The fix belongs where there is no timer: give the Bistro a real estimate.</p></div></div><div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">Today</span><p>One confident number ("7 min") that's usually wrong by a few minutes.</p></div><div><span class="tag">Redesign</span><p>A range from past orders: "usually 3–6 min." Honest about spread, and still easy to read.</p></div></div><div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">Today</span><p>At the Bistro, a blank.</p></div><div><span class="tag">Redesign</span><p>"Usually 21–34 min at this time." Then, if the student has class soon, a warning before they pay, with an exit: "I'll walk fast, order anyway."</p></div></div><div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">Missing</span><p>The app never learns whether its estimates were right.</p></div><div><span class="tag">Redesign</span><p>One tap after pickup: "Was it ready when you got there?" That is the honest version of my receipt study, built into the product with consent.</p></div></div>
+  </section>
+
   <section id="try" data-chapter="Try it">
-    <p class="chapter-num">02 · Try it</p>
+    <p class="chapter-num">04 · Try it</p>
     <h2 class="reveal">Play with the redesign</h2>
-    <p class="reveal">Pick a dish, move the clock and the queue, then hit <strong>Place order</strong>. When the math says you'll be late, the app stops you before you pay, not after.</p>
+    <p class="reveal">Pick where you're ordering and move the clock. The ranges come from my real orders.</p>
     <div class="demo reveal" id="demo">
       <div>
         <fieldset>
-          <legend>What you're ordering</legend>
+          <legend>Where you're ordering</legend>
           <div class="opts">
-            <label><input type="radio" name="dish" value="wok" checked><span>Hot wok entree</span></label>
-            <label><input type="radio" name="dish" value="cold"><span>Cold side</span></label>
+            <label><input type="radio" name="spot" value="bistro" checked><span>Bistro · salmon</span></label>
+            <label><input type="radio" name="spot" value="earls"><span>Earl's · latte</span></label>
           </div>
         </fieldset>
         <label class="lbl" for="now">It's now: <span class="val" id="nowVal"></span></label>
-        <input type="range" id="now" min="20" max="52" value="34">
-        <label class="lbl" for="queue" style="margin-top:16px">Hot orders ahead of you: <span class="val" id="queueVal"></span></label>
-        <input type="range" id="queue" min="1" max="14" value="8">
-        <p class="fine">Your next class: COGS 9 at 1:00 PM, about a 10-minute walk away. All numbers here are made up for the demo, not real Bistro data. The point is the shape of the logic: the wok station has a fixed number of burners, cold dishes don't wait for them.</p>
+        <input type="range" id="now" min="0" max="50" value="22">
+        <p class="fine">Your next class: COGS 9 at 1:00 PM, about a 10-minute walk away. Bistro range: middle half of my 9 Bistro orders (21–34 min, median 22). Earl's range: middle half of my 23 Earl's orders (3–6 min, median 4).</p>
       </div>
       <div class="phone" aria-label="Interactive phone mockup">
         <div class="screen">
           <h4>Your order</h4>
-          <div class="row"><span id="dishName">Hot wok entree</span><b>$11.95</b></div>
-          <div class="row"><span>App's estimate</span><b id="appEta"></b></div>
-          <div class="row real" id="realRow"><span>Burner-aware estimate</span><b id="realEta"></b></div>
+          <div class="row"><span id="dishName"></span><b id="price"></b></div>
+          <div class="row"><span>Today's app</span><b id="appEta"></b></div>
+          <div class="row real" id="realRow"><span>Redesign</span><b id="realEta"></b></div>
           <div class="toast" id="toast" role="status"></div>
           <button class="pay" id="pay">Place order</button>
           <div class="sheet" id="sheet" role="dialog" aria-modal="false" aria-labelledby="sheetTitle">
             <h5 id="sheetTitle"></h5>
             <p id="sheetBody"></p>
-            <button class="primary" id="swap">Switch to a cold side</button>
-            <button class="escape" id="anyway">I'll walk fast, place order anyway</button>
+            <button class="primary" id="swap">Get a latte from Earl's instead</button>
+            <button class="escape" id="anyway">I'll walk fast, order anyway</button>
           </div>
         </div>
       </div>
     </div>
   </section>
-  <section id="changes" data-chapter="Decisions">
-    <p class="chapter-num">03 · What the redesign changes</p>
-    <h2 class="reveal">Friction on purpose, with an exit</h2>
-    <div class="decision-grid">
-      <div class="decision reveal"><div class="before"><span class="tag">Normally</span><p>Checkout should be as frictionless as possible.</p></div><div><span class="tag">Here</span><p>If the math says you'll be 3 minutes late to COGS 9, the app stops you right before payment. It felt wrong at first to add a deliberate speed bump, but that's the entire point.</p></div></div>
-      <div class="decision reveal"><div class="before"><span class="tag">Risk</span><p>The walking-time math assumes you're walking. Plenty of people are on a scooter or skateboard.</p></div><div><span class="tag">So</span><p>A plain "I'll walk fast, place order anyway" link. The app can warn you, but it shouldn't get to make the final call.</p></div></div>
-    </div>
-    <figure class="figure reveal" style="max-width:320px"><img src="../assets/img/bistro-modal.jpg" alt="Figma mockup of the Triton2Go warning modal at checkout" loading="lazy"><figcaption>The Figma version of the warning, right at the moment you're about to pay.</figcaption></figure>
-  </section>
+
   <section id="ics" data-chapter="Privacy">
-    <p class="chapter-num">04 · A security call</p>
+    <p class="chapter-num">05 · A security call</p>
     <h2 class="reveal">Why .ics files instead of WebReg</h2>
-    <p class="reveal">My first instinct was to pull a student's schedule straight from WebReg. Then I realized that's a bad idea: it's UCSD's own login system, and scraping it is a real security problem. Almost every calendar app can export a standard .ics file, so I designed around that instead. Same result, far less risk, and the student never hands over a password to a class project.</p>
+    <p class="reveal">The warning needs to know when your next class is. My first instinct was to pull a student's schedule straight from WebReg. That's UCSD's own login system, and scraping it is a real security problem. Almost every calendar app can export a standard .ics file, so I designed around that instead. Same result, far less risk, and the student never hands over a password.</p>
   </section>
-  <section id="test" data-chapter="Reflect">
-    <p class="chapter-num">05 · What I'd still test</p>
-    <h2 class="reveal">Not finished until someone else uses it</h2>
-    <div class="reflection reveal"><p>I haven't gotten this in front of a student who isn't me yet, which is the obvious next step before I'd call this finished. I'm also not sure the modal should interrupt checkout every single time. There's a real chance it gets annoying if someone orders from the Bistro daily, and I'd want to watch someone hit "ignore" a few times before deciding if that's a problem.</p></div>
+
+  <section id="reflect" data-chapter="Reflect">
+    <p class="chapter-num">06 · Reflection</p>
+    <h2 class="reveal">The data changed the design</h2>
+    <div class="reflection reveal"><p>If I had built my first idea, I would have "fixed" estimates that mostly weren't broken and missed the one that didn't exist. Next, I'd collect receipts from a few other students (with their permission) to see if the Bistro pattern holds beyond my own lunch habits, and test whether a range actually helps people decide faster than a single number.</p></div>
   </section>
 </main>
 <nav class="case-nav reveal" aria-label="More case studies">
@@ -148,38 +262,37 @@
 (function () {
   const $ = (id) => document.getElementById(id);
   const WALK = 10, CLASS = 60; // minutes after 12:00
+  const SPOTS = {
+    bistro: { name: 'Sautéed salmon', price: '$17.00', app: '— (none shown)', lo: 21, mid: 22, hi: 34 },
+    earls:  { name: 'Green tea latte', price: '$5.75', app: '~7 min', lo: 3, mid: 4, hi: 6 },
+  };
   const fmt = (m) => { m = Math.round(m); const h = 12 + Math.floor(m / 60); return (h > 12 ? h - 12 : h) + ':' + String(m % 60).padStart(2, '0') + ' PM'; };
-  const dish = () => document.querySelector('input[name=dish]:checked').value;
-  const app = (q) => Math.round(q * 1.2 + 4);             // same formula for every dish: tickets x average prep
-  const real = (q, d) => d === 'cold' ? 4 : Math.ceil(q / 3) * 6 + 2; // 3 burners, ~6 min a batch
-  function calc() {
-    const now = +$('now').value, q = +$('queue').value, d = dish();
-    const r = real(q, d), late = Math.round(now + r + WALK - CLASS);
-    return { now, q, d, a: app(q), r, late };
-  }
+  const spot = () => document.querySelector('input[name=spot]:checked').value;
   function render() {
-    const c = calc();
-    $('nowVal').textContent = fmt(c.now); $('queueVal').textContent = c.q;
-    $('dishName').textContent = c.d === 'cold' ? 'Cold side' : 'Hot wok entree';
-    $('appEta').textContent = '~' + c.a + ' min';
-    $('realEta').textContent = '~' + c.r + ' min';
-    $('realRow').classList.toggle('ok', c.late <= 0);
+    const now = +$('now').value, s = SPOTS[spot()];
+    $('nowVal').textContent = fmt(now);
+    $('dishName').textContent = s.name; $('price').textContent = s.price;
+    $('appEta').textContent = s.app;
+    $('realEta').textContent = 'usually ' + s.lo + '–' + s.hi + ' min';
+    $('realRow').classList.toggle('ok', now + s.hi + WALK <= CLASS);
     $('sheet').classList.remove('open'); $('toast').classList.remove('show');
   }
-  function placed(c) { const t = $('toast'); t.textContent = c.late <= 0 ? 'Order placed. Ready ~' + fmt(c.now + c.r) + ', and you make class with ' + (-c.late) + ' min to spare.' : 'Order placed. Good luck out there.'; t.classList.add('show'); $('sheet').classList.remove('open'); }
+  function placed(msg) { const t = $('toast'); t.textContent = msg; t.classList.add('show'); $('sheet').classList.remove('open'); }
   $('pay').addEventListener('click', () => {
-    const c = calc();
-    if (c.late <= 0) return placed(c);
-    $('sheetTitle').textContent = 'Heads up: ~' + c.late + ' min late to COGS 9';
-    const cold = calc(); cold.r = real(c.q, 'cold'); const coldLate = Math.round(c.now + cold.r + WALK - CLASS);
-    $('sheetBody').textContent = 'The wok station is backed up, so this will be ready around ' + fmt(c.now + c.r) + '. A cold side would be ready in ~' + cold.r + ' min' + (coldLate <= 0 ? ', in time for class.' : '.');
-    $('swap').hidden = c.d === 'cold';
-    $('sheet').classList.add('open'); $('swap').hidden ? $('anyway').focus() : $('swap').focus();
+    const now = +$('now').value, k = spot(), s = SPOTS[k];
+    const lateTypical = Math.round(now + s.mid + WALK - CLASS), lateSlow = Math.round(now + s.hi + WALK - CLASS);
+    if (lateSlow <= 0) return placed('Order placed. Even on a slow day you make class with ' + (-lateSlow) + ' min to spare.');
+    $('sheetTitle').textContent = lateTypical > 0 ? 'Heads up: you\'ll likely be ~' + lateTypical + ' min late to COGS 9' : 'Heads up: this could make you late to COGS 9';
+    $('sheetBody').textContent = k === 'bistro'
+      ? 'Most Bistro orders take 21–34 min. Ordering at ' + fmt(now) + ', a typical order is ready around ' + fmt(now + s.mid) + ', and a slow one around ' + fmt(now + s.hi) + '.'
+      : 'Earl\'s is usually 3–6 min, but with a 10-minute walk the timing is tight.';
+    $('swap').hidden = k !== 'bistro';
+    $('sheet').classList.add('open'); ($('swap').hidden ? $('anyway') : $('swap')).focus();
   });
-  $('swap').addEventListener('click', () => { document.querySelector('input[value=cold]').checked = true; render(); $('pay').focus(); });
-  $('anyway').addEventListener('click', () => placed(calc()));
-  ['now', 'queue'].forEach((id) => $(id).addEventListener('input', render));
-  document.querySelectorAll('input[name=dish]').forEach((r) => r.addEventListener('change', render));
+  $('swap').addEventListener('click', () => { document.querySelector('input[value=earls]').checked = true; render(); $('pay').focus(); });
+  $('anyway').addEventListener('click', () => placed('Order placed. Good luck out there.'));
+  $('now').addEventListener('input', render);
+  document.querySelectorAll('input[name=spot]').forEach((r) => r.addEventListener('change', render));
   render();
 })();
 </script>

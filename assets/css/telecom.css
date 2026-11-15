@@ -27,60 +27,60 @@ body.tc {
 .tc-hero-text .tldr { max-width: 640px; background: rgba(24,34,45,.82); backdrop-filter: blur(6px); }
 .photo-flag { position: absolute; z-index: 2; right: 16px; bottom: 16px; font-size: 11px; color: #F2C879; background: rgba(15,22,30,.8); border: 1px dashed #F2C879; padding: 4px 10px; border-radius: 8px; }
 
-/* ---------- the tower spine ---------- */
-.tower-wrap { position: relative; max-width: 1180px; margin: 0 auto; padding: 140px 40px 120px; }
-.tower { position: absolute; left: 50%; top: 0; bottom: 40px; width: 132px; transform: translateX(-50%); display: flex; flex-direction: column; pointer-events: none; }
-.tower-crown { position: relative; height: 120px; flex-shrink: 0; }
-.tower-crown .antenna { position: absolute; left: 62%; bottom: 34px; width: 3px; height: 86px; background: linear-gradient(#C9D4DD, #6C7C8A); border-radius: 2px; }
-.tower-crown .sign { position: absolute; left: 0; right: 0; bottom: 0; height: 36px; background: #16202B; border: 1px solid #2F3E4D; border-bottom: 0; }
-.tower-crown .sign::after { content: ''; position: absolute; left: 22%; right: 22%; top: 13px; height: 9px; border-radius: 5px; background: #EAF3FA; box-shadow: 0 0 14px 4px rgba(200,225,245,.55); }
-.tower-body { position: relative; flex: 1; border: 1px solid #2F3E4D; overflow: hidden;
+/* ---------- scroll-driven tower: sticky stage + camera ---------- */
+.tz { position: relative; max-width: none; padding: 0; margin: 0; }
+.tz-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; background: radial-gradient(800px 500px at 50% 30%, #182432, #0F161E 70%); }
+.tz-camera { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; }
+.tz-tower { width: 300px; }
+.tower-crown { position: relative; height: 150px; }
+.tower-crown .antenna { position: absolute; left: 60%; bottom: 40px; width: 4px; height: 110px; background: linear-gradient(#C9D4DD, #6C7C8A); border-radius: 2px; }
+.tower-crown .sign { position: absolute; left: 0; right: 0; bottom: 0; height: 44px; background: #16202B; border: 1px solid #2F3E4D; border-bottom: 0; }
+.tower-crown .sign::after { content: ''; position: absolute; left: 22%; right: 22%; top: 16px; height: 10px; border-radius: 5px; background: #EAF3FA; box-shadow: 0 0 16px 5px rgba(200,225,245,.5); }
+.tz-body { position: relative; height: 1300px; border: 1px solid #2F3E4D;
   background:
+    radial-gradient(3px 4px at 7px 10px, rgba(242,200,121,.5) 98%, transparent) 0 0 / 48px 66px,
     repeating-linear-gradient(90deg, transparent 0 15px, rgba(140,165,185,.16) 15px 16px),
     repeating-linear-gradient(0deg, transparent 0 21px, rgba(140,165,185,.2) 21px 22px),
     linear-gradient(90deg, #121B25, #1A2633 55%, #121B25); }
-/* windows light up from the top as you read */
-.tower-lit { position: absolute; left: 0; right: 0; top: 0; height: 0; background:
-    radial-gradient(3px 4px at 7px 10px, rgba(242,200,121,.95) 98%, transparent) 0 0 / 16px 22px,
-    radial-gradient(3px 4px at 7px 10px, rgba(242,200,121,.6) 98%, transparent) 8px 11px / 32px 44px;
-  -webkit-mask: linear-gradient(transparent, #000 40px); mask: linear-gradient(transparent, #000 40px); opacity: .55; }
-.tower-base { height: 24px; flex-shrink: 0; margin: 0 -60px; border-top: 1px solid #2F3E4D; background: linear-gradient(#16202B, transparent); }
-/* atria: the diagonal notches, alternating sides, one per floor */
-.notch { position: absolute; width: 70%; height: 150px; background: linear-gradient(160deg, #26323F, #1B2631); border-top: 1px solid #3A4A5A; transition: background .5s, box-shadow .5s; }
-.notch.left { left: 0; clip-path: polygon(0 0, 100% 0, 0 100%); }
-.notch.right { right: 0; clip-path: polygon(0 0, 100% 0, 100% 100%); }
-.notch.on { background: linear-gradient(160deg, #FFE7B0, #F2C879 40%, #C9954A); }
+/* atria: tall lit glass boxes cut into alternating corners, like the real facade */
+.atrium { position: absolute; width: 150px; height: 230px; border: 1px solid rgba(242,200,121,.5); overflow: hidden; background: #F2C879; box-shadow: 0 0 30px rgba(242,200,121,.25); }
+.atrium.left { left: -1px; } .atrium.right { right: -1px; }
+.atrium[data-i="0"] { top: 120px; } .atrium[data-i="1"] { top: 420px; } .atrium[data-i="2"] { top: 720px; } .atrium[data-i="3"] { top: 1020px; }
+.atrium img { width: 100%; height: 100%; object-fit: cover; opacity: var(--reveal, 0); transition: opacity .2s linear; }
+.atrium::after { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, transparent 0 36px, rgba(20,30,40,.55) 36px 38px), repeating-linear-gradient(0deg, transparent 0 56px, rgba(20,30,40,.55) 56px 58px); opacity: calc(1 - var(--reveal, 0) * .8); }
 
-/* ---------- floors: content branching left / right ---------- */
-.floor { position: relative; width: calc(50% - 120px); background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; padding: 30px 30px 18px; transition: border-color .4s, box-shadow .4s; }
-.floor + .floor { margin-top: -40px; }
-.floor.left { margin-right: auto; }
-.floor.right { margin-left: auto; }
-.floor.on { border-color: rgba(242,200,121,.6); box-shadow: 0 0 0 1px rgba(242,200,121,.15), var(--shadow); }
-/* the diagonal beam that ties a floor to its atrium */
-.floor::before { content: ''; position: absolute; top: 46px; width: 104px; height: 2px; background: linear-gradient(90deg, var(--border), var(--border)); transform-origin: left center; transition: background .4s; }
-.floor.left::before { left: 100%; transform: rotate(28deg); }
-.floor.right::before { right: 100%; transform-origin: right center; transform: rotate(-28deg); }
-.floor.on::before { background: var(--glow); box-shadow: 0 0 8px rgba(242,200,121,.6); }
-.floor-tag { display: inline-flex; gap: 8px; align-items: center; font-family: var(--label); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent2); margin-bottom: 8px; }
-.floor-tag b { font-weight: 600; color: var(--hint); }
-.floor h2 { font-size: 28px; margin-bottom: 12px; }
-.floor p { font-size: 15px; color: var(--muted); margin-bottom: 14px; }
-.floor p strong { color: var(--text); }
-.floor .reflection { background: var(--accent2-bg); border-radius: 14px; padding: 16px 18px; margin: 4px 0 14px; }
-.floor .reflection p { color: var(--text); font-style: italic; margin: 0; font-size: 14.5px; }
+/* steps scroll over the stage; each card sits opposite the atrium being shown */
+.tz-steps { position: relative; margin-top: -100vh; z-index: 2; padding: 50vh 0 30vh; }
+.step { min-height: 130vh; display: flex; align-items: flex-start; padding: 0 5vw; }
+.step.left { justify-content: flex-start; } .step.right { justify-content: flex-end; }
+.card-in { width: min(440px, 40vw); background: rgba(24,34,45,.93); backdrop-filter: blur(8px); border: 1px solid var(--border); border-radius: 20px; padding: 28px 28px 14px; box-shadow: var(--shadow); }
+.step.on .card-in { border-color: rgba(242,200,121,.55); }
+.step-img { display: none; width: 100%; border-radius: 12px; margin-bottom: 16px; }
+.card-in .floor-tag { display: inline-flex; gap: 8px; font-family: var(--label); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent2); margin-bottom: 8px; }
+.card-in .floor-tag b { color: var(--hint); }
+.card-in h2 { font-size: 27px; margin-bottom: 12px; }
+.card-in p { font-size: 15px; color: var(--muted); margin-bottom: 14px; }
+.card-in p strong { color: var(--text); }
+.card-in .reflection { background: var(--accent2-bg); border-radius: 14px; padding: 16px 18px; margin: 4px 0 14px; }
+.card-in .reflection p { color: var(--text); font-style: italic; margin: 0; font-size: 14.5px; }
+.tz .photo-flag { bottom: 16px; left: 16px; right: auto; }
 .tc .case-nav a { background: var(--bg2); }
 
-@media (max-width: 960px) {
-  .tower-wrap { padding: 60px 20px 80px 20px; }
-  .tower { left: 22px; transform: none; width: 30px; }
-  .tower-crown { height: 70px; } .tower-crown .antenna { height: 46px; } .tower-crown .sign { height: 20px; }
-  .tower-crown .sign::after { top: 7px; height: 6px; }
-  .tower-base { margin: 0 -10px; }
-  .notch { width: 100%; height: 50px; }
-  .floor, .floor.left, .floor.right { width: auto; margin-left: 50px; margin-right: 0; }
-  .floor + .floor { margin-top: 28px; }
-  .floor::before, .floor.left::before, .floor.right::before { left: auto; right: 100%; width: 24px; transform: none; top: 40px; }
+@media (max-width: 760px) {
+  .step, .step.left, .step.right { justify-content: center; padding: 0 16px; min-height: 120vh; }
+  .card-in { width: 100%; margin-top: 38vh; }
+}
+/* reduced motion or no JS: no camera, the close-up sits inside each card instead */
+@media (prefers-reduced-motion: reduce) {
+  .tz-stage { display: none; } .tz-steps { margin-top: 0; padding: 40px 0; }
+  .step { min-height: 0; margin-bottom: 40px; justify-content: center !important; } .card-in { width: min(640px, 100%); }
+  .step-img { display: block; }
+}
+html:not(.js) .tz-stage { display: none; }
+html:not(.js) .tz-steps { margin-top: 0; padding: 40px 0; }
+html:not(.js) .step { min-height: 0; margin-bottom: 40px; justify-content: center; }
+html:not(.js) .step-img { display: block; }
+@media (max-width: 760px) {
   .tc-hero-bg img { width: 100%; opacity: .55; }
   .tc-hero-bg::after { background: linear-gradient(0deg, #0F161E 15%, rgba(15,22,30,.6) 70%, rgba(15,22,30,.4)); }
 }

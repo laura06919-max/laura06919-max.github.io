@@ -5,11 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Background Noise · Laura Yuan</title>
   <meta name="description" content="Case study: active learning for bird species classification from field audio, Engineers for Exploration with the San Diego Zoo.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Background Noise · Laura Yuan">
+  <meta property="og:description" content="Case study: active learning for bird species classification from field audio, Engineers for Exploration with the San Diego Zoo.">
+  <meta property="og:url" content="https://laura06919-max.github.io/work/background-noise.html">
+  <meta property="og:image" content="https://laura06919-max.github.io/assets/img/og-card.jpg">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%23F7F1DF%22/><circle cx=%2250%22 cy=%2250%22 r=%2230%22 fill=%22none%22 stroke=%22%236F95B0%22 stroke-width=%226%22/><circle cx=%2250%22 cy=%2250%22 r=%2210%22 fill=%22%23C98A7D%22/></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Fredoka:wght@500;600&family=Sora:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/site.css">
+  <style>
+    .field { margin-top: 26px; background: #0f1a24; color: #E8EDF1; border-radius: 20px; padding: 18px; box-shadow: var(--shadow); }
+    .field-top { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 14px; }
+    .field-btn { font: inherit; font-family: var(--label); font-weight: 500; font-size: 15px; display: inline-flex; align-items: center; gap: 10px; padding: 11px 20px; border-radius: 30px; border: 0; cursor: pointer; background: #F2C879; color: #1D2935; }
+    .field-btn svg { width: 16px; height: 16px; }
+    .field-btn .ic-pause { display: none; } .field.playing .field-btn .ic-play { display: none; } .field.playing .field-btn .ic-pause { display: inline; }
+    .field-iso { font: inherit; font-size: 14px; padding: 10px 16px; border-radius: 30px; cursor: pointer; background: transparent; color: #E8EDF1; border: 1px solid #3A4A5A; }
+    .field-iso[aria-pressed="true"] { background: #2C4A63; border-color: #8FB3CC; }
+    .field canvas { width: 100%; height: 150px; display: block; border-radius: 12px; background: #0f1a24; }
+    .field-legend { display: flex; justify-content: space-between; font-size: 11px; color: #9AA6B0; margin-top: 6px; }
+    .field-mix { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px 16px; margin-top: 14px; }
+    .field-mix label { font-size: 12px; color: #B7C2CB; display: flex; flex-direction: column; gap: 4px; }
+    .field-mix input { accent-color: #F2C879; width: 100%; }
+    .field-status { font-size: 13px; color: #B7C2CB; min-height: 1.4em; }
+    @media (max-width: 600px) { .field-mix { grid-template-columns: repeat(2, 1fr); } }
+  </style>
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -29,6 +51,21 @@
   <p class="eyebrow">Case study · Engineers for Exploration</p>
   <h1 class="case-title">Background Noise</h1>
   <p class="case-sub">Teaching a model to recognize bird species from field audio, and learning that the exciting-looking result was a leak.</p>
+  <section class="field" id="field" aria-label="Field recording demo">
+    <div class="field-top">
+      <button class="field-btn" data-play aria-pressed="false"><svg class="ic-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4l13 8-13 8z"/></svg><svg class="ic-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg><span>Hear the field</span></button>
+      <button class="field-iso" data-isolate aria-pressed="false">Isolate the bird</button>
+      <p class="field-status" data-status role="status">Turn on sound: this is what a field microphone hears.</p>
+    </div>
+    <canvas aria-label="Live spectrogram of the sound: time moves left, higher pitch is higher up. Bird calls appear as bright upward strokes above the noise."></canvas>
+    <div class="field-legend"><span>← time</span><span>low pitch at the bottom · high at the top</span></div>
+    <div class="field-mix">
+      <label>Wind <input type="range" min="0" max="100" value="50" data-layer="wind"></label>
+      <label>Crickets <input type="range" min="0" max="100" value="50" data-layer="crickets"></label>
+      <label>Frogs <input type="range" min="0" max="100" value="50" data-layer="frogs"></label>
+      <label>Bird <input type="range" min="0" max="100" value="50" data-layer="bird"></label>
+    </div>
+  </section>
   <dl class="tldr">
     <div><dt>Role</dt><dd>Student researcher, E4E bioacoustics</dd></div>
     <div><dt>Partner</dt><dd>San Diego Zoo</dd></div>
@@ -76,5 +113,6 @@
 </nav>
 <footer style="margin-top:60px">Laura Yuan · UCSD 2029<small><span id="laJollaTime"></span></small></footer>
 <script src="../assets/js/site.js"></script>
+<script src="../assets/js/fieldsound.js"></script>
 </body>
 </html>

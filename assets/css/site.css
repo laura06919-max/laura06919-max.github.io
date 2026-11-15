@@ -387,3 +387,32 @@ body::before { content: ''; position: fixed; inset: 0; pointer-events: none; z-i
 @media (prefers-reduced-motion: reduce) { .mini-me * { animation: none !important; } }
 .tc .mm-hair, .dh .mm-hair { stroke: rgba(232,237,241,.35); stroke-width: .7; }
 @media (prefers-color-scheme: dark) { .mm-hair { stroke: rgba(232,237,241,.35); stroke-width: .7; } }
+
+/* ---------- stable hover (no edge jitter) ----------
+   The <a class="card"> never moves, so the cursor can't fall off its edge.
+   Only the torn paper inside lifts and straightens. */
+.card { display: block; background: none; clip-path: none; transition: none; }
+.card:hover { transform: none; filter: none; }
+.card-paper { background: var(--bg3); display: flex; flex-direction: column; height: 100%; clip-path: var(--torn); transition: transform .25s ease, filter .25s ease, rotate .3s ease; }
+.card:hover .card-paper, .card:focus-visible .card-paper { transform: translateY(-3px); filter: drop-shadow(0 10px 18px rgba(46,68,86,.12)); }
+.card.wide { display: block; }
+.card.wide .card-paper { display: grid; grid-template-columns: 1.15fr 1fr; }
+.card.wide.flip .card-paper { grid-template-columns: 1fr 1.15fr; }
+.home .card, .home .card:nth-child(even), .home .card:hover { rotate: none; }
+.home .card .card-paper { rotate: -.6deg; }
+.home .card:nth-child(even) .card-paper { rotate: .7deg; }
+.home .card:hover .card-paper { rotate: 0deg; }
+.home .band .card { filter: none; } .home .band .card-paper { filter: drop-shadow(0 6px 14px rgba(46,68,86,.08)); }
+@media (max-width: 720px) { .card.wide .card-paper, .card.wide.flip .card-paper { grid-template-columns: 1fr; } }
+/* everything else that used to jump on hover now changes in place */
+.art-card:hover { transform: none; } .art-card img { transition: transform .4s ease; } .art-card:hover img { transform: scale(1.04); }
+.pill-link:hover, .case-nav a:hover, .next-up a:hover, .contact-icons a:hover, .btn-primary:hover, .icon-btn:hover { transform: none; }
+.pill-link:hover { background: var(--blue-bg); }
+.case-nav a:hover, .next-up a:hover { box-shadow: var(--shadow); }
+.btn-primary:hover { box-shadow: 0 6px 18px rgba(46,68,86,.25); }
+/* "In a hurry?" — readable */
+.hurry-label { color: var(--text); font-size: 13px; font-weight: 600; }
+.pill-link { font-size: 14px; color: var(--text); background: var(--bg3); border-color: var(--blue-light); }
+.pill-link .k { color: var(--blue-ink); font-weight: 600; font-size: 11px; }
+@media (max-width: 1100px) { .hero .frame { display: none; } }
+@media (max-width: 1360px) { .hero .frame img { width: 116px; height: 116px; } }

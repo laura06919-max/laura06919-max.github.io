@@ -16,6 +16,7 @@
         <g class="mm-arm b"><rect x="18.4" y="24.5" width="3.6" height="12" rx="1.8" class="mm-skin back"/></g>
         <path class="mm-skirt" d="M14.6 33.5 H25.4 L28 44 Q20 46 12 44 Z"/>
         <g class="mm-leg a"><rect x="17.6" y="38" width="4.4" height="15" rx="2.2" class="mm-skin"/><rect x="16.4" y="51" width="7.6" height="3.6" rx="1.8" class="mm-shoe"/></g>
+        <rect class="mm-skin" x="19.3" y="17.5" width="3.4" height="6" rx="1.4"/>
         <rect class="mm-top" x="14.2" y="22" width="11.6" height="13" rx="4"/>
         <path class="mm-collar" d="M17 22.6 L20 25.4 L23 22.6"/>
         <g class="mm-head">
@@ -190,7 +191,7 @@
       const img = c.querySelector('img');
       const fig = document.createElement('figure');
       fig.className = 'book-page';
-      fig.innerHTML = `<img src="${img.getAttribute('src')}" alt="${img.alt}"><figcaption><b>${c.querySelector('.art-title').textContent}</b><span>${c.querySelector('.art-medium').textContent}</span></figcaption>`;
+      fig.innerHTML = `<img src="${img.dataset.full || img.getAttribute('src')}" loading="lazy" alt="${img.alt}"><figcaption><b>${c.querySelector('.art-title').textContent}</b><span>${c.querySelector('.art-medium').textContent}</span></figcaption>`;
       stage.appendChild(fig); pages.push(fig);
     });
     function render() {

@@ -29,7 +29,7 @@ body.tc {
 
 /* ---------- scroll-driven tower: sticky stage + camera ---------- */
 .tz { position: relative; max-width: none; padding: 0; margin: 0; }
-.tz-stage { position: sticky; top: 0; height: 100vh; overflow: hidden; background: radial-gradient(800px 500px at 50% 30%, #182432, #0F161E 70%); }
+.tz-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: radial-gradient(800px 500px at 50% 30%, #182432, #0F161E 70%); }
 .tz-camera { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; }
 .tz-tower { width: 300px; }
 .tower-crown { position: relative; height: 150px; }

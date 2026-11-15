@@ -181,14 +181,14 @@
       st.classList.remove('dragging');
       if (!moved) return;
       const hr = homes.get(st.dataset.id).getBoundingClientRect();
-      if (e.clientX > hr.left && e.clientX < hr.right && e.clientY > hr.top && e.clientY < hr.bottom) { unplace(st); st.dataset.justDragged = '1'; return; }
+      if (e.clientX > hr.left && e.clientX < hr.right && e.clientY > hr.top && e.clientY < hr.bottom) { unplace(st); st.dataset.dragEnd = Date.now(); return; }
       const r = st.getBoundingClientRect();
       place(st, ((r.left + r.width / 2 + scrollX) / pageW()) * 100, r.top + r.height / 2 + scrollY, rnd());
-      st.dataset.justDragged = '1';
+      st.dataset.dragEnd = Date.now();
     });
     st.addEventListener('pointercancel', () => { drag = null; st.classList.remove('dragging'); });
     st.addEventListener('click', () => {
-      if (st.dataset.justDragged) { delete st.dataset.justDragged; return; }
+      if (Date.now() - (+st.dataset.dragEnd || 0) < 250) return; // the click that ends a drag
       if (st.dataset.states) { setState(st, +st.dataset.stateIdx + 1, true); return; }
       // plain stickers: sheet → a random spot in view; placed → back to the sheet
       if (st.classList.contains('placed')) { unplace(st); st.focus(); return; }

@@ -133,7 +133,8 @@
   }
   function place(st, xPct, y, rot) {
     st.classList.add('placed');
-    st.style.left = `calc(${xPct}% - 60px)`; st.style.top = (y - 60) + 'px';
+    const half = st.classList.contains('stateful') ? 70 : 60;
+    st.style.left = `calc(${xPct}% - ${half}px)`; st.style.top = (y - half) + 'px';
     st.style.transform = `rotate(${rot}deg)`;
     layer.appendChild(st);
     if (!st.dataset.states) st.setAttribute('aria-label', st.getAttribute('aria-label').replace(/^Sticker:/, 'Placed sticker:'));
@@ -151,42 +152,55 @@
   const pageW = () => document.documentElement.clientWidth;
   const rnd = () => Math.round(Math.random() * 24 - 12);
 
-  stickers.forEach((st) => { const s = saved[st.dataset.id]; if (s) place(st, s.x, s.y, s.r); });
+  const maxY = document.documentElement.scrollHeight - 40;
+  stickers.forEach((st) => { const s = saved[st.dataset.id]; if (s && s.y > 0 && s.y < maxY && s.x >= 0 && s.x <= 100) place(st, s.x, s.y, s.r); else if (s) { delete saved[st.dataset.id]; store.set('dh-stickers', saved); } });
   updateCount();
 
+  /* Dragging: listeners live on window, not the sticker. Moving the sticker into the layer
+     re-parents it, which makes the browser drop pointer capture; with element-level listeners
+     the drag then never ended and the sticker chased the cursor ("missing", laggy). */
+  let drag = null, raf = 0;
+  function moveTo(st, x, y) { st.style.left = (x - st.offsetWidth / 2) + 'px'; st.style.top = (y - st.offsetHeight / 2) + 'px'; }
+  function onMove(e) {
+    if (!drag) return;
+    if (e.buttons === 0) return endDrag(e); // button released outside the window
+    const { st } = drag;
+    if (!drag.moved) {
+      if (Math.hypot(e.clientX - drag.sx, e.clientY - drag.sy) < 6) return;
+      drag.moved = true;
+      if (!st.classList.contains('placed')) { st.classList.add('placed'); layer.appendChild(st); updateCount(); }
+      st.classList.add('dragging');
+      st.style.transform = 'rotate(0deg) scale(1.1)';
+    }
+    drag.x = e.clientX + scrollX - drag.offX; drag.y = e.clientY + scrollY - drag.offY;
+    if (!raf) raf = requestAnimationFrame(() => { raf = 0; if (drag) moveTo(drag.st, drag.x, drag.y); });
+  }
+  function endDrag(e) {
+    if (!drag) return;
+    const { st, moved } = drag; drag = null;
+    removeEventListener('pointermove', onMove); removeEventListener('pointerup', endDrag); removeEventListener('pointercancel', endDrag);
+    st.classList.remove('dragging');
+    if (!moved) return; // a plain click: handled by the click listener
+    st.dataset.dragEnd = Date.now();
+    const hr = homes.get(st.dataset.id).getBoundingClientRect();
+    const x = e.clientX ?? 0, y = e.clientY ?? 0;
+    if (e.type !== 'pointercancel' && x > hr.left && x < hr.right && y > hr.top && y < hr.bottom) { unplace(st); return; }
+    const r = st.getBoundingClientRect();
+    // keep it on the page even if dropped near an edge
+    const cx = Math.min(Math.max(r.left + r.width / 2, 40), innerWidth - 40) + scrollX;
+    place(st, (cx / pageW()) * 100, r.top + r.height / 2 + scrollY, rnd());
+  }
   stickers.forEach((st) => {
-    let drag = null;
+    st.addEventListener('dragstart', (e) => e.preventDefault());
     st.addEventListener('pointerdown', (e) => {
-      if (e.button !== 0) return;
+      if (e.button !== 0 || drag) return;
       e.preventDefault();
       const r = st.getBoundingClientRect();
-      drag = { sx: e.clientX, sy: e.clientY, moved: false, offX: e.clientX - r.left - r.width / 2, offY: e.clientY - r.top - r.height / 2 };
-      st.setPointerCapture(e.pointerId);
+      drag = { st, sx: e.clientX, sy: e.clientY, moved: false, offX: e.clientX - r.left - r.width / 2, offY: e.clientY - r.top - r.height / 2 };
+      addEventListener('pointermove', onMove, { passive: true });
+      addEventListener('pointerup', endDrag);
+      addEventListener('pointercancel', endDrag);
     });
-    st.addEventListener('pointermove', (e) => {
-      if (!drag) return;
-      if (!drag.moved && Math.hypot(e.clientX - drag.sx, e.clientY - drag.sy) < 6) return;
-      if (!drag.moved) {
-        drag.moved = true;
-        if (!st.classList.contains('placed')) { st.classList.add('placed'); layer.appendChild(st); updateCount(); }
-        st.classList.add('dragging');
-      }
-      const x = e.clientX + scrollX - drag.offX, y = e.clientY + scrollY - drag.offY;
-      st.style.left = (x - 60) + 'px'; st.style.top = (y - 60) + 'px';
-      st.style.transform = 'rotate(0deg) scale(1.12)';
-    });
-    st.addEventListener('pointerup', (e) => {
-      if (!drag) return;
-      const moved = drag.moved; drag = null;
-      st.classList.remove('dragging');
-      if (!moved) return;
-      const hr = homes.get(st.dataset.id).getBoundingClientRect();
-      if (e.clientX > hr.left && e.clientX < hr.right && e.clientY > hr.top && e.clientY < hr.bottom) { unplace(st); st.dataset.dragEnd = Date.now(); return; }
-      const r = st.getBoundingClientRect();
-      place(st, ((r.left + r.width / 2 + scrollX) / pageW()) * 100, r.top + r.height / 2 + scrollY, rnd());
-      st.dataset.dragEnd = Date.now();
-    });
-    st.addEventListener('pointercancel', () => { drag = null; st.classList.remove('dragging'); });
     st.addEventListener('click', () => {
       if (Date.now() - (+st.dataset.dragEnd || 0) < 250) return; // the click that ends a drag
       if (st.dataset.states) { setState(st, +st.dataset.stateIdx + 1, true); return; }
@@ -196,6 +210,8 @@
     });
   });
   document.getElementById('stickerReset').addEventListener('click', () => {
-    stickers.filter((s) => s.classList.contains('placed')).forEach(unplace);
+    if (drag) { drag.st.classList.remove('dragging'); drag = null; }
+    stickers.forEach((st) => { if (st.classList.contains('placed')) unplace(st); st.style.transform = ''; if (st.dataset.states) setState(st, 0); });
+    saved = {}; store.set('dh-stickers', saved);
   });
 })();

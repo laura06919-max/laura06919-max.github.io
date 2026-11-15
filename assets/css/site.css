@@ -337,10 +337,10 @@ footer small { display: block; font-size: 12px; margin-top: 4px; }
 .hero > *:not(.par) { position: relative; z-index: 1; }
 
 /* ---------- surface: paper grain + full-bleed tinted bands (breaks up the single flat background) ---------- */
-body::before { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 100; opacity: .35; mix-blend-mode: multiply;
+body::before { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 100; opacity: .22; transform: translateZ(0);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .5 0 0 0 0 .4 0 0 0 .18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
-@media (prefers-color-scheme: dark) { body::before { mix-blend-mode: screen; opacity: .12; } }
-.dh::before { mix-blend-mode: screen; opacity: .1; }
+@media (prefers-color-scheme: dark) { body::before { opacity: .08; } }
+.dh::before, .tc::before { opacity: .06; }
 .band { isolation: isolate; }
 .band::after { content: ''; position: absolute; z-index: -1; top: 30px; bottom: -30px; left: 50%; width: 100vw; transform: translateX(-50%); background: var(--band, var(--blue-bg));
   clip-path: polygon(0 3%, 6% 1%, 14% 3.5%, 23% 0.5%, 33% 2.5%, 44% 0, 55% 3%, 66% 1%, 77% 3.5%, 88% 0.5%, 100% 2.5%, 100% 97%, 92% 99.5%, 81% 97.5%, 70% 100%, 58% 97%, 46% 99.5%, 35% 97.5%, 24% 100%, 13% 97%, 0 99%); }

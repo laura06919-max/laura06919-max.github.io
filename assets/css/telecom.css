@@ -10,7 +10,7 @@ body.tc {
   --glow: #F2C879;
   --shadow: 0 16px 40px rgba(0,0,0,.45);
 }
-.tc::before { mix-blend-mode: screen; opacity: .08; }
+
 .tc .site-nav { background: color-mix(in srgb, #0F161E 88%, transparent); }
 @media (min-width: 1181px) { .tc .rail { display: none; } } /* the tower is this page's progress indicator */
 

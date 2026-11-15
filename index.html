@@ -1,888 +1,272 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Laura Yuan</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laura Yuan · UX, data & HCI</title>
+  <meta name="description" content="Laura Yuan, data science + cognitive science at UC San Diego. UX design, HCI research and ML, plus a lot of paint.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%23F7F1DF%22/><circle cx=%2250%22 cy=%2250%22 r=%2230%22 fill=%22none%22 stroke=%22%236F95B0%22 stroke-width=%226%22/><circle cx=%2250%22 cy=%2250%22 r=%2210%22 fill=%22%23C98A7D%22/></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Fredoka:wght@500;600&family=Sora:wght@400;500&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #F7F1DF; --bg2: #F0E8CC; --bg3: #FFFCF2; --border: #E3D9B8;
-      --text: #2E4456; --muted: #5C6F7E; --hint: #9CA6AC;
-      --blue: #6F95B0; --blue-light: #A8C5D9; --blue-bg: #E3EEF4;
-      --accent2: #C98A7D; --accent2-bg: #F5E3DD;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #1E2530; --bg2: #252D3A; --bg3: #2A3340; --border: #38424F;
-        --text: #E8EDF1; --muted: #AEB9C2; --hint: #707C87;
-        --blue: #8FB3CC; --blue-light: #5C7E96; --blue-bg: #2C3A47;
-        --accent2: #DDA396; --accent2-bg: #3D2D29;
-      }
-    }
-    @media (hover: hover) { body { cursor: none; } }
-    body { font-family: 'Sora', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; font-size: 16px; overflow-x: hidden; }
-    .glow { position: fixed; top: 0; left: 0; width: 28px; height: 28px; border-radius: 50%; background: radial-gradient(circle, rgba(111,149,176,0.45) 0%, transparent 70%); pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: width 0.25s, height 0.25s, background 0.4s ease; }
-    .glow.hovering { width: 48px; height: 48px; }
-    .glow.zone-work { background: radial-gradient(circle, rgba(111,149,176,0.6) 0%, transparent 70%); }
-    .glow.zone-art { background: radial-gradient(circle, rgba(201,138,125,0.55) 0%, transparent 70%); }
-    .glow.zone-about { background: radial-gradient(circle, rgba(111,149,176,0.5) 0%, transparent 70%); }
-    .glow.zone-contact { background: radial-gradient(circle, rgba(111,149,176,0.6) 0%, transparent 70%); }
-    .glow-trail { position: fixed; top: 0; left: 0; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: background 0.4s ease; }
-    .glow-trail.zone-art { background: var(--accent2); }
-    @media (hover: none) { .glow, .glow-trail { display: none; } }
-    h1, h2, h3, .display { font-family: 'Abril Fatface', serif; font-weight: 400; }
-    svg.icon { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; display: block; }
-    nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 40px; border-bottom: 0.5px solid var(--border); position: sticky; top: 0; background: var(--bg); z-index: 10; }
-    .nav-name { font-family: 'Abril Fatface', serif; font-size: 19px; color: var(--text); text-decoration: none; cursor: pointer; }
-    #waveEmoji { transition: transform 0.3s ease; opacity: 0.85; }
-    #waveEmoji.waving { animation: wave 0.6s ease; }
-    @keyframes wave { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(20deg); } 50% { transform: rotate(-15deg); } 75% { transform: rotate(15deg); } }
-    .nav-links { display: flex; gap: 24px; list-style: none; }
-    .nav-links a { font-size: 14px; color: var(--muted); text-decoration: none; transition: color 0.2s; position: relative; padding-bottom: 4px; font-family: 'Sora', sans-serif; }
-    .nav-links a:hover { color: var(--text); }
-    .nav-links a.active { color: var(--text); }
-    .nav-links a.active::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 2px; background: var(--blue); border-radius: 2px; }
-    main { max-width: 760px; margin: 0 auto; padding: 0 40px 0; }
-    .hero { min-height: 68vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin: 0 -40px; padding: 0 40px; background: linear-gradient(180deg, var(--bg) 0%, var(--blue-bg) 100%); position: relative; overflow: hidden; }
-    .hero-bg-shape { position: absolute; width: 480px; height: 480px; border-radius: 50%; background: radial-gradient(circle, var(--blue-bg) 0%, transparent 70%); opacity: 0.7; top: -120px; right: -120px; will-change: transform; }
-    .hero-collage { display: flex; justify-content: center; align-items: center; margin-bottom: 24px; overflow: hidden; padding: 10px 0; width: 100%; position: relative; }
-    .paper-piece { font-family: 'Fredoka', sans-serif; font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; padding: 8px 20px; background: var(--bg3); color: var(--text); border: 0.5px solid var(--border); box-shadow: 0 4px 14px rgba(46,68,86, 0.06); transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease; opacity: 0; will-change: transform; }
-    .piece-ds { color: var(--blue); clip-path: polygon(0% 0%, 92% 3%, 100% 45%, 90% 88%, 96% 100%, 0% 100%); transform: translate(-60vw, 20px) rotate(-12deg); margin-right: -12px; z-index: 1; }
-    .piece-cogs { color: var(--text); background: var(--bg2); clip-path: polygon(4% 0%, 100% 0%, 96% 100%, 0% 96%); transform: translate(0, -70vh) scale(1.15) rotate(8deg); z-index: 3; }
-    .piece-art { color: var(--accent2); clip-path: polygon(8% 0%, 100% 0%, 100% 100%, 4% 100%, 0% 55%, 10% 20%); transform: translate(60vw, 15px) rotate(14deg); margin-left: -12px; z-index: 2; }
-    .hero.loaded .piece-ds   { opacity: 1; transform: translate(0, 0) rotate(-1.5deg); }
-    .hero.loaded .piece-cogs { opacity: 1; transform: translate(0, 0) scale(1) rotate(0.8deg); }
-    .hero.loaded .piece-art  { opacity: 1; transform: translate(0, 0) rotate(1.2deg); }
-    .hero h1 { font-size: 46px; line-height: 1.3; color: var(--text); margin-bottom: 20px; opacity: 0; transform: translateY(16px); transition: all 0.8s ease 0.15s; position: relative; }
-    .hero p { font-size: 16px; color: var(--muted); max-width: 480px; margin-bottom: 16px; opacity: 0; transform: translateY(16px); transition: all 0.8s ease 0.3s; position: relative; }
-    .hero-philosophy { font-family: 'Abril Fatface', serif; font-size: 19px; color: var(--text); max-width: 440px; margin-bottom: 28px !important; opacity: 0; transform: translateY(16px); transition: all 0.8s ease 0.38s; position: relative; line-height: 1.4; }
-    .hero.loaded .hero-philosophy { opacity: 1; transform: translateY(0); }
-    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; opacity: 0; transform: translateY(16px); transition: all 0.8s ease 0.45s; position: relative; }
-    .tag { font-size: 12px; padding: 4px 14px; border-radius: 20px; border: 0.5px solid var(--border); color: var(--muted); background: var(--bg3); transition: transform 0.2s, border-color 0.2s; font-family: 'Sora', sans-serif; }
-    .tag:hover { transform: translateY(-2px); border-color: var(--blue); color: var(--blue); }
-    .scroll-hint { margin-top: 40px; color: var(--hint); opacity: 0; transition: opacity 0.8s ease 0.6s; animation: bounce 2s infinite; position: relative; }
-    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
-    .hero.loaded h1, .hero.loaded p, .hero.loaded .tag-row { opacity: 1; transform: translateY(0); }
-    .hero.loaded .scroll-hint { opacity: 1; }
-    .wave-wrap { margin: 0 -40px; line-height: 0; }
-    .wave-wrap svg { display: block; width: 100%; height: 60px; }
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    section { padding: 56px 40px; border-bottom: 0.5px solid var(--border); }
-    main > section { padding: 56px 0; }
-    .section-label { font-family: 'Fredoka', sans-serif; font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: var(--hint); margin-bottom: 24px; }
-    .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .project-card { background: var(--bg3); text-decoration: none; display: block; position: relative; padding: 30px 26px 38px; clip-path: polygon(0% 2%, 5% 0%, 14% 1.5%, 24% 0%, 34% 1%, 44% 0%, 54% 1.5%, 64% 0%, 74% 1%, 84% 0%, 94% 1.5%, 100% 0%, 99% 12%, 100% 24%, 98.5% 36%, 100% 48%, 99% 60%, 100% 72%, 98.5% 84%, 100% 96%, 99% 100%, 90% 98.5%, 80% 100%, 70% 99%, 60% 100%, 50% 98.5%, 40% 100%, 30% 99%, 20% 100%, 10% 98.5%, 0% 100%, 1% 88%, 0% 76%, 1.5% 64%, 0% 52%, 1% 40%, 0% 28%, 1.5% 16%, 0% 4%); transition: filter 0.2s; }
-    .project-card:hover { filter: brightness(0.99); }
-    .project-badge { display: inline-block; font-size: 10px; padding: 3px 10px; border-radius: 20px; margin-bottom: 10px; font-family: 'Sora', sans-serif; }
-    .badge-blue { background: var(--blue-bg); color: var(--blue); }
-    .badge-coral { background: var(--accent2-bg); color: var(--accent2); }
-    .project-card h3 { font-size: 22px; color: var(--text); margin-bottom: 8px; }
-    .project-card p { font-size: 13px; color: var(--muted); line-height: 1.55; margin-bottom: 12px; font-family: 'Sora', sans-serif; }
-    .chip-row { display: flex; flex-wrap: wrap; gap: 4px; }
-    .chip { font-size: 11px; padding: 2px 9px; border-radius: 20px; background: var(--bg2); color: var(--muted); font-family: 'Sora', sans-serif; }
-    .case-study-link { display: inline-block; margin-top: 14px; font-size: 12px; color: var(--blue); font-family: 'Sora', sans-serif; font-weight: 500; cursor: pointer; }
-    .case-showcase { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 36px; align-items: center; background: var(--bg2); border: 0.5px solid var(--border); border-radius: 20px; padding: 36px; margin-top: 24px; }
-    .case-showcase-text { min-width: 0; }
-    .case-showcase-visual { display: flex; align-items: center; justify-content: center; }
-    .phone-frame-css { max-width: 250px; margin: 0 auto; border-radius: 36px; padding: 8px; background: #1A202C; box-shadow: 0 20px 40px rgba(46,68,86, 0.18), inset 0 0 0 1px rgba(255,255,255,0.1); transform: rotate(-2deg); transition: transform 0.3s ease; }
-    .phone-frame-css:hover { transform: rotate(0deg) scale(1.02); }
-    .phone-frame-css img { width: 100%; border-radius: 28px; display: block; }
-    .art-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
-    .art-filter { display: flex; gap: 8px; flex-wrap: wrap; }
-    .filter-btn { font-size: 12px; padding: 4px 14px; border-radius: 20px; border: 0.5px solid var(--border); background: var(--bg3); color: var(--muted); cursor: pointer; transition: all 0.15s; font-family: 'Sora', sans-serif; }
-    .filter-btn:hover { border-color: var(--blue); color: var(--text); }
-    .filter-btn.active { background: var(--blue-bg); color: var(--blue); border-color: var(--blue); }
-    .view-all-btn { font-size: 12px; padding: 4px 16px; border-radius: 20px; border: 0.5px solid var(--blue); background: var(--blue-bg); color: var(--blue); cursor: pointer; font-family: 'Sora', sans-serif; display: inline-flex; align-items: center; gap: 6px; transition: transform 0.2s; }
-    .view-all-btn:hover { transform: translateY(-1px); }
-    .view-all-btn svg { width: 14px; height: 14px; }
-    .art-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; perspective: 1000px; }
-    .art-card { border-radius: 16px; overflow: hidden; border: 0.5px solid var(--border); cursor: pointer; background: var(--bg3); transform-style: preserve-3d; will-change: transform; transition: box-shadow 0.2s; }
-    .art-card img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
-    .art-meta { padding: 10px 12px; }
-    .art-title { font-size: 12px; font-weight: 500; color: var(--text); font-family: 'Sora', sans-serif; }
-    .art-medium { font-size: 11px; color: var(--hint); margin-top: 2px; font-family: 'Sora', sans-serif; }
-    .book-viewer { display: none; position: fixed; inset: 0; background: rgba(46,68,86,0.94); z-index: 200; align-items: center; justify-content: center; padding: 20px; }
-    .book-viewer.open { display: flex; }
-    .book-stage { position: relative; width: min(560px, 90vw); height: min(640px, 80vh); perspective: 1800px; }
-    .book-page { position: absolute; inset: 0; background: var(--bg3); display: flex; flex-direction: column; padding: 28px; backface-visibility: hidden; transform-style: preserve-3d; transform-origin: right center; transition: transform 0.7s cubic-bezier(0.45, 0.05, 0.55, 0.95); z-index: 1; clip-path: polygon(0% 1.5%, 6% 0%, 16% 1%, 26% 0%, 36% 1.2%, 46% 0%, 56% 1%, 66% 0%, 76% 1.2%, 86% 0%, 96% 1%, 100% 0%, 99% 14%, 100% 28%, 98.5% 42%, 100% 56%, 99% 70%, 100% 84%, 99% 96%, 100% 100%, 88% 99%, 76% 100%, 64% 99%, 52% 100%, 40% 99%, 28% 100%, 16% 99%, 4% 100%, 0% 99%); }
-    .book-page.flipped { transform: rotateY(180deg); z-index: 2; }
-    .book-page.current { z-index: 3; }
-    .book-page-img { flex: 1; width: 100%; object-fit: contain; border-radius: 8px; min-height: 0; }
-    .book-page-caption { padding-top: 16px; text-align: center; }
-    .book-page-title { font-family: 'Abril Fatface', serif; font-size: 20px; color: var(--text); margin-bottom: 4px; }
-    .book-page-medium { font-family: 'Sora', sans-serif; font-size: 12px; color: var(--hint); }
-    .book-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: var(--bg3); border: 0.5px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; color: var(--text); transition: transform 0.2s; }
-    .book-arrow:hover { transform: translateY(-50%) scale(1.08); }
-    .book-arrow.left { left: -60px; }
-    .book-arrow.right { right: -60px; }
-    .book-close { position: fixed; top: 24px; right: 28px; cursor: pointer; z-index: 201; opacity: 0.8; color: #F7F1DF; }
-    .book-close:hover { opacity: 1; }
-    .book-close svg { width: 26px; height: 26px; }
-    .book-counter { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); color: #F7F1DF; font-family: 'Sora', sans-serif; font-size: 13px; opacity: 0.7; }
-    .case-overlay { display: none; position: fixed; inset: 0; background: rgba(46,68,86,0.7); z-index: 200; overflow-y: auto; padding: 40px 20px; }
-    .case-overlay.open { display: block; }
-    .case-modal { max-width: 640px; margin: 0 auto; background: var(--bg3); border-radius: 24px; padding: 44px 44px 52px; position: relative; }
-    .case-close { position: absolute; top: 24px; right: 28px; cursor: pointer; color: var(--hint); transition: color 0.2s; }
-    .case-close:hover { color: var(--text); }
-    .case-close svg { width: 24px; height: 24px; }
-    .case-eyebrow { font-family: 'Fredoka', sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--blue); margin-bottom: 10px; }
-    .case-title { font-size: 32px; color: var(--text); margin-bottom: 8px; }
-    .case-subtitle { font-size: 15px; color: var(--muted); margin-bottom: 24px; }
-    .case-team-photo { width: 100%; border-radius: 14px; display: block; margin-bottom: 8px; }
-    .case-photo-caption { font-size: 12px; color: var(--hint); margin-bottom: 32px; font-style: italic; }
-    .case-meta-row { display: flex; gap: 24px; margin-bottom: 36px; padding-bottom: 28px; border-bottom: 0.5px solid var(--border); flex-wrap: wrap; }
-    .case-meta-item { flex: 1; min-width: 120px; }
-    .case-meta-label { font-family: 'Fredoka', sans-serif; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--hint); margin-bottom: 4px; }
-    .case-meta-value { font-size: 13px; color: var(--text); }
-    .case-block { margin-bottom: 32px; }
-    .case-block-title { font-family: 'Fredoka', sans-serif; font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
-    .case-block p { font-size: 14px; color: var(--muted); line-height: 1.7; }
-    .case-decision { background: var(--bg2); border-radius: 14px; padding: 16px 18px; margin-bottom: 10px; }
-    .case-decision-q { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
-    .case-decision-a { font-size: 13px; color: var(--muted); line-height: 1.6; }
-    .case-reflection { background: var(--blue-bg); border-radius: 14px; padding: 18px 20px; }
-    .case-reflection p { color: var(--text); font-style: italic; }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .about-card { background: var(--bg2); border-radius: 16px; padding: 18px 20px; transition: transform 0.2s; }
-    .about-card:hover { transform: translateY(-2px); }
-    .about-card-label { font-family: 'Fredoka', sans-serif; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: var(--blue); margin-bottom: 8px; }
-    .about-card p { font-size: 13px; color: var(--muted); line-height: 1.6; font-family: 'Sora', sans-serif; }
-    .about-intro { display: flex; gap: 28px; align-items: flex-start; margin-bottom: 32px; }
-    .about-photo { width: 180px; border-radius: 18px; object-fit: cover; flex-shrink: 0; border: 4px solid var(--bg3); box-shadow: 0 0 0 1px var(--border); background: var(--blue-bg); }
-    .about-intro-text { padding-top: 12px; }
-    .about-intro-text p { font-size: 15px; color: var(--muted); line-height: 1.7; font-family: 'Sora', sans-serif; }
-    .about-intro-text strong { color: var(--text); font-family: 'Fredoka', sans-serif; font-weight: 600; }
-    .skills-wrap { margin-top: 28px; }
-    .skill-row { margin-bottom: 16px; }
-    .skill-label { display: flex; justify-content: space-between; font-size: 13px; color: var(--text); margin-bottom: 6px; font-family: 'Sora', sans-serif; }
-    .skill-label span:last-child { color: var(--hint); }
-    .skill-track { height: 6px; background: var(--bg2); border-radius: 10px; overflow: hidden; }
-    .skill-fill { height: 100%; width: 0%; border-radius: 10px; background: var(--blue); transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
-    .contact-section { background: var(--blue-bg); margin: 0 -40px; padding: 64px 40px; text-align: center; border-bottom: none; }
-    .contact-section h2 { font-size: 38px; color: var(--text); margin-bottom: 12px; }
-    .contact-section p { font-size: 15px; color: var(--muted); max-width: 420px; margin: 0 auto 28px; font-family: 'Sora', sans-serif; }
-    .contact-email-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--text); color: var(--bg3); font-family: 'Fredoka', sans-serif; font-weight: 500; font-size: 15px; padding: 12px 24px; border-radius: 30px; text-decoration: none; transition: transform 0.2s; }
-    .contact-email-btn:hover { transform: translateY(-2px); }
-    .contact-email-btn svg { width: 18px; height: 18px; }
-    .contact-icons { display: flex; justify-content: center; gap: 14px; margin-top: 28px; }
-    .contact-icon-btn { width: 44px; height: 44px; border-radius: 50%; background: var(--bg3); border: 0.5px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text); text-decoration: none; transition: transform 0.2s, border-color 0.2s; }
-    .contact-icon-btn:hover { transform: translateY(-2px); border-color: var(--blue); color: var(--blue); }
-    .contact-icon-btn svg { width: 20px; height: 20px; }
-    footer { max-width: 760px; margin: 0 auto; padding: 28px 40px; display: flex; justify-content: center; align-items: center; }
-    .footer-inner { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
-    footer span { font-size: 13px; color: var(--hint); font-family: 'Sora', sans-serif; }
-    .footer-craft { font-size: 11px; color: var(--hint); opacity: 0.7; max-width: 480px; line-height: 1.6; }
-    .footer-time { font-family: 'Sora', sans-serif; }
-    @media (max-width: 680px) {
-      .case-showcase { grid-template-columns: 1fr; padding: 24px; text-align: center; }
-      .phone-frame-css { max-width: 220px; margin-top: 16px; }
-      .paper-piece { font-size: 10px; padding: 6px 12px; }
-      .piece-ds { margin-right: -6px; }
-      .piece-art { margin-left: -6px; }
-    }
-    @media (max-width: 600px) {
-      nav { padding: 14px 20px; }
-      main { padding: 0 20px 0; }
-      .hero { margin: 0 -20px; padding: 0 20px; }
-      .hero h1 { font-size: 32px; }
-      .wave-wrap { margin: 0 -20px; }
-      .project-grid { grid-template-columns: 1fr; }
-      .art-grid { grid-template-columns: repeat(2, 1fr); }
-      .about-grid { grid-template-columns: 1fr; }
-      .about-intro { flex-direction: column; align-items: center; text-align: center; }
-      .about-photo { width: 150px; }
-      .contact-section { margin: 0 -20px; padding: 48px 20px; }
-      section { padding: 48px 20px; }
-    }
-    .exp-intro { background: var(--bg3); padding: 30px 30px 38px; margin-bottom: 22px; clip-path: polygon(0% 2%, 5% 0%, 14% 1.5%, 24% 0%, 34% 1%, 44% 0%, 54% 1.5%, 64% 0%, 74% 1%, 84% 0%, 94% 1.5%, 100% 0%, 99% 12%, 100% 24%, 98.5% 36%, 100% 48%, 99% 60%, 100% 72%, 98.5% 84%, 100% 96%, 99% 100%, 90% 98.5%, 80% 100%, 70% 99%, 60% 100%, 50% 98.5%, 40% 100%, 30% 99%, 20% 100%, 10% 98.5%, 0% 100%, 1% 88%, 0% 76%, 1.5% 64%, 0% 52%, 1% 40%, 0% 28%, 1.5% 16%, 0% 4%); }
-    .exp-intro-role { font-family: 'Abril Fatface', serif; font-size: 22px; color: var(--text); margin-bottom: 4px; }
-    .exp-intro-meta { font-family: 'Fredoka', sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--blue); margin-bottom: 14px; }
-    .exp-intro p { font-size: 14px; color: var(--muted); line-height: 1.7; font-family: 'Sora', sans-serif; }
-    .exp-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; align-items: stretch; }
-    .exp-card { background: linear-gradient(to right, var(--blue) 0 4px, var(--bg3) 4px); padding: 26px 24px 34px 28px; cursor: pointer; display: flex; flex-direction: column; clip-path: polygon(0% 2%, 5% 0%, 14% 1.5%, 24% 0%, 34% 1%, 44% 0%, 54% 1.5%, 64% 0%, 74% 1%, 84% 0%, 94% 1.5%, 100% 0%, 99% 12%, 100% 24%, 98.5% 36%, 100% 48%, 99% 60%, 100% 72%, 98.5% 84%, 100% 96%, 99% 100%, 90% 98.5%, 80% 100%, 70% 99%, 60% 100%, 50% 98.5%, 40% 100%, 30% 99%, 20% 100%, 10% 98.5%, 0% 100%, 1% 88%, 0% 76%, 1.5% 64%, 0% 52%, 1% 40%, 0% 28%, 1.5% 16%, 0% 4%); transition: filter 0.2s; }
-    .exp-card:hover { filter: brightness(0.99); }
-    .exp-card-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
-    .exp-dept { font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 15px; color: var(--text); }
-    .exp-dept-cn { font-size: 12px; color: var(--hint); margin-bottom: 12px; font-family: 'Sora', sans-serif; }
-    .exp-pill { font-size: 10px; padding: 2px 9px; border-radius: 20px; font-family: 'Sora', sans-serif; white-space: nowrap; flex-shrink: 0; }
-    .exp-pill.current { background: var(--blue-bg); color: var(--blue); }
-    .exp-pill.upcoming { background: var(--bg2); color: var(--hint); border: 0.5px solid var(--border); }
-    .exp-card p { font-size: 13px; color: var(--muted); line-height: 1.6; font-family: 'Sora', sans-serif; }
-    .exp-card .case-study-link { margin-top: auto; padding-top: 12px; }
-    @media (max-width: 640px) { .exp-grid { grid-template-columns: 1fr; } }
-  </style>
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
+<a class="skip-link" href="#data-first">Skip to work</a>
 
-<div class="glow" id="glow"></div>
-<div class="glow-trail" id="glowTrail"></div>
-
-<nav>
-  <a class="nav-name" href="#" id="navName" onclick="return false">Laura Yuan <span id="waveEmoji" style="display:inline-block">👋</span></a>
+<nav class="site-nav" aria-label="Main">
+  <a class="nav-name" href="#top">Laura Yuan <span class="wave" aria-hidden="true">👋</span></a>
   <ul class="nav-links">
-    <li><a href="#work" class="nav-link" data-section="work">Work</a></li>
-    <li><a href="#experience" class="nav-link" data-section="experience">Experience</a></li>
-    <li><a href="#art" class="nav-link" data-section="art">Art</a></li>
-    <li><a href="#about" class="nav-link" data-section="about">About</a></li>
-    <li><a href="#contact" class="nav-link" data-section="contact">Contact</a></li>
+    <li><a href="#data-first">Work</a></li>
+    <li><a href="#art">Art</a></li>
+    <li class="opt"><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
-<div class="hero" id="hero">
-  <div class="hero-bg-shape" id="heroShape"></div>
-  <div class="hero-collage" id="heroCollage">
+<!-- 00 · HELLO -->
+<header class="hero" id="top" data-chapter="Hello">
+  <div class="hero-collage" aria-hidden="true">
     <div class="paper-piece piece-ds">Data science</div>
     <div class="paper-piece piece-cogs">Cognitive science</div>
     <div class="paper-piece piece-art">Visual arts</div>
   </div>
-  <h1>I build things at the<br>intersection of data and people.</h1>
-  <p>First-year at UC San Diego studying data science and cognitive science. I research bioacoustic ML pipelines, design interactive dashboards, and make oil paintings. Sometimes all three feel like the same problem.</p>
+  <h1>I build things at the intersection of data and people.</h1>
+  <p class="hero-lede">Second-year at UC San Diego in data science and cognitive science. I started out in the models. Lately I keep ending up with the people who have to use them.</p>
   <p class="hero-philosophy">Good interfaces don't show off the model. They show off the person using it.</p>
-  <div class="tag-row">
-    <span class="tag">Human-computer interaction</span>
-    <span class="tag">Data visualization</span>
-    <span class="tag">Active learning</span>
-    <span class="tag">Visual art</span>
-    <span class="tag">Open to research</span>
+  <div class="hurry">
+    <span class="hurry-label">In a hurry?</span>
+    <a class="pill-link" href="work/datahacks.html"><span class="k">UX</span>DataHacks portal</a>
+    <a class="pill-link" href="work/bistro.html"><span class="k">UX</span>The 30-Minute Lie</a>
+    <a class="pill-link" href="work/background-noise.html"><span class="k">ML</span>Background Noise</a>
+    <a class="pill-link" href="work/clearmed.html"><span class="k">AI</span>ClearMed</a>
   </div>
-  <div class="scroll-hint">
-    <svg class="icon" viewBox="0 0 24 24" style="margin:0 auto"><path d="M6 9l6 6 6-6"/></svg>
+  <div class="scroll-hint" aria-hidden="true">or scroll for the story
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
   </div>
-</div>
+</header>
 
-<div class="wave-wrap">
-  <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
-    <path d="M0,30 Q360,60 720,30 T1440,30 L1440,0 L0,0 Z" fill="var(--bg)"></path>
-  </svg>
-</div>
+<main id="main">
 
-<main>
-
-  <section id="work">
-    <p class="section-label reveal">Selected work</p>
-    <div class="project-grid">
-      <div class="project-card reveal" onclick="openCaseStudy('ocean')" style="cursor:pointer">
-        <span class="project-badge badge-coral">DataHacks 2026 · 3rd place</span>
-        <h3>Ocean Pulse</h3>
-        <p>Interactive dashboard for California Current ocean ecosystem health — designed for non-technical users to explore 70 years of ocean data and AI-generated policy recommendations.</p>
-        <div class="chip-row">
-          <span class="chip">Streamlit</span>
-          <span class="chip">Random Forest</span>
-          <span class="chip">Data viz</span>
-          <span class="chip">Groq LLM</span>
-        </div>
-        <span class="case-study-link">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;display:inline;vertical-align:-1px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </div>
-      <div class="project-card reveal" onclick="openCaseStudy('birdsong')" style="cursor:pointer">
-        <span class="project-badge badge-blue">Research · E4E Lab</span>
-        <h3>Background Noise</h3>
-        <p>Active learning pipeline for bird species classification from audio, with the San Diego Zoo. The interesting part turned out to be catching the model cheating.</p>
-        <div class="chip-row">
-          <span class="chip">scikit-learn</span>
-          <span class="chip">BirdNET</span>
-          <span class="chip">Active learning</span>
-          <span class="chip">Python</span>
-        </div>
-        <span class="case-study-link">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;display:inline;vertical-align:-1px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </div>
-      <div class="project-card reveal" onclick="openCaseStudy('datahacks27')" style="cursor:pointer; grid-column:1/-1">
-        <span class="project-badge badge-blue">DS3 · DataHacks 2027 · Live portal</span>
-        <h3>Never Wonder Where You Stand</h3>
-        <p>The DataHacks 2027 applicant portal, now open to applicants. I co-designed it in Figma and owned the application, status and waiver flows. The live portal uses my visual system, from the Minecraft Nether theme to the inputs and type. I also hand-painted the mascot Dyno and his sticker series.</p>
-        <div class="chip-row">
-          <span class="chip">Figma</span>
-          <span class="chip">User flows</span>
-          <span class="chip">Design system</span>
-          <span class="chip">Prototyping</span>
-          <span class="chip">Procreate</span>
-        </div>
-        <span class="case-study-link">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;display:inline;vertical-align:-1px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </div>
-      <div class="project-card reveal" onclick="openCaseStudy('clearmed')" style="cursor:pointer; grid-column:1/-1">
-        <span class="project-badge badge-blue">ACM AI · Multi-agent LLMs · In progress</span>
-        <h3>Plain Words, Same Facts</h3>
-        <p>ClearMed, a team of five AI agents that rewrites hospital paperwork so patients can read it, without inventing anything. I own the Readability agent and wire the whole pipeline together.</p>
-        <div class="chip-row">
-          <span class="chip">Python</span>
-          <span class="chip">LangGraph</span>
-          <span class="chip">Ollama</span>
-          <span class="chip">Readability metrics</span>
-          <span class="chip">LLM evaluation</span>
-        </div>
-        <span class="case-study-link">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;display:inline;vertical-align:-1px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </div>
+  <!-- 01 · DATA FIRST -->
+  <section class="chapter" id="data-first" data-chapter="Data first">
+    <div class="chapter-head reveal">
+      <span class="chapter-num">01 · Data first</span>
+      <h2 class="chapter-title">I started in the data.</h2>
+      <p class="chapter-lede">Models, pipelines, accuracy scores. But the most interesting results kept turning out to be about people: who has to trust the model, and who has to read the dashboard.</p>
     </div>
-
-    <div class="case-showcase reveal">
-      <div class="case-showcase-text">
-        <span class="project-badge badge-blue">HCI Redesign · Mobile UX</span>
-        <h3 style="font-size:28px; color:var(--text); margin-bottom:6px;">The 30-Minute Lie</h3>
-        <p style="font-family:'Fredoka',sans-serif; font-size:15px; color:var(--text); font-weight:500; margin:8px 0 12px;">Campus dining apps optimize for checkout conversion. I redesigned the ordering flow around a different problem: not making students late to lecture.</p>
-        <p style="font-size:13.5px; color:var(--muted); line-height:1.65; margin-bottom:16px;">I noticed this myself before I noticed it as a design problem: the wait time estimate at the Bistro is basically a guess. It treats a cold side dish and a hot wok entree as the same prep time, even though only one of them is bottlenecked by an actual burner. So I started dropping my class schedule in as an .ics file and built a version of the app that warns you before you pay, not after you're already standing outside in the cold wondering where your food is.</p>
-        <div class="chip-row" style="margin-bottom:20px;">
-          <span class="chip">Figma</span>
-          <span class="chip">Positive friction</span>
-          <span class="chip">Predictive UX</span>
-          <span class="chip">CogSci</span>
+    <div class="cards">
+      <a class="card wide reveal" href="work/background-noise.html">
+        <div class="card-visual svg" aria-hidden="true">
+          <svg viewBox="0 0 320 180"><rect width="320" height="180" fill="var(--bg2)"/>
+            <g fill="var(--blue)" opacity=".85">
+              <rect x="20" y="80" width="6" height="20" rx="3"/><rect x="32" y="70" width="6" height="40" rx="3"/><rect x="44" y="84" width="6" height="12" rx="3"/><rect x="56" y="76" width="6" height="28" rx="3"/><rect x="68" y="86" width="6" height="8" rx="3"/><rect x="80" y="82" width="6" height="16" rx="3"/>
+              <rect x="92" y="88" width="6" height="4" rx="2"/><rect x="104" y="84" width="6" height="12" rx="3"/><rect x="116" y="88" width="6" height="4" rx="2"/>
+            </g>
+            <g fill="var(--accent2)">
+              <rect x="128" y="50" width="6" height="80" rx="3"/><rect x="140" y="36" width="6" height="108" rx="3"/><rect x="152" y="58" width="6" height="64" rx="3"/><rect x="164" y="30" width="6" height="120" rx="3"/><rect x="176" y="48" width="6" height="84" rx="3"/><rect x="188" y="62" width="6" height="56" rx="3"/>
+            </g>
+            <g fill="var(--blue)" opacity=".85">
+              <rect x="200" y="84" width="6" height="12" rx="3"/><rect x="212" y="78" width="6" height="24" rx="3"/><rect x="224" y="86" width="6" height="8" rx="3"/><rect x="236" y="74" width="6" height="32" rx="3"/><rect x="248" y="82" width="6" height="16" rx="3"/><rect x="260" y="88" width="6" height="4" rx="2"/><rect x="272" y="80" width="6" height="20" rx="3"/><rect x="284" y="86" width="6" height="8" rx="3"/><rect x="296" y="84" width="6" height="12" rx="3"/>
+            </g>
+            <text x="160" y="168" text-anchor="middle" font-family="Sora, sans-serif" font-size="10" fill="var(--muted)">hours of noise · one bird call · which clip is worth a label?</text>
+          </svg>
         </div>
-        <span class="case-study-link" onclick="openCaseStudy('bistro')">Read the full breakdown <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;display:inline;vertical-align:-1px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </div>
-      <div class="case-showcase-visual">
-        <div class="phone-frame-css">
-          <img src="bistro-modal.jpg" alt="Triton2Go Intercept Modal Redesign" loading="lazy" />
+        <div class="card-body">
+          <span class="badge">Research · E4E · San Diego Zoo</span>
+          <h3>Background Noise</h3>
+          <p>An active learning pipeline for bird species from field audio. Margin sampling reached 85.5% with 348 labels, versus 73.2% at random. The best part was catching the model cheating.</p>
+          <div class="chips"><span class="chip">Python</span><span class="chip">scikit-learn</span><span class="chip">BirdNET</span><span class="chip">Active learning</span></div>
+          <span class="more">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+      <a class="card reveal" href="work/ocean-pulse.html">
+        <div class="card-visual"><img src="assets/img/ocean-pulse-team.jpg" alt="The Ocean Pulse team after the DataHacks 2026 demo" loading="lazy"></div>
+        <div class="card-body">
+          <span class="badge coral">DataHacks 2026 · 3rd place, ML/AI</span>
+          <h3>Ocean Pulse</h3>
+          <p>A dashboard for 70 years of ocean data. The model hit 98%. The hard part was making it make sense to a policymaker in ten seconds.</p>
+          <div class="chips"><span class="chip">Streamlit</span><span class="chip">Random Forest</span><span class="chip">Groq LLM</span></div>
+          <span class="more">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+      <div class="card reveal" style="clip-path:none;background:none;justify-content:center">
+        <div class="interlude" style="padding:10px 6px;text-align:left">
+          <p style="font-size:22px;margin:0">"If it says 'probably species X, but not confident,' what is a biologist supposed to do with that?"</p>
+          <span>Sitting with that question is what turned me toward human-centered design.</span>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="experience">
-    <p class="section-label reveal">Experience</p>
-    <div class="exp-intro reveal tilt">
-      <p class="exp-intro-role">SmartCloud Network Engineer Intern · China Telecom</p>
-      <p class="exp-intro-meta">Dongguan, Guangdong · Jul–Aug 2026</p>
-      <p>I interned across China Telecom's city headquarters cloud division, and used the time to figure out how a big state carrier actually runs, from the customer-facing side all the way to the technical backend. Along the way I built a reusable slide-generation tool on the internal TeleAgent platform, mostly as a way to learn the product by hand. It has a content-traceability check that catches the model making up facts before a deck goes out, and I got into the habit of checking every change against the slides it actually rendered instead of taking the agent's word that it worked. I put together its on-demand "skills" setup by trial and error to keep the context window from overflowing, and a company training later taught that same idea as a core concept, which was a nice moment of building something first and finding out afterward why it worked. Most of the cloud business is government and enterprise clients, the kind who care a lot about the security a state carrier can promise.</p>
+  <!-- 02 · THEN PEOPLE -->
+  <section class="chapter" id="then-people" data-chapter="Then people">
+    <div class="chapter-head reveal">
+      <span class="chapter-num">02 · Then people</span>
+      <h2 class="chapter-title">So I started designing for them.</h2>
+      <p class="chapter-lede">Both of these projects come from the same question: what does someone need to know, at the exact moment they need to know it?</p>
     </div>
-    <div class="exp-grid">
-      <div class="exp-card reveal tilt" onclick="openCaseStudy('dept_cloud')">
-        <div class="exp-card-head">
-          <span class="exp-dept">Cloud · Delivery</span>
-          <span class="exp-pill">Jul–Aug 2026</span>
+    <div class="cards">
+      <a class="card wide reveal" href="work/datahacks.html">
+        <div class="card-visual dh">
+          <img src="assets/img/datahacks-screens/q1.webp" alt="DataHacks 2027 applicant portal, About You step, Nether theme" loading="lazy">
+          <img class="mini-dyno" src="assets/img/datahacks/dyno-green-waving.webp" alt="" aria-hidden="true">
         </div>
-        <p class="exp-dept-cn">云中台 · 交付</p>
-        <p>The middle layer at HQ that connects customer solutions to the technical backend. I sat with delivery, onboarding customers and handling support and maintenance after they buy.</p>
-        <span class="case-study-link">See more details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;display:inline;vertical-align:-1px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </div>
-      <div class="exp-card reveal tilt" onclick="openCaseStudy('dept_monitor')">
-        <div class="exp-card-head">
-          <span class="exp-dept">Monitoring Center</span>
-          <span class="exp-pill">Jul–Aug 2026</span>
+        <div class="card-body">
+          <span class="badge">DS3 · DataHacks 2027 · Live portal</span>
+          <h3>Never Wonder Where You Stand</h3>
+          <p>The DataHacks 2027 applicant portal, now live. I co-designed it and owned the application, status and waiver flows, plus the design system. I also hand-painted the mascot, Dyno, and his sticker series.</p>
+          <div class="chips"><span class="chip">Figma</span><span class="chip">User flows</span><span class="chip">Design system</span><span class="chip">Procreate</span></div>
+          <span class="more">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </div>
-        <p class="exp-dept-cn">监控中心 · back end</p>
-        <p>The technical backend that watches for system faults, from cybersecurity to power to fiber, and decides what gets fixed automatically versus what needs a person.</p>
-        <span class="case-study-link">See more details <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:13px;height:13px;display:inline;vertical-align:-1px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </div>
+      </a>
+      <a class="card wide reveal" href="work/bistro.html">
+        <div class="card-visual" style="background:var(--bg2)"><img src="assets/img/bistro-modal.jpg" alt="Triton2Go redesign: a warning modal before payment" loading="lazy" style="object-fit:contain;padding:18px"></div>
+        <div class="card-body">
+          <span class="badge coral">HCI redesign · Mobile UX · Playable demo</span>
+          <h3>The 30-Minute Lie</h3>
+          <p>Campus dining apps optimize for checkout. I redesigned the ordering flow around a different goal: not making students late to lecture. The case study has a demo you can play with.</p>
+          <div class="chips"><span class="chip">Figma</span><span class="chip">Positive friction</span><span class="chip">Predictive UX</span></div>
+          <span class="more">Try the demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
     </div>
   </section>
 
-  <section id="art">
-    <p class="section-label reveal">Art</p>
+  <!-- 03 · RIGHT NOW -->
+  <section class="chapter" id="right-now" data-chapter="Right now">
+    <div class="chapter-head reveal">
+      <span class="chapter-num">03 · Right now</span>
+      <h2 class="chapter-title">Both halves, at once.</h2>
+      <p class="chapter-lede">The work I'm doing now is where the model and the person meet: AI that has to be readable, and infrastructure that has to be trusted.</p>
+    </div>
+    <div class="cards">
+      <a class="card reveal" href="work/clearmed.html">
+        <div class="card-visual svg" aria-hidden="true">
+          <svg viewBox="0 0 320 200"><rect width="320" height="200" fill="var(--bg2)"/>
+            <g font-family="Sora, sans-serif" font-size="9" text-anchor="middle" fill="var(--muted)">
+              <line x1="40" y1="90" x2="280" y2="90" stroke="var(--border)" stroke-width="2"/>
+              <path d="M160 104 C175 140, 215 140, 220 104" fill="none" stroke="var(--accent2)" stroke-width="1.5" stroke-dasharray="4 3"/>
+              <circle cx="40" cy="90" r="14" fill="var(--bg3)" stroke="var(--blue)" stroke-width="2"/><text x="40" y="124">extract</text>
+              <circle cx="100" cy="90" r="14" fill="var(--bg3)" stroke="var(--blue)" stroke-width="2"/><text x="100" y="124">simplify</text>
+              <circle cx="160" cy="90" r="14" fill="var(--bg3)" stroke="var(--blue)" stroke-width="2"/><text x="160" y="70">check</text>
+              <circle cx="220" cy="90" r="14" fill="var(--bg3)" stroke="var(--blue)" stroke-width="2"/><text x="220" y="70">fix</text>
+              <circle cx="280" cy="90" r="17" fill="var(--accent2)"/><text x="280" y="124" fill="var(--text)">readability (me)</text>
+              <text x="190" y="152" fill="var(--coral-ink)">max 2 loops</text>
+            </g>
+          </svg>
+        </div>
+        <div class="card-body">
+          <span class="badge">ACM AI · Multi-agent LLMs · In progress</span>
+          <h3>Plain Words, Same Facts</h3>
+          <p>ClearMed: five AI agents that rewrite hospital paperwork for patients without inventing anything. I own the Readability agent and the pipeline integration.</p>
+          <div class="chips"><span class="chip">LangGraph</span><span class="chip">Ollama</span><span class="chip">LLM evaluation</span></div>
+          <span class="more">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+      <a class="card reveal" href="work/china-telecom.html">
+        <div class="card-visual svg" aria-hidden="true">
+          <svg viewBox="0 0 320 200"><rect width="320" height="200" fill="var(--bg2)"/>
+            <g stroke="var(--blue)" stroke-width="1.5" fill="none" opacity=".7">
+              <path d="M160 46 L60 96 M160 46 L110 96 M160 46 L160 96 M160 46 L210 96 M160 46 L260 96"/>
+              <path d="M60 104 L44 146 M60 104 L76 146 M160 104 L144 146 M160 104 L176 146 M260 104 L244 146 M260 104 L276 146"/>
+            </g>
+            <g font-family="Sora, sans-serif" font-size="9" fill="var(--muted)" text-anchor="middle">
+              <rect x="128" y="28" width="64" height="20" rx="10" fill="var(--accent2)"/><text x="160" y="42" fill="#fff">HQ</text>
+              <g fill="var(--bg3)" stroke="var(--blue)"><circle cx="60" cy="100" r="7"/><circle cx="110" cy="100" r="7"/><circle cx="160" cy="100" r="7"/><circle cx="210" cy="100" r="7"/><circle cx="260" cy="100" r="7"/></g>
+              <g fill="var(--blue)"><circle cx="44" cy="150" r="4"/><circle cx="76" cy="150" r="4"/><circle cx="144" cy="150" r="4"/><circle cx="176" cy="150" r="4"/><circle cx="244" cy="150" r="4"/><circle cx="276" cy="150" r="4"/></g>
+              <text x="160" y="180">5 regions → townships → streets</text>
+            </g>
+          </svg>
+        </div>
+        <div class="card-body">
+          <span class="badge coral">Internship · China Telecom · Summer 2026</span>
+          <h3>SmartCloud, Dongguan</h3>
+          <p>Delivery and Monitoring Center rotations. I built a slide-generation agent on TeleAgent with a check that catches invented facts. And I found my own active-learning logic running a city's fault triage.</p>
+          <div class="chips"><span class="chip">TeleAgent</span><span class="chip">LLM agents</span><span class="chip">Fieldwork</span></div>
+          <span class="more">See the experience <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- 04 · ART -->
+  <section class="chapter" id="art" data-chapter="The other half">
+    <div class="chapter-head reveal">
+      <span class="chapter-num">04 · The other half</span>
+      <h2 class="chapter-title">And I paint.</h2>
+      <p class="chapter-lede">Oil, acrylic, gouache and Procreate. Painting is where I learned to look at something for a long time before deciding what's wrong with it, which turns out to be most of design.</p>
+    </div>
     <div class="art-header-row reveal">
-      <div class="art-filter">
-        <button class="filter-btn active" onclick="filterArt('all', this)">All</button>
-        <button class="filter-btn" onclick="filterArt('oil', this)">Oil & acrylic</button>
-        <button class="filter-btn" onclick="filterArt('digital', this)">Digital</button>
+      <div class="art-filter" role="group" aria-label="Filter artwork">
+        <button class="filter-btn" data-filter="all" aria-pressed="true">All</button>
+        <button class="filter-btn" data-filter="paint" aria-pressed="false">Paint</button>
+        <button class="filter-btn" data-filter="digital" aria-pressed="false">Digital</button>
       </div>
-      <button class="view-all-btn" onclick="openBook(0)">
-        View all
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </button>
+      <button class="ghost-btn" data-open-book>Flip through as a book →</button>
     </div>
-    <div class="art-grid" id="art-grid">
-      <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(0)">
-        <img src="the-sunset.jpg" alt="Oil painting of sunset" loading="lazy" />
-        <div class="art-meta"><p class="art-title">The sunset</p><p class="art-medium">Oil on canvas</p></div>
-      </div>
-      <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(1)">
-        <img src="fantasy-figure.jpg" alt="Acrylic painting" loading="lazy" />
-        <div class="art-meta"><p class="art-title">Ukyo Tachibana Recreation</p><p class="art-medium">Acrylic on canvas</p></div>
-      </div>
-      <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(2)">
-        <img src="floral-bouquet.JPG" alt="Oil painting of flowers" loading="lazy" />
-        <div class="art-meta"><p class="art-title">Floral bouquet</p><p class="art-medium">Oil on canvas</p></div>
-      </div>
-      <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(3)">
-        <img src="slot-canyon.JPG" alt="Oil painting of canyon" loading="lazy" />
-        <div class="art-meta"><p class="art-title">Slot canyon</p><p class="art-medium">Oil on canvas</p></div>
-      </div>
-      <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(4)">
-        <img src="cat-window.jpg" alt="Acrylic painting of cat" loading="lazy" />
-        <div class="art-meta"><p class="art-title">Cat by the window</p><p class="art-medium">Acrylic on canvas</p></div>
-      </div>
-      <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(5)">
-        <img src="plant-dino.jpg" alt="Still life" loading="lazy" />
-        <div class="art-meta"><p class="art-title">Studio still life</p><p class="art-medium">Acrylic on canvas</p></div>
-      </div>
-      <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(6)">
-        <img src="snake-flowers.jpg" alt="Gouache painting" loading="lazy" />
-        <div class="art-meta"><p class="art-title">Snake and flowers</p><p class="art-medium">Gouache</p></div>
-      </div>
-      <div class="art-card reveal tilt" data-medium="oil" onclick="openBook(7)">
-        <img src="china-triptych.JPG" alt="Acrylic triptych" loading="lazy" />
-        <div class="art-meta"><p class="art-title">Home's Flood, 2021</p><p class="art-medium">Acrylic triptych</p></div>
-      </div>
-      <div class="art-card reveal tilt" data-medium="digital" onclick="openBook(8)">
-        <img src="digital-portrait.jpg" alt="Digital art" loading="lazy" />
-        <div class="art-meta"><p class="art-title">Chang'e Recreation</p><p class="art-medium">Procreate</p></div>
-      </div>
-      <div class="art-card reveal tilt" data-medium="digital" onclick="openBook(9)">
-        <img src="digital-cafe.jpg" alt="Digital illustration" loading="lazy" />
-        <div class="art-meta"><p class="art-title">Poor Wifi Cafe</p><p class="art-medium">Procreate</p></div>
-      </div>
+    <div class="art-grid">
+      <button class="art-card reveal" data-medium="paint"><img src="assets/img/art/the-sunset.jpg" alt="Oil painting of a sunset" loading="lazy"><div class="art-meta"><p class="art-title">The sunset</p><p class="art-medium">Oil on canvas</p></div></button>
+      <button class="art-card reveal" data-medium="paint"><img src="assets/img/art/fantasy-figure.jpg" alt="Acrylic painting of a fantasy figure" loading="lazy"><div class="art-meta"><p class="art-title">Ukyo Tachibana Recreation</p><p class="art-medium">Acrylic on canvas</p></div></button>
+      <button class="art-card reveal" data-medium="paint"><img src="assets/img/art/floral-bouquet.JPG" alt="Oil painting of a floral bouquet" loading="lazy"><div class="art-meta"><p class="art-title">Floral bouquet</p><p class="art-medium">Oil on canvas</p></div></button>
+      <button class="art-card reveal" data-medium="paint"><img src="assets/img/art/slot-canyon.JPG" alt="Oil painting of a slot canyon" loading="lazy"><div class="art-meta"><p class="art-title">Slot canyon</p><p class="art-medium">Oil on canvas</p></div></button>
+      <button class="art-card reveal" data-medium="paint"><img src="assets/img/art/cat-window.jpg" alt="Acrylic painting of a cat by a window" loading="lazy"><div class="art-meta"><p class="art-title">Cat by the window</p><p class="art-medium">Acrylic on canvas</p></div></button>
+      <button class="art-card reveal" data-medium="paint"><img src="assets/img/art/plant-dino.jpg" alt="Acrylic studio still life" loading="lazy"><div class="art-meta"><p class="art-title">Studio still life</p><p class="art-medium">Acrylic on canvas</p></div></button>
+      <button class="art-card reveal" data-medium="paint"><img src="assets/img/art/snake-flowers.jpg" alt="Gouache painting of a snake and flowers" loading="lazy"><div class="art-meta"><p class="art-title">Snake and flowers</p><p class="art-medium">Gouache</p></div></button>
+      <button class="art-card reveal" data-medium="paint"><img src="assets/img/art/china-triptych.JPG" alt="Acrylic triptych about a flood at home" loading="lazy"><div class="art-meta"><p class="art-title">Home's Flood, 2021</p><p class="art-medium">Acrylic triptych</p></div></button>
+      <button class="art-card reveal" data-medium="digital"><img src="assets/img/art/digital-portrait.jpg" alt="Digital painting of Chang'e" loading="lazy"><div class="art-meta"><p class="art-title">Chang'e Recreation</p><p class="art-medium">Procreate</p></div></button>
+      <button class="art-card reveal" data-medium="digital"><img src="assets/img/art/digital-cafe.jpg" alt="Digital illustration of a cafe" loading="lazy"><div class="art-meta"><p class="art-title">Poor Wifi Cafe</p><p class="art-medium">Procreate</p></div></button>
     </div>
   </section>
 
-  <section id="about">
-    <p class="section-label reveal">About</p>
+  <!-- 05 · ABOUT -->
+  <section class="chapter" id="about" data-chapter="About">
+    <div class="chapter-head reveal">
+      <span class="chapter-num">05 · About</span>
+      <h2 class="chapter-title">Hi, I'm Laura.</h2>
+    </div>
     <div class="about-intro reveal">
-      <img class="about-photo" src="me.jpg" alt="Laura Yuan, candid photo" />
-      <div class="about-intro-text">
-        <p><strong>Hi, I'm Laura</strong> — second-year at UCSD, equally happy in front of a Jupyter notebook or a canvas. This site is where both sides live.</p>
-      </div>
+      <img class="about-photo" src="assets/img/me.jpg" alt="Laura Yuan, candid photo">
+      <p><strong>Second-year at UCSD</strong>, equally happy in front of a Jupyter notebook or a canvas. I've lived in a lot of places, which may be why I'm always asking who a thing was built for, and who got left out.</p>
     </div>
     <div class="about-grid">
-      <div class="about-card reveal">
-        <p class="about-card-label">Currently</p>
-        <p>ML research at Engineers for Exploration with the San Diego Zoo, designing the DataHacks 2027 site and applicant portal, and building the Readability agent for ClearMed, an ACM multi-agent LLM project.</p>
-      </div>
-      <div class="about-card reveal">
-        <p class="about-card-label">Background</p>
-        <p>I came to HCI through data science — building dashboards and realizing that good data and good design are inseparable problems. Also a practicing visual artist.</p>
-      </div>
-      <div class="about-card reveal">
-        <p class="about-card-label">Education</p>
-        <p>B.S. Data Science, minor in Cognitive Science — UC San Diego, class of 2029.</p>
-      </div>
-      <div class="about-card reveal">
-        <p class="about-card-label">Looking for</p>
-        <p>Summer 2027 internships in product, UX and data/AI, plus HCI research where data and human experience meet.</p>
-      </div>
+      <div class="about-card reveal"><h3>Currently</h3><p>ML research at Engineers for Exploration with the San Diego Zoo, designing for DataHacks 2027, and building the Readability agent for ClearMed.</p></div>
+      <div class="about-card reveal"><h3>Looking for</h3><p>Summer 2027 internships in product, UX and data/AI, plus HCI research where data and human experience meet.</p></div>
+      <div class="about-card reveal"><h3>Education</h3><p>B.S. Data Science, minor in Cognitive Science, UC San Diego, class of 2029.</p></div>
+      <div class="about-card reveal"><h3>Background</h3><p>I came to HCI through data science: building dashboards and realizing good data and good design are the same problem.</p></div>
     </div>
-    <div class="skills-wrap reveal" id="skillsWrap">
-      <p class="section-label" style="margin-bottom:16px">Comfort level</p>
-      <div class="skill-row">
-        <div class="skill-label"><span>Python / data science</span><span>90%</span></div>
-        <div class="skill-track"><div class="skill-fill" data-width="90"></div></div>
-      </div>
-      <div class="skill-row">
-        <div class="skill-label"><span>Visual art (oil, acrylic, digital)</span><span>85%</span></div>
-        <div class="skill-track"><div class="skill-fill" data-width="85"></div></div>
-      </div>
-      <div class="skill-row">
-        <div class="skill-label"><span>Java</span><span>60%</span></div>
-        <div class="skill-track"><div class="skill-fill" data-width="60"></div></div>
-      </div>
-      <div class="skill-row">
-        <div class="skill-label"><span>HTML / CSS / front-end</span><span>55%</span></div>
-        <div class="skill-track"><div class="skill-fill" data-width="55"></div></div>
-      </div>
-      <div class="skill-row">
-        <div class="skill-label"><span>Figma / UI design</span><span>65%</span></div>
-        <div class="skill-track"><div class="skill-fill" data-width="65"></div></div>
-      </div>
-      <div class="skill-row">
-        <div class="skill-label"><span>LLM pipelines &amp; evaluation</span><span>55%</span></div>
-        <div class="skill-track"><div class="skill-fill" data-width="55"></div></div>
-      </div>
-      <div class="skill-row">
-        <div class="skill-label"><span>UX / design research</span><span>40%</span></div>
-        <div class="skill-track"><div class="skill-fill" data-width="40"></div></div>
-      </div>
+    <div class="toolbox reveal">
+      <div><h3>Design</h3><div class="chips"><span class="chip">Figma</span><span class="chip">Prototyping</span><span class="chip">Design systems</span><span class="chip">Procreate</span></div></div>
+      <div><h3>Data + ML</h3><div class="chips"><span class="chip">Python</span><span class="chip">scikit-learn</span><span class="chip">LangGraph</span><span class="chip">Ollama</span><span class="chip">Streamlit</span></div></div>
+      <div><h3>Build</h3><div class="chips"><span class="chip">HTML / CSS / JS</span><span class="chip">Vue 3</span><span class="chip">Java</span></div></div>
     </div>
   </section>
-
 </main>
 
-<section id="contact" class="contact-section reveal">
+<section class="contact" id="contact">
   <h2>Let's make something</h2>
-  <p>Whether it's about research, design, or just comparing notes on oil paint brands — I'd love to hear from you.</p>
-  <a class="contact-email-btn" href="mailto:l3yuan@ucsd.edu">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
-    l3yuan@ucsd.edu
-  </a>
+  <p>Whether it's about research, design, or comparing notes on oil paint brands, I'd love to hear from you.</p>
+  <a class="btn-primary" href="mailto:l3yuan@ucsd.edu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>l3yuan@ucsd.edu</a>
   <div class="contact-icons">
-    <a class="contact-icon-btn" href="https://github.com/laura06919-max" target="_blank" aria-label="GitHub">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
-    </a>
-    <a class="contact-icon-btn" href="https://linkedin.com/in/laurayuan" target="_blank" aria-label="LinkedIn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4V8h4v2a4 4 0 0 1 4-2z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-    </a>
-    <a class="contact-icon-btn" href="mailto:l3yuan@ucsd.edu" aria-label="Email">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
-    </a>
+    <a href="https://github.com/laura06919-max" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a>
+    <a href="https://linkedin.com/in/laurayuan" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4V8h4v2a4 4 0 0 1 4-2z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
   </div>
 </section>
 
-<footer>
-  <div class="footer-inner">
-    <span>Laura Yuan · UCSD 2029</span>
-    <span class="footer-craft">Hand-coded in HTML/CSS/JS, no template · built quarter by quarter while learning front-end · <span class="footer-time" id="footerTime"></span></span>
-  </div>
-</footer>
+<footer>Laura Yuan · UCSD 2029<small>Hand-coded, no template · <span id="laJollaTime"></span></small></footer>
 
-<div class="case-overlay" id="caseOverlay" onclick="if(event.target===this)closeCaseStudy()">
-  <div class="case-modal" id="caseModalContent"></div>
-</div>
-
-<div class="book-viewer" id="bookViewer">
-  <span class="book-close" onclick="closeBook()">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
-  </span>
-  <div class="book-stage" id="bookStage">
-    <div class="book-arrow left" onclick="bookPrev()" aria-label="Previous">
-      <svg class="icon" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
-    </div>
-    <div class="book-arrow right" onclick="bookNext()" aria-label="Next">
-      <svg class="icon" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+<div class="book-viewer" id="bookViewer" role="dialog" aria-modal="true" aria-label="Artwork viewer">
+  <button class="icon-btn book-close" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  <div class="book-stage">
+    <div class="book-nav">
+      <button class="icon-btn" data-prev aria-label="Previous artwork"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <span class="book-count"></span>
+      <button class="icon-btn" data-next aria-label="Next artwork"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
     </div>
   </div>
-  <p class="book-counter" id="bookCounter"></p>
 </div>
 
-<script>
-  const artworks = [
-    { src: 'the-sunset.jpg', title: 'The sunset', medium: 'Oil on canvas' },
-    { src: 'fantasy-figure.jpg', title: 'Ukyo Tachibana Recreation', medium: 'Acrylic on canvas' },
-    { src: 'floral-bouquet.JPG', title: 'Floral bouquet', medium: 'Oil on canvas' },
-    { src: 'slot-canyon.JPG', title: 'Slot canyon', medium: 'Oil on canvas' },
-    { src: 'cat-window.jpg', title: 'Cat by the window', medium: 'Acrylic on canvas' },
-    { src: 'plant-dino.jpg', title: 'Studio still life', medium: 'Acrylic on canvas' },
-    { src: 'snake-flowers.jpg', title: 'Snake and flowers', medium: 'Gouache' },
-    { src: 'china-triptych.JPG', title: "Home's Flood, 2021", medium: 'Acrylic triptych' },
-    { src: 'digital-portrait.jpg', title: "Chang'e Recreation", medium: 'Procreate' },
-    { src: 'digital-cafe.jpg', title: 'Poor Wifi Cafe', medium: 'Procreate' }
-  ];
-  let currentPage = 0;
-  let pageEls = [];
-
-  function buildBookPages() {
-    const stage = document.getElementById('bookStage');
-    pageEls.forEach(el => el.remove());
-    pageEls = [];
-    artworks.forEach((art, i) => {
-      const page = document.createElement('div');
-      page.className = 'book-page';
-      page.style.zIndex = artworks.length - i;
-      page.innerHTML = `
-        <img class="book-page-img" src="${art.src}" alt="${art.title}" />
-        <div class="book-page-caption">
-          <p class="book-page-title">${art.title}</p>
-          <p class="book-page-medium">${art.medium}</p>
-        </div>
-      `;
-      stage.insertBefore(page, stage.querySelector('.book-arrow.left'));
-      pageEls.push(page);
-    });
-  }
-
-  function renderBook() {
-    pageEls.forEach((el, i) => {
-      el.classList.remove('current');
-      if (i < currentPage) {
-        el.classList.add('flipped');
-        el.style.zIndex = i + 1;
-      } else {
-        el.classList.remove('flipped');
-        el.style.zIndex = artworks.length - i;
-      }
-      if (i === currentPage) el.classList.add('current');
-    });
-    document.getElementById('bookCounter').textContent = (currentPage + 1) + ' / ' + artworks.length;
-  }
-
-  function openBook(index) {
-    if (pageEls.length === 0) buildBookPages();
-    currentPage = index;
-    renderBook();
-    document.getElementById('bookViewer').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  const caseStudies = {
-    clearmed: `
-      <span class="case-close" onclick="closeCaseStudy()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
-      <p class="case-eyebrow">Case study · ACM AI Team 3 · Fall 2026</p>
-      <h2 class="case-title">Plain Words, Same Facts</h2>
-      <p class="case-subtitle">Hospital discharge notes are written for doctors. ClearMed rewrites them for patients, and checks every sentence so the rewrite never says something the original didn't.</p>
-      <div class="case-meta-row">
-        <div class="case-meta-item"><p class="case-meta-label">Role</p><p class="case-meta-value">Readability agent owner + integration lead</p></div>
-        <div class="case-meta-item"><p class="case-meta-label">Stack</p><p class="case-meta-value">Python, LangGraph, Ollama, textstat</p></div>
-        <div class="case-meta-item"><p class="case-meta-label">Timeline</p><p class="case-meta-value">Oct 2026 – present</p></div>
-      </div>
-      <div class="case-block"><p class="case-block-title">The problem</p><p>Only about 1 in 10 US adults can comfortably read everyday clinical information. People misread a dose or miss a follow-up, and some end up back in the hospital. AI can rewrite the text simply, but it can also make things up, like a dose or an instruction that was never there. In medicine that's worse than no rewrite at all.</p></div>
-      <div class="case-block"><p class="case-block-title">Five agents instead of one</p><p>Instead of asking one model to do everything, our team splits the job. One agent pulls out the facts, one rewrites them in plain language, one checks every sentence against the original and flags anything unsupported, one fixes the flags, and the last one, mine, polishes the reading level. Everything runs on free, local open-source models, so anyone can reproduce it.</p></div>
-      <div class="case-block"><p class="case-block-title">What I found before building</p><p>Our target was an 8th-grade reading level. Before tuning my agent, I scored 20 pairs of expert-written plain-language rewrites on Flesch-Kincaid, SMOG and jargon density. None of the 20 reached grade 8. In some pairs the "plain" version even scored harder, because experts keep the medical term and explain it in parentheses, and the formula punishes longer sentences. So the standard metric can penalize exactly the kind of explaining we want. That changed how I think about the agent's target: hitting a number isn't the goal if it means dropping the explanation a patient needs.</p></div>
-      <div class="case-block"><p class="case-block-title">What I'm building now</p><p>I'm wiring the agents into a LangGraph pipeline with one bounded loop, where the checker and the fixer pass a draft back and forth at most twice, plus per-agent traces so we can see which agent changed what. Next up are ablation tests to measure which agents actually earn their place, and a demo.</p></div>
-    `,
-    datahacks27: `
-      <span class="case-close" onclick="closeCaseStudy()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
-      <p class="case-eyebrow">Case study · DS3 DataHacks 2027</p>
-      <h2 class="case-title">Never Wonder Where You Stand</h2>
-      <p class="case-subtitle">Designing the DataHacks 2027 applicant portal, where a playful game theme still has to make the form the clearest part.</p>
-      <div class="case-meta-row">
-        <div class="case-meta-item"><p class="case-meta-label">Role</p><p class="case-meta-value">Co-designer (with one other designer). Owned application, status + waiver flows</p></div>
-        <div class="case-meta-item"><p class="case-meta-label">Team</p><p class="case-meta-value">4 designers + the dev team</p></div>
-        <div class="case-meta-item"><p class="case-meta-label">Tools</p><p class="case-meta-value">Figma, Procreate</p></div>
-        <div class="case-meta-item"><p class="case-meta-label">Timeline</p><p class="case-meta-value">Oct 2026 – present</p></div>
-      </div>
-      <div class="case-block"><p class="case-block-title">Context</p><p>DataHacks is the yearly hackathon run by UCSD's Data Science Student Society. Our design team worked in a hand-painted, blocky style inspired by Minecraft and TreeHacks, with no official game assets. AI was used only for idea generation and quick mockups. Every final asset is drawn by hand. The main event website was designed by our design lead. My work is the applicant portal and the mascot.</p></div>
-      <div class="case-block"><p class="case-block-title">The problem</p><p>Applicants often don't know how much of the form is left, whether their work saved, what went wrong, or when they'll hear back. My goal was simple. Applicants should never wonder where they stand.</p></div>
-      <div class="case-block"><p class="case-block-title">How the direction changed</p>
-        <div class="case-decision"><p class="case-decision-q">Three templates, a signpost, then the Nether</p><p class="case-decision-a">I started with three template directions, moved to a wooden signpost look, and after a team meeting landed on a Minecraft Nether theme that the whole portal now uses.</p></div>
-        <div class="case-decision"><p class="case-decision-q">From a book to a sidebar</p><p class="case-decision-a">I first pictured the event handbook as a book you flip through. I switched to sidebar pages, because flipping adds friction when someone just needs the schedule. The handbook became 10 short, scannable pages that unlock on acceptance.</p></div>
-        <div class="case-decision"><p class="case-decision-q">Feedback I acted on</p><p class="case-decision-a">My first version had Dyno appearing all over the application. Now he shows up once, on the long-answer step, where a friendly nudge actually helps. I also removed the lava on the sides to give the form room to breathe.</p></div>
-      </div>
-      <div class="case-block"><p class="case-block-title">Key screens</p>
-        <div class="case-decision"><p class="case-decision-q">About you</p><p class="case-decision-a">A progress bar, Save Draft and a status chip, so nobody wonders whether closing the tab loses their work.</p></div>
-        <div class="case-decision"><p class="case-decision-q">Errors</p><p class="case-decision-a">A banner plus a message under each field, so you can find the problem without rereading the whole page.</p></div>
-        <div class="case-decision"><p class="case-decision-q">Status, in review</p><p class="case-decision-a">A tracker with a "You are here" marker, and separate accepted, waitlisted and rejected screens.</p></div>
-        <div class="case-decision"><p class="case-decision-q">Handbook and locked sidebar</p><p class="case-decision-a">Ten scannable pages, including the run of show, locked until you're accepted.</p></div>
-      </div>
-      <div class="case-block"><p class="case-block-title">Design system</p><p>To keep four designers consistent, I built a style guide and component sheet. Tabs (default, active, locked), buttons, inputs (empty, filled, focused, error) and status steps all have their states drawn out. Headings use a pixel font and body text a clean sans-serif.</p></div>
-      <div class="case-block"><p class="case-block-title">Interaction prototype</p><p>I built a clickable Figma prototype with an animated Dyno (blink, wave, talk), a mini Dyno riding the progress bar, and flowing lava. These are in the prototype, not in the launched version.</p><p><a href="https://www.figma.com/proto/QVtMklBwxPAWFEJVVa8lWM/portfolio-export?node-id=35-16&starting-point-node-id=35%3A16&scaling=scale-down" target="_blank" rel="noopener">Click through the Figma prototype</a></p></div>
-      <div class="case-block"><p class="case-block-title">What shipped</p><p>The live portal uses my visual system. That means the Nether theme, the board-and-sidebar layout, the tab signs, inputs and the pixel/sans type pairing. For launch, engineering simplified the experience. The 4-step application became one scrolling form with automatic saving, and the interactive elements were cut to keep the build lean. The status, waiver and handbook pages are planned for after admissions decisions.</p></div>
-      <div class="case-block"><p class="case-block-title">Dyno, mascot and stickers</p><p>I hand-painted Dyno in four poses and three wing colors, and turned him into a die-cut sticker series, including Dyno pulling a broken board back together and Dyno with a treasure chest. My process is AI references for composition, then traced and hand-painted in my own style in Procreate. Next up is the 2027 event logo for merchandise like banners and lanyard cards.</p></div>
-      <div class="case-block"><p class="case-block-title">Reflection</p>
-        <div class="case-reflection"><p>If I had another round, I'd push to bring back a lightweight progress indicator first, because it's the cheapest change with the biggest effect on applicants finishing the form. Next, I'd run a quick usability test with five students to measure completion time and errors.</p></div>
-      </div>
-    `,
-    ocean: `
-      <span class="case-close" onclick="closeCaseStudy()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
-      <p class="case-eyebrow">Case study · DataHacks 2026</p>
-      <h2 class="case-title">Ocean Pulse</h2>
-      <p class="case-subtitle">A dashboard for exploring 70 years of California Current ocean data — built in 48 hours, mostly figured out by trial and error.</p>
-      <img class="case-team-photo" src="ocean-pulse-team.jpg" alt="Our team at DataHacks 2026" loading="lazy" />
-      <p class="case-photo-caption">Us right after the demo, still running on no sleep and free Red Bull.</p>
-      <div class="case-meta-row">
-        <div class="case-meta-item"><p class="case-meta-label">Role</p><p class="case-meta-value">ML + design, team of 4</p></div>
-        <div class="case-meta-item"><p class="case-meta-label">Timeline</p><p class="case-meta-value">48-hour hackathon</p></div>
-        <div class="case-meta-item"><p class="case-meta-label">Outcome</p><p class="case-meta-value">3rd place, ML/AI track</p></div>
-      </div>
-      <div class="case-block"><p class="case-block-title">The problem</p><p>We had 70 years of CalCOFI ocean data and a Random Forest model that hit 98% accuracy predicting ecosystem health. Honestly, that part wasn't even the hard part — anyone on the team could've built that model alone. What we kept running into was that nobody who'd actually use this thing cares about model accuracy. A policymaker isn't going to read our confusion matrix. If they can't figure out what the dashboard is telling them in the first ten seconds, it doesn't matter how good the model is underneath.</p></div>
-      <div class="case-block"><p class="case-block-title">Who it's for</p><p>Not us. Not other data science students. We had to keep reminding ourselves of that. The actual user is someone with zero ML background — a policymaker, a science communicator, maybe a curious local — who needs to look at the screen and know whether a region's ecosystem is doing okay, fast, and trust that answer enough to do something with it.</p></div>
-      <div class="case-block"><p class="case-block-title">Things we changed (and why)</p>
-        <div class="case-decision"><p class="case-decision-q">Tab order</p><p class="case-decision-a">We built the tabs in the order we built the pipeline — raw data first, then the model, then predictions last. Made sense to us, made zero sense to anyone testing it. We flipped it so "is this region healthy right now" comes first, and buried the methodology stuff further back for people who actually want to dig in.</p></div>
-        <div class="case-decision"><p class="case-decision-q">The AI explainer</p><p class="case-decision-a">A health score by itself is just a number floating there. We hooked up a Groq model to translate the prediction into plain language about what it might mean for regional policy. This wasn't us trying to cram AI into the project for the sake of it — we genuinely needed something to close the gap between "here's a score" and "here's why you should care."</p></div>
-        <div class="case-decision"><p class="case-decision-q">Limiting the map</p><p class="case-decision-a">Originally you could click literally anywhere on the map. Felt cool in the demo, but it was kind of dishonest — real ocean policy gets made at the level of government-regulated zones, not random coordinates someone clicked on. So we scoped the predictor down to match those actual boundaries. Less flashy, more true to how this would really get used.</p></div>
-      </div>
-      <div class="case-block"><p class="case-block-title">What I'd do differently</p>
-        <div class="case-reflection"><p>None of us had the vocabulary for "user-centered design" while we were building this — we just kept saying the dashboard "felt off" until something clicked. Looking back, I wish we'd shown the tab layout to one non-technical person before writing any code, instead of building first and rearranging things at 3am once we noticed the problem ourselves.</p></div>
-      </div>
-    `,
-    bistro: `
-      <span class="case-close" onclick="closeCaseStudy()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
-      <p class="case-eyebrow">Case study · Unsolicited redesign</p>
-      <h2 class="case-title">The 30-Minute Lie</h2>
-      <p class="case-subtitle">A redesign of UCSD's dining app, built around one constraint: actually making it to 1pm lecture.</p>
-      <img class="case-team-photo" src="bistro-modal.jpg" alt="Triton2Go intercept modal redesign" loading="lazy" style="max-width:320px; margin:0 auto; display:block;" />
-      <p class="case-photo-caption" style="text-align:center;">The warning modal, right at the moment you're about to pay.</p>
-      <div class="case-meta-row">
-        <div class="case-meta-item"><p class="case-meta-label">Role</p><p class="case-meta-value">Solo, design + Figma</p></div>
-        <div class="case-meta-item"><p class="case-meta-label">Started from</p><p class="case-meta-value">Being late to lecture, repeatedly</p></div>
-        <div class="case-meta-item"><p class="case-meta-label">Tooling</p><p class="case-meta-value">Figma</p></div>
-      </div>
-      <div class="case-block"><p class="case-block-title">The wait time is basically a guess</p><p>This started as me being annoyed, not as a design exercise. The app estimates pickup time the same way for every dish, calculated by active tickets times average prep time. But at the Bistro, a cold side and a hot wok entree are not the same. The wok station only has so many burners. The app has no idea, so it just lies to you with a confident little timer, and you end up standing outside in the wind way past when it said your food would be ready.</p></div>
-      <div class="case-block"><p class="case-block-title">Why I went with .ics files instead of scraping WebReg</p><p>My first instinct was to just pull a student's schedule straight from WebReg. Then I realize it is a bad idea since that's UCSD's own login system, and scraping it is a real security problem. Almost every calendar app can export a standard .ics file though, so I designed around that instead. Same result, way less risk, and the student never has to hand over a password to a class project.</p></div>
-      <div class="case-block"><p class="case-block-title">What the redesign actually changes</p>
-        <div class="case-decision"><p class="case-decision-q">Slowing down checkout on purpose</p><p class="case-decision-a">Normally you'd want checkout to be as frictionless as possible. I did the opposite here. If the math says you'll be 3 minutes late to COGS 9, the app stops you right before payment instead of letting you find out the hard way. It felt wrong at first to add a deliberate speed bump, but that's the entire point of the redesign.</p></div>
-        <div class="case-decision"><p class="case-decision-q">Leaving an escape hatch</p><p class="case-decision-a">The walking-time math assumes you're, well, walking. Plenty of people are on a scooter or skateboard. So there's a plain "I'll walk fast, place order anyway" link at the bottom. In this way, the app can warn you, but it shouldn't get to make the final call for you.</p></div>
-      </div>
-      <div class="case-block"><p class="case-block-title">What I'd still want to test</p>
-        <div class="case-reflection"><p>I haven't gotten this in front of an actual student who isn't me yet, which is the obvious next step before I'd call this finished. I'm also not totally sure the modal should interrupt checkout every single time, since there's a real chance it gets annoying fast if someone orders from the Bistro daily, and I'd want to watch someone actually hit "ignore" a few times before deciding if that's a problem.</p></div>
-      </div>
-    `,
-    birdsong: `
-      <span class="case-close" onclick="closeCaseStudy()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
-      <p class="case-eyebrow">Case study · Engineers for Exploration</p>
-      <h2 class="case-title">Background Noise</h2>
-      <p class="case-subtitle">Teaching a model to recognize bird species from field audio — and learning that the exciting-looking result was a leak.</p>
-      <div class="case-meta-row">
-        <div class="case-meta-item"><p class="case-meta-label">Role</p><p class="case-meta-value">Student researcher, E4E bioacoustics</p></div>
-        <div class="case-meta-item"><p class="case-meta-label">Partner</p><p class="case-meta-value">San Diego Zoo</p></div>
-        <div class="case-meta-item"><p class="case-meta-label">Data</p><p class="case-meta-value">Public BirdSet</p></div>
-      </div>
-      <div class="case-block"><p class="case-block-title">The bottleneck is labeling, not recording</p><p>Field microphones run continuously and pull in hours of wind, rain, insects, and silence, with the actual bird calls scattered somewhere inside. Recording is easy. The expensive part is labeling, because someone has to tag clips by hand and the model only learns from what's been tagged. So most of my work went into the question underneath all of that: which clips are worth a human's time to label? That's the active learning loop, and I built several strategies for choosing those clips — top-k entropy, dynamic batch sizing off an entropy threshold, and Query-by-Committee using Monte Carlo Dropout — plus a reinforcement-learning component that adjusts the labeling budget as training goes instead of spending it at a flat rate.</p></div>
-      <div class="case-block"><p class="case-block-title">The model was cheating</p><p>Early on the model looked like it was doing well. It wasn't. Clips from the same field recording were landing in both the training and test sets, so the model was quietly learning the background hiss of individual recordings — the specific hum of one microphone on one day — instead of the birds. It looked like recognition. It was memorization. I rewrote the train/test split so it separates by recording, meaning no recording ever appears on both sides. Accuracy dropped, which was the point: the lower number was the honest one, and everything measured after that was finally measuring the thing we actually cared about.</p></div>
-      <div class="case-block"><p class="case-block-title">What the numbers actually say</p><p>On 25 species from the public BirdSet data, averaged over three seeds, margin sampling reached 85.5% accuracy with 348 labels, compared with 73.2% when clips were picked at random. Coreset, which picks clips to cover the data evenly, did worse than random, at 65.9%. I also built a bandit agent that decides how many clips to label each round. An early comparison made it look like a big win, until I noticed it had been given more rounds than the fixed baseline. Once every method had the same label budget, the bandit matched a well-chosen fixed budget instead of beating it. That's a less exciting result, and it's the honest one.</p><p><a href="https://github.com/laura06919-max/adaptive-budget-active-learning" target="_blank" rel="noopener">See the code and full results on GitHub</a></p></div>
-      <div class="case-block"><p class="case-block-title">Where I sit on this</p><p>I'm not the strongest coder in the room, and I don't pretend to be. What I bring is field intuition and follow-through. Before I opened a single spectrogram, I'd spent weeks in Belize snorkeling through mangrove roots and watching a bird migration pass overhead, so I already had a feel for why monitoring wildlife in a noisy real environment is so hard. When I joined I read the lab's papers cold and used AI tools to fill the gaps in my background, so I could contribute early instead of spending a month catching up.</p></div>
-      <div class="case-block"><p class="case-block-title">What it turned into</p>
-        <div class="case-reflection"><p>What stuck with me was less about the accuracy score and more about trust. A biologist has to act on this model's output without being able to see inside it. If it says "probably species X, but not confident," what are they supposed to do with that? Sitting with that question is what turned me toward human-centered design. (Built with Jeremy Frank and Shrivas Sudharsan on public BirdSet data. My part is in the public repo linked above.)</p></div>
-      </div>
-    `,
-    dept_cloud: `
-      <span class="case-close" onclick="closeCaseStudy()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
-      <p class="case-eyebrow">Experience · China Telecom</p>
-      <h2 class="case-title">Cloud · Delivery</h2>
-      <p class="case-subtitle">云中台 · 交付 — the middle layer, where customer solutions meet the technical backend.</p>
-      <div class="case-meta-row">
-        <div class="case-meta-item"><p class="case-meta-label">Team</p><p class="case-meta-value">Cloud, delivery side</p></div>
-        <div class="case-meta-item"><p class="case-meta-label">Status</p><p class="case-meta-value">Current rotation</p></div>
-      </div>
-      <div class="case-block"><p class="case-block-title">What this team does</p><p>The cloud group at city headquarters is split into two sides. Pre-sales pitches the product and proposes the solution. Delivery, where I worked, takes over once a customer buys: showing them how to use it and handling maintenance when something breaks. Working on delivery meant I saw what actually happens after the sale, which is usually the messier and more honest half of the story.</p></div>
-      <div class="case-block"><p class="case-block-title">The tool I built here</p><p>My lead had me build a slide-generation tool on the internal TeleAgent platform, mostly so I'd know the product well enough to demo it live for customers later. It turns raw content into finished, on-brand product-intro decks for pre-sales. The part I'm proudest of is a content check that catches the model inventing facts before a deck ever goes out, since a confident wrong number in front of a client is worse than no deck at all.</p></div>
-      <div class="case-block"><p class="case-block-title">What I learned about the product</p><p>Building on TeleAgent taught me the product from the inside instead of from a script. When I go out on a customer visit now, I can actually show the thing working and speak from having broken it and fixed it myself, which lands very differently than reading off a slide.</p></div>
-      <div class="case-block"><p class="case-block-title">A rule I didn't expect</p>
-        <div class="case-reflection"><p>In my last week, I went out with the local township team to install cloud PCs for a government department. Partway through, people kept bringing up problems that had nothing to do with what we were actually there to deliver, a printer that wouldn't connect, an old machine too outdated to support the setup. Some of it we could have fixed on the spot. My first instinct was that if I could solve something right there, I should. My colleague told me otherwise: guide people to handle it themselves when you can, don't just do it for them, because if you fix one person's problem today, everyone else finds you tomorrow, and your own work never gets done. I found that a little jarring. It's only my second time doing fieldwork, and I didn't expect the more effective version of helping to look like holding a boundary instead of just solving whatever was in front of me.</p></div>
-      </div>
-    `,
-    dept_monitor: `
-      <span class="case-close" onclick="closeCaseStudy()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></span>
-      <p class="case-eyebrow">Experience · China Telecom</p>
-      <h2 class="case-title">Monitoring Center</h2>
-      <p class="case-subtitle">监控中心 — the technical backend that catches faults and sends the fix.</p>
-      <div class="case-meta-row">
-        <div class="case-meta-item"><p class="case-meta-label">Team</p><p class="case-meta-value">Monitoring, back end</p></div>
-        <div class="case-meta-item"><p class="case-meta-label">Status</p><p class="case-meta-value">Current rotation</p></div>
-        <div class="case-meta-item"><p class="case-meta-label">Role</p><p class="case-meta-value">Fault detection + dispatch</p></div>
-      </div>
-      <div class="case-block"><p class="case-block-title">How one team watches a whole city</p><p>My team lead walked me through how Monitoring Center is actually structured: separate teams for cybersecurity anomalies, for the physical server rooms (机房), for power (backup systems keep the machines holding the most critical data running even if the city grid goes down), and for cable breaks, copper and fiber. Each team watches for a different kind of failure, and instructions cascade down a real hierarchy: HQ divides Dongguan into five regions, each region routes down to its townships, each township down to the street. Seeing that hierarchy laid out made the scale of the company click in a way no org chart could.</p></div>
-      <div class="case-block"><p class="case-block-title">The triage system, and a pattern I recognized</p><p>Most anomalies get auto-assigned straight to the district and township level for a routine fix. Only two kinds escalate to a person: issues sent down directly from Guangzhou, the provincial capital, and the ones where the system notices something odd, the same kind of request repeating in the same region at the same time, over and over. That second category is the interesting one. It's the same shape as the active learning work I do at E4E: automate the confident cases, route the ambiguous ones to a human. I wasn't expecting to find my own research logic running a telecom's fault system.</p></div>
-      <div class="case-block"><p class="case-block-title">Watching theory become infrastructure</p><p>The lead and a teammate on the Internet Maintenance (互联网维护) sub-team, who has a software engineering degree, walked me through real network topology diagrams: how intranet and internet-facing networks differ, why a public IP and fiber connection are what actually let a device reach the internet, what each machine in the diagram does. It was the first time concepts from the Huawei networking training I'd been studying showed up as something actually running, at the scale of an entire province, instead of a lab exercise. I asked him, half out of curiosity, why my home WiFi keeps lagging, and he walked me through what to check and how, the same troubleshooting instinct at a much smaller scale.</p></div>
-      <div class="case-block"><p class="case-block-title">Learning to build, not just observe</p>
-        <div class="case-reflection"><p>He builds the internal web tools that support the team's work, which is how his software engineering degree ended up inside a telecom operations role. He walked me through Vue3 from scratch: how it runs locally, how it differs from plain HTML, how existing HTML gets absorbed into a component structure. I went home and rebuilt a piece of my own portfolio in it, converting the hand-written skills bar on this site into a real Vue component, as a way to check I'd actually understood rather than just followed along. He also showed me tools I hadn't known existed, including one that turns a UI sketched on paper into a usable design once you scan it.</p></div>
-      </div>
-    `
-  };
-
-  function openCaseStudy(type) {
-    const modalContent = document.getElementById('caseModalContent');
-    modalContent.innerHTML = caseStudies[type] || caseStudies['ocean'];
-    document.getElementById('caseOverlay').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeCaseStudy() {
-    document.getElementById('caseOverlay').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  function closeBook() {
-    document.getElementById('bookViewer').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  function bookNext() { if (currentPage < artworks.length - 1) { currentPage++; renderBook(); } }
-  function bookPrev() { if (currentPage > 0) { currentPage--; renderBook(); } }
-
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && document.getElementById('caseOverlay').classList.contains('open')) closeCaseStudy();
-    if (!document.getElementById('bookViewer').classList.contains('open')) return;
-    if (e.key === 'Escape') closeBook();
-    if (e.key === 'ArrowRight') bookNext();
-    if (e.key === 'ArrowLeft') bookPrev();
-  });
-
-  const glow = document.getElementById('glow');
-  const trail = document.getElementById('glowTrail');
-  let mouseX = 0, mouseY = 0, glowX = 0, glowY = 0;
-
-  if (window.matchMedia('(hover: hover)').matches) {
-    document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX; mouseY = e.clientY;
-      trail.style.left = mouseX + 'px'; trail.style.top = mouseY + 'px';
-    });
-
-    function animateGlow() {
-      glowX += (mouseX - glowX) * 0.12; glowY += (mouseY - glowY) * 0.12;
-      glow.style.left = glowX + 'px'; glow.style.top = glowY + 'px';
-      requestAnimationFrame(animateGlow);
-    }
-    animateGlow();
-
-    const zoneSections = [
-      { id: 'work', el: document.getElementById('work') },
-      { id: 'art', el: document.getElementById('art') },
-      { id: 'about', el: document.getElementById('about') },
-      { id: 'contact', el: document.getElementById('contact') }
-    ].filter(s => s.el);
-    let currentZone = null;
-
-    function updateCursorZone() {
-      let foundZone = null;
-      for (const s of zoneSections) {
-        const rect = s.el.getBoundingClientRect();
-        if (mouseY >= rect.top && mouseY <= rect.bottom) { foundZone = s.id; break; }
-      }
-      if (foundZone !== currentZone) {
-        if (currentZone) { glow.classList.remove('zone-' + currentZone); trail.classList.remove('zone-' + currentZone); }
-        if (foundZone) { glow.classList.add('zone-' + foundZone); trail.classList.add('zone-' + foundZone); }
-        currentZone = foundZone;
-      }
-    }
-    setInterval(updateCursorZone, 150);
-
-    document.querySelectorAll('a, button, .tilt').forEach(el => {
-      el.addEventListener('mouseenter', () => glow.classList.add('hovering'));
-      el.addEventListener('mouseleave', () => glow.classList.remove('hovering'));
-    });
-
-    document.querySelectorAll('.tilt').forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left, y = e.clientY - rect.top;
-        const centerX = rect.width / 2, centerY = rect.height / 2;
-        const rotateX = ((y - centerY) / centerY) * -8, rotateY = ((x - centerX) / centerX) * 8;
-        card.style.transform = `perspective(500px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(0)`;
-      });
-      card.addEventListener('mouseleave', () => { card.style.transform = 'perspective(500px) rotateX(0) rotateY(0)'; });
-    });
-
-    window.addEventListener('scroll', () => {
-      const shape = document.getElementById('heroShape');
-      if (shape) shape.style.transform = `translateY(${window.scrollY * 0.3}px)`;
-    });
-  }
-
-  setTimeout(() => { document.getElementById('hero').classList.add('loaded'); }, 100);
-
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-  const skillObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        document.querySelectorAll('.skill-fill').forEach(fill => { fill.style.width = fill.dataset.width + '%'; });
-        skillObserver.disconnect();
-      }
-    });
-  }, { threshold: 0.3 });
-  const skillsEl = document.getElementById('skillsWrap');
-  if (skillsEl) skillObserver.observe(skillsEl);
-
-  const sections = document.querySelectorAll('main section[id], #contact');
-  const navLinks = document.querySelectorAll('.nav-link');
-  const navObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        navLinks.forEach(link => { link.classList.toggle('active', link.dataset.section === entry.target.id); });
-      }
-    });
-  }, { threshold: 0.3, rootMargin: '-80px 0px -50% 0px' });
-  sections.forEach(s => navObserver.observe(s));
-
-  function filterArt(type, btn) {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.art-card').forEach(card => {
-      card.style.display = (type === 'all' || card.dataset.medium === type) ? 'block' : 'none';
-    });
-  }
-
-  const navName = document.getElementById('navName');
-  const waveEmoji = document.getElementById('waveEmoji');
-  if (navName) {
-    navName.addEventListener('click', () => {
-      waveEmoji.classList.remove('waving'); void waveEmoji.offsetWidth; waveEmoji.classList.add('waving');
-    });
-  }
-
-  const footerTime = document.getElementById('footerTime');
-  if (footerTime) {
-    function updateTime() {
-      const now = new Date();
-      const options = { hour: 'numeric', minute: '2-digit', timeZone: 'America/Los_Angeles' };
-      footerTime.textContent = "it's " + now.toLocaleTimeString('en-US', options) + ' in La Jolla right now';
-    }
-    updateTime(); setInterval(updateTime, 30000);
-  }
-</script>
-
+<script src="assets/js/site.js"></script>
 </body>
 </html>

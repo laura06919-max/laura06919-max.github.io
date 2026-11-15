@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plain Words, Same Facts · ClearMed · Laura Yuan</title>
+  <meta name="description" content="Case study: ClearMed, a five-agent LLM pipeline that rewrites hospital discharge notes for patients without inventing anything.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%23F7F1DF%22/><circle cx=%2250%22 cy=%2250%22 r=%2230%22 fill=%22none%22 stroke=%22%236F95B0%22 stroke-width=%226%22/><circle cx=%2250%22 cy=%2250%22 r=%2210%22 fill=%22%23C98A7D%22/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Fredoka:wght@500;600&family=Sora:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+<a class="skip-link" href="#problem">Skip to case study</a>
+<nav class="site-nav" aria-label="Main">
+  <a class="nav-name" href="../index.html">Laura Yuan <span class="wave" aria-hidden="true">👋</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html#data-first">Work</a></li>
+    <li><a href="../index.html#art">Art</a></li>
+    <li class="opt"><a href="../index.html#about">About</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+<header class="case-hero" id="start" data-chapter="Start">
+  <a class="back-link" href="../index.html#right-now">← All work</a>
+  <p class="eyebrow">Case study · ACM AI Team 3 · Fall 2026</p>
+  <h1 class="case-title">Plain Words, Same Facts</h1>
+  <p class="case-sub">Hospital discharge notes are written for doctors. ClearMed rewrites them for patients, and checks every sentence so the rewrite never says something the original didn't.</p>
+  <dl class="tldr">
+    <div><dt>Role</dt><dd>Readability agent owner + integration lead</dd></div>
+    <div><dt>Stack</dt><dd>Python, LangGraph, Ollama, textstat</dd></div>
+    <div><dt>Timeline</dt><dd>Oct 2026 – present</dd></div>
+    <div class="full"><dt>Outcome</dt><dd>In progress: pipeline wiring, then ablation tests and a demo.</dd></div>
+  </dl>
+</header>
+<main class="case-body">
+  <section id="problem" data-chapter="Problem">
+    <p class="chapter-num">01 · The problem</p>
+    <h2 class="reveal">A wrong rewrite is worse than none</h2>
+    <p class="reveal">Only about 1 in 10 US adults can comfortably read everyday clinical information. People misread a dose or miss a follow-up, and some end up back in the hospital. AI can rewrite the text simply, but it can also make things up, like a dose or an instruction that was never there. In medicine, that's worse than no rewrite at all.</p>
+  </section>
+  <section id="agents" data-chapter="Five agents">
+    <p class="chapter-num">02 · The approach</p>
+    <h2 class="reveal">Five agents instead of one</h2>
+    <p class="reveal">Instead of asking one model to do everything, our team splits the job. One agent pulls out the facts, one rewrites them in plain language, one checks every sentence against the original and flags anything unsupported, one fixes the flags, and the last one, mine, polishes the reading level. Everything runs on free, local open-source models, so anyone can reproduce it.</p>
+    <figure class="figure reveal"><svg viewBox="0 0 640 150" role="img" aria-label="Pipeline: extract, simplify, check, fix, readability. Check and fix loop at most twice." style="width:100%;height:auto"><g font-family="Sora, sans-serif" font-size="12" text-anchor="middle" fill="var(--text)">
+      <line x1="64" y1="60" x2="576" y2="60" stroke="var(--border)" stroke-width="2"/>
+      <path d="M320 80 C340 125, 430 125, 448 80" fill="none" stroke="var(--accent2)" stroke-width="1.6" stroke-dasharray="5 4"/><text x="384" y="140" fill="var(--coral-ink)">bounded loop · max 2</text>
+      <g fill="var(--bg3)" stroke="var(--blue)" stroke-width="2"><rect x="14" y="40" width="100" height="40" rx="20"/><rect x="142" y="40" width="100" height="40" rx="20"/><rect x="270" y="40" width="100" height="40" rx="20"/><rect x="398" y="40" width="100" height="40" rx="20"/></g>
+      <rect x="526" y="40" width="100" height="40" rx="20" fill="var(--accent2)"/>
+      <text x="64" y="64">Extract</text><text x="192" y="64">Simplify</text><text x="320" y="64">Check</text><text x="448" y="64">Fix</text><text x="576" y="64" fill="#fff">Readability</text><text x="576" y="28" fill="var(--coral-ink)">mine</text>
+    </g></svg><figcaption>The pipeline, with the checker/fixer loop capped at two passes.</figcaption></figure>
+  </section>
+  <section id="found" data-chapter="Before building">
+    <p class="chapter-num">03 · What I found before building</p>
+    <h2 class="reveal">The metric punished the explaining</h2>
+    <p class="reveal">Our target was an 8th-grade reading level. Before tuning my agent, I scored 20 pairs of expert-written plain-language rewrites on Flesch-Kincaid, SMOG and jargon density. <strong>None of the 20 reached grade 8.</strong></p>
+    <p class="reveal">In some pairs the "plain" version even scored harder, because experts keep the medical term and explain it in parentheses, and the formula punishes longer sentences. So the standard metric can penalize exactly the kind of explaining we want. That changed how I think about the agent's target: hitting a number isn't the goal if it means dropping the explanation a patient needs.</p>
+  </section>
+  <section id="now" data-chapter="Now">
+    <p class="chapter-num">04 · What I'm building now</p>
+    <h2 class="reveal">Wiring and measuring</h2>
+    <p class="reveal">I'm wiring the agents into a LangGraph pipeline with one bounded loop, where the checker and the fixer pass a draft back and forth at most twice, plus per-agent traces so we can see which agent changed what. Next up are ablation tests to measure which agents actually earn their place, and a demo.</p>
+  </section>
+</main>
+<div class="next-up reveal">
+  <a href="china-telecom.html"><span><small>Next case study</small><b>SmartCloud, Dongguan</b></span><span aria-hidden="true">→</span></a>
+</div>
+<footer style="margin-top:60px">Laura Yuan · UCSD 2029<small><span id="laJollaTime"></span></small></footer>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>

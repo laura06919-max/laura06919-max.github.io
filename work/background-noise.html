@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Background Noise · Laura Yuan</title>
+  <meta name="description" content="Case study: active learning for bird species classification from field audio, Engineers for Exploration with the San Diego Zoo.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%23F7F1DF%22/><circle cx=%2250%22 cy=%2250%22 r=%2230%22 fill=%22none%22 stroke=%22%236F95B0%22 stroke-width=%226%22/><circle cx=%2250%22 cy=%2250%22 r=%2210%22 fill=%22%23C98A7D%22/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Fredoka:wght@500;600&family=Sora:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+<a class="skip-link" href="#bottleneck">Skip to case study</a>
+<nav class="site-nav" aria-label="Main">
+  <a class="nav-name" href="../index.html">Laura Yuan <span class="wave" aria-hidden="true">👋</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html#data-first">Work</a></li>
+    <li><a href="../index.html#art">Art</a></li>
+    <li class="opt"><a href="../index.html#about">About</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+<header class="case-hero" id="start" data-chapter="Start">
+  <a class="back-link" href="../index.html#data-first">← All work</a>
+  <p class="eyebrow">Case study · Engineers for Exploration</p>
+  <h1 class="case-title">Background Noise</h1>
+  <p class="case-sub">Teaching a model to recognize bird species from field audio, and learning that the exciting-looking result was a leak.</p>
+  <dl class="tldr">
+    <div><dt>Role</dt><dd>Student researcher, E4E bioacoustics</dd></div>
+    <div><dt>Partner</dt><dd>San Diego Zoo</dd></div>
+    <div><dt>Data</dt><dd>Public BirdSet, 25 species</dd></div>
+    <div><dt>Stack</dt><dd>Python, scikit-learn, BirdNET</dd></div>
+    <div class="full"><dt>Outcome</dt><dd>Margin sampling reached 85.5% accuracy with 348 labels vs. 73.2% at random (mean of 3 seeds). <a class="text-link" href="https://github.com/laura06919-max/adaptive-budget-active-learning" target="_blank" rel="noopener">Code and full results on GitHub ↗</a></dd></div>
+  </dl>
+</header>
+<main class="case-body">
+  <section id="bottleneck" data-chapter="Bottleneck">
+    <p class="chapter-num">01 · The real bottleneck</p>
+    <h2 class="reveal">Labeling, not recording</h2>
+    <p class="reveal">Field microphones run continuously and pull in hours of wind, rain, insects and silence, with the actual bird calls scattered somewhere inside. Recording is easy. The expensive part is labeling: someone has to tag clips by hand, and the model only learns from what's been tagged.</p>
+    <p class="reveal">So most of my work went into the question underneath all of that: <strong>which clips are worth a human's time to label?</strong> That's the active learning loop. I built several strategies for choosing those clips (top-k entropy, dynamic batch sizing off an entropy threshold, and Query-by-Committee using Monte Carlo Dropout) plus a reinforcement-learning component that adjusts the labeling budget as training goes, instead of spending it at a flat rate.</p>
+  </section>
+  <section id="cheating" data-chapter="The leak">
+    <p class="chapter-num">02 · The model was cheating</p>
+    <h2 class="reveal">It looked like recognition. It was memorization.</h2>
+    <p class="reveal">Early on the model looked like it was doing well. It wasn't. Clips from the same field recording were landing in both the training and test sets, so the model was quietly learning the background hiss of individual recordings, the specific hum of one microphone on one day, instead of the birds.</p>
+    <p class="reveal">I rewrote the train/test split so it separates by recording, meaning no recording ever appears on both sides. Accuracy dropped, which was the point: the lower number was the honest one, and everything measured after that was finally measuring the thing we cared about.</p>
+  </section>
+  <section id="numbers" data-chapter="Numbers">
+    <p class="chapter-num">03 · What the numbers say</p>
+    <h2 class="reveal">Less exciting, more honest</h2>
+    <p class="reveal">On 25 species from the public BirdSet data, averaged over three seeds, margin sampling reached <strong>85.5%</strong> accuracy with 348 labels, compared with <strong>73.2%</strong> when clips were picked at random. Coreset, which picks clips to cover the data evenly, did worse than random, at 65.9%.</p>
+    <p class="reveal">I also built a bandit agent that decides how many clips to label each round. An early comparison made it look like a big win, until I noticed it had been given more rounds than the fixed baseline. Once every method had the same label budget, the bandit matched a well-chosen fixed budget instead of beating it. That's a less exciting result, and it's the honest one.</p>
+    <figure class="figure reveal"><svg viewBox="0 0 600 170" role="img" aria-label="Accuracy at 348 labels: margin sampling 85.5%, random 73.2%, coreset 65.9%" style="width:100%;height:auto"><g font-family="Sora, sans-serif" font-size="13" fill="var(--text)"><text x="0" y="34">Margin sampling</text><rect x="150" y="18" width="383" height="24" rx="6" fill="var(--blue)"/><text x="541" y="35">85.5%</text><text x="0" y="84">Random</text><rect x="150" y="68" width="328" height="24" rx="6" fill="var(--border)"/><text x="486" y="85">73.2%</text><text x="0" y="134">Coreset</text><rect x="150" y="118" width="295" height="24" rx="6" fill="var(--accent2)"/><text x="453" y="135">65.9%</text></g></svg><figcaption>Accuracy at 348 labels, 25 species, mean of 3 seeds. Bars start at 0.</figcaption></figure>
+  </section>
+  <section id="me" data-chapter="Where I sit">
+    <p class="chapter-num">04 · Where I sit on this</p>
+    <h2 class="reveal">Field intuition and follow-through</h2>
+    <p class="reveal">I'm not the strongest coder in the room, and I don't pretend to be. What I bring is field intuition and follow-through. Before I opened a single spectrogram, I'd spent weeks in Belize snorkeling through mangrove roots and watching a bird migration pass overhead, so I already had a feel for why monitoring wildlife in a noisy real environment is so hard. When I joined, I read the lab's papers cold and used AI tools to fill the gaps in my background, so I could contribute early instead of spending a month catching up.</p>
+  </section>
+  <section id="turned" data-chapter="Reflect">
+    <p class="chapter-num">05 · What it turned into</p>
+    <h2 class="reveal">A question about trust</h2>
+    <div class="reflection reveal"><p>What stuck with me was less about the accuracy score and more about trust. A biologist has to act on this model's output without being able to see inside it. If it says "probably species X, but not confident," what are they supposed to do with that? Sitting with that question is what turned me toward human-centered design.</p></div>
+    <p class="reveal" style="margin-top:14px;font-size:14px">Built with Jeremy Frank and Shrivas Sudharsan on public BirdSet data. My part is in the public repo linked above.</p>
+  </section>
+</main>
+<div class="next-up reveal">
+  <a href="datahacks.html"><span><small>Next case study</small><b>Never Wonder Where You Stand</b></span><span aria-hidden="true">→</span></a>
+</div>
+<footer style="margin-top:60px">Laura Yuan · UCSD 2029<small><span id="laJollaTime"></span></small></footer>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>

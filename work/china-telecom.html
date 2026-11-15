@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartCloud Internship · China Telecom · Laura Yuan</title>
+  <meta name="description" content="Experience: SmartCloud network engineer intern at China Telecom Dongguan, delivery and monitoring center rotations.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%23F7F1DF%22/><circle cx=%2250%22 cy=%2250%22 r=%2230%22 fill=%22none%22 stroke=%22%236F95B0%22 stroke-width=%226%22/><circle cx=%2250%22 cy=%2250%22 r=%2210%22 fill=%22%23C98A7D%22/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Fredoka:wght@500;600&family=Sora:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+<a class="skip-link" href="#overview">Skip to case study</a>
+<nav class="site-nav" aria-label="Main">
+  <a class="nav-name" href="../index.html">Laura Yuan <span class="wave" aria-hidden="true">👋</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html#data-first">Work</a></li>
+    <li><a href="../index.html#art">Art</a></li>
+    <li class="opt"><a href="../index.html#about">About</a></li>
+    <li><a href="../index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+<header class="case-hero" id="start" data-chapter="Start">
+  <a class="back-link" href="../index.html#right-now">← All work</a>
+  <p class="eyebrow">Experience · China Telecom · Jul–Aug 2026</p>
+  <h1 class="case-title">SmartCloud, Dongguan</h1>
+  <p class="case-sub">I interned across China Telecom's city headquarters cloud division and used the time to figure out how a big state carrier actually runs, from the customer-facing side to the technical backend.</p>
+  <dl class="tldr">
+    <div><dt>Role</dt><dd>SmartCloud Network Engineer Intern</dd></div>
+    <div><dt>Where</dt><dd>Dongguan, Guangdong</dd></div>
+    <div><dt>Rotations</dt><dd>Cloud · Delivery (云中台 · 交付), Monitoring Center (监控中心)</dd></div>
+    <div class="full"><dt>Outcome</dt><dd>Built a reusable slide-generation tool on the internal TeleAgent platform, with a content-traceability check that catches invented facts before a deck goes out.</dd></div>
+  </dl>
+</header>
+<main class="case-body">
+  <section id="overview" data-chapter="Overview">
+    <p class="chapter-num">01 · The tool</p>
+    <h2 class="reveal">Learning the product by building on it</h2>
+    <p class="reveal">My lead had me build a slide-generation tool on the internal TeleAgent platform, mostly so I'd know the product well enough to demo it live for customers later. It turns raw content into finished, on-brand product-intro decks for pre-sales.</p>
+    <p class="reveal">The part I'm proudest of is a content check that catches the model inventing facts before a deck ever goes out, since a confident wrong number in front of a client is worse than no deck at all. I got into the habit of checking every change against the slides it actually rendered, instead of taking the agent's word that it worked.</p>
+    <p class="reveal">I put together its on-demand "skills" setup by trial and error to keep the context window from overflowing. A company training later taught that same idea as a core concept, which was a nice moment of building something first and finding out afterward why it worked.</p>
+  </section>
+  <section id="delivery" data-chapter="Delivery">
+    <p class="chapter-num">02 · Cloud · Delivery</p>
+    <h2 class="reveal">The messier, more honest half</h2>
+    <p class="reveal">The cloud group at city headquarters is split into two sides. Pre-sales pitches the product and proposes the solution. Delivery, where I worked, takes over once a customer buys: showing them how to use it and handling maintenance when something breaks. Most of the cloud business is government and enterprise clients, the kind who care a lot about the security a state carrier can promise.</p>
+    <p class="reveal">Building on TeleAgent taught me the product from the inside instead of from a script. On customer visits I could actually show the thing working, and speak from having broken it and fixed it myself.</p>
+    <div class="reflection reveal"><p>In my last week, I went out with the local township team to install cloud PCs for a government department. People kept bringing up problems that had nothing to do with what we were there to deliver. My first instinct was that if I could solve something on the spot, I should. My colleague told me otherwise: guide people to handle it themselves when you can, because if you fix one person's problem today, everyone else finds you tomorrow, and your own work never gets done. I didn't expect the more effective version of helping to look like holding a boundary.</p></div>
+  </section>
+  <section id="monitoring" data-chapter="Monitoring">
+    <p class="chapter-num">03 · Monitoring Center</p>
+    <h2 class="reveal">My research logic, running a city</h2>
+    <p class="reveal">Monitoring Center has separate teams for cybersecurity anomalies, the physical server rooms (机房), power (backup systems keep the most critical machines running even if the city grid goes down), and cable breaks, copper and fiber. Instructions cascade down a real hierarchy: HQ divides Dongguan into five regions, each region routes down to its townships, each township down to the street.</p>
+    <p class="reveal">Most anomalies get auto-assigned straight to the district and township level for a routine fix. Only two kinds escalate to a person: issues sent down directly from Guangzhou, and the ones where the system notices something odd, like the same kind of request repeating in the same region at the same time. That second category is the same shape as my active learning work at E4E: <strong>automate the confident cases, route the ambiguous ones to a human.</strong> I wasn't expecting to find my own research logic running a telecom's fault system.</p>
+  </section>
+  <section id="building" data-chapter="Building">
+    <p class="chapter-num">04 · Learning to build</p>
+    <h2 class="reveal">From observing to building</h2>
+    <p class="reveal">A teammate on the Internet Maintenance (互联网维护) sub-team, who has a software engineering degree, walked me through real network topology diagrams: how intranet and internet-facing networks differ, and why a public IP and fiber connection are what actually let a device reach the internet. It was the first time concepts from the Huawei networking training I'd been studying showed up as something running at the scale of a province.</p>
+    <p class="reveal">He also builds the team's internal web tools, and walked me through Vue 3 from scratch. I went home and rebuilt a piece of my own portfolio in it, converting the hand-written skills bar into a real Vue component, to check I'd actually understood rather than just followed along.</p>
+  </section>
+</main>
+<div class="next-up reveal">
+  <a href="background-noise.html"><span><small>Next case study</small><b>Background Noise</b></span><span aria-hidden="true">→</span></a>
+</div>
+<footer style="margin-top:60px">Laura Yuan · UCSD 2029<small><span id="laJollaTime"></span></small></footer>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>

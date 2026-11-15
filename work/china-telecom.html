@@ -10,10 +10,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Fredoka:wght@500;600&family=Sora:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/site.css">
+  <link rel="stylesheet" href="../assets/css/telecom.css">
   <script>document.documentElement.classList.add('js')</script>
 </head>
-<body>
-<a class="skip-link" href="#overview">Skip to case study</a>
+<body class="tc">
+<a class="skip-link" href="#floor-tool">Skip to the story</a>
 <nav class="site-nav" aria-label="Main">
   <a class="nav-name" href="../index.html"><span class="nav-avatar" aria-hidden="true">LY</span>Laura Yuan</a>
   <ul class="nav-links">
@@ -23,46 +24,65 @@
     <li><a href="../index.html#contact">Contact</a></li>
   </ul>
 </nav>
-<header class="case-hero" id="start" data-chapter="Start">
-  <a class="back-link" href="../index.html#right-now">← All work</a>
-  <p class="eyebrow">Experience · China Telecom · Jul–Aug 2026</p>
-  <h1 class="case-title">SmartCloud, Dongguan</h1>
-  <p class="case-sub">I interned across China Telecom's city headquarters cloud division and used the time to figure out how a big state carrier actually runs, from the customer-facing side to the technical backend.</p>
-  <dl class="tldr">
-    <div><dt>Role</dt><dd>SmartCloud Network Engineer Intern</dd></div>
-    <div><dt>Where</dt><dd>Dongguan, Guangdong</dd></div>
-    <div><dt>Rotations</dt><dd>Cloud · Delivery (云中台 · 交付), Monitoring Center (监控中心)</dd></div>
-    <div class="full"><dt>Outcome</dt><dd>Built a reusable slide-generation tool on the internal TeleAgent platform, with a content-traceability check that catches invented facts before a deck goes out.</dd></div>
-  </dl>
+
+<header class="tc-hero" id="start" data-chapter="Start">
+  <div class="tc-hero-bg par" data-speed="-0.12" aria-hidden="true">
+    <!-- PLACEHOLDER: this photo is from the architect's post, not mine. Replace with my own photo (or my painting of the tower) before publishing. -->
+    <img src="../assets/img/telecom/hero-PLACEHOLDER-not-mine.webp" alt="">
+  </div>
+  <span class="photo-flag">Placeholder photo, not mine. Swap before publishing.</span>
+  <div class="tc-hero-text">
+    <a class="back-link" href="../index.html#right-now">← All work</a>
+    <p class="eyebrow">Experience · China Telecom · Jul–Aug 2026</p>
+    <h1 class="case-title">SmartCloud, Dongguan</h1>
+    <p class="case-sub">I interned in the cloud division at China Telecom's Dongguan headquarters and used the time to figure out how a big state carrier actually runs, from the customer-facing side to the technical backend.</p>
+    <dl class="tldr">
+      <div><dt>Role</dt><dd>SmartCloud Network Engineer Intern</dd></div>
+      <div><dt>Where</dt><dd>Dongguan, Guangdong</dd></div>
+      <div><dt>Rotations</dt><dd>Cloud · Delivery (云中台 · 交付), Monitoring Center (监控中心)</dd></div>
+      <div class="full"><dt>Outcome</dt><dd>Built a reusable slide-generation tool on the internal TeleAgent platform, with a content-traceability check that catches invented facts before a deck goes out.</dd></div>
+    </dl>
+  </div>
 </header>
-<main class="case-body">
-  <section id="overview" data-chapter="Overview">
-    <p class="chapter-num">01 · The tool</p>
-    <h2 class="reveal">Learning the product by building on it</h2>
-    <p class="reveal">My lead had me build a slide-generation tool on the internal TeleAgent platform, mostly so I'd know the product well enough to demo it live for customers later. It turns raw content into finished, on-brand product-intro decks for pre-sales.</p>
-    <p class="reveal">The part I'm proudest of is a content check that catches the model inventing facts before a deck ever goes out, since a confident wrong number in front of a client is worse than no deck at all. I got into the habit of checking every change against the slides it actually rendered, instead of taking the agent's word that it worked.</p>
-    <p class="reveal">I put together its on-demand "skills" setup by trial and error to keep the context window from overflowing. A company training later taught that same idea as a core concept, which was a nice moment of building something first and finding out afterward why it worked.</p>
+
+<main class="tower-wrap" id="tower">
+  <div class="tower" aria-hidden="true">
+    <div class="tower-crown"><span class="antenna"></span><span class="sign"></span></div>
+    <div class="tower-body"><div class="tower-lit"></div></div>
+    <div class="tower-base"></div>
+  </div>
+
+  <section class="floor left reveal" data-r="left" id="floor-tool" data-chapter="The tool">
+    <p class="floor-tag">01 <b>·</b> The tool</p>
+    <h2>Learning the product by building on it</h2>
+    <p>My lead had me build a slide-generation tool on the internal TeleAgent platform, mostly so I'd know the product well enough to demo it live for customers later. It turns raw content into finished, on-brand product-intro decks for pre-sales.</p>
+    <p>The part I'm proudest of is a content check that catches the model inventing facts before a deck ever goes out, since a confident wrong number in front of a client is worse than no deck at all. I got into the habit of checking every change against the slides it actually rendered, instead of taking the agent's word that it worked.</p>
+    <p>I put together its on-demand "skills" setup by trial and error to keep the context window from overflowing. A company training later taught that same idea as a core concept, which was a nice moment of building something first and finding out afterward why it worked.</p>
   </section>
-  <section id="delivery" data-chapter="Delivery">
-    <p class="chapter-num">02 · Cloud · Delivery</p>
-    <h2 class="reveal">The messier, more honest half</h2>
-    <p class="reveal">The cloud group at city headquarters is split into two sides. Pre-sales pitches the product and proposes the solution. Delivery, where I worked, takes over once a customer buys: showing them how to use it and handling maintenance when something breaks. Most of the cloud business is government and enterprise clients, the kind who care a lot about the security a state carrier can promise.</p>
-    <p class="reveal">Building on TeleAgent taught me the product from the inside instead of from a script. On customer visits I could actually show the thing working, and speak from having broken it and fixed it myself.</p>
-    <div class="reflection reveal"><p>In my last week, I went out with the local township team to install cloud PCs for a government department. People kept bringing up problems that had nothing to do with what we were there to deliver. My first instinct was that if I could solve something on the spot, I should. My colleague told me otherwise: guide people to handle it themselves when you can, because if you fix one person's problem today, everyone else finds you tomorrow, and your own work never gets done. I didn't expect the more effective version of helping to look like holding a boundary.</p></div>
+
+  <section class="floor right reveal" data-r="right" id="floor-delivery" data-chapter="Delivery">
+    <p class="floor-tag">02 <b>·</b> Cloud · Delivery</p>
+    <h2>The messier, more honest half</h2>
+    <p>The cloud group at city headquarters is split into two sides. Pre-sales pitches the product and proposes the solution. Delivery, where I worked, takes over once a customer buys: showing them how to use it and handling maintenance when something breaks. Most of the cloud business is government and enterprise clients, the kind who care a lot about the security a state carrier can promise.</p>
+    <p>Building on TeleAgent taught me the product from the inside instead of from a script. On customer visits I could actually show the thing working, and speak from having broken it and fixed it myself.</p>
+    <div class="reflection"><p>In my last week, I went out with the local township team to install cloud PCs for a government department. People kept bringing up problems that had nothing to do with what we were there to deliver. My first instinct was that if I could solve something on the spot, I should. My colleague told me otherwise: guide people to handle it themselves when you can, because if you fix one person's problem today, everyone else finds you tomorrow, and your own work never gets done. I didn't expect the more effective version of helping to look like holding a boundary.</p></div>
   </section>
-  <section id="monitoring" data-chapter="Monitoring">
-    <p class="chapter-num">03 · Monitoring Center</p>
-    <h2 class="reveal">My research logic, running a city</h2>
-    <p class="reveal">Monitoring Center has separate teams for cybersecurity anomalies, the physical server rooms (机房), power (backup systems keep the most critical machines running even if the city grid goes down), and cable breaks, copper and fiber. Instructions cascade down a real hierarchy: HQ divides Dongguan into five regions, each region routes down to its townships, each township down to the street.</p>
-    <p class="reveal">Most anomalies get auto-assigned straight to the district and township level for a routine fix. Only two kinds escalate to a person: issues sent down directly from Guangzhou, and the ones where the system notices something odd, like the same kind of request repeating in the same region at the same time. That second category is the same shape as my active learning work at E4E: <strong>automate the confident cases, route the ambiguous ones to a human.</strong> I wasn't expecting to find my own research logic running a telecom's fault system.</p>
+
+  <section class="floor left reveal" data-r="left" id="floor-monitoring" data-chapter="Monitoring">
+    <p class="floor-tag">03 <b>·</b> Monitoring Center</p>
+    <h2>My research logic, running a city</h2>
+    <p>Monitoring Center has separate teams for cybersecurity anomalies, the physical server rooms (机房), power (backup systems keep the most critical machines running even if the city grid goes down), and cable breaks, copper and fiber. Instructions cascade down a real hierarchy: HQ divides Dongguan into five regions, each region routes down to its townships, each township down to the street.</p>
+    <p>Most anomalies get auto-assigned straight to the district and township level for a routine fix. Only two kinds escalate to a person: issues sent down directly from Guangzhou, and the ones where the system notices something odd, like the same kind of request repeating in the same region at the same time. That second category is the same shape as my active learning work at E4E: <strong>automate the confident cases, route the ambiguous ones to a human.</strong> I wasn't expecting to find my own research logic running a telecom's fault system.</p>
   </section>
-  <section id="building" data-chapter="Building">
-    <p class="chapter-num">04 · Learning to build</p>
-    <h2 class="reveal">From observing to building</h2>
-    <p class="reveal">A teammate on the Internet Maintenance (互联网维护) sub-team, who has a software engineering degree, walked me through real network topology diagrams: how intranet and internet-facing networks differ, and why a public IP and fiber connection are what actually let a device reach the internet. It was the first time concepts from the Huawei networking training I'd been studying showed up as something running at the scale of a province.</p>
-    <p class="reveal">He also builds the team's internal web tools, and walked me through Vue 3 from scratch. I went home and rebuilt a piece of my own portfolio in it, converting the hand-written skills bar into a real Vue component, to check I'd actually understood rather than just followed along.</p>
+
+  <section class="floor right reveal" data-r="right" id="floor-building" data-chapter="Building">
+    <p class="floor-tag">04 <b>·</b> Learning to build</p>
+    <h2>From observing to building</h2>
+    <p>A teammate on the Internet Maintenance (互联网维护) sub-team, who has a software engineering degree, walked me through real network topology diagrams: how intranet and internet-facing networks differ, and why a public IP and fiber connection are what actually let a device reach the internet. It was the first time concepts from the Huawei networking training I'd been studying showed up as something running at the scale of a province.</p>
+    <p>He also builds the team's internal web tools, and walked me through Vue 3 from scratch. I went home and rebuilt a piece of my own portfolio in it, converting the hand-written skills bar into a real Vue component, to check I'd actually understood rather than just followed along.</p>
   </section>
 </main>
+
 <nav class="case-nav reveal" aria-label="More case studies">
   <a class="prev" href="clearmed.html"><small>← Previous case study</small><b>Plain Words, Same Facts</b></a>
   <a class="next" href="background-noise.html"><small>Back to the start →</small><b>Background Noise</b></a>
@@ -70,5 +90,6 @@
 </nav>
 <footer style="margin-top:60px">Laura Yuan · UCSD 2029<small><span id="laJollaTime"></span></small></footer>
 <script src="../assets/js/site.js"></script>
+<script src="../assets/js/telecom.js"></script>
 </body>
 </html>

@@ -1,0 +1,86 @@
+/* SmartCloud / China Telecom page.
+   Concept: the Dongguan HQ tower's facade has diagonal sky-atria that alternate left and right as it rises.
+   The page borrows that: a drawn tower runs down the middle as the progress spine, each "floor"
+   of the story branches off left or right from its own atrium, and the windows light up as you read. */
+body.tc {
+  --bg: #0F161E; --bg2: #18222D; --bg3: #1D2935; --border: #2C3A48;
+  --text: #E8EDF1; --muted: #B7C2CB; --hint: #9AA6B0;
+  --blue: #7FB0D6; --blue-ink: #9CC4E4; --blue-bg: #1A2A38;
+  --accent2: #F2C879; --coral-ink: #F2C879; --accent2-bg: #2F2A1E;
+  --glow: #F2C879;
+  --shadow: 0 16px 40px rgba(0,0,0,.45);
+}
+.tc::before { mix-blend-mode: screen; opacity: .08; }
+.tc .site-nav { background: color-mix(in srgb, #0F161E 88%, transparent); }
+@media (min-width: 1181px) { .tc .rail { display: none; } } /* the tower is this page's progress indicator */
+
+/* ---------- hero: night photo behind, text in front ---------- */
+.tc-hero { position: relative; min-height: 88vh; display: flex; align-items: flex-end; overflow: hidden; }
+.tc-hero-bg { position: absolute; inset: -80px 0 0 0; z-index: 0; }
+.tc-hero-bg img { position: absolute; right: 0; top: 0; height: 100%; width: 62%; object-fit: cover; object-position: center 30%; }
+.tc-hero-bg::after { content: ''; position: absolute; inset: 0; background:
+  linear-gradient(90deg, #0F161E 36%, rgba(15,22,30,.55) 62%, rgba(15,22,30,.15) 100%),
+  linear-gradient(0deg, #0F161E 0%, transparent 35%); }
+.tc-hero-text { position: relative; z-index: 1; max-width: 1180px; width: 100%; margin: 0 auto; padding: 60px 40px 40px; }
+.tc-hero-text .case-title { max-width: 560px; }
+.tc-hero-text .case-sub { max-width: 520px; }
+.tc-hero-text .tldr { max-width: 640px; background: rgba(24,34,45,.82); backdrop-filter: blur(6px); }
+.photo-flag { position: absolute; z-index: 2; right: 16px; bottom: 16px; font-size: 11px; color: #F2C879; background: rgba(15,22,30,.8); border: 1px dashed #F2C879; padding: 4px 10px; border-radius: 8px; }
+
+/* ---------- the tower spine ---------- */
+.tower-wrap { position: relative; max-width: 1180px; margin: 0 auto; padding: 140px 40px 120px; }
+.tower { position: absolute; left: 50%; top: 0; bottom: 40px; width: 132px; transform: translateX(-50%); display: flex; flex-direction: column; pointer-events: none; }
+.tower-crown { position: relative; height: 120px; flex-shrink: 0; }
+.tower-crown .antenna { position: absolute; left: 62%; bottom: 34px; width: 3px; height: 86px; background: linear-gradient(#C9D4DD, #6C7C8A); border-radius: 2px; }
+.tower-crown .sign { position: absolute; left: 0; right: 0; bottom: 0; height: 36px; background: #16202B; border: 1px solid #2F3E4D; border-bottom: 0; }
+.tower-crown .sign::after { content: ''; position: absolute; left: 22%; right: 22%; top: 13px; height: 9px; border-radius: 5px; background: #EAF3FA; box-shadow: 0 0 14px 4px rgba(200,225,245,.55); }
+.tower-body { position: relative; flex: 1; border: 1px solid #2F3E4D; overflow: hidden;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 15px, rgba(140,165,185,.16) 15px 16px),
+    repeating-linear-gradient(0deg, transparent 0 21px, rgba(140,165,185,.2) 21px 22px),
+    linear-gradient(90deg, #121B25, #1A2633 55%, #121B25); }
+/* windows light up from the top as you read */
+.tower-lit { position: absolute; left: 0; right: 0; top: 0; height: 0; background:
+    radial-gradient(3px 4px at 7px 10px, rgba(242,200,121,.95) 98%, transparent) 0 0 / 16px 22px,
+    radial-gradient(3px 4px at 7px 10px, rgba(242,200,121,.6) 98%, transparent) 8px 11px / 32px 44px;
+  -webkit-mask: linear-gradient(transparent, #000 40px); mask: linear-gradient(transparent, #000 40px); opacity: .55; }
+.tower-base { height: 24px; flex-shrink: 0; margin: 0 -60px; border-top: 1px solid #2F3E4D; background: linear-gradient(#16202B, transparent); }
+/* atria: the diagonal notches, alternating sides, one per floor */
+.notch { position: absolute; width: 70%; height: 150px; background: linear-gradient(160deg, #26323F, #1B2631); border-top: 1px solid #3A4A5A; transition: background .5s, box-shadow .5s; }
+.notch.left { left: 0; clip-path: polygon(0 0, 100% 0, 0 100%); }
+.notch.right { right: 0; clip-path: polygon(0 0, 100% 0, 100% 100%); }
+.notch.on { background: linear-gradient(160deg, #FFE7B0, #F2C879 40%, #C9954A); }
+
+/* ---------- floors: content branching left / right ---------- */
+.floor { position: relative; width: calc(50% - 120px); background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; padding: 30px 30px 18px; transition: border-color .4s, box-shadow .4s; }
+.floor + .floor { margin-top: -40px; }
+.floor.left { margin-right: auto; }
+.floor.right { margin-left: auto; }
+.floor.on { border-color: rgba(242,200,121,.6); box-shadow: 0 0 0 1px rgba(242,200,121,.15), var(--shadow); }
+/* the diagonal beam that ties a floor to its atrium */
+.floor::before { content: ''; position: absolute; top: 46px; width: 104px; height: 2px; background: linear-gradient(90deg, var(--border), var(--border)); transform-origin: left center; transition: background .4s; }
+.floor.left::before { left: 100%; transform: rotate(28deg); }
+.floor.right::before { right: 100%; transform-origin: right center; transform: rotate(-28deg); }
+.floor.on::before { background: var(--glow); box-shadow: 0 0 8px rgba(242,200,121,.6); }
+.floor-tag { display: inline-flex; gap: 8px; align-items: center; font-family: var(--label); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent2); margin-bottom: 8px; }
+.floor-tag b { font-weight: 600; color: var(--hint); }
+.floor h2 { font-size: 28px; margin-bottom: 12px; }
+.floor p { font-size: 15px; color: var(--muted); margin-bottom: 14px; }
+.floor p strong { color: var(--text); }
+.floor .reflection { background: var(--accent2-bg); border-radius: 14px; padding: 16px 18px; margin: 4px 0 14px; }
+.floor .reflection p { color: var(--text); font-style: italic; margin: 0; font-size: 14.5px; }
+.tc .case-nav a { background: var(--bg2); }
+
+@media (max-width: 960px) {
+  .tower-wrap { padding: 60px 20px 80px 20px; }
+  .tower { left: 22px; transform: none; width: 30px; }
+  .tower-crown { height: 70px; } .tower-crown .antenna { height: 46px; } .tower-crown .sign { height: 20px; }
+  .tower-crown .sign::after { top: 7px; height: 6px; }
+  .tower-base { margin: 0 -10px; }
+  .notch { width: 100%; height: 50px; }
+  .floor, .floor.left, .floor.right { width: auto; margin-left: 50px; margin-right: 0; }
+  .floor + .floor { margin-top: 28px; }
+  .floor::before, .floor.left::before, .floor.right::before { left: auto; right: 100%; width: 24px; transform: none; top: 40px; }
+  .tc-hero-bg img { width: 100%; opacity: .55; }
+  .tc-hero-bg::after { background: linear-gradient(0deg, #0F161E 15%, rgba(15,22,30,.6) 70%, rgba(15,22,30,.4)); }
+}

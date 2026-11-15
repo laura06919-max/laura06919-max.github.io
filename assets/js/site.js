@@ -4,6 +4,31 @@
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const canHover = window.matchMedia('(hover: hover)').matches;
 
+  /* ---------- mini me: a little figure walking in place next to my name ----------
+     Inline SVG so CSS can animate the limbs; replaces the "LY" fallback. Hover the name and she waves. */
+  const slot = document.querySelector('.nav-avatar');
+  if (slot) {
+    slot.classList.add('mini-me');
+    slot.innerHTML = `<svg viewBox="0 0 40 60" width="34" height="51" aria-hidden="true">
+      <ellipse class="mm-shadow" cx="20" cy="57.5" rx="8" ry="1.8"/>
+      <g class="mm-body">
+        <g class="mm-leg b"><rect x="17.6" y="38" width="4.4" height="15" rx="2.2" class="mm-skin back"/><rect x="16.4" y="51" width="7.6" height="3.6" rx="1.8" class="mm-shoe back"/></g>
+        <g class="mm-arm b"><rect x="18.4" y="24.5" width="3.6" height="12" rx="1.8" class="mm-skin back"/></g>
+        <path class="mm-skirt" d="M14.6 33.5 H25.4 L28 44 Q20 46 12 44 Z"/>
+        <g class="mm-leg a"><rect x="17.6" y="38" width="4.4" height="15" rx="2.2" class="mm-skin"/><rect x="16.4" y="51" width="7.6" height="3.6" rx="1.8" class="mm-shoe"/></g>
+        <rect class="mm-top" x="14.2" y="22" width="11.6" height="13" rx="4"/>
+        <path class="mm-collar" d="M17 22.6 L20 25.4 L23 22.6"/>
+        <g class="mm-head">
+          <path class="mm-hair" d="M12.6 15 C12 7 17 4.2 21 4.4 C26.6 4.6 28.4 9 27.6 14 L27.4 22.5 C25.5 23.8 24 23.4 23.2 22 L23 17 L16 17 L15.4 23.4 C14 24 12.6 23.4 12.2 22.4 Z"/>
+          <circle class="mm-skin" cx="21" cy="13.4" r="6.4"/>
+          <path class="mm-hair" d="M14.4 12 C15 6.6 19.6 5.2 23 5.8 C26.4 6.6 27.4 9.4 27.2 12 C24.6 11.2 22.4 9.8 21.4 8.2 C20.2 10.4 17.6 11.8 14.4 12 Z"/>
+          <circle cx="24.6" cy="13.8" r="0.95" class="mm-eye"/><circle cx="25.2" cy="16.4" r="1.4" class="mm-blush"/>
+        </g>
+        <g class="mm-arm a"><rect x="18.4" y="24.5" width="3.6" height="12" rx="1.8" class="mm-skin"/></g>
+      </g>
+    </svg>`;
+  }
+
   /* ---------- hero entrance ---------- */
   const hero = document.querySelector('.hero');
   if (hero) requestAnimationFrame(() => setTimeout(() => hero.classList.add('loaded'), 80));

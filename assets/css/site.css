@@ -353,3 +353,37 @@ body::before { content: ''; position: fixed; inset: 0; pointer-events: none; z-i
 .nav-avatar img { width: 100%; height: 100%; object-fit: cover; }
 .nav-name:hover .nav-avatar { transform: rotate(-8deg) scale(1.08); }
 .nav-name { gap: 10px; }
+
+/* ---------- mini me (nav figure) ---------- */
+.nav-avatar.mini-me { width: 34px; height: 51px; border-radius: 0; background: none; border: 0; box-shadow: none; overflow: visible; margin: -8px 0 -6px; }
+.nav-name:hover .nav-avatar.mini-me { transform: none; }
+.mini-me svg { display: block; overflow: visible; }
+.mm-skin { fill: #F1CDB0; } .mm-hair { fill: #2A2430; } .mm-top { fill: #6F95B0; } .mm-skirt { fill: #CDB892; }
+.mm-shoe { fill: #2E4456; } .mm-skin.back { fill: #D9AF90; } .mm-shoe.back { fill: #1E2E3C; } .mm-eye { fill: #2A2430; } .mm-blush { fill: #E59A8A; opacity: .55; }
+.mm-collar { fill: none; stroke: #C98A7D; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.mm-shadow { fill: rgba(46,68,86,.18); }
+.mm-leg, .mm-arm { transform-box: view-box; }
+.mm-leg { transform-origin: 19.8px 38.5px; } .mm-arm { transform-origin: 20.2px 25.5px; }
+.mm-head { transform-box: view-box; transform-origin: 20px 20px; }
+/* walk in place */
+.mm-leg.a { animation: mm-swing .76s ease-in-out infinite alternate; }
+.mm-leg.b { animation: mm-swing .76s ease-in-out infinite alternate-reverse; }
+.mm-arm.a { animation: mm-arm .76s ease-in-out infinite alternate-reverse; }
+.mm-arm.b { animation: mm-arm .76s ease-in-out infinite alternate; }
+.mm-body { animation: mm-bob .38s ease-in-out infinite alternate; }
+.mm-head { animation: mm-nod .76s ease-in-out infinite alternate; }
+.mm-shadow { transform-box: fill-box; transform-origin: center; animation: mm-shadow .38s ease-in-out infinite alternate; }
+@keyframes mm-swing { from { transform: rotate(34deg); } to { transform: rotate(-34deg); } }
+@keyframes mm-arm { from { transform: rotate(42deg); } to { transform: rotate(-42deg); } }
+@keyframes mm-bob { from { transform: translateY(0); } to { transform: translateY(-1.2px); } }
+@keyframes mm-nod { from { transform: rotate(-2deg); } to { transform: rotate(2deg); } }
+@keyframes mm-shadow { from { transform: scaleX(1); } to { transform: scaleX(.85); } }
+/* hover the name: she stops and waves */
+.nav-name:hover .mm-leg, .nav-name:hover .mm-body, .nav-name:hover .mm-shadow, .nav-name:hover .mm-arm.b, .nav-name:hover .mm-head,
+.nav-name:focus-visible .mm-leg, .nav-name:focus-visible .mm-body, .nav-name:focus-visible .mm-arm.b { animation: none; transform: none; }
+.nav-name:hover .mm-arm.a, .nav-name:focus-visible .mm-arm.a { animation: mm-wave .5s ease-in-out infinite alternate; }
+@keyframes mm-wave { from { transform: rotate(-105deg); } to { transform: rotate(-140deg); } }
+.tc .mm-shadow, .dh .mm-shadow { fill: rgba(0,0,0,.35); }
+@media (prefers-reduced-motion: reduce) { .mini-me * { animation: none !important; } }
+.tc .mm-hair, .dh .mm-hair { stroke: rgba(232,237,241,.35); stroke-width: .7; }
+@media (prefers-color-scheme: dark) { .mm-hair { stroke: rgba(232,237,241,.35); stroke-width: .7; } }

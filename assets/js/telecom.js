@@ -6,7 +6,6 @@
   if (!stage || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const camera = stage.querySelector('.tz-camera');
   const tower = stage.querySelector('.tz-tower');
-  const body = stage.querySelector('.tz-body');
   const atria = [...stage.querySelectorAll('.atrium')];
   const steps = [...document.querySelectorAll('.tz-steps .step')];
   const clamp = (v) => Math.max(0, Math.min(1, v));
@@ -18,8 +17,8 @@
     return { s: Math.min((vh * 0.84) / H, (vw * 0.5) / W), px: W / 2, py: H / 2, X: vw / 2, Y: vh / 2 };
   }
   function target(i, vw, vh) {
-    const a = atria[i], bodyTop = body.offsetTop;
-    const px = a.offsetLeft + a.offsetWidth / 2, py = bodyTop + a.offsetTop + a.offsetHeight / 2;
+    const a = atria[i];
+    const px = a.offsetLeft + a.offsetWidth / 2, py = a.offsetTop + a.offsetHeight / 2;
     const narrow = vw < 760;
     const s = narrow ? Math.min((vw * 0.8) / a.offsetWidth, (vh * 0.3) / a.offsetHeight)
                      : Math.min((vw * 0.46) / a.offsetWidth, (vh * 0.8) / a.offsetHeight);

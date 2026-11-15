@@ -40,6 +40,7 @@
     <div><dt>Role</dt><dd>ML + design, team of 4</dd></div>
     <div><dt>Timeline</dt><dd>48-hour hackathon</dd></div>
     <div><dt>Stack</dt><dd>Streamlit, Random Forest, Groq LLM</dd></div>
+    <div><dt>Dashboard</dt><dd><a class="text-link" href="https://laura06919-max.github.io/datahacks-2026/" target="_blank" rel="noopener">Open the live dashboard ↗</a></dd></div>
     <div class="full"><dt>Outcome</dt><dd>3rd place, ML/AI track. <a class="text-link" href="https://github.com/laura06919-max/datahacks-2026" target="_blank" rel="noopener">Code on GitHub ↗</a></dd></div>
   </dl>
 </header>
@@ -54,6 +55,8 @@
     <p class="chapter-num">02 · Who it's for</p>
     <h2 class="reveal">Not us</h2>
     <p class="reveal">Not us, and not other data science students. We had to keep reminding ourselves of that. The actual user is someone with zero ML background (a policymaker, a science communicator, maybe a curious local) who needs to look at the screen and know, fast, whether a region's ecosystem is doing okay, and trust that answer enough to act on it.</p>
+    <figure class="figure reveal" data-r="pop"><img src="../assets/img/ocean/dash-regional.webp" alt="Ocean Pulse dashboard, Regional Policy Advisor tab: pick a California region and see average temperature, oxygen, percent critical and stressed, and a health trend." loading="lazy"><figcaption>The Regional Policy Advisor: pick a stretch of coast, see whether it's healthy, then ask for recommendations. Built for someone with zero ML background.</figcaption></figure>
+
   </section>
   <section id="changes" data-chapter="Changes">
     <p class="chapter-num">03 · What we changed</p>
@@ -63,6 +66,10 @@
       <div class="decision reveal"><div class="before"><span class="tag">Before</span><p>A health score by itself, just a number floating there.</p></div><div><span class="tag">After</span><p>A Groq model translates the prediction into plain language about what it might mean for regional policy. It closes the gap between "here's a score" and "here's why you should care."</p></div></div>
       <div class="decision reveal"><div class="before"><span class="tag">Before</span><p>You could click literally anywhere on the map. Felt cool in the demo, but it was kind of dishonest.</p></div><div><span class="tag">After</span><p>Scoped to the government-regulated zones where ocean policy actually gets made. Less flashy, more true to how it would be used.</p></div></div>
     </div>
+    <figure class="figure reveal" data-r="pop"><img src="../assets/img/ocean/dash-health.webp" alt="Ocean Pulse dashboard, Health Over Time tab: stacked area chart of healthy, stressed and critical samples from 1949 to 2021." loading="lazy"><figcaption>"Is this region healthy right now?" moved to the front. The model details live further back, under Model Insights.</figcaption></figure>
+  <figure class="figure reveal" data-r="pop"><img src="../assets/img/ocean/dash-model.webp" alt="Ocean Pulse dashboard, Model Insights tab: feature importance bars next to plain-language explanations of what each feature means." loading="lazy"><figcaption>Model Insights pairs each feature with a sentence explaining what it means for the ocean, instead of leaving people with a bar chart.</figcaption></figure>
+  <figure class="figure reveal" data-r="pop"><img src="../assets/img/ocean/map-health.webp" alt="Map of the California coast with sampling stations colored by ecosystem health: healthy, stressed, critical." loading="lazy"><figcaption>Where the samples come from, colored by the model's health label. We later scoped the interactive map to government-regulated zones.</figcaption></figure>
+
   </section>
   <section id="differently" data-chapter="Reflect">
     <p class="chapter-num">04 · Reflection</p>
@@ -77,5 +84,7 @@
 </nav>
 <footer style="margin-top:60px">Laura Yuan · UCSD 2029<small><span id="laJollaTime"></span></small></footer>
 <script src="../assets/js/site.js"></script>
+<!-- Visitor stats: GoatCounter (no cookies, no personal data). Dashboard: https://laurayuan.goatcounter.com -->
+<script data-goatcounter="https://laurayuan.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

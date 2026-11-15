@@ -19,6 +19,62 @@
     reveals.forEach((el) => el.classList.add('visible'));
   }
 
+  /* ---------- case pages: a ghost number behind each section (background layer) ---------- */
+  document.querySelectorAll('.case-body section[data-chapter]').forEach((sec, i) => {
+    const g = document.createElement('span');
+    g.className = 'par ghost-num ' + (i % 2 ? 'left' : 'right');
+    g.dataset.speed = '-0.1'; g.setAttribute('aria-hidden', 'true');
+    g.textContent = String(i + 1).padStart(2, '0');
+    sec.prepend(g);
+  });
+  document.querySelectorAll('.case-body section .reveal:not([data-r])').forEach((el, i) => {
+    if (el.matches('h2')) el.dataset.r = 'left';
+    else if (el.matches('.decision, .notes li, .figure, .two-up, .tldr, .reflection')) el.dataset.r = 'pop';
+  });
+
+  /* ---------- stagger: children of [data-stagger] enter one after another ---------- */
+  document.querySelectorAll('[data-stagger]').forEach((g) => {
+    [...g.querySelectorAll(':scope > .reveal')].forEach((el, i) => { el.style.transitionDelay = (i * 90) + 'ms'; });
+  });
+
+  /* ---------- depth: parallax layers + flyers ----------
+     Each .par moves relative to its parent section, so nothing reads its own transformed rect. */
+  const pars = [...document.querySelectorAll('[data-speed]')];
+  const flyers = [...document.querySelectorAll('[data-fly]')];
+  if (!reduceMotion && (pars.length || flyers.length)) {
+    let queued = false;
+    const frame = () => {
+      queued = false;
+      const vh = innerHeight;
+      pars.forEach((el) => {
+        const host = el.offsetParent || el.parentElement;
+        const r = host.getBoundingClientRect();
+        if (r.bottom < -vh || r.top > vh * 2) return;
+        const d = (r.top + r.height / 2) - vh / 2;
+        const py = Math.max(-140, Math.min(140, -d * parseFloat(el.dataset.speed)));
+        el.style.setProperty('--py', py.toFixed(1) + 'px');
+      });
+      flyers.forEach((el) => {
+        const r = el.parentElement.getBoundingClientRect();
+        const p = Math.min(1, Math.max(0, (vh - r.top) / (vh + r.height * 0.6)));
+        const w = el.offsetWidth;
+        el.style.setProperty('--px', (-w + p * (innerWidth + w * 1.2)).toFixed(1) + 'px');
+      });
+    };
+    const req = () => { if (!queued) { queued = true; requestAnimationFrame(frame); } };
+    addEventListener('scroll', req, { passive: true }); addEventListener('resize', req); frame();
+  }
+
+  /* ---------- hero: layers follow the mouse a little ---------- */
+  const heroLayers = document.querySelectorAll('.hero [data-depth]');
+  if (heroLayers.length && canHover && !reduceMotion) {
+    hero.addEventListener('mousemove', (e) => {
+      const r = hero.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5, y = (e.clientY - r.top) / r.height - 0.5;
+      heroLayers.forEach((l) => { const k = parseFloat(l.dataset.depth); l.style.translate = `${(x * k).toFixed(1)}px ${(y * k).toFixed(1)}px`; });
+    });
+  }
+
   /* ---------- soft cursor glow (native cursor stays) ---------- */
   if (canHover && !reduceMotion) {
     const glow = document.createElement('div');

@@ -12,11 +12,11 @@
   <link rel="stylesheet" href="assets/css/site.css">
   <script>document.documentElement.classList.add('js')</script>
 </head>
-<body>
+<body class="home">
 <a class="skip-link" href="#data-first">Skip to work</a>
 
 <nav class="site-nav" aria-label="Main">
-  <a class="nav-name" href="#top">Laura Yuan <span class="wave" aria-hidden="true">👋</span></a>
+  <a class="nav-name" href="#top"><span class="nav-avatar" aria-hidden="true">LY</span>Laura Yuan</a>
   <ul class="nav-links">
     <li><a href="#data-first">Work</a></li>
     <li><a href="#art">Art</a></li>
@@ -27,6 +27,11 @@
 
 <!-- 00 · HELLO -->
 <header class="hero" id="top" data-chapter="Hello">
+  <div class="par blob" data-speed="-0.11" data-depth="-10" style="left:-60px;top:60px" aria-hidden="true"></div>
+  <div class="par blob coral" data-speed="-0.07" data-depth="-6" style="right:-80px;bottom:40px;--rot:12deg" aria-hidden="true"></div>
+  <div class="par frame floater hide-sm" data-speed="0.16" data-depth="22" style="left:7%;top:24%;--rot:-8deg" aria-hidden="true"><span class="tape"></span><img src="assets/img/art/the-sunset.jpg" alt=""></div>
+  <div class="par frame floater hide-sm" data-speed="0.23" data-depth="34" style="right:8%;top:16%;--rot:7deg" aria-hidden="true"><span class="tape"></span><img src="assets/img/art/cat-window.jpg" alt=""></div>
+  <img class="par floater hide-sm" data-speed="0.27" data-depth="40" src="assets/img/datahacks/dyno-green-waving.webp" alt="" aria-hidden="true" style="right:12%;bottom:6%;width:110px;--rot:-4deg">
   <div class="hero-collage" aria-hidden="true">
     <div class="paper-piece piece-ds">Data science</div>
     <div class="paper-piece piece-cogs">Cognitive science</div>
@@ -51,13 +56,16 @@
 
   <!-- 01 · DATA FIRST -->
   <section class="chapter" id="data-first" data-chapter="Data first">
-    <div class="chapter-head reveal">
+    <span class="par ghost-num right" data-speed="-0.09" aria-hidden="true">01</span>
+    <div class="par blob hide-sm" data-speed="-0.05" style="left:-120px;top:420px;--rot:-6deg" aria-hidden="true"></div>
+    <svg class="par floater hide-sm" data-speed="0.14" viewBox="0 0 120 80" style="right:2%;top:120px;width:120px;--rot:-10deg" aria-hidden="true"><path d="M6 46 C26 26, 44 24, 60 40 C70 22, 92 12, 114 18 C98 26, 86 40, 80 54 C66 50, 54 56, 46 66 C40 56, 24 48, 6 46Z" fill="var(--blue-light)"/><circle cx="96" cy="22" r="2.4" fill="var(--text)"/></svg>
+    <div class="chapter-head reveal" data-r="left">
       <span class="chapter-num">01 · Data first</span>
       <h2 class="chapter-title">I started in the data.</h2>
       <p class="chapter-lede">Models, pipelines, accuracy scores. But the most interesting results kept turning out to be about people: who has to trust the model, and who has to read the dashboard.</p>
     </div>
-    <div class="cards">
-      <a class="card wide reveal" href="work/background-noise.html">
+    <div class="cards" data-stagger>
+      <a class="card wide reveal" data-r="pop" href="work/background-noise.html">
         <div class="card-visual svg" aria-hidden="true">
           <svg viewBox="0 0 320 180"><rect width="320" height="180" fill="var(--bg2)"/>
             <g fill="var(--blue)" opacity=".85">
@@ -81,7 +89,7 @@
           <span class="more">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </div>
       </a>
-      <a class="card reveal" href="work/ocean-pulse.html">
+      <a class="card reveal" data-r="pop" href="work/ocean-pulse.html">
         <div class="card-visual"><img src="assets/img/ocean-pulse-team.jpg" alt="The Ocean Pulse team after the DataHacks 2026 demo" loading="lazy"></div>
         <div class="card-body">
           <span class="badge coral">DataHacks 2026 · 3rd place, ML/AI</span>
@@ -91,7 +99,7 @@
           <span class="more">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </div>
       </a>
-      <div class="card reveal" style="clip-path:none;background:none;justify-content:center">
+      <div class="card reveal offset" data-r="right" style="clip-path:none;background:none;justify-content:center;rotate:0deg">
         <div class="interlude" style="padding:10px 6px;text-align:left">
           <p style="font-size:22px;margin:0">"If it says 'probably species X, but not confident,' what is a biologist supposed to do with that?"</p>
           <span>Sitting with that question is what turned me toward human-centered design.</span>
@@ -101,14 +109,17 @@
   </section>
 
   <!-- 02 · THEN PEOPLE -->
-  <section class="chapter" id="then-people" data-chapter="Then people">
-    <div class="chapter-head reveal">
+  <section class="chapter alt band" id="then-people" data-chapter="Then people">
+    <span class="par ghost-num left" data-speed="-0.09" aria-hidden="true">02</span>
+    <div class="par flyer" data-fly aria-hidden="true"><span class="banner">now designing for people →</span><span class="rope"></span><img src="assets/img/datahacks/dyno-green-standing.webp" alt=""></div>
+    <img class="par floater hide-sm" data-speed="0.18" src="assets/img/datahacks/sticker-loot-chest.webp" alt="" aria-hidden="true" style="left:-30px;bottom:120px;width:120px;--rot:-12deg">
+    <div class="chapter-head reveal" data-r="right" style="padding-top:70px">
       <span class="chapter-num">02 · Then people</span>
       <h2 class="chapter-title">So I started designing for them.</h2>
       <p class="chapter-lede">Both of these projects come from the same question: what does someone need to know, at the exact moment they need to know it?</p>
     </div>
-    <div class="cards">
-      <a class="card wide reveal" href="work/datahacks.html">
+    <div class="cards" data-stagger>
+      <a class="card wide reveal" data-r="pop" href="work/datahacks.html">
         <div class="card-visual dh">
           <img src="assets/img/datahacks-screens/q1.webp" alt="DataHacks 2027 applicant portal, About You step, Nether theme" loading="lazy">
           <img class="mini-dyno" src="assets/img/datahacks/dyno-green-waving.webp" alt="" aria-hidden="true">
@@ -121,8 +132,8 @@
           <span class="more">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </div>
       </a>
-      <a class="card wide reveal" href="work/bistro.html">
-        <div class="card-visual" style="background:var(--bg2)"><img src="assets/img/bistro-modal.jpg" alt="Triton2Go redesign: a warning modal before payment" loading="lazy" style="object-fit:contain;padding:18px"></div>
+      <a class="card wide flip reveal" data-r="pop" href="work/bistro.html">
+        <div class="card-visual" style="background:var(--bg2);display:grid;place-items:center;padding:22px"><img src="assets/img/bistro-modal.jpg" alt="Triton2Go redesign: a warning modal before payment" loading="lazy" style="width:auto;height:auto;max-height:320px;max-width:100%;object-fit:contain;border-radius:18px;box-shadow:var(--shadow)"></div>
         <div class="card-body">
           <span class="badge coral">HCI redesign · Mobile UX · Playable demo</span>
           <h3>The 30-Minute Lie</h3>
@@ -136,13 +147,15 @@
 
   <!-- 03 · RIGHT NOW -->
   <section class="chapter" id="right-now" data-chapter="Right now">
-    <div class="chapter-head reveal">
+    <span class="par ghost-num right" data-speed="-0.09" aria-hidden="true">03</span>
+    <div class="par blob coral hide-sm" data-speed="-0.05" style="right:-140px;top:260px;--rot:8deg" aria-hidden="true"></div>
+    <div class="chapter-head reveal" data-r="left">
       <span class="chapter-num">03 · Right now</span>
       <h2 class="chapter-title">Both halves, at once.</h2>
       <p class="chapter-lede">The work I'm doing now is where the model and the person meet: AI that has to be readable, and infrastructure that has to be trusted.</p>
     </div>
-    <div class="cards">
-      <a class="card reveal" href="work/clearmed.html">
+    <div class="cards" data-stagger>
+      <a class="card reveal" data-r="pop" href="work/clearmed.html">
         <div class="card-visual svg" aria-hidden="true">
           <svg viewBox="0 0 320 200"><rect width="320" height="200" fill="var(--bg2)"/>
             <g font-family="Sora, sans-serif" font-size="9" text-anchor="middle" fill="var(--muted)">
@@ -165,7 +178,7 @@
           <span class="more">Read the case study <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </div>
       </a>
-      <a class="card reveal" href="work/china-telecom.html">
+      <a class="card reveal offset" data-r="pop" href="work/china-telecom.html">
         <div class="card-visual svg" aria-hidden="true">
           <svg viewBox="0 0 320 200"><rect width="320" height="200" fill="var(--bg2)"/>
             <g stroke="var(--blue)" stroke-width="1.5" fill="none" opacity=".7">
@@ -192,8 +205,11 @@
   </section>
 
   <!-- 04 · ART -->
-  <section class="chapter" id="art" data-chapter="The other half">
-    <div class="chapter-head reveal">
+  <section class="chapter alt band sand" id="art" data-chapter="The other half">
+    <span class="par ghost-num left" data-speed="-0.09" aria-hidden="true">04</span>
+    <div class="par frame floater hide-sm" data-speed="0.14" style="left:4%;top:60px;--rot:-7deg" aria-hidden="true"><span class="tape"></span><img src="assets/img/art/slot-canyon.JPG" alt=""></div>
+    <div class="par frame floater hide-sm" data-speed="0.25" style="left:22%;top:150px;--rot:5deg" aria-hidden="true"><span class="tape"></span><img src="assets/img/art/digital-cafe.jpg" alt=""></div>
+    <div class="chapter-head reveal" data-r="right">
       <span class="chapter-num">04 · The other half</span>
       <h2 class="chapter-title">And I paint.</h2>
       <p class="chapter-lede">Oil, acrylic, gouache and Procreate. Painting is where I learned to look at something for a long time before deciding what's wrong with it, which turns out to be most of design.</p>
@@ -206,23 +222,24 @@
       </div>
       <button class="ghost-btn" data-open-book>Flip through as a book →</button>
     </div>
-    <div class="art-grid">
-      <button class="art-card reveal" data-medium="paint"><img src="assets/img/art/the-sunset.jpg" alt="Oil painting of a sunset" loading="lazy"><div class="art-meta"><p class="art-title">The sunset</p><p class="art-medium">Oil on canvas</p></div></button>
-      <button class="art-card reveal" data-medium="paint"><img src="assets/img/art/fantasy-figure.jpg" alt="Acrylic painting of a fantasy figure" loading="lazy"><div class="art-meta"><p class="art-title">Ukyo Tachibana Recreation</p><p class="art-medium">Acrylic on canvas</p></div></button>
-      <button class="art-card reveal" data-medium="paint"><img src="assets/img/art/floral-bouquet.JPG" alt="Oil painting of a floral bouquet" loading="lazy"><div class="art-meta"><p class="art-title">Floral bouquet</p><p class="art-medium">Oil on canvas</p></div></button>
-      <button class="art-card reveal" data-medium="paint"><img src="assets/img/art/slot-canyon.JPG" alt="Oil painting of a slot canyon" loading="lazy"><div class="art-meta"><p class="art-title">Slot canyon</p><p class="art-medium">Oil on canvas</p></div></button>
-      <button class="art-card reveal" data-medium="paint"><img src="assets/img/art/cat-window.jpg" alt="Acrylic painting of a cat by a window" loading="lazy"><div class="art-meta"><p class="art-title">Cat by the window</p><p class="art-medium">Acrylic on canvas</p></div></button>
-      <button class="art-card reveal" data-medium="paint"><img src="assets/img/art/plant-dino.jpg" alt="Acrylic studio still life" loading="lazy"><div class="art-meta"><p class="art-title">Studio still life</p><p class="art-medium">Acrylic on canvas</p></div></button>
-      <button class="art-card reveal" data-medium="paint"><img src="assets/img/art/snake-flowers.jpg" alt="Gouache painting of a snake and flowers" loading="lazy"><div class="art-meta"><p class="art-title">Snake and flowers</p><p class="art-medium">Gouache</p></div></button>
-      <button class="art-card reveal" data-medium="paint"><img src="assets/img/art/china-triptych.JPG" alt="Acrylic triptych about a flood at home" loading="lazy"><div class="art-meta"><p class="art-title">Home's Flood, 2021</p><p class="art-medium">Acrylic triptych</p></div></button>
-      <button class="art-card reveal" data-medium="digital"><img src="assets/img/art/digital-portrait.jpg" alt="Digital painting of Chang'e" loading="lazy"><div class="art-meta"><p class="art-title">Chang'e Recreation</p><p class="art-medium">Procreate</p></div></button>
-      <button class="art-card reveal" data-medium="digital"><img src="assets/img/art/digital-cafe.jpg" alt="Digital illustration of a cafe" loading="lazy"><div class="art-meta"><p class="art-title">Poor Wifi Cafe</p><p class="art-medium">Procreate</p></div></button>
+    <div class="art-grid" data-stagger>
+      <button class="art-card reveal" data-r="pop" data-medium="paint"><img src="assets/img/art/the-sunset.jpg" alt="Oil painting of a sunset" loading="lazy"><div class="art-meta"><p class="art-title">The sunset</p><p class="art-medium">Oil on canvas</p></div></button>
+      <button class="art-card reveal" data-r="pop" data-medium="paint"><img src="assets/img/art/fantasy-figure.jpg" alt="Acrylic painting of a fantasy figure" loading="lazy"><div class="art-meta"><p class="art-title">Ukyo Tachibana Recreation</p><p class="art-medium">Acrylic on canvas</p></div></button>
+      <button class="art-card reveal" data-r="pop" data-medium="paint"><img src="assets/img/art/floral-bouquet.JPG" alt="Oil painting of a floral bouquet" loading="lazy"><div class="art-meta"><p class="art-title">Floral bouquet</p><p class="art-medium">Oil on canvas</p></div></button>
+      <button class="art-card reveal" data-r="pop" data-medium="paint"><img src="assets/img/art/slot-canyon.JPG" alt="Oil painting of a slot canyon" loading="lazy"><div class="art-meta"><p class="art-title">Slot canyon</p><p class="art-medium">Oil on canvas</p></div></button>
+      <button class="art-card reveal" data-r="pop" data-medium="paint"><img src="assets/img/art/cat-window.jpg" alt="Acrylic painting of a cat by a window" loading="lazy"><div class="art-meta"><p class="art-title">Cat by the window</p><p class="art-medium">Acrylic on canvas</p></div></button>
+      <button class="art-card reveal" data-r="pop" data-medium="paint"><img src="assets/img/art/plant-dino.jpg" alt="Acrylic studio still life" loading="lazy"><div class="art-meta"><p class="art-title">Studio still life</p><p class="art-medium">Acrylic on canvas</p></div></button>
+      <button class="art-card reveal" data-r="pop" data-medium="paint"><img src="assets/img/art/snake-flowers.jpg" alt="Gouache painting of a snake and flowers" loading="lazy"><div class="art-meta"><p class="art-title">Snake and flowers</p><p class="art-medium">Gouache</p></div></button>
+      <button class="art-card reveal" data-r="pop" data-medium="paint"><img src="assets/img/art/china-triptych.JPG" alt="Acrylic triptych about a flood at home" loading="lazy"><div class="art-meta"><p class="art-title">Home's Flood, 2021</p><p class="art-medium">Acrylic triptych</p></div></button>
+      <button class="art-card reveal" data-r="pop" data-medium="digital"><img src="assets/img/art/digital-portrait.jpg" alt="Digital painting of Chang'e" loading="lazy"><div class="art-meta"><p class="art-title">Chang'e Recreation</p><p class="art-medium">Procreate</p></div></button>
+      <button class="art-card reveal" data-r="pop" data-medium="digital"><img src="assets/img/art/digital-cafe.jpg" alt="Digital illustration of a cafe" loading="lazy"><div class="art-meta"><p class="art-title">Poor Wifi Cafe</p><p class="art-medium">Procreate</p></div></button>
     </div>
   </section>
 
   <!-- 05 · ABOUT -->
   <section class="chapter" id="about" data-chapter="About">
-    <div class="chapter-head reveal">
+    <span class="par ghost-num right" data-speed="-0.09" aria-hidden="true">05</span>
+    <div class="chapter-head reveal" data-r="left">
       <span class="chapter-num">05 · About</span>
       <h2 class="chapter-title">Hi, I'm Laura.</h2>
     </div>
@@ -230,7 +247,7 @@
       <img class="about-photo" src="assets/img/me.jpg" alt="Laura Yuan, candid photo">
       <p><strong>Second-year at UCSD</strong>, equally happy in front of a Jupyter notebook or a canvas. I've lived in a lot of places, which may be why I'm always asking who a thing was built for, and who got left out.</p>
     </div>
-    <div class="about-grid">
+    <div class="about-grid" data-stagger>
       <div class="about-card reveal"><h3>Currently</h3><p>ML research at Engineers for Exploration with the San Diego Zoo, designing for DataHacks 2027, and building the Readability agent for ClearMed.</p></div>
       <div class="about-card reveal"><h3>Looking for</h3><p>Summer 2027 internships in product, UX and data/AI, plus HCI research where data and human experience meet.</p></div>
       <div class="about-card reveal"><h3>Education</h3><p>B.S. Data Science, minor in Cognitive Science, UC San Diego, class of 2029.</p></div>

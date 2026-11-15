@@ -92,43 +92,51 @@
     document.querySelectorAll('.state-view figure').forEach((f) => f.classList.toggle('on', f.dataset.state === b.dataset.state));
   }));
 
-  /* ---------- props with states ---------- */
-  document.querySelectorAll('.prop').forEach((p) => {
-    const states = p.dataset.states.split(','), imgs = [...p.querySelectorAll('.art img')], label = p.querySelector('.state');
-    const name = p.querySelector('.nm').textContent;
-    let s = 0;
-    p.addEventListener('click', () => {
-      s = (s + 1) % states.length;
-      imgs.forEach((im, i) => im.classList.toggle('on', i === s));
-      label.textContent = states[s];
-      p.setAttribute('aria-label', `${name}, ${states[s]}. Press to change.`);
-      if (!reduceMotion) { p.classList.remove('pop'); void p.offsetWidth; p.classList.add('pop'); }
-    });
-  });
+  /* ---------- logo output toggle (color / black-and-white print) ---------- */
+  const logoBtns = document.querySelectorAll('[data-logo]:is(button)');
+  logoBtns.forEach((b) => b.addEventListener('click', () => {
+    logoBtns.forEach((x) => x.setAttribute('aria-pressed', x === b));
+    document.querySelectorAll('.logo-stage img[data-logo]').forEach((im) => im.classList.toggle('on', im.dataset.logo === b.dataset.logo));
+  }));
 
   /* ---------- peelable stickers ----------
-     A sticker lives either in its slot on the sheet, or "placed" in #sticker-layer
-     at page coordinates (x stored as % of page width so it survives resizes). */
+     A sticker lives in its slot (on the sheet or a prop card) or is "placed" in #sticker-layer
+     at page coordinates (x stored as % of page width so it survives resizes).
+     Stateful stickers (chest, ore) switch state on click, both in the slot and once placed. */
   const layer = document.getElementById('sticker-layer');
   const sheet = document.getElementById('stickerSheet');
   if (!layer || !sheet) return;
-  const stickers = [...sheet.querySelectorAll('.sticker')];
+  const stickers = [...document.querySelectorAll('.sticker')];
   const slots = new Map(stickers.map((s) => [s.dataset.id, s.parentElement]));
+  const homes = new Map(stickers.map((s) => [s.dataset.id, s.closest('.sticker-home, #stickerSheet')]));
   const countEl = document.getElementById('stickerCount');
   let saved = store.get('dh-stickers') || {};
+  const states = store.get('dh-sticker-states') || {};
+
+  function setState(st, idx, animate) {
+    const list = st.dataset.states.split(','), imgs = [...st.querySelectorAll('img')];
+    idx = idx % list.length;
+    st.dataset.stateIdx = idx;
+    imgs.forEach((im, i) => im.classList.toggle('on', i === idx));
+    const label = document.querySelector(`.state[data-for="${st.dataset.id}"]`);
+    if (label) label.textContent = list[idx];
+    st.setAttribute('aria-label', `${st.dataset.name} sticker, ${list[idx]}. Press to change state, drag to stick it anywhere.`);
+    states[st.dataset.id] = idx; store.set('dh-sticker-states', states);
+    if (animate && !reduceMotion) { st.classList.remove('pop'); void st.offsetWidth; st.classList.add('pop'); }
+  }
+  stickers.filter((s) => s.dataset.states).forEach((s) => setState(s, states[s.dataset.id] || 0));
 
   function updateCount() {
-    const left = stickers.filter((s) => !s.classList.contains('placed')).length;
+    const left = stickers.filter((s) => homes.get(s.dataset.id) === sheet && !s.classList.contains('placed')).length;
     countEl.textContent = left ? `${left} sticker${left > 1 ? 's' : ''} left on the sheet` : 'Sheet empty. Nice work.';
-    slots.forEach((slot, id) => slot.classList.toggle('empty', !slot.querySelector('.sticker')));
+    slots.forEach((slot) => slot.classList.toggle('empty', !slot.querySelector('.sticker')));
   }
   function place(st, xPct, y, rot) {
     st.classList.add('placed');
     st.style.left = `calc(${xPct}% - 60px)`; st.style.top = (y - 60) + 'px';
     st.style.transform = `rotate(${rot}deg)`;
-    st.dataset.rot = rot;
     layer.appendChild(st);
-    st.setAttribute('aria-label', st.getAttribute('aria-label').replace(/^Sticker:/, 'Placed sticker:') );
+    if (!st.dataset.states) st.setAttribute('aria-label', st.getAttribute('aria-label').replace(/^Sticker:/, 'Placed sticker:'));
     saved[st.dataset.id] = { x: xPct, y, r: rot }; store.set('dh-stickers', saved);
     updateCount();
   }
@@ -136,14 +144,13 @@
     st.classList.remove('placed', 'dragging');
     st.style.left = st.style.top = st.style.transform = '';
     slots.get(st.dataset.id).appendChild(st);
-    st.setAttribute('aria-label', st.getAttribute('aria-label').replace(/^Placed sticker:/, 'Sticker:'));
+    if (!st.dataset.states) st.setAttribute('aria-label', st.getAttribute('aria-label').replace(/^Placed sticker:/, 'Sticker:'));
     delete saved[st.dataset.id]; store.set('dh-stickers', saved);
     updateCount();
   }
   const pageW = () => document.documentElement.clientWidth;
   const rnd = () => Math.round(Math.random() * 24 - 12);
 
-  // restore
   stickers.forEach((st) => { const s = saved[st.dataset.id]; if (s) place(st, s.x, s.y, s.r); });
   updateCount();
 
@@ -158,7 +165,7 @@
     });
     st.addEventListener('pointermove', (e) => {
       if (!drag) return;
-      if (!drag.moved && Math.hypot(e.clientX - drag.sx, e.clientY - drag.sy) < 5) return;
+      if (!drag.moved && Math.hypot(e.clientX - drag.sx, e.clientY - drag.sy) < 6) return;
       if (!drag.moved) {
         drag.moved = true;
         if (!st.classList.contains('placed')) { st.classList.add('placed'); layer.appendChild(st); updateCount(); }
@@ -172,22 +179,20 @@
       if (!drag) return;
       const moved = drag.moved; drag = null;
       st.classList.remove('dragging');
-      if (!moved) return; // treated as a click below
-      const sr = sheet.getBoundingClientRect();
-      const overSheet = e.clientX > sr.left && e.clientX < sr.right && e.clientY > sr.top && e.clientY < sr.bottom;
-      if (overSheet) { unplace(st); return; }
+      if (!moved) return;
+      const hr = homes.get(st.dataset.id).getBoundingClientRect();
+      if (e.clientX > hr.left && e.clientX < hr.right && e.clientY > hr.top && e.clientY < hr.bottom) { unplace(st); st.dataset.justDragged = '1'; return; }
       const r = st.getBoundingClientRect();
-      const cx = r.left + r.width / 2 + scrollX, cy = r.top + r.height / 2 + scrollY;
-      place(st, (cx / pageW()) * 100, cy, rnd());
+      place(st, ((r.left + r.width / 2 + scrollX) / pageW()) * 100, r.top + r.height / 2 + scrollY, rnd());
       st.dataset.justDragged = '1';
     });
     st.addEventListener('pointercancel', () => { drag = null; st.classList.remove('dragging'); });
-    // click / Enter: sheet → a random spot in view; placed → back to the sheet
     st.addEventListener('click', () => {
       if (st.dataset.justDragged) { delete st.dataset.justDragged; return; }
+      if (st.dataset.states) { setState(st, +st.dataset.stateIdx + 1, true); return; }
+      // plain stickers: sheet → a random spot in view; placed → back to the sheet
       if (st.classList.contains('placed')) { unplace(st); st.focus(); return; }
-      const x = 12 + Math.random() * 76, y = scrollY + innerHeight * (0.2 + Math.random() * 0.5);
-      place(st, x, y, rnd()); st.focus();
+      place(st, 12 + Math.random() * 76, scrollY + innerHeight * (0.2 + Math.random() * 0.5), rnd()); st.focus();
     });
   });
   document.getElementById('stickerReset').addEventListener('click', () => {

@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The 30-Minute Lie · Laura Yuan</title>
-  <meta name="description" content="Case study: I set out to prove UCSD's dining app gives wrong wait times. 77 of my own orders showed the real problem was the estimate that never appears.">
+  <meta name="description" content="Case study: I set out to prove UCSD's dining app gives wrong wait times. 125 real orders from two students showed the real problem was the estimate that never appears.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="The 30-Minute Lie · Laura Yuan">
-  <meta property="og:description" content="Case study: I set out to prove UCSD's dining app gives wrong wait times. 77 of my own orders showed the real problem was the estimate that never appears.">
+  <meta property="og:description" content="Case study: I set out to prove UCSD's dining app gives wrong wait times. 125 real orders from two students showed the real problem was the estimate that never appears.">
   <meta property="og:url" content="https://laura06919-max.github.io/work/bistro.html">
   <meta property="og:image" content="https://laura06919-max.github.io/assets/img/og-card.jpg">
   <meta name="twitter:card" content="summary_large_image">
@@ -45,6 +45,23 @@
     .sheet .escape { font: inherit; font-size: 13px; background: none; border: 0; color: #3E6680; text-decoration: underline; cursor: pointer; }
     .toast { font-size: 13px; padding: 10px 12px; border-radius: 12px; background: #E3EEF4; color: #2E4456; display: none; }
     .toast.show { display: block; }
+    .optlabel { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: #6B7C88; margin: 4px 0 -2px; }
+    .alts { display: flex; flex-direction: column; gap: 8px; }
+    .alt { display: grid; grid-template-columns: 44px 1fr auto; gap: 10px; align-items: center; text-align: left; font: inherit; font-size: 13px; color: #2E4456; background: #F3EEDF; border: 1px solid transparent; border-radius: 12px; padding: 8px; cursor: pointer; }
+    .alt:hover, .alt:focus-visible { border-color: #3E6680; }
+    .alt b { display: block; font-size: 13.5px; }
+    .alt small { color: #5C6E7B; font-size: 11.5px; }
+    .alt .early { font-size: 11px; background: #DCEBD9; color: #2F5A2A; border-radius: 99px; padding: 3px 8px; white-space: nowrap; }
+    .ph { width: 44px; height: 44px; border-radius: 10px; background: repeating-linear-gradient(135deg,#E2DCCB 0 6px,#EAE4D4 6px 12px); display: grid; place-items: center; color: #8A8270; }
+    .ph svg { width: 18px; height: 18px; }
+    .menu { display: none; flex-direction: column; gap: 8px; }
+    .menu.on { display: flex; }
+    .menu .mhead { display: flex; justify-content: space-between; align-items: baseline; font-size: 12.5px; color: #5C6E7B; }
+    .menu .mhead button { font: inherit; font-size: 12px; background: none; border: 0; color: #3E6680; text-decoration: underline; cursor: pointer; padding: 0; }
+    .dish { display: grid; grid-template-columns: 44px 1fr auto; gap: 10px; align-items: center; font-size: 13px; background: #FFF; border: 1px solid #E6E0D0; border-radius: 12px; padding: 8px; }
+    .dish button { font: inherit; font-size: 12px; border: 1px solid #2E4456; background: none; color: #2E4456; border-radius: 99px; padding: 4px 10px; cursor: pointer; }
+    .dish.picked { border-color: #2E4456; }
+    .dish.picked button { background: #2E4456; color: #FFFCF2; }
     @media (max-width: 760px) { .demo { grid-template-columns: 1fr; } .phone { max-width: 300px; margin: 0 auto; } }
   </style>
   <script>document.documentElement.classList.add('js')</script>
@@ -66,12 +83,12 @@
   <a class="back-link" href="../index.html#then-people">← All work</a>
   <p class="eyebrow">Case study · Data-informed redesign · Mobile UX</p>
   <h1 class="case-title">The 30-Minute Lie</h1>
-  <p class="case-sub">I set out to prove that UCSD's dining app gives wrong wait times. Then I pulled 77 of my own orders, and the data told a more interesting story.</p>
+  <p class="case-sub">I set out to prove that UCSD's dining app gives wrong wait times. Then I pulled 125 real orders, mine and a friend's, and the data told a more interesting story.</p>
   <dl class="tldr">
     <div><dt>Role</dt><dd>Solo: data collection, analysis, design</dd></div>
-    <div><dt>Data</dt><dd>77 of my own Triton2Go food orders, May–Nov 2026, from emailed receipts</dd></div>
+    <div><dt>Data</dt><dd>125 Triton2Go food orders from two students (77 mine, 48 a friend's), May–Nov 2026, from emailed receipts</dd></div>
     <div><dt>Tools</dt><dd>Python, Figma</dd></div>
-    <div class="full"><dt>Finding</dt><dd>Where the app gives an estimate, it pads it: 53 of 66 orders were ready early. The Bistro, the slowest spot, never gave an estimate at all: 9 orders, 10 to 41 minutes, median 22.</dd></div>
+    <div class="full"><dt>Finding</dt><dd>Where the app gives an estimate, it pads it: 84 of 110 orders were ready early. The Bistro, the slowest spot, never gave an estimate at all: 11 orders, 10 to 41 minutes, median 30.</dd></div>
   </dl>
 </header>
 <main class="case-body">
@@ -84,123 +101,169 @@
 
   <section id="data" data-chapter="The data">
     <p class="chapter-num">02 · Testing it</p>
-    <h2 class="reveal">77 receipts</h2>
-    <p class="reveal">The app blocks screenshots, but every order sends an email receipt with the order time, the app's target time, and when the order was marked complete. I collected 77 of my food orders from May to November 2026 and turned them into a dataset: location, dish, time ordered, time quoted, time actually completed.</p>
+    <h2 class="reveal">125 receipts</h2>
+    <p class="reveal">Getting the data was its own obstacle. The app blocks screenshots (the screen goes white), and receipts can only be emailed to the account's own address. So every order sends an email receipt with the order time, the app's target time, and when the order was marked complete. I collected 77 of my food orders from May to November 2026. To check that this wasn't just my habits, a friend forwarded her receipts too: 48 more orders. Together, that's a dataset of 125 orders: location, dish, time ordered, time quoted, time actually completed.</p>
     <figure class="figure reveal" data-r="pop" style="background:var(--bg3);border:0.5px solid var(--border);border-radius:16px;padding:18px 14px 10px">
-      <svg viewBox="0 0 760 398" role="img" aria-labelledby="ct cd" style="width:100%;height:auto">
-<title id="ct">How long my Triton2Go orders actually took, by location</title>
-<desc id="cd">77 orders, May to November 2026. The Bistro never showed an estimate; its 9 orders took 10 to 41 minutes, median 22. At the other locations the quoted time was usually longer than the real wait.</desc>
+      <svg viewBox="0 0 760 464" role="img" aria-labelledby="ct cd" style="width:100%;height:auto">
+<title id="ct">How long Triton2Go orders actually took, by location</title>
+<desc id="cd">125 orders from two students, May to November 2026. The Bistro never showed an estimate; its 11 orders took 10 to 41 minutes, median 30. At the other locations the quoted time was usually longer than the real wait.</desc>
 <g font-family="Sora, sans-serif" font-size="12" fill="var(--muted)">
-<line x1="150.0" x2="150.0" y1="26" y2="336" stroke="var(--border)" stroke-width="1"/><text x="150.0" y="354" text-anchor="middle">0</text>
-<line x1="214.4" x2="214.4" y1="26" y2="336" stroke="var(--border)" stroke-width="1"/><text x="214.4" y="354" text-anchor="middle">5</text>
-<line x1="278.9" x2="278.9" y1="26" y2="336" stroke="var(--border)" stroke-width="1"/><text x="278.9" y="354" text-anchor="middle">10</text>
-<line x1="343.3" x2="343.3" y1="26" y2="336" stroke="var(--border)" stroke-width="1"/><text x="343.3" y="354" text-anchor="middle">15</text>
-<line x1="407.8" x2="407.8" y1="26" y2="336" stroke="var(--border)" stroke-width="1"/><text x="407.8" y="354" text-anchor="middle">20</text>
-<line x1="472.2" x2="472.2" y1="26" y2="336" stroke="var(--border)" stroke-width="1"/><text x="472.2" y="354" text-anchor="middle">25</text>
-<line x1="536.7" x2="536.7" y1="26" y2="336" stroke="var(--border)" stroke-width="1"/><text x="536.7" y="354" text-anchor="middle">30</text>
-<line x1="601.1" x2="601.1" y1="26" y2="336" stroke="var(--border)" stroke-width="1"/><text x="601.1" y="354" text-anchor="middle">35</text>
-<line x1="665.6" x2="665.6" y1="26" y2="336" stroke="var(--border)" stroke-width="1"/><text x="665.6" y="354" text-anchor="middle">40</text>
-<line x1="730.0" x2="730.0" y1="26" y2="336" stroke="var(--border)" stroke-width="1"/><text x="730.0" y="354" text-anchor="middle">45</text>
-<text x="440.0" y="390" text-anchor="middle" fill="var(--hint)">minutes from ordering to "completed"</text>
-<text x="138" y="44" text-anchor="end" fill="var(--text)" font-weight="600">The Bistro</text>
-<text x="138" y="59" text-anchor="end" font-size="10.5" fill="var(--hint)">9 orders · no estimate</text>
-<circle cx="420.7" cy="36.3" r="4.6" fill="var(--accent2)" fill-opacity=".75"/>
-<circle cx="420.7" cy="34.4" r="4.6" fill="var(--accent2)" fill-opacity=".75"/>
-<circle cx="433.6" cy="38.5" r="4.6" fill="var(--accent2)" fill-opacity=".75"/>
-<circle cx="356.2" cy="35.2" r="4.6" fill="var(--accent2)" fill-opacity=".75"/>
-<circle cx="626.9" cy="33.9" r="4.6" fill="var(--accent2)" fill-opacity=".75"/>
-<circle cx="678.4" cy="38.6" r="4.6" fill="var(--accent2)" fill-opacity=".75"/>
-<circle cx="588.2" cy="45.9" r="4.6" fill="var(--accent2)" fill-opacity=".75"/>
-<circle cx="278.9" cy="44.2" r="4.6" fill="var(--accent2)" fill-opacity=".75"/>
-<circle cx="562.4" cy="43.7" r="4.6" fill="var(--accent2)" fill-opacity=".75"/>
-<text x="433.6" y="26" text-anchor="middle" font-size="11" fill="var(--coral-ink)">median 22 min</text>
-<text x="138" y="96" text-anchor="end" fill="var(--text)" font-weight="400">Earl's Coffeehouse</text>
-<text x="138" y="111" text-anchor="end" font-size="10.5" fill="var(--hint)">23 orders</text>
-<circle cx="201.6" cy="88.1" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="227.3" cy="92.5" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="240.2" cy="88.9" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="201.6" cy="87.4" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="201.6" cy="86.5" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="188.7" cy="88.0" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="188.7" cy="98.0" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="201.6" cy="96.6" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="175.8" cy="96.3" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="227.3" cy="96.2" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="227.3" cy="87.7" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="175.8" cy="89.3" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="188.7" cy="93.8" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="188.7" cy="95.2" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="240.2" cy="97.0" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="214.4" cy="97.3" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="227.3" cy="86.2" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="188.7" cy="93.5" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="420.7" cy="94.4" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="291.8" cy="92.1" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="175.8" cy="87.5" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="201.6" cy="91.6" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="201.6" cy="86.3" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<line x1="240.2" x2="240.2" y1="79" y2="105" stroke="#C98A2B" stroke-width="3" stroke-linecap="round"/>
-<text x="138" y="148" text-anchor="end" fill="var(--text)" font-weight="400">Club Med</text>
-<text x="138" y="163" text-anchor="end" font-size="10.5" fill="var(--hint)">19 orders</text>
-<circle cx="175.8" cy="150.1" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="291.8" cy="149.1" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="175.8" cy="144.7" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="240.2" cy="141.2" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="240.2" cy="149.7" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="214.4" cy="145.0" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="291.8" cy="149.4" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="240.2" cy="148.9" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="485.1" cy="144.1" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="175.8" cy="142.8" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="330.4" cy="145.4" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="188.7" cy="143.0" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="162.9" cy="139.3" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="240.2" cy="141.3" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="214.4" cy="148.4" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="240.2" cy="137.6" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="162.9" cy="137.6" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="227.3" cy="145.8" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="317.6" cy="140.9" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<line x1="304.7" x2="304.7" y1="131" y2="157" stroke="#C98A2B" stroke-width="3" stroke-linecap="round"/>
-<text x="138" y="200" text-anchor="end" fill="var(--text)" font-weight="400">Fusion</text>
-<text x="138" y="215" text-anchor="end" font-size="10.5" fill="var(--hint)">7 orders</text>
-<circle cx="304.7" cy="196.5" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="240.2" cy="195.6" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="188.7" cy="193.8" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="240.2" cy="203.0" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="175.8" cy="191.7" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="253.1" cy="194.8" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="175.8" cy="191.8" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<line x1="278.9" x2="278.9" y1="183" y2="209" stroke="#C98A2B" stroke-width="3" stroke-linecap="round"/>
-<text x="138" y="252" text-anchor="end" fill="var(--text)" font-weight="400">Goody's</text>
-<text x="138" y="267" text-anchor="end" font-size="10.5" fill="var(--hint)">4 orders</text>
-<circle cx="162.9" cy="249.9" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="626.9" cy="244.9" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="317.6" cy="246.0" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="394.9" cy="251.5" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<line x1="349.8" x2="349.8" y1="235" y2="261" stroke="#C98A2B" stroke-width="3" stroke-linecap="round"/>
-<text x="138" y="304" text-anchor="end" fill="var(--text)" font-weight="400">Fresh</text>
-<text x="138" y="319" text-anchor="end" font-size="10.5" fill="var(--hint)">4 orders</text>
-<circle cx="162.9" cy="297.5" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="253.1" cy="300.8" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="459.3" cy="305.7" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<circle cx="201.6" cy="294.4" r="4.6" fill="var(--blue)" fill-opacity=".75"/>
-<line x1="240.2" x2="240.2" y1="287" y2="313" stroke="#C98A2B" stroke-width="3" stroke-linecap="round"/>
+<line x1="150.0" x2="150.0" y1="26" y2="394" stroke="var(--border)" stroke-width="1"/><text x="150.0" y="412" text-anchor="middle">0</text>
+<line x1="214.4" x2="214.4" y1="26" y2="394" stroke="var(--border)" stroke-width="1"/><text x="214.4" y="412" text-anchor="middle">5</text>
+<line x1="278.9" x2="278.9" y1="26" y2="394" stroke="var(--border)" stroke-width="1"/><text x="278.9" y="412" text-anchor="middle">10</text>
+<line x1="343.3" x2="343.3" y1="26" y2="394" stroke="var(--border)" stroke-width="1"/><text x="343.3" y="412" text-anchor="middle">15</text>
+<line x1="407.8" x2="407.8" y1="26" y2="394" stroke="var(--border)" stroke-width="1"/><text x="407.8" y="412" text-anchor="middle">20</text>
+<line x1="472.2" x2="472.2" y1="26" y2="394" stroke="var(--border)" stroke-width="1"/><text x="472.2" y="412" text-anchor="middle">25</text>
+<line x1="536.7" x2="536.7" y1="26" y2="394" stroke="var(--border)" stroke-width="1"/><text x="536.7" y="412" text-anchor="middle">30</text>
+<line x1="601.1" x2="601.1" y1="26" y2="394" stroke="var(--border)" stroke-width="1"/><text x="601.1" y="412" text-anchor="middle">35</text>
+<line x1="665.6" x2="665.6" y1="26" y2="394" stroke="var(--border)" stroke-width="1"/><text x="665.6" y="412" text-anchor="middle">40</text>
+<line x1="730.0" x2="730.0" y1="26" y2="394" stroke="var(--border)" stroke-width="1"/><text x="730.0" y="412" text-anchor="middle">45</text>
+<text x="440.0" y="440" text-anchor="middle" fill="var(--hint)">minutes from ordering to "completed"</text>
+<text x="138" y="46" text-anchor="end" fill="var(--text)" font-weight="600">The Bistro</text>
+<text x="138" y="61" text-anchor="end" font-size="10.5" fill="var(--hint)">11 orders · no estimate</text>
+<circle cx="420.7" cy="41.5" r="4.4" fill="var(--accent2)" fill-opacity=".7"/>
+<circle cx="420.7" cy="39.1" r="4.4" fill="var(--accent2)" fill-opacity=".7"/>
+<circle cx="433.6" cy="46.1" r="4.4" fill="var(--accent2)" fill-opacity=".7"/>
+<circle cx="356.2" cy="38.0" r="4.4" fill="var(--accent2)" fill-opacity=".7"/>
+<circle cx="626.9" cy="44.5" r="4.4" fill="var(--accent2)" fill-opacity=".7"/>
+<circle cx="678.4" cy="42.1" r="4.4" fill="var(--accent2)" fill-opacity=".7"/>
+<circle cx="536.7" cy="37.8" r="4.4" fill="var(--accent2)" fill-opacity=".7"/>
+<circle cx="588.2" cy="44.1" r="4.4" fill="var(--accent2)" fill-opacity=".7"/>
+<circle cx="278.9" cy="37.5" r="4.4" fill="var(--accent2)" fill-opacity=".7"/>
+<circle cx="536.7" cy="43.1" r="4.4" fill="var(--accent2)" fill-opacity=".7"/>
+<circle cx="562.4" cy="38.0" r="4.4" fill="var(--accent2)" fill-opacity=".7"/>
+<text x="536.7" y="68" text-anchor="middle" font-size="11" fill="var(--coral-ink)">median 30 min</text>
+<text x="138" y="92" text-anchor="end" fill="var(--text)" font-weight="400">Fusion</text>
+<text x="138" y="107" text-anchor="end" font-size="10.5" fill="var(--hint)">32 orders</text>
+<circle cx="304.7" cy="84.3" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="240.2" cy="88.9" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="188.7" cy="94.6" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="240.2" cy="84.7" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="175.8" cy="86.1" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="253.1" cy="91.8" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="266.0" cy="96.3" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="175.8" cy="91.1" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="330.4" cy="88.6" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="253.1" cy="96.7" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="227.3" cy="83.7" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="356.2" cy="95.0" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="253.1" cy="87.1" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="253.1" cy="85.0" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="266.0" cy="84.6" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="433.6" cy="87.3" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="266.0" cy="94.4" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="201.6" cy="85.5" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="201.6" cy="91.1" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="162.9" cy="91.9" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="162.9" cy="88.2" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="382.0" cy="90.7" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="472.2" cy="83.9" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="343.3" cy="83.8" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="214.4" cy="85.9" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="227.3" cy="92.5" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="227.3" cy="89.0" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="201.6" cy="87.4" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="240.2" cy="91.2" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="330.4" cy="89.3" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="291.8" cy="87.2" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="291.8" cy="94.1" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<line x1="278.9" x2="278.9" y1="77" y2="103" stroke="#C98A2B" stroke-width="3" stroke-linecap="round"/>
+<text x="138" y="138" text-anchor="end" fill="var(--text)" font-weight="400">Earl's Coffeehouse</text>
+<text x="138" y="153" text-anchor="end" font-size="10.5" fill="var(--hint)">25 orders</text>
+<circle cx="201.6" cy="138.8" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="227.3" cy="132.4" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="240.2" cy="137.0" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="201.6" cy="136.4" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="201.6" cy="141.3" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="188.7" cy="139.2" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="188.7" cy="133.0" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="201.6" cy="142.7" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="175.8" cy="130.7" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="227.3" cy="134.9" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="253.1" cy="139.6" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="227.3" cy="131.1" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="266.0" cy="135.8" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="175.8" cy="129.5" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="188.7" cy="138.4" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="188.7" cy="139.7" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="240.2" cy="137.0" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="214.4" cy="141.3" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="227.3" cy="133.4" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="188.7" cy="138.7" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="420.7" cy="137.3" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="291.8" cy="137.1" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="175.8" cy="135.4" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="201.6" cy="140.8" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="201.6" cy="142.2" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<line x1="240.2" x2="240.2" y1="123" y2="149" stroke="#C98A2B" stroke-width="3" stroke-linecap="round"/>
+<text x="138" y="184" text-anchor="end" fill="var(--text)" font-weight="400">Club Med</text>
+<text x="138" y="199" text-anchor="end" font-size="10.5" fill="var(--hint)">19 orders</text>
+<circle cx="175.8" cy="181.6" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="291.8" cy="184.3" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="175.8" cy="175.8" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="240.2" cy="184.8" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="240.2" cy="184.1" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="214.4" cy="188.9" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="291.8" cy="186.5" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="240.2" cy="179.0" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="485.1" cy="180.4" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="175.8" cy="184.4" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="330.4" cy="175.3" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="188.7" cy="181.5" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="162.9" cy="177.4" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="240.2" cy="176.6" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="214.4" cy="175.8" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="240.2" cy="185.8" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="162.9" cy="176.8" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="227.3" cy="178.5" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="317.6" cy="180.5" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<line x1="304.7" x2="304.7" y1="169" y2="195" stroke="#C98A2B" stroke-width="3" stroke-linecap="round"/>
+<text x="138" y="230" text-anchor="end" fill="var(--text)" font-weight="400">64 Triton Grill</text>
+<text x="138" y="245" text-anchor="end" font-size="10.5" fill="var(--hint)">6 orders</text>
+<circle cx="240.2" cy="233.2" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="188.7" cy="222.1" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="343.3" cy="227.3" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="472.2" cy="228.7" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="227.3" cy="233.4" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="240.2" cy="232.5" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<line x1="446.4" x2="446.4" y1="215" y2="241" stroke="#C98A2B" stroke-width="3" stroke-linecap="round"/>
+<text x="138" y="276" text-anchor="end" fill="var(--text)" font-weight="400">Fresh</text>
+<text x="138" y="291" text-anchor="end" font-size="10.5" fill="var(--hint)">4 orders</text>
+<circle cx="162.9" cy="279.1" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="253.1" cy="270.9" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="459.3" cy="272.8" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="201.6" cy="272.0" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<line x1="240.2" x2="240.2" y1="261" y2="287" stroke="#C98A2B" stroke-width="3" stroke-linecap="round"/>
+<text x="138" y="322" text-anchor="end" fill="var(--text)" font-weight="400">Goody's</text>
+<text x="138" y="337" text-anchor="end" font-size="10.5" fill="var(--hint)">4 orders</text>
+<circle cx="162.9" cy="325.4" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="626.9" cy="326.4" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="317.6" cy="315.1" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="394.9" cy="315.5" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<line x1="349.8" x2="349.8" y1="307" y2="333" stroke="#C98A2B" stroke-width="3" stroke-linecap="round"/>
+<text x="138" y="368" text-anchor="end" fill="var(--text)" font-weight="400">Umi</text>
+<text x="138" y="383" text-anchor="end" font-size="10.5" fill="var(--hint)">4 orders</text>
+<circle cx="304.7" cy="362.2" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="394.9" cy="362.3" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="382.0" cy="365.8" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<circle cx="678.4" cy="367.2" r="4.4" fill="var(--blue)" fill-opacity=".7"/>
+<line x1="459.3" x2="459.3" y1="353" y2="379" stroke="#C98A2B" stroke-width="3" stroke-linecap="round"/>
 </g>
-<g font-family="Sora, sans-serif" font-size="11" fill="var(--muted)"><circle cx="150" cy="14" r="4.6" fill="var(--blue)" fill-opacity=".75"/><text x="160" y="18">one order (actual wait)</text><line x1="310" x2="310" y1="6" y2="22" stroke="#C98A2B" stroke-width="3" stroke-linecap="round"/><text x="320" y="18">what the app usually quoted there</text></g>
+<g font-family="Sora, sans-serif" font-size="11" fill="var(--muted)"><circle cx="150" cy="10" r="4.6" fill="var(--blue)" fill-opacity=".75"/><text x="160" y="14">one order (actual wait)</text><line x1="310" x2="310" y1="2" y2="18" stroke="#C98A2B" stroke-width="3" stroke-linecap="round"/><text x="320" y="14">what the app usually quoted there</text></g>
 </svg>
-      <figcaption>Each dot is one of my orders. The amber tick is the wait the app usually quoted at that location. Locations with fewer than 4 orders are left out of the chart (but included in the counts).</figcaption>
+      <figcaption>Each dot is one order (mine and a friend's). The amber tick is the wait the app usually quoted at that location. Locations with fewer than 4 orders are left out of the chart (but included in the counts).</figcaption>
     </figure>
     <p class="pull reveal">The lie wasn't the number. It was the missing one.</p>
-    <p class="reveal">At the places that give an estimate, the estimate is <strong>padded, not optimistic</strong>: 53 of 66 orders (80%) were ready early, typically 4 minutes before the quoted time. Earl's quotes 7 minutes and is usually done in 3–6.</p>
-    <p class="reveal">The Bistro is the opposite. It <strong>never showed an estimate</strong> on any of my 9 orders, and it's by far the slowest: 10 to 41 minutes, median 22, with 7 of 9 orders taking 21 minutes or more. The one place a student most needs to plan around is the one place the app says nothing.</p>
-    <div class="reflection reveal"><p><b>What this data can and can't say.</b> It's one person's orders, at the times I happen to eat, and only 9 from the Bistro, so it shows a pattern, not a proof. "Completed" is when staff marked the order ready for pickup, which is the moment that matters for planning. The receipt may also leave out an estimate the app showed on screen.</p></div>
+    <p class="reveal">At the places that give an estimate, the estimate is <strong>padded, not optimistic</strong>: 84 of 110 orders (76%) were ready early, typically 4 minutes before the quoted time, and my friend's orders showed the same pattern as mine. Earl's quotes 7 minutes and is usually done in 3–6.</p>
+    <p class="reveal">The Bistro is the opposite. It <strong>never showed an estimate</strong> on any of our 11 orders, and it's by far the slowest: 10 to 41 minutes, median 30, with 9 of 11 orders taking 21 minutes or more. The one place a student most needs to plan around is the one place the app says nothing.</p>
+    <p class="reveal">One more thing the second dataset made visible: when an order is late, it can be <strong>very</strong> late. 19 of the 110 estimated orders came in after the quoted time, and 8 of those were 8 or more minutes late (one was 27). A single number hides that tail. A range shows it.</p>
+    <div class="reflection reveal"><p><b>What this data can and can't say.</b> It's two students' orders, at the times we happen to eat, and only 11 from the Bistro, so it shows a pattern, not a proof. I also looked for a lunch-rush effect and didn't find a clear one: rush-hour orders took a median of 8 minutes vs. 6 otherwise, and the app was still early during the rush. "Completed" is when staff marked the order ready for pickup, which is the moment that matters for planning. The receipt may also leave out an estimate the app showed on screen.</p></div>
   </section>
 
   <section id="redesign" data-chapter="Redesign">
     <p class="chapter-num">03 · What changed in the design</p>
     <h2 class="reveal">Design for the gap, not the hunch</h2>
-    <div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">My first idea</span><p>Recalculate every estimate around burner capacity, because the timer is too short.</p></div><div><span class="tag">After the data</span><p>Most timers are fine, just padded. The fix belongs where there is no timer: give the Bistro a real estimate.</p></div></div><div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">Today</span><p>One confident number ("7 min") that's usually wrong by a few minutes.</p></div><div><span class="tag">Redesign</span><p>A range from past orders: "usually 3–6 min." Honest about spread, and still easy to read.</p></div></div><div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">Today</span><p>At the Bistro, a blank.</p></div><div><span class="tag">Redesign</span><p>"Usually 21–34 min at this time." Then, if the student has class soon, a warning before they pay, with an exit: "I'll walk fast, order anyway."</p></div></div><div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">Missing</span><p>The app never learns whether its estimates were right.</p></div><div><span class="tag">Redesign</span><p>One tap after pickup: "Was it ready when you got there?" That is the honest version of my receipt study, built into the product with consent.</p></div></div>
+    <div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">My first idea</span><p>Recalculate every estimate around burner capacity, because the timer is too short.</p></div><div><span class="tag">After the data</span><p>Most timers are fine, just padded. The fix belongs where there is no timer: give the Bistro a real estimate.</p></div></div><div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">Today</span><p>One confident number ("7 min") that's usually wrong by a few minutes.</p></div><div><span class="tag">Redesign</span><p>A range from past orders: "usually 3–6 min." Honest about spread, and still easy to read.</p></div></div><div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">Today</span><p>At the Bistro, a blank.</p></div><div><span class="tag">Redesign</span><p>"Usually 21–33 min." Then, if the student has class soon, a warning before they pay, with an exit: "I'll walk fast, order anyway."</p></div></div><div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">My first warning</span><p>"Get a latte from Earl's instead." One fixed suggestion, whether or not it actually helps.</p></div><div><span class="tag">Redesign</span><p>Nearby options that would still get you to class, each with its usual wait, how early you'd arrive, and a tap straight into that menu.</p></div></div><div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">Today</span><p>Menus are text only. Dish names like "Loco Moco Plate" or "City Slicker" mean nothing if you've never had them.</p></div><div><span class="tag">Redesign</span><p>A photo on every dish. This came from my friend, not from me: she said it's the feature she wants most, and that it matters most for international students choosing food they don't know by name.</p></div></div><div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">Missing</span><p>The app never learns whether its estimates were right.</p></div><div><span class="tag">Redesign</span><p>One tap after pickup: "Was it ready when you got there?" That is the honest version of my receipt study, built into the product with consent.</p></div></div>
   </section>
 
   <section id="try" data-chapter="Try it">
@@ -218,7 +281,7 @@
         </fieldset>
         <label class="lbl" for="now">It's now: <span class="val" id="nowVal"></span></label>
         <input type="range" id="now" min="0" max="50" value="22">
-        <p class="fine">Your next class: COGS 9 at 1:00 PM, about a 10-minute walk away. Bistro range: middle half of my 9 Bistro orders (21–34 min, median 22). Earl's range: middle half of my 23 Earl's orders (3–6 min, median 4).</p>
+        <p class="fine">Your next class: COGS 9 at 1:00 PM, about a 10-minute walk away. Ranges are the middle half of real orders: Bistro 21–33 min (11 orders), Earl's 3–6 (25), Club Med 3–9 (19), Fusion 5–11 (32). Walk times to the other spots are assumed to be 10 min too. Gray photo boxes mark where dish photos go. </p>
       </div>
       <div class="phone" aria-label="Interactive phone mockup">
         <div class="screen">
@@ -227,11 +290,13 @@
           <div class="row"><span>Today's app</span><b id="appEta"></b></div>
           <div class="row real" id="realRow"><span>Redesign</span><b id="realEta"></b></div>
           <div class="toast" id="toast" role="status"></div>
+          <div class="menu" id="menu" aria-live="polite"></div>
           <button class="pay" id="pay">Place order</button>
           <div class="sheet" id="sheet" role="dialog" aria-modal="false" aria-labelledby="sheetTitle">
             <h5 id="sheetTitle"></h5>
             <p id="sheetBody"></p>
-            <button class="primary" id="swap">Get a latte from Earl's instead</button>
+            <p class="optlabel" id="optLabel">Still gets you there on time</p>
+            <div class="alts" id="alts"></div>
             <button class="escape" id="anyway">I'll walk fast, order anyway</button>
           </div>
         </div>
@@ -248,7 +313,7 @@
   <section id="reflect" data-chapter="Reflect">
     <p class="chapter-num">06 · Reflection</p>
     <h2 class="reveal">The data changed the design</h2>
-    <div class="reflection reveal"><p>If I had built my first idea, I would have "fixed" estimates that mostly weren't broken and missed the one that didn't exist. Next, I'd collect receipts from a few other students (with their permission) to see if the Bistro pattern holds beyond my own lunch habits, and test whether a range actually helps people decide faster than a single number.</p></div>
+    <div class="reflection reveal"><p>If I had built my first idea, I would have "fixed" estimates that mostly weren't broken and missed the one that didn't exist. A friend's 48 orders confirmed the main pattern, so it isn't just my lunch habits. Next: talk to Bistro staff about why there's no estimate, test the warning and the nearby options with students, and bring this to HDH Dining, who run the app. Students use it every day, but only the university can change it, and anonymized order data from them would turn two students' receipts into a real model.</p></div>
   </section>
 </main>
 <nav class="case-nav reveal" aria-label="More case studies">
@@ -262,37 +327,59 @@
 (function () {
   const $ = (id) => document.getElementById(id);
   const WALK = 10, CLASS = 60; // minutes after 12:00
+  const CAM = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 8h3l2-2.5h6L17 8h3v11H4z"/><circle cx="12" cy="13.5" r="3.5"/></svg>';
   const SPOTS = {
-    bistro: { name: 'Sautéed salmon', price: '$17.00', app: '— (none shown)', lo: 21, mid: 22, hi: 34 },
-    earls:  { name: 'Green tea latte', price: '$5.75', app: '~7 min', lo: 3, mid: 4, hi: 6 },
+    bistro: { place: 'The Bistro', name: 'Sautéed salmon', price: '$17.00', app: '— (none shown)', lo: 21, mid: 30, hi: 33 },
+    earls:  { place: "Earl's Coffeehouse", name: 'Green Tea Latte', price: '$5.75', app: '~7 min', lo: 3, mid: 4, hi: 6, menu: ['Green Tea Latte', 'Lavender Vanilla Matcha Latte', 'Croissant'] },
+    clubmed:{ place: 'Club Med', name: 'Chicken Club Sandwich', price: '', app: '~12 min', lo: 3, mid: 7, hi: 9, menu: ['Chicken Club Sandwich', 'Maui Ham Pizza', 'City Slicker Sandwich'] },
+    fusion: { place: 'Fusion', name: 'Loco Moco Plate', price: '', app: '~10 min', lo: 5, mid: 8, hi: 11, menu: ['Loco Moco Plate', 'CV Single Smash Burger Combo', 'Breakfast Smashburger'] },
   };
+  let cur = 'bistro';
   const fmt = (m) => { m = Math.round(m); const h = 12 + Math.floor(m / 60); return (h > 12 ? h - 12 : h) + ':' + String(m % 60).padStart(2, '0') + ' PM'; };
-  const spot = () => document.querySelector('input[name=spot]:checked').value;
+  const ph = () => '<span class="ph" title="Dish photo goes here">' + CAM + '</span>';
+  function setSpot(k) { cur = k; const r = document.querySelector('input[name=spot][value=' + k + ']'); if (r) r.checked = true; else document.querySelectorAll('input[name=spot]').forEach((x) => { x.checked = false; }); }
   function render() {
-    const now = +$('now').value, s = SPOTS[spot()];
+    const now = +$('now').value, s = SPOTS[cur];
     $('nowVal').textContent = fmt(now);
-    $('dishName').textContent = s.name; $('price').textContent = s.price;
+    $('dishName').textContent = s.place === 'The Bistro' ? s.name : s.place + ' · ' + s.name;
+    $('price').textContent = s.price;
     $('appEta').textContent = s.app;
     $('realEta').textContent = 'usually ' + s.lo + '–' + s.hi + ' min';
     $('realRow').classList.toggle('ok', now + s.hi + WALK <= CLASS);
     $('sheet').classList.remove('open'); $('toast').classList.remove('show');
   }
-  function placed(msg) { const t = $('toast'); t.textContent = msg; t.classList.add('show'); $('sheet').classList.remove('open'); }
+  function placed(msg) { const t = $('toast'); t.textContent = msg; t.classList.add('show'); $('sheet').classList.remove('open'); $('menu').classList.remove('on'); }
+  function openMenu(k) {
+    const s = SPOTS[k], m = $('menu');
+    m.innerHTML = '<div class="mhead"><b>' + s.place + ' menu</b><button type="button" id="mclose">Back</button></div>' +
+      s.menu.map((d, i) => '<div class="dish' + (i === 0 ? ' picked' : '') + '">' + ph() + '<span>' + d + '</span><button type="button" data-d="' + d + '">' + (i === 0 ? 'Added' : 'Add') + '</button></div>').join('');
+    m.classList.add('on'); $('sheet').classList.remove('open');
+    setSpot(k); SPOTS[k].name = s.menu[0]; render(); $('menu').classList.add('on');
+    m.querySelectorAll('.dish button').forEach((b) => b.addEventListener('click', () => {
+      m.querySelectorAll('.dish').forEach((x) => { x.classList.remove('picked'); x.querySelector('button').textContent = 'Add'; });
+      b.parentElement.classList.add('picked'); b.textContent = 'Added'; SPOTS[k].name = b.dataset.d; render(); $('menu').classList.add('on');
+    }));
+    $('mclose').addEventListener('click', () => { m.classList.remove('on'); setSpot('bistro'); render(); });
+    m.querySelector('.dish button').focus();
+  }
   $('pay').addEventListener('click', () => {
-    const now = +$('now').value, k = spot(), s = SPOTS[k];
+    const now = +$('now').value, s = SPOTS[cur];
     const lateTypical = Math.round(now + s.mid + WALK - CLASS), lateSlow = Math.round(now + s.hi + WALK - CLASS);
-    if (lateSlow <= 0) return placed('Order placed. Even on a slow day you make class with ' + (-lateSlow) + ' min to spare.');
+    if (lateSlow <= 0) return placed('Order placed at ' + s.place + '. Even on a slow day you make class with ' + (-lateSlow) + ' min to spare.');
     $('sheetTitle').textContent = lateTypical > 0 ? 'Heads up: you\'ll likely be ~' + lateTypical + ' min late to COGS 9' : 'Heads up: this could make you late to COGS 9';
-    $('sheetBody').textContent = k === 'bistro'
-      ? 'Most Bistro orders take 21–34 min. Ordering at ' + fmt(now) + ', a typical order is ready around ' + fmt(now + s.mid) + ', and a slow one around ' + fmt(now + s.hi) + '.'
-      : 'Earl\'s is usually 3–6 min, but with a 10-minute walk the timing is tight.';
-    $('swap').hidden = k !== 'bistro';
-    $('sheet').classList.add('open'); ($('swap').hidden ? $('anyway') : $('swap')).focus();
+    $('sheetBody').textContent = 'Most ' + s.place + ' orders take ' + s.lo + '–' + s.hi + ' min. Ordering at ' + fmt(now) + ', a typical order is ready around ' + fmt(now + s.mid) + ', and a slow one around ' + fmt(now + s.hi) + '.';
+    const fits = Object.keys(SPOTS).filter((k) => k !== cur && SPOTS[k].menu && now + SPOTS[k].hi + WALK <= CLASS)
+      .sort((x, y) => SPOTS[x].hi - SPOTS[y].hi).slice(0, 3);
+    $('optLabel').hidden = !fits.length;
+    $('optLabel').textContent = 'Still gets you there on time';
+    $('alts').innerHTML = fits.map((k) => { const o = SPOTS[k], spare = CLASS - (now + o.hi + WALK);
+      return '<button type="button" class="alt" data-k="' + k + '">' + ph() + '<span><b>' + o.place + '</b><small>usually ' + o.lo + '–' + o.hi + ' min · see menu</small></span><span class="early">' + spare + ' min early</span></button>'; }).join('');
+    $('alts').querySelectorAll('.alt').forEach((b) => b.addEventListener('click', () => openMenu(b.dataset.k)));
+    $('sheet').classList.add('open'); ($('alts').querySelector('.alt') || $('anyway')).focus();
   });
-  $('swap').addEventListener('click', () => { document.querySelector('input[value=earls]').checked = true; render(); $('pay').focus(); });
   $('anyway').addEventListener('click', () => placed('Order placed. Good luck out there.'));
   $('now').addEventListener('input', render);
-  document.querySelectorAll('input[name=spot]').forEach((r) => r.addEventListener('change', render));
+  document.querySelectorAll('input[name=spot]').forEach((r) => r.addEventListener('change', () => { cur = r.value; $('menu').classList.remove('on'); render(); }));
   render();
 })();
 </script>

@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Missing Estimate · Laura Yuan</title>
-  <meta name="description" content="Case study in progress: 125 real Triton2Go orders from two students showed the real gap in UCSD\'s dining app is the estimate it never shows.">
+  <meta name="description" content="Case study in progress: 125 real Triton2Go orders from two students. The slowest spot on campus is also the least predictable, and its estimate is the one the receipts never record.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="The Missing Estimate · Laura Yuan">
-  <meta property="og:description" content="Case study in progress: 125 real Triton2Go orders from two students showed the real gap in UCSD\'s dining app is the estimate it never shows.">
+  <meta property="og:description" content="Case study in progress: 125 real Triton2Go orders from two students. The slowest spot on campus is also the least predictable, and its estimate is the one the receipts never record.">
   <meta property="og:url" content="https://laura06919-max.github.io/work/bistro.html">
   <meta property="og:image" content="https://laura06919-max.github.io/assets/img/og-card.jpg">
   <meta name="twitter:card" content="summary_large_image">
@@ -104,12 +104,12 @@
   <a class="back-link" href="../index.html#then-people">← All work</a>
   <p class="eyebrow">Case study · Data-informed redesign · Mobile UX · In progress</p>
   <h1 class="case-title">The Missing Estimate</h1>
-  <p class="case-sub">I set out to test whether UCSD's dining app's wait times were accurate. Then I pulled 125 real orders, mine and my friend Linda Song's, and found the real gap was the estimate the app never shows.</p>
+  <p class="case-sub">I set out to test whether UCSD's dining app's wait times were accurate. Then I pulled 125 real orders, mine and my friend Linda Song's, and found that the slowest spot on campus is also the hardest to plan around.</p>
   <dl class="tldr">
     <div><dt>Role</dt><dd>Solo: data collection, analysis, design</dd></div>
     <div><dt>Data</dt><dd>125 Triton2Go food orders from two students (77 mine, 48 from Linda Song), May–Nov 2026, from emailed receipts</dd></div>
     <div><dt>Tools</dt><dd>Python, Figma, HTML/CSS/JS</dd></div>
-    <div class="full"><dt>Finding</dt><dd>The Bistro never showed an estimate: 11 orders, 10 to 41 minutes, median 30 (a small sample). Elsewhere, estimates were mostly cautious: of 110 orders, 84 were early and 19 (17%) late.</dd></div>
+    <div class="full"><dt>Finding</dt><dd>The Bistro is the slowest and least predictable spot: 11 orders, 10 to 41 minutes, median 30 (a small sample). Its checkout shows a "Ready in" time, but its receipts never record it, so that estimate can't be checked yet. Elsewhere, estimates were mostly cautious: of 110 orders, 84 were early and 19 (17%) late.</dd></div>
     <div class="full"><dt>Status</dt><dd>Diagnosing why the Bistro is different before designing more: meeting HDH Dining, who run the app, on Nov 19.</dd></div>
   </dl>
 </header>
@@ -127,11 +127,12 @@
     <p class="reveal">Triton2Go is UC San Diego's mobile ordering app for campus dining, run by HDH Dining. A typical order:</p>
     <ol class="steps reveal">
       <li>Pick a dining location and add items.</li>
-      <li>At checkout, most locations show a target pickup time. Some, like the Bistro, show nothing.</li>
+      <li>At checkout, the app shows a "Ready in" time, like "Ready in 24 min" at the Bistro.</li>
       <li>Pay, then wait for the app's alert that the order is ready.</li>
-      <li>Walk over and pick it up. An emailed receipt records when you ordered, the target time, and when staff marked it complete.</li>
+      <li>Walk over and pick it up. An emailed receipt records when you ordered, the target time, and when staff marked it complete. Bistro receipts leave the target time out.</li>
     </ol>
-    <p class="reveal">That receipt became my dataset. Getting it was its own obstacle: the app blocks screenshots (the screen goes white), and receipts only go to the account's own email, so a friend has to forward hers to share.</p>
+    <figure class="figure reveal" style="max-width:420px;margin:6px auto 14px"><img src="../assets/img/bistro-checkout.webp" alt="Triton2Go checkout screen for a Sauteed Salmon at the Bistro, showing Ready in 24 min next to the location name" style="width:100%;border-radius:14px;border:0.5px solid var(--border)" loading="lazy"><figcaption>Today's checkout at the Bistro (my screenshot, Nov 17). The "Ready in" time shows here, but not on the emailed receipt.</figcaption></figure>
+    <p class="reveal">That receipt became my dataset. Getting it was its own obstacle: the in-app receipt screen turns white if you screenshot it, and emailed receipts only go to the account's own email, so a friend has to forward hers to share.</p>
   </section>
 
   <section id="data" data-chapter="The data">
@@ -141,7 +142,7 @@
     <figure class="figure reveal" data-r="pop" style="background:var(--bg3);border:0.5px solid var(--border);border-radius:16px;padding:18px 14px 10px">
       <svg viewBox="0 0 760 464" role="img" aria-labelledby="ct cd" style="width:100%;height:auto">
 <title id="ct">How long Triton2Go orders actually took, by location</title>
-<desc id="cd">125 orders from two students, May to November 2026. The Bistro never showed an estimate; its 11 orders took 10 to 41 minutes, median 30. At the other locations the quoted time was usually longer than the real wait.</desc>
+<desc id="cd">125 orders from two students, May to November 2026. Bistro receipts never record an estimate; its 11 orders took 10 to 41 minutes, median 30. At the other locations the quoted time was usually longer than the real wait.</desc>
 <g font-family="Sora, sans-serif" font-size="12" fill="var(--muted)">
 <line x1="150.0" x2="150.0" y1="26" y2="394" stroke="var(--border)" stroke-width="1"/><text x="150.0" y="412" text-anchor="middle">0</text>
 <line x1="214.4" x2="214.4" y1="26" y2="394" stroke="var(--border)" stroke-width="1"/><text x="214.4" y="412" text-anchor="middle">5</text>
@@ -155,7 +156,7 @@
 <line x1="730.0" x2="730.0" y1="26" y2="394" stroke="var(--border)" stroke-width="1"/><text x="730.0" y="412" text-anchor="middle">45</text>
 <text x="440.0" y="440" text-anchor="middle" fill="var(--hint)">minutes from ordering to "completed"</text>
 <text x="138" y="46" text-anchor="end" fill="var(--text)" font-weight="600">The Bistro</text>
-<text x="138" y="61" text-anchor="end" font-size="10.5" fill="var(--hint)">11 orders · no estimate</text>
+<text x="138" y="61" text-anchor="end" font-size="10.5" fill="var(--hint)">11 orders · not on receipt</text>
 <circle cx="420.7" cy="41.5" r="4.4" fill="var(--accent2)" fill-opacity=".7"/>
 <circle cx="420.7" cy="39.1" r="4.4" fill="var(--accent2)" fill-opacity=".7"/>
 <circle cx="433.6" cy="46.1" r="4.4" fill="var(--accent2)" fill-opacity=".7"/>
@@ -286,13 +287,14 @@
 </g>
 <g font-family="Sora, sans-serif" font-size="11" fill="var(--muted)"><circle cx="150" cy="10" r="4.6" fill="var(--blue)" fill-opacity=".75"/><text x="160" y="14">one order (actual wait)</text><line x1="310" x2="310" y1="2" y2="18" stroke="#C98A2B" stroke-width="3" stroke-linecap="round"/><text x="320" y="14">what the app usually quoted there</text></g>
 </svg>
-      <figcaption>Each dot is one order (mine and Linda's). The Bistro row is coral because it never showed an estimate. The amber tick is the wait the app usually quoted at that location. Locations with fewer than 4 orders are left out of the chart (but included in the counts).</figcaption>
+      <figcaption>Each dot is one order (mine and Linda's). The Bistro row is coral because its receipts never record the quoted time, so it has no amber tick. The amber tick is the wait the app usually quoted at that location. Locations with fewer than 4 orders are left out of the chart (but included in the counts).</figcaption>
     </figure>
-    <p class="pull reveal">The problem wasn't the number. It was the missing one.</p>
-    <p class="reveal"><strong>The Bistro never showed an estimate</strong> on any of our 11 orders, and it's the slowest spot: 10 to 41 minutes, median 30, with 9 of 11 taking 21 minutes or more. That's only 11 orders from two people, so it's a strong signal, not proof.</p>
+    <p class="pull reveal">The estimate I most needed to check was the one the receipts left out.</p>
+    <p class="reveal"><strong>The Bistro is the slowest and least predictable spot:</strong> 10 to 41 minutes, median 30, with 9 of 11 orders taking 21 minutes or more. That's only 11 orders from two people, so it's a strong signal, not proof.</p>
+    <p class="reveal">None of its receipts recorded a target time, and at first I read that as the app showing no estimate. Then I checked the app itself: checkout does show one ("Ready in 24 min" on Nov 17). The receipt is what leaves it out, so there's no record to check it against. If 24 minutes is typical there, Bistro orders usually take longer than quoted, the opposite of everywhere else. One screenshot can't show that, so I now screenshot the Bistro's quote every time I order.</p>
     <p class="reveal">Everywhere else, the gap was smaller than I expected. Of the 110 orders that showed an estimate, 84 (76%) were ready early, 7 on time and 19 (17%) late. Eight of those 19 were 8 or more minutes late, and one was 27.</p>
-    <p class="reveal">So the gap I'm closing is specific: <strong>15 of 125 orders (12%) came with no estimate at all, 11 of them at the Bistro</strong>, plus a smaller tail of badly late orders (8 of 110, about 7%).</p>
-    <div class="reflection reveal"><p><b>What this data can and can't say.</b> It's two students' orders, at the times we happen to eat. I also looked for a lunch-rush effect and didn't find a clear one: rush-hour orders took a median of 8 minutes vs. 6 otherwise, and the app was still early during the rush. "Completed" is when staff marked the order ready for pickup. The receipt may also leave out an estimate the app showed on screen.</p></div>
+    <p class="reveal">So the gap is narrower than I first thought: <strong>the Bistro's estimate is the one nobody can check, at the spot where waits vary the most</strong>, plus a smaller tail of badly late orders elsewhere (8 of 110, about 7%).</p>
+    <div class="reflection reveal"><p><b>What this data can and can't say.</b> It's two students' orders, at the times we happen to eat. I also looked for a lunch-rush effect and didn't find a clear one: rush-hour orders took a median of 8 minutes vs. 6 otherwise, and the app was still early during the rush. "Completed" is when staff marked the order ready for pickup. Bistro receipts don't record the quoted time, so for those 11 orders I know the actual wait but not the estimate.</p></div>
   </section>
 
   <section id="unknowns" data-chapter="Open questions">
@@ -301,7 +303,8 @@
     <p class="reveal">The receipts show <em>that</em> the Bistro is slow and silent, not <em>why</em>. Before designing anything big, I need answers the data can't give me:</p>
     <ul class="reveal">
       <li><b>Who marks an order complete, and when?</b> Food bagged, or placed on the pickup shelf?</li>
-      <li><b>Why does the Bistro show no estimate?</b> An app setting, made-to-order cooking, or a kitchen choice?</li>
+      <li><b>Why don't Bistro receipts record the quoted time?</b> And how is its "Ready in" number calculated: an app setting, made-to-order cooking, or a kitchen choice?</li>
+      <li><b>Why does the in-app receipt block screenshots?</b> It makes it hard for students to keep or share their own order history.</li>
       <li><b>Is a 30–40 minute wait normal there?</b> Or are my 11 orders outliers? I'm calling an order "late" when it's completed after the quoted time, and "very late" at 8+ minutes. I don't yet know how HDH defines it.</li>
     </ul>
     <p class="reveal">So I asked. HDH Dining's business analytics manager agreed to meet on Nov 19, and I plan to talk to Bistro staff next. I'll update this section with what they tell me.</p>
@@ -309,9 +312,9 @@
 
   <section id="redesign" data-chapter="First fix">
     <p class="chapter-num">05 · A conservative first fix</p>
-    <h2 class="reveal">Show something instead of nothing</h2>
+    <h2 class="reveal">Show the spread, not one number</h2>
     <p class="reveal">Until I know why the Bistro is slow, I'm only committing to the smallest change the data supports.</p>
-    <div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">My first idea</span><p>Recalculate every estimate around burner capacity, because the timer is too short.</p></div><div><span class="tag">After the data</span><p>Most timers are fine, just cautious. The fix belongs where there is no timer.</p></div></div><div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">Today</span><p>At the Bistro, a blank.</p></div><div><span class="tag">First fix</span><p>A rough range from past orders, labeled as rough: "usually 21–33 min, based on 11 orders." Honest about how little it rests on.</p></div></div><div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">Today</span><p>Elsewhere, one number ("~7 min") that's usually a few minutes off.</p></div><div><span class="tag">First fix</span><p>The same kind of range: "usually 3–6 min." It shows the spread, including the occasional very late order.</p></div></div>
+    <div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">My first idea</span><p>Recalculate every estimate around burner capacity, because the timer is too short.</p></div><div><span class="tag">After the data</span><p>Most timers are fine, just cautious. The fix belongs at the spot that's hardest to predict.</p></div></div><div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">Today</span><p>At the Bistro, one number ("Ready in 24 min") for a wait that ranged from 10 to 41 minutes.</p></div><div><span class="tag">First fix</span><p>A rough range from past orders, labeled as rough: "usually 21–33 min, based on 11 orders." Honest about how little it rests on.</p></div></div><div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">Today</span><p>Elsewhere, one number ("~7 min") that's usually a few minutes off.</p></div><div><span class="tag">First fix</span><p>The same kind of range: "usually 3–6 min." It shows the spread, including the occasional very late order.</p></div></div>
   </section>
 
   <section id="try" data-chapter="Before / after">
@@ -347,7 +350,7 @@
           </div></div>
         </figure>
       </div>
-      <p class="fine">Ranges: Bistro 21–33 min (11 orders), Earl's 3–6 (25), Fusion 5–11 (32), Club Med 3–9 (19). "Today" shows the target the app usually quoted at each spot. The class-time hint assumes a 10-minute walk.</p>
+      <p class="fine">Ranges: Bistro 21–33 min (11 orders), Earl's 3–6 (25), Fusion 5–11 (32), Club Med 3–9 (19). "Today" shows the target the app usually quoted at each spot (the Bistro's 24 min comes from one screenshot). The class-time hint assumes a 10-minute walk.</p>
     </div>
   </section>
 
@@ -365,7 +368,7 @@
   <section id="reflect" data-chapter="Reflect">
     <p class="chapter-num">08 · Reflection</p>
     <h2 class="reveal">The data changed the question</h2>
-    <div class="reflection reveal"><p>If I had built my first idea, I would have "fixed" estimates that mostly weren't broken and missed the one that didn't exist. The next step is the one I skipped at first: understanding why the Bistro is different, from the people who run it. After that, I'd test the first fix and the ideas above with students before building anything bigger.</p></div>
+    <div class="reflection reveal"><p>If I had built my first idea, I would have "fixed" estimates that mostly weren't broken and missed where the real uncertainty is: the slowest spot, whose estimate nobody records. The next step is the one I skipped at first: understanding why the Bistro is different, from the people who run it. After that, I'd test the first fix and the ideas above with students before building anything bigger.</p></div>
   </section>
 </main>
 <nav class="case-nav reveal" aria-label="More case studies">
@@ -380,7 +383,7 @@
   const $ = (id) => document.getElementById(id);
   const WALK = 10;
   const SPOTS = {
-    bistro:  { label: 'Bistro', item: 'Sautéed salmon', price: '$17.00', quote: null, lo: 21, hi: 33, n: 11 },
+    bistro:  { label: 'Bistro', item: 'Sautéed salmon', price: '$17.00', quote: 24, lo: 21, hi: 33, n: 11 },
     earls:   { label: "Earl's", item: 'Green Tea Latte', price: '$5.75', quote: 7, lo: 3, hi: 6, n: 25 },
     fusion:  { label: 'Fusion', item: 'Loco Moco Plate', price: '', quote: 10, lo: 5, hi: 11, n: 32 },
     clubmed: { label: 'Club Med', item: 'Chicken Club Sandwich', price: '', quote: 12, lo: 3, hi: 9, n: 19 },

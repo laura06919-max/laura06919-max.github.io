@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Missing Estimate · Laura Yuan</title>
-  <meta name="description" content="Case study: I set out to test whether UCSD's dining app's wait times were accurate. 125 real orders from two students showed the real problem was the estimate that never appears.">
+  <meta name="description" content="Case study in progress: 125 real Triton2Go orders from two students showed the real gap in UCSD\'s dining app is the estimate it never shows.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="The Missing Estimate · Laura Yuan">
-  <meta property="og:description" content="Case study: I set out to test whether UCSD's dining app's wait times were accurate. 125 real orders from two students showed the real problem was the estimate that never appears.">
+  <meta property="og:description" content="Case study in progress: 125 real Triton2Go orders from two students showed the real gap in UCSD\'s dining app is the estimate it never shows.">
   <meta property="og:url" content="https://laura06919-max.github.io/work/bistro.html">
   <meta property="og:image" content="https://laura06919-max.github.io/assets/img/og-card.jpg">
   <meta name="twitter:card" content="summary_large_image">
@@ -63,6 +63,27 @@
     .dish.picked { border-color: #2E4456; }
     .dish.picked button { background: #2E4456; color: #FFFCF2; }
     @media (max-width: 760px) { .demo { grid-template-columns: 1fr; } .phone { max-width: 300px; margin: 0 auto; } }
+    .steps { padding-left: 22px; margin: 10px 0 14px; }
+    .steps li { margin: 6px 0; }
+    .ba { background: var(--bg2); border-radius: 22px; padding: 26px; margin-top: 18px; }
+    .ba fieldset { border: 0; margin-bottom: 16px; }
+    .ba legend { font-family: var(--label); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--hint); margin-bottom: 8px; }
+    .ba .opts { display: flex; gap: 8px; flex-wrap: wrap; }
+    .ba .opts button { font: inherit; font-size: 14px; padding: 7px 14px; border-radius: 20px; border: 0.5px solid var(--border); background: var(--bg3); color: var(--text); cursor: pointer; }
+    .ba .opts button[aria-pressed=true] { background: var(--text); color: var(--bg3); border-color: var(--text); }
+    .tag-test { text-transform: none; letter-spacing: 0; font-size: 11px; background: #F5E3DD; color: #8A4B3E; border-radius: 99px; padding: 2px 8px; margin-left: 6px; }
+    .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 640px; margin: 8px auto 0; }
+    .pair .col { margin: 0; }
+    .pair figcaption { font-family: var(--label); font-weight: 600; text-align: center; margin-bottom: 10px; }
+    .pair .screen { min-height: 380px; }
+    .pair .row.real { background: #E3EEF4; }
+    .row.eta { font-weight: 500; }
+    .row.eta.none { background: #EFE9DA; color: #8A8270; font-style: italic; }
+    .basis { font-size: 12px; color: #6B7C88; margin: -4px 2px 0; }
+    .hint { font-size: 12.5px; border-radius: 10px; padding: 8px 10px; background: #F5E3DD; color: #6E3B30; margin: 0; }
+    .hint.ok { background: #E3EEF4; color: #2E4456; }
+    .pay { text-align: center; }
+    @media (max-width: 640px) { .pair { grid-template-columns: 1fr; max-width: 300px; } }
   </style>
   <script>document.documentElement.classList.add('js')</script>
 </head>
@@ -81,14 +102,15 @@
 </nav>
 <header class="case-hero" id="start" data-chapter="Start">
   <a class="back-link" href="../index.html#then-people">← All work</a>
-  <p class="eyebrow">Case study · Data-informed redesign · Mobile UX</p>
+  <p class="eyebrow">Case study · Data-informed redesign · Mobile UX · In progress</p>
   <h1 class="case-title">The Missing Estimate</h1>
-  <p class="case-sub">I set out to test whether UCSD's dining app's wait times were accurate. Then I pulled 125 real orders, mine and my friend Linda Song's, and the data told a more interesting story.</p>
+  <p class="case-sub">I set out to test whether UCSD's dining app's wait times were accurate. Then I pulled 125 real orders, mine and my friend Linda Song's, and found the real gap was the estimate the app never shows.</p>
   <dl class="tldr">
     <div><dt>Role</dt><dd>Solo: data collection, analysis, design</dd></div>
     <div><dt>Data</dt><dd>125 Triton2Go food orders from two students (77 mine, 48 from Linda Song), May–Nov 2026, from emailed receipts</dd></div>
-    <div><dt>Tools</dt><dd>Python, Figma</dd></div>
-    <div class="full"><dt>Finding</dt><dd>Where the app gives an estimate, it builds in a buffer: 84 of 110 orders were ready early. The Bistro, the slowest spot, never gave an estimate at all: 11 orders, 10 to 41 minutes, median 30.</dd></div>
+    <div><dt>Tools</dt><dd>Python, Figma, HTML/CSS/JS</dd></div>
+    <div class="full"><dt>Finding</dt><dd>The Bistro never showed an estimate: 11 orders, 10 to 41 minutes, median 30 (a small sample). Elsewhere, estimates were mostly cautious: of 110 orders, 84 were early and 19 (17%) late.</dd></div>
+    <div class="full"><dt>Status</dt><dd>Diagnosing why the Bistro is different before designing more: meeting HDH Dining, who run the app, on Nov 19.</dd></div>
   </dl>
 </header>
 <main class="case-body">
@@ -99,10 +121,23 @@
     <p class="reveal">That theory made a nice story. Before designing around it, I wanted to check it.</p>
   </section>
 
+  <section id="today" data-chapter="How it works">
+    <p class="chapter-num">02 · How Triton2Go works today</p>
+    <h2 class="reveal">The flow students use now</h2>
+    <p class="reveal">Triton2Go is UC San Diego's mobile ordering app for campus dining, run by HDH Dining. A typical order:</p>
+    <ol class="steps reveal">
+      <li>Pick a dining location and add items.</li>
+      <li>At checkout, most locations show a target pickup time. Some, like the Bistro, show nothing.</li>
+      <li>Pay, then wait for the app's alert that the order is ready.</li>
+      <li>Walk over and pick it up. An emailed receipt records when you ordered, the target time, and when staff marked it complete.</li>
+    </ol>
+    <p class="reveal">That receipt became my dataset. Getting it was its own obstacle: the app blocks screenshots (the screen goes white), and receipts only go to the account's own email, so a friend has to forward hers to share.</p>
+  </section>
+
   <section id="data" data-chapter="The data">
-    <p class="chapter-num">02 · Testing it</p>
+    <p class="chapter-num">03 · Testing it</p>
     <h2 class="reveal">125 receipts</h2>
-    <p class="reveal">Getting the data was its own obstacle. The app blocks screenshots (the screen goes white), and receipts can only be emailed to the account's own address. So every order sends an email receipt with the order time, the app's target time, and when the order was marked complete. I collected 77 of my food orders from May to November 2026. To check that this wasn't just my habits, my friend Linda Song forwarded her receipts too: 48 more orders. Together, that's a dataset of 125 orders: location, dish, time ordered, time quoted, time actually completed.</p>
+    <p class="reveal">I collected 77 of my food orders from May to November 2026. To check that this wasn't just my habits, Linda forwarded hers too: 48 more. For each order: location, dish, time ordered, time quoted, time completed.</p>
     <figure class="figure reveal" data-r="pop" style="background:var(--bg3);border:0.5px solid var(--border);border-radius:16px;padding:18px 14px 10px">
       <svg viewBox="0 0 760 464" role="img" aria-labelledby="ct cd" style="width:100%;height:auto">
 <title id="ct">How long Triton2Go orders actually took, by location</title>
@@ -251,69 +286,86 @@
 </g>
 <g font-family="Sora, sans-serif" font-size="11" fill="var(--muted)"><circle cx="150" cy="10" r="4.6" fill="var(--blue)" fill-opacity=".75"/><text x="160" y="14">one order (actual wait)</text><line x1="310" x2="310" y1="2" y2="18" stroke="#C98A2B" stroke-width="3" stroke-linecap="round"/><text x="320" y="14">what the app usually quoted there</text></g>
 </svg>
-      <figcaption>Each dot is one order (mine and Linda's). The amber tick is the wait the app usually quoted at that location. Locations with fewer than 4 orders are left out of the chart (but included in the counts).</figcaption>
+      <figcaption>Each dot is one order (mine and Linda's). The Bistro row is coral because it never showed an estimate. The amber tick is the wait the app usually quoted at that location. Locations with fewer than 4 orders are left out of the chart (but included in the counts).</figcaption>
     </figure>
     <p class="pull reveal">The problem wasn't the number. It was the missing one.</p>
-    <p class="reveal">At the places that give an estimate, the estimate is <strong>cautious, not optimistic</strong>: 84 of 110 orders (76%) were ready early, typically 4 minutes before the quoted time, and Linda's orders showed the same pattern as mine. Earl's quotes 7 minutes and is usually done in 3–6.</p>
-    <p class="reveal">The Bistro is the opposite. It <strong>never showed an estimate</strong> on any of our 11 orders, and it's by far the slowest: 10 to 41 minutes, median 30, with 9 of 11 orders taking 21 minutes or more. The one place a student most needs to plan around is the one place the app says nothing.</p>
-    <p class="reveal">One more thing the second dataset made visible: when an order is late, it can be <strong>very</strong> late. 19 of the 110 estimated orders came in after the quoted time, and 8 of those were 8 or more minutes late (one was 27). A single number hides that tail. A range shows it.</p>
-    <div class="reflection reveal"><p><b>What this data can and can't say.</b> It's two students' orders, at the times we happen to eat, and only 11 from the Bistro, so it shows a pattern, not a proof. I also looked for a lunch-rush effect and didn't find a clear one: rush-hour orders took a median of 8 minutes vs. 6 otherwise, and the app was still early during the rush. "Completed" is when staff marked the order ready for pickup, which is the moment that matters for planning. The receipt may also leave out an estimate the app showed on screen.</p></div>
+    <p class="reveal"><strong>The Bistro never showed an estimate</strong> on any of our 11 orders, and it's the slowest spot: 10 to 41 minutes, median 30, with 9 of 11 taking 21 minutes or more. That's only 11 orders from two people, so it's a strong signal, not proof.</p>
+    <p class="reveal">Everywhere else, the gap was smaller than I expected. Of the 110 orders that showed an estimate, 84 (76%) were ready early, 7 on time and 19 (17%) late. Eight of those 19 were 8 or more minutes late, and one was 27.</p>
+    <p class="reveal">So the gap I'm closing is specific: <strong>15 of 125 orders (12%) came with no estimate at all, 11 of them at the Bistro</strong>, plus a smaller tail of badly late orders (8 of 110, about 7%).</p>
+    <div class="reflection reveal"><p><b>What this data can and can't say.</b> It's two students' orders, at the times we happen to eat. I also looked for a lunch-rush effect and didn't find a clear one: rush-hour orders took a median of 8 minutes vs. 6 otherwise, and the app was still early during the rush. "Completed" is when staff marked the order ready for pickup. The receipt may also leave out an estimate the app showed on screen.</p></div>
   </section>
 
-  <section id="redesign" data-chapter="Redesign">
-    <p class="chapter-num">03 · What changed in the design</p>
-    <h2 class="reveal">Design for the gap, not the hunch</h2>
-    <div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">My first idea</span><p>Recalculate every estimate around burner capacity, because the timer is too short.</p></div><div><span class="tag">After the data</span><p>Most timers are fine, just cautious. The fix belongs where there is no timer: give the Bistro a real estimate.</p></div></div><div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">Today</span><p>One confident number ("7 min") that's usually wrong by a few minutes.</p></div><div><span class="tag">Redesign</span><p>A range from past orders: "usually 3–6 min." Honest about spread, and still easy to read.</p></div></div><div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">Today</span><p>At the Bistro, a blank.</p></div><div><span class="tag">Redesign</span><p>"Usually 21–33 min." Then, if the student has class soon, a warning before they pay, with an exit: "I'll walk fast, order anyway."</p></div></div><div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">My first warning</span><p>"Get a latte from Earl's instead." One fixed suggestion, whether or not it actually helps.</p></div><div><span class="tag">Redesign</span><p>Nearby options that would still get you to class, each with its usual wait, how early you'd arrive, and a tap straight into that menu.</p></div></div><div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">Today</span><p>Menus are text only. Dish names like "Loco Moco Plate" or "City Slicker" mean nothing if you've never had them.</p></div><div><span class="tag">Redesign</span><p>A photo on every dish. This came from Linda, not from me: she said it's the feature she wants most, and that it matters most for international students choosing food they don't know by name.</p></div></div><div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">Missing</span><p>The app never learns whether its estimates were right.</p></div><div><span class="tag">Redesign</span><p>One tap after pickup: "Was it ready when you got there?" That is the honest version of my receipt study, built into the product with consent.</p></div></div>
+  <section id="unknowns" data-chapter="Open questions">
+    <p class="chapter-num">04 · What I don't know yet</p>
+    <h2 class="reveal">Why is the Bistro different?</h2>
+    <p class="reveal">The receipts show <em>that</em> the Bistro is slow and silent, not <em>why</em>. Before designing anything big, I need answers the data can't give me:</p>
+    <ul class="reveal">
+      <li><b>Who marks an order complete, and when?</b> Food bagged, or placed on the pickup shelf?</li>
+      <li><b>Why does the Bistro show no estimate?</b> An app setting, made-to-order cooking, or a kitchen choice?</li>
+      <li><b>Is a 30–40 minute wait normal there?</b> Or are my 11 orders outliers? I'm calling an order "late" when it's completed after the quoted time, and "very late" at 8+ minutes. I don't yet know how HDH defines it.</li>
+    </ul>
+    <p class="reveal">So I asked. HDH Dining's business analytics manager agreed to meet on Nov 19, and I plan to talk to Bistro staff next. I'll update this section with what they tell me.</p>
   </section>
 
-  <section id="try" data-chapter="Try it">
-    <p class="chapter-num">04 · Try it</p>
-    <h2 class="reveal">Play with the redesign</h2>
-    <p class="reveal">Pick where you're ordering and move the clock. The ranges come from my real orders.</p>
-    <div class="demo reveal" id="demo">
-      <div>
-        <fieldset>
-          <legend>Where you're ordering</legend>
-          <div class="opts">
-            <label><input type="radio" name="spot" value="bistro" checked><span>Bistro · salmon</span></label>
-            <label><input type="radio" name="spot" value="earls"><span>Earl's · latte</span></label>
-          </div>
-        </fieldset>
-        <label class="lbl" for="now">It's now: <span class="val" id="nowVal"></span></label>
-        <input type="range" id="now" min="0" max="50" value="22">
-        <p class="fine">Your next class: COGS 9 at 1:00 PM, about a 10-minute walk away. Ranges are the middle half of real orders: Bistro 21–33 min (11 orders), Earl's 3–6 (25), Club Med 3–9 (19), Fusion 5–11 (32). Walk times to the other spots are assumed to be 10 min too. Gray photo boxes mark where dish photos go. </p>
+  <section id="redesign" data-chapter="First fix">
+    <p class="chapter-num">05 · A conservative first fix</p>
+    <h2 class="reveal">Show something instead of nothing</h2>
+    <p class="reveal">Until I know why the Bistro is slow, I'm only committing to the smallest change the data supports.</p>
+    <div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">My first idea</span><p>Recalculate every estimate around burner capacity, because the timer is too short.</p></div><div><span class="tag">After the data</span><p>Most timers are fine, just cautious. The fix belongs where there is no timer.</p></div></div><div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">Today</span><p>At the Bistro, a blank.</p></div><div><span class="tag">First fix</span><p>A rough range from past orders, labeled as rough: "usually 21–33 min, based on 11 orders." Honest about how little it rests on.</p></div></div><div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">Today</span><p>Elsewhere, one number ("~7 min") that's usually a few minutes off.</p></div><div><span class="tag">First fix</span><p>The same kind of range: "usually 3–6 min." It shows the spread, including the occasional very late order.</p></div></div>
+  </section>
+
+  <section id="try" data-chapter="Before / after">
+    <p class="chapter-num">06 · Before and after</p>
+    <h2 class="reveal">Compare the two checkouts</h2>
+    <p class="reveal">Pick a location to see today's checkout next to the first fix. The ranges are the middle half of our real orders.</p>
+    <div class="ba reveal" id="demo">
+      <fieldset>
+        <legend>Where you're ordering</legend>
+        <div class="opts" id="spots"></div>
+      </fieldset>
+      <fieldset>
+        <legend>Your next class starts in <span class="tag-test">idea to test</span></legend>
+        <div class="opts" id="classes"></div>
+      </fieldset>
+      <div class="pair">
+        <figure class="col"><figcaption>Today</figcaption>
+          <div class="phone"><div class="screen">
+            <h4>Checkout</h4>
+            <div class="row"><span id="t-item"></span><b id="t-price"></b></div>
+            <div class="row eta" id="t-eta"></div>
+            <div class="pay" aria-hidden="true">Place order</div>
+          </div></div>
+        </figure>
+        <figure class="col"><figcaption>First fix</figcaption>
+          <div class="phone"><div class="screen">
+            <h4>Checkout</h4>
+            <div class="row"><span id="r-item"></span><b id="r-price"></b></div>
+            <div class="row eta real" id="r-eta"></div>
+            <p class="basis" id="r-basis"></p>
+            <p class="hint" id="r-hint" hidden></p>
+            <div class="pay" aria-hidden="true">Place order</div>
+          </div></div>
+        </figure>
       </div>
-      <div class="phone" aria-label="Interactive phone mockup">
-        <div class="screen">
-          <h4>Your order</h4>
-          <div class="row"><span id="dishName"></span><b id="price"></b></div>
-          <div class="row"><span>Today's app</span><b id="appEta"></b></div>
-          <div class="row real" id="realRow"><span>Redesign</span><b id="realEta"></b></div>
-          <div class="toast" id="toast" role="status"></div>
-          <div class="menu" id="menu" aria-live="polite"></div>
-          <button class="pay" id="pay">Place order</button>
-          <div class="sheet" id="sheet" role="dialog" aria-modal="false" aria-labelledby="sheetTitle">
-            <h5 id="sheetTitle"></h5>
-            <p id="sheetBody"></p>
-            <p class="optlabel" id="optLabel">Still gets you there on time</p>
-            <div class="alts" id="alts"></div>
-            <button class="escape" id="anyway">I'll walk fast, order anyway</button>
-          </div>
-        </div>
-      </div>
+      <p class="fine">Ranges: Bistro 21–33 min (11 orders), Earl's 3–6 (25), Fusion 5–11 (32), Club Med 3–9 (19). "Today" shows the target the app usually quoted at each spot. The class-time hint assumes a 10-minute walk.</p>
     </div>
   </section>
 
-  <section id="ics" data-chapter="Privacy">
-    <p class="chapter-num">05 · A security call</p>
-    <h2 class="reveal">Why .ics files instead of WebReg</h2>
-    <p class="reveal">The warning needs to know when your next class is. My first instinct was to pull a student's schedule straight from WebReg. That's UCSD's own login system, and scraping it is a real security problem. Almost every calendar app can export a standard .ics file, so I designed around that instead. Same result, far less risk, and the student never hands over a password.</p>
+  <section id="ideas" data-chapter="Ideas to test">
+    <p class="chapter-num">07 · Ideas I'm not building yet</p>
+    <h2 class="reveal">Hypotheses, not findings</h2>
+    <p class="reveal">A few ideas came up that my data doesn't support yet, so I'm keeping them as things to test with students rather than designing them out:</p>
+    <ul class="reveal">
+      <li><b>A late-for-class warning</b> before paying, using a calendar file (.ics) the student exports, rather than their WebReg login.</li>
+      <li><b>Nearby spots</b> that would still get you to class on time, when your first choice is slow.</li>
+      <li><b>Dish photos</b> on the menu. Linda suggested this for international students who don't know dishes by name.</li>
+    </ul>
   </section>
 
   <section id="reflect" data-chapter="Reflect">
-    <p class="chapter-num">06 · Reflection</p>
-    <h2 class="reveal">The data changed the design</h2>
-    <div class="reflection reveal"><p>If I had built my first idea, I would have "fixed" estimates that mostly weren't broken and missed the one that didn't exist. Linda's 48 orders confirmed the main pattern, so it isn't just my lunch habits. Next: talk to Bistro staff about why there's no estimate, test the warning and the nearby options with students, and bring this to HDH Dining, who run the app. Students use it every day, but only the university can change it, and anonymized order data from them would turn two students' receipts into a real model.</p></div>
+    <p class="chapter-num">08 · Reflection</p>
+    <h2 class="reveal">The data changed the question</h2>
+    <div class="reflection reveal"><p>If I had built my first idea, I would have "fixed" estimates that mostly weren't broken and missed the one that didn't exist. The next step is the one I skipped at first: understanding why the Bistro is different, from the people who run it. After that, I'd test the first fix and the ideas above with students before building anything bigger.</p></div>
   </section>
 </main>
 <nav class="case-nav reveal" aria-label="More case studies">
@@ -326,60 +378,39 @@
 <script>
 (function () {
   const $ = (id) => document.getElementById(id);
-  const WALK = 10, CLASS = 60; // minutes after 12:00
-  const CAM = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 8h3l2-2.5h6L17 8h3v11H4z"/><circle cx="12" cy="13.5" r="3.5"/></svg>';
+  const WALK = 10;
   const SPOTS = {
-    bistro: { place: 'The Bistro', name: 'Sautéed salmon', price: '$17.00', app: '— (none shown)', lo: 21, mid: 30, hi: 33 },
-    earls:  { place: "Earl's Coffeehouse", name: 'Green Tea Latte', price: '$5.75', app: '~7 min', lo: 3, mid: 4, hi: 6, menu: ['Green Tea Latte', 'Lavender Vanilla Matcha Latte', 'Croissant'] },
-    clubmed:{ place: 'Club Med', name: 'Chicken Club Sandwich', price: '', app: '~12 min', lo: 3, mid: 7, hi: 9, menu: ['Chicken Club Sandwich', 'Maui Ham Pizza', 'City Slicker Sandwich'] },
-    fusion: { place: 'Fusion', name: 'Loco Moco Plate', price: '', app: '~10 min', lo: 5, mid: 8, hi: 11, menu: ['Loco Moco Plate', 'CV Single Smash Burger Combo', 'Breakfast Smashburger'] },
+    bistro:  { label: 'Bistro', item: 'Sautéed salmon', price: '$17.00', quote: null, lo: 21, hi: 33, n: 11 },
+    earls:   { label: "Earl's", item: 'Green Tea Latte', price: '$5.75', quote: 7, lo: 3, hi: 6, n: 25 },
+    fusion:  { label: 'Fusion', item: 'Loco Moco Plate', price: '', quote: 10, lo: 5, hi: 11, n: 32 },
+    clubmed: { label: 'Club Med', item: 'Chicken Club Sandwich', price: '', quote: 12, lo: 3, hi: 9, n: 19 },
   };
-  let cur = 'bistro';
-  const fmt = (m) => { m = Math.round(m); const h = 12 + Math.floor(m / 60); return (h > 12 ? h - 12 : h) + ':' + String(m % 60).padStart(2, '0') + ' PM'; };
-  const ph = () => '<span class="ph" title="Dish photo goes here">' + CAM + '</span>';
-  function setSpot(k) { cur = k; const r = document.querySelector('input[name=spot][value=' + k + ']'); if (r) r.checked = true; else document.querySelectorAll('input[name=spot]').forEach((x) => { x.checked = false; }); }
+  const CLASSES = [null, 20, 30, 45, 60];
+  let cur = 'bistro', cls = null;
+  function pills(el, items, isOn, onPick) {
+    el.innerHTML = '';
+    items.forEach(([key, text]) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = text;
+      b.setAttribute('aria-pressed', isOn(key)); b.addEventListener('click', () => { onPick(key); render(); }); el.appendChild(b); });
+  }
   function render() {
-    const now = +$('now').value, s = SPOTS[cur];
-    $('nowVal').textContent = fmt(now);
-    $('dishName').textContent = s.place === 'The Bistro' ? s.name : s.place + ' · ' + s.name;
-    $('price').textContent = s.price;
-    $('appEta').textContent = s.app;
-    $('realEta').textContent = 'usually ' + s.lo + '–' + s.hi + ' min';
-    $('realRow').classList.toggle('ok', now + s.hi + WALK <= CLASS);
-    $('sheet').classList.remove('open'); $('toast').classList.remove('show');
+    const s = SPOTS[cur];
+    pills($('spots'), Object.keys(SPOTS).map((k) => [k, SPOTS[k].label]), (k) => k === cur, (k) => { cur = k; });
+    pills($('classes'), CLASSES.map((c) => [c, c ? c + ' min' : 'Not set']), (c) => c === cls, (c) => { cls = c; });
+    $('t-item').textContent = $('r-item').textContent = s.item;
+    $('t-price').textContent = $('r-price').textContent = s.price;
+    const t = $('t-eta');
+    if (s.quote) { t.textContent = 'Ready in ~' + s.quote + ' min'; t.classList.remove('none'); }
+    else { t.textContent = 'No estimate shown'; t.classList.add('none'); }
+    $('r-eta').textContent = 'Usually ' + s.lo + '–' + s.hi + ' min';
+    $('r-basis').textContent = (s.n < 15 ? 'Rough range, ' : 'Range ') + 'based on ' + s.n + ' past orders';
+    const h = $('r-hint');
+    if (!cls) { h.hidden = true; return; }
+    h.hidden = false;
+    const spare = cls - (s.hi + WALK);
+    h.className = 'hint' + (spare >= 0 ? ' ok' : '');
+    h.textContent = spare >= 0 ? 'Idea to test: even a slow order leaves ' + spare + ' min to get to class.'
+      : 'Idea to test: a slow order (' + s.hi + ' min) plus the walk could make you ' + (-spare) + ' min late.';
   }
-  function placed(msg) { const t = $('toast'); t.textContent = msg; t.classList.add('show'); $('sheet').classList.remove('open'); $('menu').classList.remove('on'); }
-  function openMenu(k) {
-    const s = SPOTS[k], m = $('menu');
-    m.innerHTML = '<div class="mhead"><b>' + s.place + ' menu</b><button type="button" id="mclose">Back</button></div>' +
-      s.menu.map((d, i) => '<div class="dish' + (i === 0 ? ' picked' : '') + '">' + ph() + '<span>' + d + '</span><button type="button" data-d="' + d + '">' + (i === 0 ? 'Added' : 'Add') + '</button></div>').join('');
-    m.classList.add('on'); $('sheet').classList.remove('open');
-    setSpot(k); SPOTS[k].name = s.menu[0]; render(); $('menu').classList.add('on');
-    m.querySelectorAll('.dish button').forEach((b) => b.addEventListener('click', () => {
-      m.querySelectorAll('.dish').forEach((x) => { x.classList.remove('picked'); x.querySelector('button').textContent = 'Add'; });
-      b.parentElement.classList.add('picked'); b.textContent = 'Added'; SPOTS[k].name = b.dataset.d; render(); $('menu').classList.add('on');
-    }));
-    $('mclose').addEventListener('click', () => { m.classList.remove('on'); setSpot('bistro'); render(); });
-    m.querySelector('.dish button').focus();
-  }
-  $('pay').addEventListener('click', () => {
-    const now = +$('now').value, s = SPOTS[cur];
-    const lateTypical = Math.round(now + s.mid + WALK - CLASS), lateSlow = Math.round(now + s.hi + WALK - CLASS);
-    if (lateSlow <= 0) return placed('Order placed at ' + s.place + '. Even on a slow day you make class with ' + (-lateSlow) + ' min to spare.');
-    $('sheetTitle').textContent = lateTypical > 0 ? 'Heads up: you\'ll likely be ~' + lateTypical + ' min late to COGS 9' : 'Heads up: this could make you late to COGS 9';
-    $('sheetBody').textContent = 'Most ' + s.place + ' orders take ' + s.lo + '–' + s.hi + ' min. Ordering at ' + fmt(now) + ', a typical order is ready around ' + fmt(now + s.mid) + ', and a slow one around ' + fmt(now + s.hi) + '.';
-    const fits = Object.keys(SPOTS).filter((k) => k !== cur && SPOTS[k].menu && now + SPOTS[k].hi + WALK <= CLASS)
-      .sort((x, y) => SPOTS[x].hi - SPOTS[y].hi).slice(0, 3);
-    $('optLabel').hidden = !fits.length;
-    $('optLabel').textContent = 'Still gets you there on time';
-    $('alts').innerHTML = fits.map((k) => { const o = SPOTS[k], spare = CLASS - (now + o.hi + WALK);
-      return '<button type="button" class="alt" data-k="' + k + '">' + ph() + '<span><b>' + o.place + '</b><small>usually ' + o.lo + '–' + o.hi + ' min · see menu</small></span><span class="early">' + spare + ' min early</span></button>'; }).join('');
-    $('alts').querySelectorAll('.alt').forEach((b) => b.addEventListener('click', () => openMenu(b.dataset.k)));
-    $('sheet').classList.add('open'); ($('alts').querySelector('.alt') || $('anyway')).focus();
-  });
-  $('anyway').addEventListener('click', () => placed('Order placed. Good luck out there.'));
-  $('now').addEventListener('input', render);
-  document.querySelectorAll('input[name=spot]').forEach((r) => r.addEventListener('change', () => { cur = r.value; $('menu').classList.remove('on'); render(); }));
   render();
 })();
 </script>

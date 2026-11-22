@@ -12,7 +12,7 @@
   --accent2: #C98A7D; --coral-ink: #93503E; --accent2-bg: #F5E3DD;
   --shadow: 0 10px 30px rgba(46,68,86,0.10);
   --torn: polygon(0% 2%, 5% 0%, 14% 1.5%, 24% 0%, 34% 1%, 44% 0%, 54% 1.5%, 64% 0%, 74% 1%, 84% 0%, 94% 1.5%, 100% 0%, 99% 12%, 100% 24%, 98.5% 36%, 100% 48%, 99% 60%, 100% 72%, 98.5% 84%, 100% 96%, 99% 100%, 90% 98.5%, 80% 100%, 70% 99%, 60% 100%, 50% 98.5%, 40% 100%, 30% 99%, 20% 100%, 10% 98.5%, 0% 100%, 1% 88%, 0% 76%, 1.5% 64%, 0% 52%, 1% 40%, 0% 28%, 1.5% 16%, 0% 4%);
-  --display: 'Abril Fatface', Georgia, serif;
+  --display: 'Fraunces', Georgia, serif;
   --label: 'Fredoka', system-ui, sans-serif;
   --body: 'Sora', -apple-system, system-ui, sans-serif;
   --nav-h: 58px;
@@ -31,7 +31,7 @@ html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 16px); }
 body { font-family: var(--body); background: var(--bg); color: var(--text); line-height: 1.65; font-size: 16px; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 img { max-width: 100%; display: block; }
 a { color: inherit; }
-h1, h2, h3, .display { font-family: var(--display); font-weight: 400; line-height: 1.2; }
+h1, h2, h3, .display { font-family: var(--display); font-weight: 600; line-height: 1.2; }
 :focus-visible { outline: 2.5px solid var(--blue-ink); outline-offset: 3px; border-radius: 6px; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .skip-link { position: absolute; left: 12px; top: -60px; z-index: 1000; background: var(--text); color: var(--bg3); padding: 8px 14px; border-radius: 8px; font-size: 14px; text-decoration: none; }
@@ -104,7 +104,7 @@ main { max-width: 820px; margin: 0 auto; padding: 0 40px; }
 .js .hero:not(.loaded) .piece-art { opacity: 0; transform: translate(60vw, 15px) rotate(14deg); }
 .hero h1 { font-size: 48px; margin-bottom: 18px; max-width: 700px; }
 .hero-lede { font-size: 17px; color: var(--muted); max-width: 540px; margin-bottom: 14px; }
-.hero-philosophy { font-family: var(--display); font-size: 20px; max-width: 460px; margin-bottom: 30px; line-height: 1.4; }
+.hero-philosophy { font-family: var(--display); font-weight: 600; font-size: 20px; max-width: 460px; margin-bottom: 30px; line-height: 1.4; }
 .hurry { background: var(--bg3); border: 0.5px solid var(--border); border-radius: 18px; padding: 14px 18px; display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; justify-content: center; max-width: 640px; box-shadow: var(--shadow); }
 .hurry-label { font-family: var(--label); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--hint); margin-right: 4px; }
 .pill-link { font-size: 13px; padding: 5px 13px; border-radius: 20px; text-decoration: none; border: 0.5px solid var(--border); background: var(--bg); transition: border-color .2s, transform .2s; }
@@ -166,7 +166,7 @@ main { max-width: 820px; margin: 0 auto; padding: 0 40px; }
 .book-page.flipped { transform: rotateY(-180deg); }
 .book-page img { flex: 1; width: 100%; object-fit: contain; min-height: 0; border-radius: 8px; }
 .book-page figcaption { text-align: center; padding-top: 14px; }
-.book-page figcaption b { font-family: var(--display); font-weight: 400; font-size: 20px; display: block; }
+.book-page figcaption b { font-family: var(--display); font-weight: 600; font-size: 20px; display: block; }
 .book-page figcaption span { font-size: 12px; color: var(--hint); }
 .icon-btn { width: 46px; height: 46px; border-radius: 50%; background: var(--bg3); border: 0.5px solid var(--border); display: grid; place-items: center; cursor: pointer; color: var(--text); transition: transform .2s; }
 .icon-btn:hover { transform: scale(1.06); }
@@ -235,7 +235,7 @@ footer small { display: block; font-size: 12px; margin-top: 4px; }
 .next-up a { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 26px 28px; background: var(--bg3); clip-path: var(--torn); text-decoration: none; transition: transform .2s; }
 .next-up a:hover { transform: translateY(-2px); }
 .next-up small { font-family: var(--label); text-transform: uppercase; letter-spacing: .06em; font-size: 12px; color: var(--hint); }
-.next-up b { font-family: var(--display); font-weight: 400; font-size: 26px; display: block; }
+.next-up b { font-family: var(--display); font-weight: 600; font-size: 26px; display: block; }
 .text-link { color: var(--blue-ink); font-weight: 500; }
 
 /* ---------- responsive ---------- */
@@ -321,7 +321,7 @@ footer small { display: block; font-size: 12px; margin-top: 4px; }
 .case-nav a:hover { transform: translateY(-2px); border-color: var(--blue); }
 .case-nav a.next { text-align: right; }
 .case-nav small { font-family: var(--label); text-transform: uppercase; letter-spacing: .06em; font-size: 12px; color: var(--hint); }
-.case-nav b { font-family: var(--display); font-weight: 400; font-size: 22px; }
+.case-nav b { font-family: var(--display); font-weight: 600; font-size: 22px; }
 .case-nav .all { grid-column: 1 / -1; text-align: center; background: none; border: 0; padding: 6px; font-size: 14px; color: var(--muted); }
 .case-nav .all:hover { transform: none; color: var(--text); }
 

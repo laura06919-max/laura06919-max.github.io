@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Missing Estimate · Laura Yuan</title>
-  <meta name="description" content="Case study in progress: 125 real Triton2Go orders from two students. The slowest spot on campus is also the least predictable, and its estimate is the one the receipts never record.">
+  <meta name="description" content="Case study: I tested my assumption about UCSD's dining app with 125 real orders, then asked the team that runs it why. The answer changed what was worth designing.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="The Missing Estimate · Laura Yuan">
-  <meta property="og:description" content="Case study in progress: 125 real Triton2Go orders from two students. The slowest spot on campus is also the least predictable, and its estimate is the one the receipts never record.">
+  <meta property="og:description" content="Case study: I tested my assumption about UCSD's dining app with 125 real orders, then asked the team that runs it why. The answer changed what was worth designing.">
   <meta property="og:url" content="https://laura06919-max.github.io/work/bistro.html">
   <meta property="og:image" content="https://laura06919-max.github.io/assets/img/og-card.jpg">
   <meta name="twitter:card" content="summary_large_image">
@@ -84,6 +84,12 @@
     .hint.ok { background: #E3EEF4; color: #2E4456; }
     .pay { text-align: center; }
     @media (max-width: 640px) { .pair { grid-template-columns: 1fr; max-width: 300px; } }
+    .qa { border-left: 3px solid var(--blue); padding: 4px 0 4px 16px; margin: 18px 0; }
+    .qa .q { font-family: var(--label); font-weight: 600; margin-bottom: 6px; }
+    .qa .a { color: var(--text); }
+    details.early { background: var(--bg2); border-radius: 18px; padding: 16px 20px; margin-top: 16px; }
+    details.early summary { cursor: pointer; font-family: var(--label); font-weight: 600; }
+    details.early .ba { background: transparent; padding: 16px 0 0; }
   </style>
   <script>document.documentElement.classList.add('js')</script>
 </head>
@@ -102,15 +108,15 @@
 </nav>
 <header class="case-hero" id="start" data-chapter="Start">
   <a class="back-link" href="../index.html#then-people">← All work</a>
-  <p class="eyebrow">Case study · Data-informed redesign · Mobile UX · In progress</p>
+  <p class="eyebrow">Case study · Discovery · Data analysis · Stakeholder research</p>
   <h1 class="case-title">The Missing Estimate</h1>
-  <p class="case-sub">I set out to test whether UCSD's dining app's wait times were accurate. Then I pulled 125 real orders, mine and a friend's, and found that the slowest spot on campus is also the hardest to plan around.</p>
+  <p class="case-sub">I set out to test whether UCSD's dining app's wait times were accurate. Then I pulled 125 real orders, mine and a friend's, Then I asked the team that runs the app why the data looked the way it did. The answer changed what was worth designing.</p>
   <dl class="tldr">
-    <div><dt>Role</dt><dd>Solo: data collection, analysis, design</dd></div>
+    <div><dt>Role</dt><dd>Solo: data collection, analysis, stakeholder interview</dd></div>
     <div><dt>Data</dt><dd>125 Triton2Go food orders from two students (77 mine, 48 a friend's), May–Nov 2026, from emailed receipts</dd></div>
-    <div><dt>Tools</dt><dd>Python, Figma, HTML/CSS/JS</dd></div>
-    <div class="full"><dt>Finding</dt><dd>The Bistro is the slowest and least predictable spot: 11 orders, 10 to 41 minutes, median 30 (a small sample). Its checkout shows a "Ready in" time, but its receipts never record it, so that estimate can't be checked yet. Elsewhere, estimates were mostly cautious: of 110 orders, 84 were early and 19 (17%) late.</dd></div>
-    <div class="full"><dt>Status</dt><dd>Diagnosing why the Bistro is different before designing more: meeting HDH Dining, who run the app, on Nov 19.</dd></div>
+    <div><dt>Tools</dt><dd>Python, Figma</dd></div>
+    <div class="full"><dt>Finding</dt><dd>The app's estimates were mostly cautious, not optimistic: 84 of 110 orders were ready early. The Bistro, the slowest spot, keeps its quoted time off receipts because it holds orders in a queue during rushes. The app's vendor is already rolling out AI-adjusted estimates, expected in 2027.</dd></div>
+    <div class="full"><dt>Outcome</dt><dd>Instead of redesigning something the vendor is already fixing, I'm surveying international students about dish photos, a change HDH Dining controls and has agreed to prioritize if students say it matters.</dd></div>
   </dl>
 </header>
 <main class="case-body">
@@ -297,31 +303,43 @@
     <div class="reflection reveal"><p><b>What this data can and can't say.</b> It's two students' orders, at the times we happen to eat. I also looked for a lunch-rush effect and didn't find a clear one: rush-hour orders took a median of 8 minutes vs. 6 otherwise, and the app was still early during the rush. "Completed" is when staff marked the order ready for pickup. Bistro receipts don't record the quoted time, so for those 11 orders I know the actual wait but not the estimate.</p></div>
   </section>
 
-  <section id="unknowns" data-chapter="Open questions">
-    <p class="chapter-num">04 · What I don't know yet</p>
-    <h2 class="reveal">Why is the Bistro different?</h2>
-    <p class="reveal">The receipts show <em>that</em> the Bistro is slow and silent, not <em>why</em>. Before designing anything big, I need answers the data can't give me:</p>
-    <ul class="reveal">
-      <li><b>Who marks an order complete, and when?</b> Food bagged, or placed on the pickup shelf?</li>
-      <li><b>Why don't Bistro receipts record the quoted time?</b> And how is its "Ready in" number calculated: an app setting, made-to-order cooking, or a kitchen choice?</li>
-      <li><b>Why does the in-app receipt block screenshots?</b> It makes it hard for students to keep or share their own order history.</li>
-      <li><b>Is a 30–40 minute wait normal there?</b> Or are my 11 orders outliers? I'm calling an order "late" when it's completed after the quoted time, and "very late" at 8+ minutes. I don't yet know how HDH defines it.</li>
-    </ul>
-    <p class="reveal">So I asked. HDH Dining's business analytics manager agreed to meet on Nov 19, and I plan to talk to Bistro staff next. I'll update this section with what they tell me.</p>
+  <section id="diagnosis" data-chapter="Asking HDH">
+    <p class="chapter-num">04 · Asking the people who run it</p>
+    <h2 class="reveal">The receipts couldn't tell me why</h2>
+    <p class="reveal">My data showed <em>what</em> was happening, not <em>why</em>. So I emailed HDH Dining, who run Triton2Go, and they connected me with their business analytics manager, who manages the system. Here is what I asked and what I learned.</p>
+    <div class="qa reveal">
+      <div class="q">Why don't Bistro receipts record a quoted time?</div>
+      <div class="a">The Bistro gets around a hundred orders the moment it opens, so it's the only location set to hold orders in a queue and print about 20 tickets at a time. While an order is held, the app says "waiting to release," and the student can still cancel. The quoted time only attaches once the ticket prints. A held order means a wait of at least about 45 minutes.</div>
+    </div>
+    <div class="qa reveal">
+      <div class="q">How is the "Ready in" time calculated?</div>
+      <div class="a">From two settings HDH controls: how many orders a kitchen can handle per hour, and a prep time for each dish. Extra items on one ticket add a little more time each. The system can't vary prep time by time of day, and the first "Ready in" screen doesn't know when a kitchen is running behind.</div>
+    </div>
+    <div class="qa reveal">
+      <div class="q">Why were most of our orders early?</div>
+      <div class="a">On purpose. Kitchens are short-staffed at the start of the year, so prep times are padded in fall, then trimmed later in the year as teams settle in.</div>
+    </div>
+    <div class="qa reveal">
+      <div class="q">What counts as late?</div>
+      <div class="a">HDH's dashboard calls an order on time if it's ready within 3 minutes of the quote, and they aim for most orders to land there. By that definition, 40 of our 110 orders (36%) were on time. Most of the rest were early, which fits the fall padding.</div>
+    </div>
   </section>
 
-  <section id="redesign" data-chapter="First fix">
-    <p class="chapter-num">05 · A conservative first fix</p>
-    <h2 class="reveal">Show the spread, not one number</h2>
-    <p class="reveal">Until I know why the Bistro is slow, I'm only committing to the smallest change the data supports.</p>
-    <div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">My first idea</span><p>Recalculate every estimate around burner capacity, because the timer is too short.</p></div><div><span class="tag">After the data</span><p>Most timers are fine, just cautious. The fix belongs at the spot that's hardest to predict.</p></div></div><div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">Today</span><p>At the Bistro, one number ("Ready in 24 min") for a wait that ranged from 10 to 41 minutes.</p></div><div><span class="tag">First fix</span><p>A rough range from past orders, labeled as rough: "usually 21–33 min, based on 11 orders." Honest about how little it rests on.</p></div></div><div class="decision reveal" style="margin-bottom:12px"><div class="before"><span class="tag">Today</span><p>Elsewhere, one number ("~7 min") that's usually a few minutes off.</p></div><div><span class="tag">First fix</span><p>The same kind of range: "usually 3–6 min." It shows the spread, including the occasional very late order.</p></div></div>
+  <section id="fixing" data-chapter="Already fixing">
+    <p class="chapter-num">05 · Already being fixed</p>
+    <h2 class="reveal">The estimate isn't mine to redesign</h2>
+    <p class="reveal">Triton2Go is third-party software, so HDH can only change the settings the vendor exposes. The vendor has already piloted AI-adjusted estimates that react to real-time load and staffing. At one UCSD location, orders ready within 3 minutes of the quote went from about 80% to 98%. A campus-wide rollout, including the Bistro, is expected in 2027.</p>
+    <p class="pull reveal">The most useful thing my data did was tell me where not to design.</p>
   </section>
 
-  <section id="try" data-chapter="Before / after">
-    <p class="chapter-num">06 · Before and after</p>
-    <h2 class="reveal">Compare the two checkouts</h2>
-    <p class="reveal">Pick a location to see today's checkout next to the first fix. The ranges are the middle half of our real orders.</p>
-    <div class="ba reveal" id="demo">
+  <section id="prototype" data-chapter="What I'd change">
+    <p class="chapter-num">06 · What I'd do differently</p>
+    <h2 class="reveal">I prototyped too early</h2>
+    <p class="reveal">Before I understood the problem, I designed a checkout that showed a wait range at the Bistro and warned students if an order might make them late to class. A UX engineer who reviewed this case study put it plainly: with discovery incomplete, no prototype should have been made yet. He was right. The Bistro's "missing" estimate turned out to be a deliberate queue setting, and the estimates themselves are being rebuilt by the vendor.</p>
+    <p class="reveal">I'm keeping the early prototype here as part of the process, not as the answer.</p>
+    <details class="early reveal">
+      <summary>See the early prototype</summary>
+      <div class="ba" id="demo">
       <fieldset>
         <legend>Where you're ordering</legend>
         <div class="opts" id="spots"></div>
@@ -352,23 +370,20 @@
       </div>
       <p class="fine">Ranges: Bistro 21–33 min (11 orders), Earl's 3–6 (25), Fusion 5–11 (32), Club Med 3–9 (19). "Today" shows the target the app usually quoted at each spot (the Bistro's 24 min comes from one screenshot). The class-time hint assumes a 10-minute walk.</p>
     </div>
+    </details>
   </section>
 
-  <section id="ideas" data-chapter="Ideas to test">
-    <p class="chapter-num">07 · Ideas I'm not building yet</p>
-    <h2 class="reveal">Hypotheses, not findings</h2>
-    <p class="reveal">A few ideas came up that my data doesn't support yet, so I'm keeping them as things to test with students rather than designing them out:</p>
-    <ul class="reveal">
-      <li><b>A late-for-class warning</b> before paying, using a calendar file (.ics) the student exports, rather than their WebReg login.</li>
-      <li><b>Nearby spots</b> that would still get you to class on time, when your first choice is slow.</li>
-      <li><b>Dish photos</b> on the menu. A friend suggested this for international students who don't know dishes by name.</li>
-    </ul>
+  <section id="next" data-chapter="Next">
+    <p class="chapter-num">07 · Where this goes next</p>
+    <h2 class="reveal">A problem I can actually move</h2>
+    <p class="reveal">One thing came up in the conversation that HDH controls directly: dish photos. Most menu items have no picture, which matters for students who don't recognize a dish by name. HDH has wanted photos for years, but had never heard from students that it changes what they order.</p>
+    <p class="reveal">So that's my next step: a short survey of international students on how photos would affect what they order. HDH Dining has agreed to share the results with their team to help prioritize photos in the coming year.</p>
   </section>
 
   <section id="reflect" data-chapter="Reflect">
     <p class="chapter-num">08 · Reflection</p>
-    <h2 class="reveal">The data changed the question</h2>
-    <div class="reflection reveal"><p>If I had built my first idea, I would have "fixed" estimates that mostly weren't broken and missed where the real uncertainty is: the slowest spot, whose estimate nobody records. The next step is the one I skipped at first: understanding why the Bistro is different, from the people who run it. After that, I'd test the first fix and the ideas above with students before building anything bigger.</p></div>
+    <h2 class="reveal">Discovery first, then design</h2>
+    <div class="reflection reveal"><p>My first hunch was wrong, and my first design was early. What made this project worth doing was the order I eventually followed: test the assumption with real data, take the data to the people who run the system, and only then decide what to build. Sometimes the answer is that the fix is already on its way, and the most useful work is somewhere else.</p></div>
   </section>
 </main>
 <nav class="case-nav reveal" aria-label="More case studies">
